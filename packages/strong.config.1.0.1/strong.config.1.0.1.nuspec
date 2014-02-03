@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>strong.config</id>
+    <version>1.0.1</version>
+    <title>strong.config</title>
+    <authors>Levi Botelho</authors>
+    <owners>Levi Botelho</owners>
+    <licenseUrl>http://strongconfig.codeplex.com/license</licenseUrl>
+    <projectUrl>http://strongconfig.codeplex.com/</projectUrl>
+    <iconUrl>http://www.levibotelho.com/wp-content/uploads/2013/06/untitled.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>strong.config provides an automatically-generated, strongly-typed facade for accessing application configuration settings.</description>
+    <releaseNotes>This is the preliminary release of strong.config. This project was born out of personal necessity,
+	  so while this release meets my own needs quite nicely I would really appreciate any feedback on how it can be
+	  improved for wider public use.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <language />
+    <tags>strong config configuration web.config app.config facade t4 generate generation generated</tags>
+  </metadata>
+</package>

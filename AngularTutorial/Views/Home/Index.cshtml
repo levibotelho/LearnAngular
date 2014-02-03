@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style type="text/css" media="screen">
+    .editor {
+        position: relative;
+        height: 200px;
+        width: 500px;
+    }
+</style>
+
+<h2>Write some code!</h2>
+<button id="Upload">Upload to frame</button>
+<pre id="htmlEditor" class="editor">
+
+</pre>
+<br />
+<br />
+<pre id="javascriptEditor" class="editor">
+
+</pre>
+<iframe></iframe>
+
+@section Scripts
+{
+    <script>
+        s = undefined,
+        $.getJSON("/Scripts/lessons.json", function(data) {
+            s = data.toString();
+        });
+        var htmlEditor = ace.edit("htmlEditor");
+        htmlEditor.setTheme("ace/theme/monokai");
+        htmlEditor.getSession().setMode("ace/mode/html");
+        var jsEditor = ace.edit("javascriptEditor");
+        jsEditor.setTheme("ace/theme/monokai");
+        jsEditor.getSession().setMode("ace/mode/javascript");
+
+        document.getElementById("Upload").onclick = function () {
+            var doc = window.frames[0].document;
+            doc.open();
+            doc.write("<html><body>");
+            doc.write(htmlEditor.getValue());
+            doc.write("<script>");
+            doc.write(jsEditor.getValue());
+            doc.write("<\/script><\/body><\/html>");
+            doc.close();
+        };
+    </script>
+}
+<!--
+    <button id="MyButton">Click me!</button>
+    document.getElementById("MyButton").onclick = function() { alert("hi"); };
+
+    -->

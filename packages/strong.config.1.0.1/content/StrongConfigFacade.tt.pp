@@ -1,0 +1,271 @@
+﻿<#
+//----------------------------------------------------------------------------------------------
+// <copyright file="StrongConfigFacade.tt">
+//	 Copyright (c) 2013 All Rights Reserved
+// </copyright>
+// <license>
+//   This source code is subject to terms and conditions of the Microsoft Public License. A copy of
+//	 the license can be found at http://strongconfig.codeplex.com/license. If you cannot locate the  
+//   Microsoft Public License, please send an email to dlr@microsoft.com. By using this source code
+//	 in any fashion, you are agreeing to be bound by the terms of the Microsoft Public License. You
+//	 must not remove this notice, or any other, from this software.
+// </license>
+// <author>Levi Botelho</author>
+// <date>05/06/2013</date>
+// <summary>Session façade class generator.</summary>
+//-------------------------------------------------------------------------------------------------
+#>
+<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ Assembly Name="System.Xml" #>
+<#@ Assembly Name="System.Xml.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#
+	/// <summary>
+	/// The relative path to the application's configuration file, starting at the solution root.
+	/// </summary>
+	const string ConfigPath = "Web.config"; // TODO: Set this path as applicable to your application.
+#>
+using System;
+using System.Configuration;
+
+namespace $rootnamespace$
+{
+	/// <summary>
+	/// Provides strongly-typed access to configuration data.
+	/// </summary>
+	public static class ConfigurationFacade
+	{<#
+		var stream = new StreamReader(Host.ResolvePath(ConfigPath));
+		var root = XElement.Load(stream);
+        var nodes = root.Descendants("appSettings").First().DescendantNodes().ToArray();
+        var comment = new StringBuilder();
+
+        comment.AppendLine(SummaryOpening);
+        for (var i = 0; i < nodes.Length; i++)
+        {			
+			var node = nodes[i];
+            if (node.NodeType == System.Xml.XmlNodeType.Comment)
+            {
+				if (nodes[i + 1].NodeType != System.Xml.XmlNodeType.Comment)
+				{
+					var reader = new StringReader(((XComment)node).Value);
+					var line = reader.ReadLine();
+					while (line != null)
+					{
+						comment.Append("\t\t/// ");
+						comment.AppendLine(line.Trim());
+						line = reader.ReadLine();
+					}
+				}
+            }
+            else
+            {
+				var element = (XElement)node;
+				if (comment.ToString() == SummaryOpening + Environment.NewLine)
+                {
+					#><#= Environment.NewLine + GenerateProperty(element.Attribute("key").Value, element.Attribute("value").Value, null) + Environment.NewLine #><#
+                }
+				else
+				{
+					comment.Append("\t\t");
+					comment.Append(SummaryClosing);
+					#><#= Environment.NewLine + GenerateProperty(element.Attribute("key").Value, element.Attribute("value").Value, comment.ToString()) + Environment.NewLine #><#
+					comment.Clear();
+					comment.AppendLine(SummaryOpening);
+                }
+            }
+        }
+#>
+	}
+}
+<#+ 
+	/// <summary>
+    /// The format string used to create the casted value segment of a configuration property segment.
+    /// </summary>
+    const string CastedValueFormatString = "{0}.Parse(ConfigurationManager.AppSettings[\"{1}\"])";
+
+    /// <summary>
+    /// The format string used to create the uncasted value segment of a configuration property segment.
+    /// </summary>
+    const string UncastedValueFormatString = "ConfigurationManager.AppSettings[\"{0}\"]";
+
+	/// <summary>
+	/// The opening tag of the summary XML comment.
+	/// </summary>
+	const string SummaryOpening = "/// <summary>";
+    
+	/// <summary>
+	/// The closing tag of the summary XML comment.
+	/// </summary>
+	const string SummaryClosing = "/// </summary>";
+
+    /// <summary>
+    /// The format string used to generate a property declaration.
+    /// </summary>
+    readonly string propertyFormatString = string.Concat(
+        "\t\tpublic static {0} {1}", Environment.NewLine,
+        "\t\t{{", Environment.NewLine,
+        "\t\t\tget {{ return {2}; }}", Environment.NewLine,
+        "\t\t}}");
+
+	/// <summary>
+    /// The format string used to generate a property declaration with a summary XML comment.
+    /// </summary>
+	readonly string propertyWithSummaryFormatString = string.Concat(
+		"\t\t{3}", Environment.NewLine,
+        "\t\tpublic static {0} {1}", Environment.NewLine,
+        "\t\t{{", Environment.NewLine,
+        "\t\t\tget {{ return {2}; }}", Environment.NewLine,
+        "\t\t}}");
+
+    /// <summary>
+    /// A dictionary of property names declared in the config facade.
+    /// </summary>
+    readonly Dictionary<string, int> propertyNames = new Dictionary<string, int>();
+
+    /// <summary>
+    /// A dictionary of type aliases, used to determine the alias for a given type.
+    /// </summary>
+    readonly Dictionary<Type, string> typeAliases = new Dictionary<Type, string>
+	{
+		{ typeof(byte), "byte" },
+		{ typeof(sbyte), "sbyte" },
+		{ typeof(short), "short" },
+		{ typeof(ushort), "ushort" },
+		{ typeof(int), "int" },
+		{ typeof(uint), "uint" },
+		{ typeof(long), "long" },
+		{ typeof(ulong), "ulong" },
+		{ typeof(float), "float" },
+		{ typeof(double), "double" },
+		{ typeof(decimal), "decimal" },
+		{ typeof(object), "object" },
+		{ typeof(bool), "bool" },
+		{ typeof(char), "char" },
+		{ typeof(string), "string" }
+	};
+
+    /// <summary>
+    /// Generates the necessary code to declare a readonly property, based on a type and a key from the configuration file.
+    /// </summary>
+    /// <param name="key">The key in the configuration file.</param>
+    /// <param name="value">The value associated with the given key.</param>
+    /// <returns>The necessary code to declare a readonly property.</returns>
+    string GenerateProperty(string key, string value, string comment)
+    {
+        var type = GetTypeFromValue(value);
+        var name = GeneratePropertyName(key);
+
+		if (!string.IsNullOrEmpty(comment))
+        {
+			return string.Format(propertyWithSummaryFormatString, GetTypeAlias(type), name, GenerateValueString(type, key), comment);
+        }
+
+		return string.Format(propertyFormatString, GetTypeAlias(type), name, GenerateValueString(type, key));
+    }
+
+    /// <summary>
+    /// Generates the value segment of a given property declaration.
+    /// </summary>
+    /// <param name="type">The property type.</param>
+    /// <param name="key">The key in the configuration file.</param>
+    /// <returns>The value segment of a given property declaration.</returns>
+    string GenerateValueString(Type type, string key)
+    {
+        return (type == typeof(string)) ? string.Format(UncastedValueFormatString, key) : string.Format(CastedValueFormatString, GetTypeAlias(type), key);
+    }
+
+    /// <summary>
+    /// Generates a valid C# property name from a web.config key by removing non-alphanumeric characters and ensuring that the first
+    /// character is a letter.
+    /// </summary>
+    /// <param name="key">The key of the web.config value to use to generate the property name.</param>
+    /// <returns>A valid C# property name.</returns>
+    string GeneratePropertyName(string key)
+    {
+        var nameBuilder = new StringBuilder();
+        var firstChar = true;
+        foreach (var character in key)
+        {
+            if (firstChar)
+            {
+                if (char.IsLetter(character))
+                {
+                    nameBuilder.Append(character);
+                    firstChar = false;
+                }
+            }
+            else
+            {
+                if (char.IsLetterOrDigit(character))
+                {
+                    nameBuilder.Append(character);
+                }
+            }
+        }
+
+        var name = nameBuilder.ToString();
+        if (string.IsNullOrEmpty(name))
+        {
+            name = "UntitledProperty";
+        }
+
+        return GenerateUniqueName(name);
+    }
+
+    /// <summary>
+    /// Returns an unused version of a given property name. As web.config keys are by nature unique, a name different than that passed
+    /// to the function will be returned only if it differs from another key only by non-alphanumeric characters.
+    /// </summary>
+    /// <param name="name">The property name to make unique.</param>
+    /// <returns>If the variable name is unique, the variable name; otherwise, the variable name with a number appended to it which
+    /// guarantees unicity.</returns>
+    string GenerateUniqueName(string name)
+    {
+        if (!propertyNames.ContainsKey(name))
+        {
+            propertyNames.Add(name, 0);
+            return name;
+        }
+
+        return name + ++propertyNames[name];
+    }
+
+    /// <summary>
+    /// Gets the type alias for the given type.
+    /// </summary>
+    /// <param name="type">The type for which to return the alias.</param>
+    /// <returns>The type alias for the given type if it exists; otherwise, the type name.</returns>
+    string GetTypeAlias(Type type)
+    {
+        return typeAliases.ContainsKey(type) ? typeAliases[type] : type.Name;
+    }
+
+    /// <summary>
+    /// Gets the type of a given value extracted from the configuration file.
+    /// </summary>
+    /// <param name="value">The value for which to determine the type.</param>
+    /// <returns>The type of a given value.</returns>
+    Type GetTypeFromValue(string value)
+    {
+        DateTime dateTimeOutput;
+        bool boolOutput;
+        int intOutput;
+
+        return DateTime.TryParse(value, out dateTimeOutput) ?
+            typeof(DateTime) :
+            (bool.TryParse(value, out boolOutput)) ?
+                typeof(bool) :
+                int.TryParse(value, out intOutput) ?
+                    typeof(int) :
+                    typeof(string);
+    }
+#>
