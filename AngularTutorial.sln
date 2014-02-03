@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial", "AngularTutorial\AngularTutorial.csproj", "{C67746A6-2062-4C39-B45A-9F78A1F98A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Web", "AngularTutorial\AngularTutorial.Web.csproj", "{C67746A6-2062-4C39-B45A-9F78A1F98A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Entities", "AngularTutorial.Entities\AngularTutorial.Entities.csproj", "{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Repository", "AngularTutorial.Repository\AngularTutorial.Repository.csproj", "{12C9B943-09F4-4A6B-9770-A53A0D144BDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.UnitTests", "AngularTutorial.UnitTests\AngularTutorial.UnitTests.csproj", "{4B2769FE-323F-4542-8854-3A9B7C046215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2769FE-323F-4542-8854-3A9B7C046215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2769FE-323F-4542-8854-3A9B7C046215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2769FE-323F-4542-8854-3A9B7C046215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2769FE-323F-4542-8854-3A9B7C046215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
