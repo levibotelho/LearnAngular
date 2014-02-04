@@ -1,1 +1,13 @@
-﻿
+﻿.editor {
+    position: relative;
+    min-height: 200px !important;
+    width: auto;
+}
+
+.paddedRow {
+    margin: 1em 0 1em 0;
+}
+
+.renderFrame {
+    width: 100%;
+}

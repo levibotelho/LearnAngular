@@ -4,39 +4,48 @@
     ViewBag.Title = "Index";
 }
 
-<style type="text/css" media="screen">
-    .editor {
-        position: relative;
-        height: 200px;
-        width: 500px;
-    }
-</style>
-
-<h2>Write some code!</h2>
-
-<ul>
-    @foreach (var moduleName in Model.ModuleNames)
-    {
-        <li>@moduleName</li>
-    }
-</ul>
-
-<button id="Upload">Upload to frame</button>
-<pre id="htmlEditor" class="editor">
-
-</pre>
-<br />
-<br />
-<pre id="javascriptEditor" class="editor">
-
-</pre>
-<iframe></iframe>
+<div class="row">
+    <div class="col-sm-4 col-md-2">
+        @foreach (var moduleName in Model.ModuleNames)
+        {
+            <button class="btn btn-info btn-lg btn-block">@moduleName</button>
+        }
+    </div>
+    <div class="col-sm-8 col-md-10">
+        <div class="row paddedRow">
+            <div class="col-xs-12">
+                <h1>Write some code!</h1>
+            </div>
+        </div>
+        <div class="row paddedRow">
+            <div class="col-xs-12">
+                <button id="Upload" class="btn btn-sm btn-success">Upload to frame</button>
+            </div>
+        </div>
+        <div class="row paddedRow">
+            <div class="col-sm-6">
+                <pre id="htmlEditor" class="editor"></pre>
+            </div>
+            <div class="col-sm-6">
+                This is where the instructions will go!
+            </div>
+        </div>
+        <div class="row paddedRow">
+            <div class="col-sm-6">
+                <pre id="javascriptEditor" class="editor"></pre>
+            </div>
+            <div class="col-sm-6">
+                <iframe class="renderFrame"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts
 {
     <script>
         s = undefined,
-        $.getJSON("/Scripts/lessons.json", function(data) {
+        $.getJSON("/Scripts/lessons.json", function (data) {
             s = data.toString();
         });
         var htmlEditor = ace.edit("htmlEditor");
@@ -58,8 +67,3 @@
         };
     </script>
 }
-<!--
-    <button id="MyButton">Click me!</button>
-    document.getElementById("MyButton").onclick = function() { alert("hi"); };
-
-    -->
