@@ -9,10 +9,17 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AngularTutorial.Services
 {
-    public class CourseService
+    public interface ICourseService
+    {
+        TableOfContents TableOfContents { get; }
+        IEnumerable<Step> GetModule(string moduleName);
+        void AddStep(Step step);
+    }
+
+    public class CourseService : ICourseService
     {
         static TableOfContents _tableOfContents;
-        ICourseRepository _repository;
+        readonly ICourseRepository _repository;
 
         public CourseService(ICourseRepository repository)
         {
@@ -23,12 +30,6 @@ namespace AngularTutorial.Services
         {
             get { return _tableOfContents ?? (_tableOfContents = GenerateTableOfContents()); }
         }
-
-        TableOfContents GenerateTableOfContents()
-        {
-            var listing = _repository.GetTableListing();
-            return new TableOfContents(_repository.GetTableListing());
-        }
         
         public IEnumerable<Step> GetModule(string moduleName)
         {
@@ -38,6 +39,11 @@ namespace AngularTutorial.Services
         public void AddStep(Step step)
         {
             _repository.AddStep(step);
+        }
+
+        TableOfContents GenerateTableOfContents()
+        {
+            return new TableOfContents(_repository.GetTableListing());
         }
     }
 }

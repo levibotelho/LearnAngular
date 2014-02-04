@@ -260,6 +260,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DependencyInjectionConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -271,6 +272,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StrongConfigFacade.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitOfWorkBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -293,6 +295,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AngularTutorial.Entities\AngularTutorial.Entities.csproj">
+      <Project>{afaba0db-367e-4bd5-a8fe-2eb8c555e826}</Project>
+      <Name>AngularTutorial.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Repository\AngularTutorial.Repository.csproj">
+      <Project>{12c9b943-09f4-4a6b-9770-a53a0d144bda}</Project>
+      <Name>AngularTutorial.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Services\AngularTutorial.Services.csproj">
+      <Project>{631650ea-aa2b-489e-8c2f-c2f2290005e2}</Project>
+      <Name>AngularTutorial.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
