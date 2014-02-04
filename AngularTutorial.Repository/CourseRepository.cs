@@ -34,7 +34,7 @@ namespace AngularTutorial.Repository
 
         public IEnumerable<TableEntityIndex> GetTableListing()
         {
-            var query = _table.CreateQuery<DynamicTableEntity>().Select(new[] { "PartitionKey", "RowKey" });
+            var query = new TableQuery().Select(new[] { "PartitionKey", "RowKey" });
             return _table.ExecuteQuery(query, (key, rowKey, timestamp, properties, etag) => new TableEntityIndex(key, rowKey));
         }
 

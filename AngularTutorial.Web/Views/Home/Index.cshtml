@@ -1,8 +1,8 @@
-﻿
+﻿@model AngularTutorial.Web.Models.Home.IndexModel
+
 @{
     ViewBag.Title = "Index";
 }
-
 
 <style type="text/css" media="screen">
     .editor {
@@ -13,6 +13,14 @@
 </style>
 
 <h2>Write some code!</h2>
+
+<ul>
+    @foreach (var moduleName in Model.ModuleNames)
+    {
+        <li>@moduleName</li>
+    }
+</ul>
+
 <button id="Upload">Upload to frame</button>
 <pre id="htmlEditor" class="editor">
 

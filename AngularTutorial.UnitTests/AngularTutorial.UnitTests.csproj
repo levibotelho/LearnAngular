@@ -77,7 +77,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Jobs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
