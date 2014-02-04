@@ -89,7 +89,11 @@
       <Project>{12c9b943-09f4-4a6b-9770-a53a0d144bda}</Project>
       <Name>AngularTutorial.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AngularTutorial\AngularTutorial.Web.csproj">
+    <ProjectReference Include="..\AngularTutorial.Services\AngularTutorial.Services.csproj">
+      <Project>{631650ea-aa2b-489e-8c2f-c2f2290005e2}</Project>
+      <Name>AngularTutorial.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Web\AngularTutorial.Web.csproj">
       <Project>{c67746a6-2062-4c39-b45a-9f78a1f98a55}</Project>
       <Name>AngularTutorial.Web</Name>
     </ProjectReference>

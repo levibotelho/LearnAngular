@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using AngularTutorial.Entities;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -11,42 +7,40 @@ namespace AngularTutorial.Repository
 {
     public interface ICourseRepository
     {
-        TableOfContents TableOfContents { get; }
-        IEnumerable<Step> GetModule(string name);
+        IEnumerable<Step> GetAllInPartition(string partitionKey);
+        Step Get(string partitionKey, string rowKey);
+        IEnumerable<TableEntityIndex> GetTableListing();
         void AddStep(Step step);
     }
 
     public class CourseRepository : ICourseRepository
     {
         readonly CloudTable _table;
-        static TableOfContents _tableOfContents;
 
-        public CourseRepository(CloudTableClient tableClient, string tableName)
+        public CourseRepository(IUnitOfWork unitOfWork)
         {
-            _table = tableClient.GetTableReference(tableName);
+            _table = unitOfWork.CourseTable;
         }
 
-        public TableOfContents TableOfContents
+        public IEnumerable<Step> GetAllInPartition(string partitionKey)
         {
-            get { return _tableOfContents ?? (_tableOfContents = GenerateTableOfContents()); }
+            return _table.CreateQuery<Step>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partitionKey));
         }
-        
-        public IEnumerable<Step> GetModule(string name)
+
+        public Step Get(string partitionKey, string rowKey)
         {
-            var query = _table.CreateQuery<Step>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, name));
-            return _table.ExecuteQuery(query);
+            return (Step) _table.Execute(TableOperation.Retrieve(partitionKey, rowKey)).Result;
+        }
+
+        public IEnumerable<TableEntityIndex> GetTableListing()
+        {
+            var query = _table.CreateQuery<DynamicTableEntity>().Select(new[] { "PartitionKey", "RowKey" });
+            return _table.ExecuteQuery(query, (key, rowKey, timestamp, properties, etag) => new TableEntityIndex(key, rowKey));
         }
 
         public void AddStep(Step step)
         {
             _table.Execute(TableOperation.Insert(step));
-        }
-        
-        TableOfContents GenerateTableOfContents()
-        {
-            var query = _table.CreateQuery<DynamicTableEntity>().Select(new[] {"PartitionKey", "RowKey"});
-            var steps = _table.ExecuteQuery(query, (key, rowKey, timestamp, properties, etag) => new KeyValuePair<string, string>(key, rowKey));
-            return new TableOfContents(steps);
         }
     }
 }
