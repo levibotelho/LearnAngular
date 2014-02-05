@@ -23,7 +23,8 @@ namespace AngularTutorial.Web
         {
             container.Register<IUnitOfWorkBootstrapper, UnitOfWorkBootstrapper>();
             container.Register<IUnitOfWork, UnitOfWork>();
-            container.Register<ICourseRepository, CourseRepository>();
+            container.Register<IStepRepository, StepRepository>();
+            container.Register<IInstructionRepository, InstructionRepository>();
             container.Register<ICourseService, CourseService>();
         }
     }

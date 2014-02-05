@@ -19,9 +19,9 @@ namespace AngularTutorial.Services
     public class CourseService : ICourseService
     {
         static TableOfContents _tableOfContents;
-        readonly ICourseRepository _repository;
+        readonly IStepRepository _repository;
 
-        public CourseService(ICourseRepository repository)
+        public CourseService(IStepRepository repository)
         {
             _repository = repository;
         }

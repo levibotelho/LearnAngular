@@ -5,7 +5,8 @@ namespace AngularTutorial.Repository
 {
     public interface IUnitOfWork
     {
-        CloudTable CourseTable { get; }
+        CloudTable StepTable { get; }
+        CloudTable InstructionTable { get; }
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -13,9 +14,10 @@ namespace AngularTutorial.Repository
         public UnitOfWork(IUnitOfWorkBootstrapper bootstrapper)
         {
             var storageAccount = CloudStorageAccount.Parse(bootstrapper.ConnectionString);
-            CourseTable = storageAccount.CreateCloudTableClient().GetTableReference(bootstrapper.CourseRepositoryTableName);
+            StepTable = storageAccount.CreateCloudTableClient().GetTableReference(bootstrapper.CourseRepositoryTableName);
         }
 
-        public CloudTable CourseTable { get; private set; }
+        public CloudTable StepTable { get; private set; }
+        public CloudTable InstructionTable { get; private set; }
     }
 }

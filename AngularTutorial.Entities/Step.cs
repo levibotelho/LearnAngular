@@ -22,6 +22,8 @@ namespace AngularTutorial.Entities
             set { RowKey = value; }
         }
 
+        public string UniqueKey { get { return PartitionKey + RowKey; } }
+        
         public string StartingHtml { get; set; }
         public string SolutionHtml { get; set; }
         public string StartingJavaScript { get; set; }
