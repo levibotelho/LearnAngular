@@ -92,6 +92,8 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ace\ace.js" />
     <Content Include="Scripts\ace\ext-elastic_tabstops_lite.js" />
