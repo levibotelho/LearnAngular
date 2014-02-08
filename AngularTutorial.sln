@@ -7,51 +7,51 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Entities", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Repository", "AngularTutorial.Repository\AngularTutorial.Repository.csproj", "{12C9B943-09F4-4A6B-9770-A53A0D144BDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.UnitTests", "AngularTutorial.UnitTests\AngularTutorial.UnitTests.csproj", "{4B2769FE-323F-4542-8854-3A9B7C046215}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Web", "AngularTutorial.Web\AngularTutorial.Web.csproj", "{C67746A6-2062-4C39-B45A-9F78A1F98A55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Services", "AngularTutorial.Services\AngularTutorial.Services.csproj", "{631650EA-AA2B-489E-8C2F-C2F2290005E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Tests.Unit", "AngularTutorial.Tests.Unit\AngularTutorial.Tests.Unit.csproj", "{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{563097AD-B346-4F3C-910C-4B3F25DE55E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.SetupCache", "AngularTutorial.SetupCache\AngularTutorial.SetupCache.csproj", "{316EEFEB-4210-4262-A3D1-8B2664336360}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		DebugAzureEmulator|Any CPU = DebugAzureEmulator|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.DebugAzureEmulator|Any CPU.ActiveCfg = DebugAzureEmulator|Any CPU
-		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.DebugAzureEmulator|Any CPU.Build.0 = DebugAzureEmulator|Any CPU
 		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFABA0DB-367E-4BD5-A8FE-2EB8C555E826}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.DebugAzureEmulator|Any CPU.ActiveCfg = DebugAzureEmulator|Any CPU
-		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.DebugAzureEmulator|Any CPU.Build.0 = DebugAzureEmulator|Any CPU
 		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12C9B943-09F4-4A6B-9770-A53A0D144BDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.DebugAzureEmulator|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.DebugAzureEmulator|Any CPU.Build.0 = Debug|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B2769FE-323F-4542-8854-3A9B7C046215}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.DebugAzureEmulator|Any CPU.ActiveCfg = DebugAzureEmulator|Any CPU
-		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.DebugAzureEmulator|Any CPU.Build.0 = DebugAzureEmulator|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C67746A6-2062-4C39-B45A-9F78A1F98A55}.Release|Any CPU.Build.0 = Release|Any CPU
 		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.DebugAzureEmulator|Any CPU.ActiveCfg = Debug|Any CPU
-		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.DebugAzureEmulator|Any CPU.Build.0 = Debug|Any CPU
 		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{631650EA-AA2B-489E-8C2F-C2F2290005E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316EEFEB-4210-4262-A3D1-8B2664336360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316EEFEB-4210-4262-A3D1-8B2664336360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316EEFEB-4210-4262-A3D1-8B2664336360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316EEFEB-4210-4262-A3D1-8B2664336360}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC} = {563097AD-B346-4F3C-910C-4B3F25DE55E0}
 	EndGlobalSection
 EndGlobal

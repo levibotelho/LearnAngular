@@ -1,12 +1,13 @@
-﻿using Microsoft.ApplicationServer.Caching;
+﻿using System;
+using Microsoft.ApplicationServer.Caching;
 
 namespace AngularTutorial.Repository
 {
     public interface ICacheRepository
     {
-        T Get<T>(string key);
-        void Put(string key, object value);
-        void Remove(string key);
+        T Get<T>(Guid key);
+        void Put(Guid key, object value);
+        void Remove(Guid key);
     }
 
     public class CacheRepository : ICacheRepository
@@ -18,19 +19,19 @@ namespace AngularTutorial.Repository
             _cache = unitOfWork.Cache;
         }
 
-        public T Get<T>(string key)
+        public T Get<T>(Guid key)
         {
-            return (T)_cache.Get(key);
+            return (T)_cache.Get(key.ToString());
         }
 
-        public void Put(string key, object value)
+        public void Put(Guid key, object value)
         {
-            _cache.Put(key, value);
+            _cache.Put(key.ToString(), value);
         }
 
-        public void Remove(string key)
+        public void Remove(Guid key)
         {
-            _cache.Remove(key);
+            _cache.Remove(key.ToString());
         }
     }
 }

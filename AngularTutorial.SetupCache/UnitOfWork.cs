@@ -1,8 +1,7 @@
-﻿using System;
-using AngularTutorial.Repository;
+﻿using AngularTutorial.Repository;
 using Microsoft.ApplicationServer.Caching;
 
-namespace AngularTutorial.Web
+namespace AngularTutorial.SetupCache
 {
     public class UnitOfWork : IUnitOfWork
     {

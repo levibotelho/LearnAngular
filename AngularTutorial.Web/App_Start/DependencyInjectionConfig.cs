@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Web.Mvc;
 using AngularTutorial.Repository;
+using AngularTutorial.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 
@@ -22,6 +23,7 @@ namespace AngularTutorial.Web
         {
             container.Register<IUnitOfWork, UnitOfWork>();
             container.Register<ICacheRepository, CacheRepository>();
+            container.Register<ICurriculumServiceBootstrapper, CurriculumServiceBootstrapper>();
         }
     }
 }
