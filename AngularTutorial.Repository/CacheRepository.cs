@@ -33,5 +33,10 @@ namespace AngularTutorial.Repository
         {
             _cache.Remove(key.ToString());
         }
+
+        public void Clear()
+        {
+            _cache.Clear();
+        }
     }
 }

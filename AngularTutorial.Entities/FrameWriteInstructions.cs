@@ -1,5 +1,8 @@
-﻿namespace AngularTutorial.Entities
+﻿using System;
+
+namespace AngularTutorial.Entities
 {
+    [Serializable]
     public class FrameWriteInstructions
     {
         public string StartDocument { get; set; }

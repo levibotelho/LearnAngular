@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace AngularTutorial.Entities
 {
+    [Serializable]
     public class TableOfContents : CacheableEntityBase
     {
         readonly KeyValuePair<Guid, Guid[]>[] _tableOfContents;

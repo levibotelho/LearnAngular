@@ -2,6 +2,7 @@
 
 namespace AngularTutorial.Entities
 {
+    [Serializable]
     public class Module : CacheableEntityBase
     {
         readonly TranslationDictionary _name;

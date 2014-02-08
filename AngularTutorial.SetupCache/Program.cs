@@ -37,6 +37,7 @@ namespace AngularTutorial.SetupCache
             var tableOfContents = new TableOfContents(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), tableOfContentsArray);
 
             var cache = new CacheRepository(new UnitOfWork());
+            cache.Clear();
             AddCollection(modules, cache);
             AddCollection(steps, cache);
             Add(tableOfContents, cache);
