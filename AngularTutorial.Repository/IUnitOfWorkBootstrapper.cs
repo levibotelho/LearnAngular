@@ -1,8 +1,9 @@
-﻿namespace AngularTutorial.Repository
+﻿using System;
+
+namespace AngularTutorial.Repository
 {
     public interface IUnitOfWorkBootstrapper
     {
-        string ConnectionString { get; }
-        string CourseRepositoryTableName { get; }
+        Guid TableOfContentsCacheKey { get; }
     }
 }

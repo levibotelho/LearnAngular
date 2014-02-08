@@ -4,13 +4,24 @@ using System.Linq;
 
 namespace AngularTutorial.Entities
 {
-    public class TableOfContents
+    class TableOfContents : CacheableEntityBase
     {
-        public TableOfContents(IEnumerable<TableEntityIndex> steps)
+        readonly KeyValuePair<Guid, Guid[]>[] _tableOfContents;
+
+        public TableOfContents() { }
+
+        public TableOfContents(Guid id, KeyValuePair<Guid, Guid[]>[] tableOfContents)
+            : base(id)
         {
-            Modules = steps.GroupBy(x => x.PartitionKey, x => x.RowKey).ToDictionary(x => x.Key, x => x.ToArray());
+            _tableOfContents = tableOfContents;
+            Modules = tableOfContents.Select(x => x.Key).ToArray();
         }
 
-        public Dictionary<string, string[]> Modules { get; set; }
+        public Guid[] this[Guid key]
+        {
+            get { return _tableOfContents.Single(x => x.Key == key).Value; }
+        }
+
+        public Guid[] Modules { get; private set; }
     }
 }

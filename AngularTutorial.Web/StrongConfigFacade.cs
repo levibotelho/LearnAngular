@@ -28,14 +28,9 @@ namespace AngularTutorial.Web
 			get { return bool.Parse(ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"]); }
 		}
 
-		public static string CourseRepositoryTableName
+		public static string TableOfContentsCacheKey
 		{
-			get { return ConfigurationManager.AppSettings["CourseRepositoryTableName"]; }
-		}
-
-		public static string StorageConnectionString
-		{
-			get { return ConfigurationManager.AppSettings["StorageConnectionString"]; }
+			get { return ConfigurationManager.AppSettings["TableOfContentsCacheKey"]; }
 		}
 	}
 }

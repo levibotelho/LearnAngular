@@ -1,23 +1,23 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using System;
+using Microsoft.ApplicationServer.Caching;
 
 namespace AngularTutorial.Repository
 {
     public interface IUnitOfWork
     {
-        CloudTable StepTable { get; }
-        CloudTable InstructionTable { get; }
+        Guid TableOfContentsCacheKey { get; }
+        DataCache Cache { get; }
     }
 
     public class UnitOfWork : IUnitOfWork
     {
         public UnitOfWork(IUnitOfWorkBootstrapper bootstrapper)
         {
-            var storageAccount = CloudStorageAccount.Parse(bootstrapper.ConnectionString);
-            StepTable = storageAccount.CreateCloudTableClient().GetTableReference(bootstrapper.CourseRepositoryTableName);
+            TableOfContentsCacheKey = bootstrapper.TableOfContentsCacheKey;
+            Cache = new DataCacheFactory().GetDefaultCache();
         }
 
-        public CloudTable StepTable { get; private set; }
-        public CloudTable InstructionTable { get; private set; }
+        public Guid TableOfContentsCacheKey { get; private set; }
+        public DataCache Cache { get; private set; }
     }
 }

@@ -2,8 +2,9 @@
 {
     public class FrameWriteInstructions
     {
-        public string PreHtml { get; set; }
-        public string PreScript { get; set; }
-        public string PostScript { get; set; }
+        public string StartDocument { get; set; }
+        public string HeadToContent { get; set; }
+        public string ContentToScript { get; set; }
+        public string EndDocument { get; set; }
     }
 }
