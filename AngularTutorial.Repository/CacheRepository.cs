@@ -18,7 +18,6 @@ namespace AngularTutorial.Repository
             _cache = unitOfWork.Cache;
         }
 
-
         public T Get<T>(string key)
         {
             return (T)_cache.Get(key);
