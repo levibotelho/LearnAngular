@@ -20,7 +20,6 @@ namespace AngularTutorial.Web
 
         static void RegisterTypes(this Container container)
         {
-            container.Register<IUnitOfWorkBootstrapper, UnitOfWorkBootstrapper>();
             container.Register<IUnitOfWork, UnitOfWork>();
             container.Register<ICacheRepository, CacheRepository>();
         }
