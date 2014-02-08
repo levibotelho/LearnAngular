@@ -4,22 +4,22 @@ using System.Collections.Generic;
 namespace AngularTutorial.Entities
 {
     [Serializable]
-    public class TranslationDictionary
+    public class Translation<T>
     {
-        readonly Dictionary<string, string> _translations;
+        readonly Dictionary<string, T> _translations;
 
-        public TranslationDictionary() { }
+        public Translation() { }
 
-        public TranslationDictionary(Dictionary<string, string> translations)
+        public Translation(Dictionary<string, T> translations)
         {
             _translations = translations;
         }
 
-        public string this[string languageCode]
+        public T this[string languageCode]
         {
             get
             {
-                string translation;
+                T translation;
                 return _translations.TryGetValue(languageCode, out translation) ? translation : _translations["en"];
             }
         }

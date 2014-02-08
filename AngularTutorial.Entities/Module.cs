@@ -5,11 +5,11 @@ namespace AngularTutorial.Entities
     [Serializable]
     public class Module : CacheableEntityBase
     {
-        readonly TranslationDictionary _name;
+        readonly Translation<string> _name;
 
         public Module() { }
 
-        public Module(Guid id, TranslationDictionary name)
+        public Module(Guid id, Translation<string> name)
             :base(id)
         {
             _name = name;

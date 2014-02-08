@@ -5,11 +5,11 @@ namespace AngularTutorial.Entities
     [Serializable]
     public class Step : CacheableEntityBase
     {
-        readonly TranslationDictionary _name;
+        readonly Translation<string> _name;
 
         public Step() { }
 
-        public Step(Guid id, TranslationDictionary name)
+        public Step(Guid id, Translation<string> name)
             : base(id)
         {
             _name = name;

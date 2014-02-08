@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AngularTutorial.Entities;
 using AngularTutorial.Repository;
 
@@ -15,17 +16,20 @@ namespace AngularTutorial.SetupCache
 
             var modules = new[]
             {
-                new Module(gettingStartedId, new TranslationDictionary(new Dictionary<string, string> {{"en", "Getting Started"}})),
-                new Module(continuingOnId, new TranslationDictionary(new Dictionary<string, string> {{"en", "Continuing On"}})),
+                new Module(gettingStartedId, new Translation<string>(new Dictionary<string, string> {{"en", "Getting Started"}})),
+                new Module(continuingOnId, new Translation<string>(new Dictionary<string, string> {{"en", "Continuing On"}})),
             };
+
+            var moduleNamesDictionary = new Dictionary<string, string[]> {{"en", modules.Select(x => x.GetName("en")).ToArray()}};
+            var moduleNames = new Translation<string[]>(moduleNamesDictionary);
 
             var steps = new[]
             {
-                new Step(gettingStarted1Id, new TranslationDictionary(new Dictionary<string, string> {{"en", "Getting Started 1"}})),
-                new Step(gettingStarted2Id, new TranslationDictionary(new Dictionary<string, string> {{"en", "Getting Started 2"}})),
-                new Step(gettingStarted3Id, new TranslationDictionary(new Dictionary<string, string> {{"en", "Getting Started 3"}})),
-                new Step(continuingOn1Id, new TranslationDictionary(new Dictionary<string, string> {{"en", "Continuing On 1"}})),
-                new Step(continuingOn2Id, new TranslationDictionary(new Dictionary<string, string> {{"en", "Continuing On 2"}})),
+                new Step(gettingStarted1Id, new Translation<string>(new Dictionary<string, string> {{"en", "Getting Started 1"}})),
+                new Step(gettingStarted2Id, new Translation<string>(new Dictionary<string, string> {{"en", "Getting Started 2"}})),
+                new Step(gettingStarted3Id, new Translation<string>(new Dictionary<string, string> {{"en", "Getting Started 3"}})),
+                new Step(continuingOn1Id, new Translation<string>(new Dictionary<string, string> {{"en", "Continuing On 1"}})),
+                new Step(continuingOn2Id, new Translation<string>(new Dictionary<string, string> {{"en", "Continuing On 2"}})),
             };
             
             var tableOfContentsArray = new[]
@@ -34,7 +38,7 @@ namespace AngularTutorial.SetupCache
                 new KeyValuePair<Guid, Guid[]>(continuingOnId, new[] {continuingOn1Id, continuingOn2Id})
             };
 
-            var tableOfContents = new TableOfContents(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), tableOfContentsArray);
+            var tableOfContents = new TableOfContents(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), tableOfContentsArray, moduleNames);
 
             var cache = new CacheRepository(new UnitOfWork());
             cache.Clear();

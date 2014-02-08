@@ -8,14 +8,17 @@ namespace AngularTutorial.Entities
     public class TableOfContents : CacheableEntityBase
     {
         readonly KeyValuePair<Guid, Guid[]>[] _tableOfContents;
-
+        
         public TableOfContents() { }
-
-        public TableOfContents(Guid id, KeyValuePair<Guid, Guid[]>[] tableOfContents)
+        
+        public TableOfContents(Guid id, KeyValuePair<Guid, Guid[]>[] tableOfContents, Translation<string[]> moduleNames)
             : base(id)
         {
             _tableOfContents = tableOfContents;
-            Modules = tableOfContents.Select(x => x.Key).ToArray();
+
+            // moduleNames is passed and stored for performance reasons. It is entirely possible to dynamically generate
+            // the list of module names each time they are requested.
+            ModuleNames = moduleNames;
         }
 
         public Guid[] this[Guid key]
@@ -23,6 +26,6 @@ namespace AngularTutorial.Entities
             get { return _tableOfContents.Single(x => x.Key == key).Value; }
         }
 
-        public Guid[] Modules { get; private set; }
+        public Translation<string[]> ModuleNames { get; private set; }
     }
 }

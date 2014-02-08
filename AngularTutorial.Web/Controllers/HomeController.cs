@@ -16,7 +16,7 @@ namespace AngularTutorial.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_curriculumService.GetModuleNames("en"));
+            var model = new IndexModel(_curriculumService.GetTableOfContents().ModuleNames["en"]);
             return View(model);
         }
 	}
