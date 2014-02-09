@@ -21,9 +21,9 @@ namespace AngularTutorial.Entities
         public string SolutionJavaScript { get; set; }
         public FrameWriteInstructions FrameWriteInstructions { get; set; }
 
-        public string GetName(string languageCode)
+        public string GetName(Language language)
         {
-            return _name[languageCode];
+            return _name[language];
         }
     }
 }

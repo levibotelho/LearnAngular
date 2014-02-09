@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CacheableEntityBase.cs" />
     <Compile Include="FrameWriteInstructions.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Step.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

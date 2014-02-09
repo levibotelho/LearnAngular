@@ -15,9 +15,9 @@ namespace AngularTutorial.Entities
             _name = name;
         }
 
-        public string GetName(string languageCode)
+        public string GetName(Language language)
         {
-            return _name[languageCode];
+            return _name[language];
         }
     }
 }
