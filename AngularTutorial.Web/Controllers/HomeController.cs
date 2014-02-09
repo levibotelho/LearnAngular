@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using AngularTutorial.Entities;
 using AngularTutorial.Services;
 using AngularTutorial.Web.Models.Home;
 
@@ -18,7 +17,7 @@ namespace AngularTutorial.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules());
+            var model = new IndexModel(_curriculumService.GetTableOfContents().Modules);
             return View(model);
         }
 

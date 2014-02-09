@@ -7,13 +7,14 @@ namespace AngularTutorial.Entities
     {
         public Step() { }
 
-        public Step(Guid id, string name)
+        public Step(Guid id, string title)
             : base(id)
         {
-            Name = name;
+            Title = title;
         }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
+        public string Instructions { get; set; }
         public string StartingHtml { get; set; }
         public string SolutionHtml { get; set; }
         public string StartingJavaScript { get; set; }

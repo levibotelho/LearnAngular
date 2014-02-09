@@ -13,16 +13,16 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#Modules" href="#@module.Id">
-                            @module.Name
+                            @module.Title
                         </a>
                     </h4>
                 </div>
-                <div id="@module.Id" class="panel-collapse collapse @{ if (i == 0) { <text>in</text>; } }">
+                <div id="@module.Id" class="panel-collapse collapse @{ if (i == 0) { <text>in</text> } }">
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
-                            @foreach (var step in module.Steps)
+                            @foreach (var step in module.Children)
                             {
-                                <li><a ng-click="index.loadStep('@step.Id')">@step.Text</a></li>
+                                <li><a ng-click="index.loadStep('@step.Id')">@step.Title</a></li>
                             }
                         </ul>
                     </div>

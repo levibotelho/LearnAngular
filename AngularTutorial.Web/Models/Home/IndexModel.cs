@@ -7,11 +7,11 @@ namespace AngularTutorial.Web.Models.Home
     {
         public IndexModel() { }
 
-        public IndexModel(IReadOnlyCollection<TableOfContentsModule> modules)
+        public IndexModel(IEnumerable<TableOfContentsEntry> modules)
         {
             Modules = modules;
         }
 
-        public IReadOnlyCollection<TableOfContentsModule> Modules { get; private set; }
+        public IEnumerable<TableOfContentsEntry> Modules { get; private set; }
     }
 }
