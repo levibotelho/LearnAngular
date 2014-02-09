@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AngularTutorial.Entities;
 using AngularTutorial.Services;
 using AngularTutorial.Web.Models.Home;
@@ -18,7 +17,7 @@ namespace AngularTutorial.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules(Language.English).Select(x => x.Name).ToArray());
+            var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules(Language.English));
             return View(model);
         }
 	}

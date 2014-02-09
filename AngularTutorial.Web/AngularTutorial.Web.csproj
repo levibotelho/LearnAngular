@@ -326,7 +326,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\lessons.json" />
     <Content Include="StrongConfigFacade.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StrongConfigFacade.cs</LastGenOutput>
