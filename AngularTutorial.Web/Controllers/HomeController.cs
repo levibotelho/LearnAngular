@@ -18,14 +18,15 @@ namespace AngularTutorial.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules(Language.English));
+            var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules());
             return View(model);
         }
 
         [HttpGet]
         public JsonResult GetStep(Guid id)
         {
-            return Json(_curriculumService.GetStep(id), JsonRequestBehavior.AllowGet);
+            var step = _curriculumService.GetStep(id);
+            return Json(step, JsonRequestBehavior.AllowGet);
         }
 	}
 }

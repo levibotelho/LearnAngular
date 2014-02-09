@@ -5,25 +5,19 @@ namespace AngularTutorial.Entities
     [Serializable]
     public class Step : CacheableEntityBase
     {
-        readonly Translation<string> _name;
-
         public Step() { }
 
-        public Step(Guid id, Translation<string> name)
+        public Step(Guid id, string name)
             : base(id)
         {
-            _name = name;
+            Name = name;
         }
 
+        public string Name { get; set; }
         public string StartingHtml { get; set; }
         public string SolutionHtml { get; set; }
         public string StartingJavaScript { get; set; }
         public string SolutionJavaScript { get; set; }
         public FrameWriteInstructions FrameWriteInstructions { get; set; }
-
-        public string GetName(Language language)
-        {
-            return _name[language];
-        }
     }
 }

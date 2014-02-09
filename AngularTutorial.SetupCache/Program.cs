@@ -17,20 +17,20 @@ namespace AngularTutorial.SetupCache
             var modules = new Dictionary<Module, IEnumerable<Step>>
             {
                 {
-                    new Module(gettingStartedId, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Getting Started"}})),   
+                    new Module(gettingStartedId, "Getting Started"),   
                     new []
                     {
-                        new Step(gettingStarted1Id, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Getting Started 1"}})),
-                        new Step(gettingStarted2Id, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Getting Started 2"}})),
-                        new Step(gettingStarted3Id, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Getting Started 3"}})),
+                        new Step(gettingStarted1Id, "Getting Started 1"),
+                        new Step(gettingStarted2Id, "Getting Started 2"),
+                        new Step(gettingStarted3Id, "Getting Started 3")
                     }
                 },
                 {
-                    new Module(continuingOnId, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Continuing On"}})),
+                    new Module(continuingOnId, "Continuing On"),
                     new []
                     {
-                        new Step(continuingOn1Id, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Continuing On 1"}})),
-                        new Step(continuingOn2Id, new Translation<string>(new Dictionary<Language, string> {{Language.English, "Continuing On 2"}})),
+                        new Step(continuingOn1Id, "Continuing On 1"),
+                        new Step(continuingOn2Id, "Continuing On 2"),
                     }
                 }
             };
