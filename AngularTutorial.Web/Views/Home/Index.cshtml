@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div class="row">
+<div class="row" ng-controller="IndexController as index">
     <div id="Modules" class="col-sm-4 col-md-2 panel-group">
         @for (var i = 0; i < Model.Modules.Count(); i++)
         {
@@ -19,10 +19,10 @@
                 </div>
                 <div id="@module.Id" class="panel-collapse collapse @{ if (i == 0) { <text>in</text>; } }">
                     <div class="panel-body">
-                        <ul>
+                        <ul class="nav nav-pills nav-stacked">
                             @foreach (var step in module.Steps)
                             {
-                                <li>@step.Text</li>
+                                <li><a ng-click="index.loadStep('@step.Id')">@step.Text</a></li>
                             }
                         </ul>
                     </div>
@@ -34,7 +34,7 @@
     <div class="col-sm-8 col-md-10">
         <div class="row paddedRow">
             <div class="col-xs-12">
-                <h1>Write some code!</h1>
+                <h1>{{index.title}}</h1>
             </div>
         </div>
         <div class="row paddedRow">
@@ -63,6 +63,7 @@
 
 @section Scripts
 {
+    <script src="~/Scripts/AngularModules/IndexController.js"></script>
     <script>
         var htmlEditor = ace.edit("htmlEditor");
         htmlEditor.setTheme("ace/theme/monokai");

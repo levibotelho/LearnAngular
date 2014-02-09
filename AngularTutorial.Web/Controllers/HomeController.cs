@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using AngularTutorial.Entities;
 using AngularTutorial.Services;
 using AngularTutorial.Web.Models.Home;
@@ -19,6 +20,12 @@ namespace AngularTutorial.Web.Controllers
         {
             var model = new IndexModel(_curriculumService.GetTableOfContents().GetModules(Language.English));
             return View(model);
+        }
+
+        [HttpGet]
+        public JsonResult GetStep(Guid id)
+        {
+            return Json(_curriculumService.GetStep(id), JsonRequestBehavior.AllowGet);
         }
 	}
 }
