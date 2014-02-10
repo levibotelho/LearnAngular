@@ -5,18 +5,18 @@ using AngularTutorial.Repository;
 
 namespace AngularTutorial.Services
 {
-    public interface ICurriculumService
+    public interface ICourseService
     {
         TableOfContents GetTableOfContents();
         Step GetStep(Guid id);
     }
 
-    public class CurriculumService : ICurriculumService
+    public class CourseService : ICourseService
     {
         readonly Guid _tableOfContentsCacheKey;
         readonly ICacheRepository _cacheRepository;
 
-        public CurriculumService(ICacheRepository cacheRepository, ICurriculumServiceBootstrapper bootstrapper)
+        public CourseService(ICacheRepository cacheRepository, ICourseServiceBootstrapper bootstrapper)
         {
             _tableOfContentsCacheKey = bootstrapper.TableOfContentsCacheKey;
             _cacheRepository = cacheRepository;

@@ -50,8 +50,32 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\CourseData\XmlParserTests\ConstructorTests.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Web\CourseData\XmlParserTests\Course.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AngularTutorial.Entities\AngularTutorial.Entities.csproj">
+      <Project>{afaba0db-367e-4bd5-a8fe-2eb8c555e826}</Project>
+      <Name>AngularTutorial.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Repository\AngularTutorial.Repository.csproj">
+      <Project>{12c9b943-09f4-4a6b-9770-a53a0d144bda}</Project>
+      <Name>AngularTutorial.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Services\AngularTutorial.Services.csproj">
+      <Project>{631650ea-aa2b-489e-8c2f-c2f2290005e2}</Project>
+      <Name>AngularTutorial.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AngularTutorial.Web\AngularTutorial.Web.csproj">
+      <Project>{c67746a6-2062-4c39-b45a-9f78a1f98a55}</Project>
+      <Name>AngularTutorial.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

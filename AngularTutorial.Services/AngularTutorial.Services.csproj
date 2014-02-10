@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurriculumService.cs" />
-    <Compile Include="ICurriculumServiceBootstrapper.cs" />
+    <Compile Include="CourseService.cs" />
+    <Compile Include="ICourseServiceBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

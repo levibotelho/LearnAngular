@@ -2,7 +2,7 @@
 
 namespace AngularTutorial.Services
 {
-    public interface ICurriculumServiceBootstrapper
+    public interface ICourseServiceBootstrapper
     {
         Guid TableOfContentsCacheKey { get; }
     }

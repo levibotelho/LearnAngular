@@ -119,9 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
-    <Content Include="Course.xml" />
+    <Content Include="CourseData\Course.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Global.asax" />
-    <None Include="Course.xsd">
+    <None Include="CourseData\Course.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe">
@@ -317,6 +319,8 @@
     <Compile Include="App_Start\DependencyInjectionConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CourseData\CacheFiller.cs" />
+    <Compile Include="CourseData\XmlParser.cs" />
     <Compile Include="Dependencies\CourseServiceBootstrapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -340,7 +344,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CourseData\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

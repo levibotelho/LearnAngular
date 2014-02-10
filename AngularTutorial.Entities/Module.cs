@@ -9,6 +9,13 @@ namespace AngularTutorial.Entities
         public readonly string Title;
         public readonly Step[] Steps;
 
+        public Module(string title, Step[] steps)
+        {
+            Id = Guid.NewGuid();
+            Title = title;
+            Steps = steps;
+        }
+
         public Module(Guid id, string title, Step[] steps)
         {
             Id = id;
