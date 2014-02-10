@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Curriculum"
+    targetNamespace="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
+    xmlns:mstns="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Modules">
+    <xs:complexType>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Module">
+          <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="Step">
+                <xs:complexType>
+                  <xs:all minOccurs="1" maxOccurs="1">
+                    <xs:element name="Instructions" type="xs:string" />
+                    <xs:element name="StartingHtml" type="xs:string" />
+                    <xs:element name="SolutionHtml" type="xs:string" />
+                    <xs:element name="StartingJavaScript" type="xs:string" />
+                    <xs:element name="SolutionJavaScript" type="xs:string" />
+                    <xs:element name="FrameWriteInstructions">
+                      <xs:complexType>
+                        <xs:all minOccurs="1" maxOccurs="1">
+                          <xs:element name="StartDocument" type="xs:string" />
+                          <xs:element name="HeadToContent" type="xs:string" />
+                          <xs:element name="ContentToScript" type="xs:string" />
+                          <xs:element name="EndDocument" type="xs:string" />
+                        </xs:all>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

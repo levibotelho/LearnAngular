@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Modules xmlns="http://angulartutorial.azurewebsites.net/Curriculum.xsd">
+  <Module>
+    <Step>
+      <Instructions>
+
+      </Instructions>
+      <StartingHtml>
+
+      </StartingHtml>
+      <SolutionHtml>
+
+      </SolutionHtml>
+      <StartingJavaScript>
+
+      </StartingJavaScript>
+      <SolutionJavaScript>
+
+      </SolutionJavaScript>
+      <FrameWriteInstructions>
+        <StartDocument></StartDocument>
+        <StartDocument></StartDocument>
+        <ContentToScript></ContentToScript>
+        <EndDocument></EndDocument>
+      </FrameWriteInstructions>
+    </Step>
+  </Module>
+</Modules>

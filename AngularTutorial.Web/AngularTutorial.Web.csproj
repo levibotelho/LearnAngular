@@ -119,7 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="Curriculum.xml" />
     <Content Include="Global.asax" />
+    <None Include="Curriculum.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
