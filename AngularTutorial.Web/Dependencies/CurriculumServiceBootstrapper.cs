@@ -1,7 +1,7 @@
 ﻿using System;
 using AngularTutorial.Services;
 
-namespace AngularTutorial.Web
+namespace AngularTutorial.Web.Dependencies
 {
     public class CurriculumServiceBootstrapper : ICurriculumServiceBootstrapper
     {

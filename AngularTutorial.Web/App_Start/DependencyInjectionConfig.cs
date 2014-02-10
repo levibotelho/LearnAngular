@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AngularTutorial.Repository;
 using AngularTutorial.Services;
+using AngularTutorial.Web.Dependencies;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 
