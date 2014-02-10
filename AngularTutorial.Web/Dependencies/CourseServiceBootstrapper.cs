@@ -3,7 +3,7 @@ using AngularTutorial.Services;
 
 namespace AngularTutorial.Web.Dependencies
 {
-    public class CurriculumServiceBootstrapper : ICurriculumServiceBootstrapper
+    public class CourseServiceBootstrapper : ICourseServiceBootstrapper
     {
         static Guid _tableOfContentsCacheKey;
 

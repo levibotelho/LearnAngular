@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="Curriculum"
-    targetNamespace="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
+<xs:schema id="Course"
+    targetNamespace="http://angulartutorial.azurewebsites.net/Course.xsd"
     elementFormDefault="qualified"
-    xmlns="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
-    xmlns:mstns="http://angulartutorial.azurewebsites.net/Curriculum.xsd"
+    xmlns="http://angulartutorial.azurewebsites.net/Course.xsd"
+    xmlns:mstns="http://angulartutorial.azurewebsites.net/Course.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-  <xs:element name="Modules">
+  <xs:element name="Course">
     <xs:complexType>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Module">

@@ -7,24 +7,24 @@ namespace AngularTutorial.Web.Controllers
 {
     public class HomeController : Controller
     {
-        readonly ICurriculumService _curriculumService;
+        readonly ICourseService _courseService;
 
-        public HomeController(ICurriculumService curriculumService)
+        public HomeController(ICourseService courseService)
         {
-            _curriculumService = curriculumService;
+            _courseService = courseService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_curriculumService.GetTableOfContents().Modules);
+            var model = new IndexModel(_courseService.GetTableOfContents().Modules);
             return View(model);
         }
 
         [HttpGet]
         public JsonResult GetStep(Guid id)
         {
-            var step = _curriculumService.GetStep(id);
+            var step = _courseService.GetStep(id);
             return Json(step, JsonRequestBehavior.AllowGet);
         }
 	}

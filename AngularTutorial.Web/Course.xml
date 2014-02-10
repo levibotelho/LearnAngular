@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Modules xmlns="http://angulartutorial.azurewebsites.net/Curriculum.xsd">
+<Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Title="Getting Started">
     <Step Title="Getting Started 1">
       <Instructions>
@@ -306,4 +306,4 @@ Hello there, and welcome to the first module!
       </FrameWriteInstructions>
     </Step>
   </Module>
-</Modules>
+</Course>
