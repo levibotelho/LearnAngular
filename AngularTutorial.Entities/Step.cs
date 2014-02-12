@@ -5,8 +5,6 @@ namespace AngularTutorial.Entities
     [Serializable]
     public class Step : CacheableEntityBase
     {
-        public Step() { }
-
         public Step(Guid id, string title)
             : base(id)
         {

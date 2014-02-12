@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Xml.Linq;
 using AngularTutorial.Entities;
 
@@ -9,19 +7,23 @@ namespace AngularTutorial.Web.CourseData
 {
     public class XmlParser
     {
-        const string ModuleNodeName = "Module";
-        const string StepNodeName = "Step";
-        const string InstructionsNodeName = "Instructions";
-        const string StartingHtmlNodeName = "StartingHtml";
-        const string SolutionHtmlNodeName = "SolutionHtml";
-        const string StartingJavaScriptNodeName = "StartingJavaScript";
-        const string SolutionJavaScriptNodeName = "SolutionJavaScript";
-        const string FrameWriteInstructionsNodeName = "FrameWriteInstructions";
-        const string TitleAttributeName = "Title";
+        static readonly XNamespace Namespace = "http://angulartutorial.azurewebsites.net/Course.xsd";
 
-        static readonly XNamespace XmlNamespace = "http://angulartutorial.azurewebsites.net/Course.xsd";
+        static readonly XName InstructionsNodeName = Namespace + "Instructions";
+        static readonly XName StartingHtmlNodeName = Namespace + "StartingHtml";
+        static readonly XName SolutionHtmlNodeName = Namespace + "SolutionHtml";
+        static readonly XName StartingJavaScriptNodeName = Namespace + "StartingJavaScript";
+        static readonly XName SolutionJavaScriptNodeName = Namespace + "SolutionJavaScript";
+        static readonly XName FrameWriteInstructionsNodeName = Namespace + "FrameWriteInstructions";
+        
+        static readonly XName StartDocumentNodeName = Namespace + "StartDocument";
+        static readonly XName HeadToContentNodeName = Namespace + "HeadToContent";
+        static readonly XName ContentToScriptName = Namespace + "ContentToScript";
+        static readonly XName EndDocumentNodeName = Namespace + "EndDocument";
 
-        XDocument _document;
+        static readonly XName TitleAttributeName = "Title";
+
+        readonly XDocument _document;
 
         public XmlParser(string documentPath)
         {
@@ -45,9 +47,8 @@ namespace AngularTutorial.Web.CourseData
         Step GenerateStepFromXElement(XElement stepNode)
         {
             // ReSharper disable PossibleNullReferenceException
-            return new Step
+            return new Step(Guid.NewGuid(), stepNode.Attribute(TitleAttributeName).Value)
             {
-                Title = stepNode.Attribute(TitleAttributeName).Value,
                 Instructions = stepNode.Element(InstructionsNodeName).Value,
                 StartingHtml = stepNode.Element(StartingHtmlNodeName).Value,
                 SolutionHtml = stepNode.Element(SolutionHtmlNodeName).Value,
@@ -60,7 +61,15 @@ namespace AngularTutorial.Web.CourseData
 
         FrameWriteInstructions GenerateFrameWriteInstructionsFromElement(XElement frameWriteInstructionsNode)
         {
-            return null;
+            // ReSharper disable PossibleNullReferenceException
+            return new FrameWriteInstructions
+            {
+                StartDocument = frameWriteInstructionsNode.Element(StartDocumentNodeName).Value,
+                HeadToContent = frameWriteInstructionsNode.Element(HeadToContentNodeName).Value,
+                ContentToScript = frameWriteInstructionsNode.Element(ContentToScriptName).Value,
+                EndDocument = frameWriteInstructionsNode.Element(EndDocumentNodeName).Value
+            };
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }
