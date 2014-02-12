@@ -134,8 +134,6 @@
     </None>
     <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Microsoft.WindowsAzure.Caching\PerformanceCounters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -289,18 +287,8 @@
     <Content Include="Scripts\ace\worker-lua.js" />
     <Content Include="Scripts\ace\worker-php.js" />
     <Content Include="Scripts\ace\worker-xquery.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\AngularModules\IndexController.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

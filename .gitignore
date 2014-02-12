@@ -154,4 +154,8 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# =========================
+# Application-specific
+# =========================
 AngularTutorial.Web/Properties/PublishProfiles/
