@@ -10,14 +10,16 @@ namespace AngularTutorial.Web
 {
     public static class DependencyInjectionConfig
     {
+        internal static Container DependencyInjectionContainer;
+
         public static void Register()
         {
-            var container = new Container();
-            container.RegisterTypes();
-            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-            container.RegisterMvcAttributeFilterProvider();
-            container.Verify();
-            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            DependencyInjectionContainer = new Container();
+            DependencyInjectionContainer.RegisterTypes();
+            DependencyInjectionContainer.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+            DependencyInjectionContainer.RegisterMvcAttributeFilterProvider();
+            DependencyInjectionContainer.Verify();
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(DependencyInjectionContainer));
         }
 
         static void RegisterTypes(this Container container)

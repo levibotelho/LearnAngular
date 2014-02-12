@@ -120,7 +120,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="CourseData\Course.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
     <None Include="CourseData\Course.xsd">

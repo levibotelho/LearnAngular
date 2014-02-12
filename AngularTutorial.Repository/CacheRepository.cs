@@ -8,6 +8,7 @@ namespace AngularTutorial.Repository
         T Get<T>(Guid key);
         void Put(Guid key, object value);
         void Remove(Guid key);
+        void Clear();
     }
 
     public class CacheRepository : ICacheRepository

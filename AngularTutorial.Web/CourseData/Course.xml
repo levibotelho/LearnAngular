@@ -94,7 +94,7 @@
     </Step>
   </Module>
   <Module Title="The second module...">
-    <Step Title="Getting Started 2">
+    <Step Title="The second module 1">
       <Instructions>Hello there, and welcome to the second module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -123,7 +123,7 @@
         </EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="Getting Started 2">
+    <Step Title="The second module 2">
       <Instructions>This is the second step of the second module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -152,7 +152,7 @@
         </EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="Getting Started 3">
+    <Step Title="The second module 3">
       <Instructions>This is the third step of the second module!</Instructions>
       <StartingHtml><![CDATA[button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>

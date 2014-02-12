@@ -5,14 +5,13 @@ using System.Linq;
 namespace AngularTutorial.Entities
 {
     [Serializable]
-    public class TableOfContents : CacheableEntityBase
+    public class TableOfContents
     {
         public readonly TableOfContentsEntry[] Modules;
 
         public TableOfContents() { }
 
-        public TableOfContents(Guid id, IEnumerable<Module> modules)
-            : base(id)
+        public TableOfContents(IEnumerable<Module> modules)
         {
             Modules = modules
                 .Select(module => new TableOfContentsEntry(

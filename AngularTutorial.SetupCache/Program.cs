@@ -28,23 +28,23 @@ namespace AngularTutorial.SetupCache
                     })
             };
 
-            var tableOfContents = new TableOfContents(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), modules);
-            ReinitializeCache(modules, tableOfContents);
+            var tableOfContents = new TableOfContents(modules);
+            //ReinitializeCache(modules, tableOfContents);
         }
 
-        static void ReinitializeCache(IEnumerable<Module> modules, TableOfContents tableOfContents)
-        {
-            var cache = new CacheRepository(new UnitOfWork());
-            cache.Clear();
-            Add(tableOfContents, cache);
-            foreach (var module in modules)
-            {
-                foreach (var step in module.Steps)
-                {
-                    Add(step, cache);
-                }
-            }
-        }
+        //static void ReinitializeCache(IEnumerable<Module> modules, TableOfContents tableOfContents)
+        //{
+        //    var cache = new CacheRepository(new UnitOfWork());
+        //    cache.Clear();
+        //    Add(tableOfContents, cache);
+        //    foreach (var module in modules)
+        //    {
+        //        foreach (var step in module.Steps)
+        //        {
+        //            Add(step, cache);
+        //        }
+        //    }
+        //}
 
         static void Add(CacheableEntityBase entity, ICacheRepository cache)
         {
