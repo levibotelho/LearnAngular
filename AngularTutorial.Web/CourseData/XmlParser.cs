@@ -49,11 +49,11 @@ namespace AngularTutorial.Web.CourseData
             // ReSharper disable PossibleNullReferenceException
             return new Step(Guid.NewGuid(), stepNode.Attribute(TitleAttributeName).Value)
             {
-                Instructions = stepNode.Element(InstructionsNodeName).Value,
-                StartingHtml = stepNode.Element(StartingHtmlNodeName).Value,
-                SolutionHtml = stepNode.Element(SolutionHtmlNodeName).Value,
-                StartingJavaScript = stepNode.Element(StartingJavaScriptNodeName).Value,
-                SolutionJavaScript = stepNode.Element(SolutionJavaScriptNodeName).Value,
+                Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
+                StartingHtml = GetValueFromElement(stepNode.Element(StartingHtmlNodeName)),
+                SolutionHtml = GetValueFromElement(stepNode.Element(SolutionHtmlNodeName)),
+                StartingJavaScript = GetValueFromElement(stepNode.Element(StartingJavaScriptNodeName)),
+                SolutionJavaScript = GetValueFromElement(stepNode.Element(SolutionJavaScriptNodeName)),
                 FrameWriteInstructions = GenerateFrameWriteInstructionsFromElement(stepNode.Element(FrameWriteInstructionsNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
@@ -64,12 +64,17 @@ namespace AngularTutorial.Web.CourseData
             // ReSharper disable PossibleNullReferenceException
             return new FrameWriteInstructions
             {
-                StartDocument = frameWriteInstructionsNode.Element(StartDocumentNodeName).Value,
-                HeadToContent = frameWriteInstructionsNode.Element(HeadToContentNodeName).Value,
-                ContentToScript = frameWriteInstructionsNode.Element(ContentToScriptName).Value,
-                EndDocument = frameWriteInstructionsNode.Element(EndDocumentNodeName).Value
+                StartDocument = GetValueFromElement(frameWriteInstructionsNode.Element(StartDocumentNodeName)),
+                HeadToContent = GetValueFromElement(frameWriteInstructionsNode.Element(HeadToContentNodeName)),
+                ContentToScript = GetValueFromElement(frameWriteInstructionsNode.Element(ContentToScriptName)),
+                EndDocument = GetValueFromElement(frameWriteInstructionsNode.Element(EndDocumentNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
+        }
+
+        static string GetValueFromElement(XElement element)
+        {
+            return element.Value.Trim();
         }
     }
 }

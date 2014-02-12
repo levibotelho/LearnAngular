@@ -2,80 +2,40 @@
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Title="Getting Started">
     <Step Title="Getting Started 1">
-      <Instructions>
-        <![CDATA[
-Hello there, and welcome to the first module!
-]]>
-      </Instructions>
-      <StartingHtml>
-        <![CDATA[
-<button>Hello button!</button>
-]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-<button id="MyButton">Hello button!</button>
-]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-// The rest is up to you!
-]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-  document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <Instructions>Hello there, and welcome to the first module!</Instructions>
+      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
-          <html>
-          <head>
+<html>
+<head>
           ]]>
         </StartDocument>
         <HeadToContent>
           <![CDATA[
-          </head>
-          <body>
+</head>
+<body>
           ]]>
         </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-          <script>
-          ]]>
-        </ContentToScript>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
         <EndDocument>
           <![CDATA[
-          </script>
-          </body>
-          </html>
+</script>
+</body>
+</html>
           ]]>
         </EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="Getting Started 2">
       <Instructions>This is the second step of the first module!</Instructions>
-      <StartingHtml>
-        <![CDATA[
-          <button>Hello button!</button>
-        ]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-          <button id="MyButton">Hello button!</button>
-        ]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-          // The rest is up to you!
-        ]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-          document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
@@ -105,49 +65,29 @@ Hello there, and welcome to the first module!
     </Step>
     <Step Title="Getting Started 3">
       <Instructions>This is the third step of the first module!</Instructions>
-      <StartingHtml>
-        <![CDATA[
-          <button>Hello button!</button>
-        ]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-          <button id="MyButton">Hello button!</button>
-        ]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-          // The rest is up to you!
-        ]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-          document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
-            <html>
-            <head>
+<html>
+<head>
           ]]>
         </StartDocument>
         <HeadToContent>
           <![CDATA[
-            </head>
-            <body>
+</head>
+<body>
           ]]>
         </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-            <script>
-          ]]>
-        </ContentToScript>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
         <EndDocument>
           <![CDATA[
-            </script>
-            </body>
-            </html>
+</script>
+</body>
+</html>
           ]]>
         </EndDocument>
       </FrameWriteInstructions>
@@ -155,152 +95,88 @@ Hello there, and welcome to the first module!
   </Module>
   <Module Title="The second module...">
     <Step Title="Getting Started 2">
-      <Instructions>
-        <![CDATA[
-          Hello there, and welcome to the second module!
-        ]]>
-      </Instructions>
-      <StartingHtml>
-        <![CDATA[
-          <button>Hello button!</button>
-        ]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-          <button id="MyButton">Hello button!</button>
-        ]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-          // The rest is up to you!
-        ]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-          document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <Instructions>Hello there, and welcome to the second module!</Instructions>
+      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
-            <html>
-            <head>
+<html>
+<head>
           ]]>
         </StartDocument>
         <HeadToContent>
           <![CDATA[
-            </head>
-            <body>
+</head>
+<body>
           ]]>
         </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-            <script>
-          ]]>
-        </ContentToScript>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
         <EndDocument>
           <![CDATA[
-            </script>
-            </body>
-            </html>
+</script>
+</body>
+</html>
           ]]>
         </EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="Getting Started 2">
       <Instructions>This is the second step of the second module!</Instructions>
-      <StartingHtml>
-        <![CDATA[
-          <button>Hello button!</button>
-        ]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-          <button id="MyButton">Hello button!</button>
-        ]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-          // The rest is up to you!
-        ]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-          document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
-            <html>
-            <head>
+<html>
+<head>
           ]]>
         </StartDocument>
         <HeadToContent>
           <![CDATA[
-            </head>
-            <body>
+</head>
+<body>
           ]]>
         </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-            <script>
-          ]]>
-        </ContentToScript>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
         <EndDocument>
           <![CDATA[
-            </script>
-            </body>
-            </html>
+</script>
+</body>
+</html>
           ]]>
         </EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="Getting Started 3">
       <Instructions>This is the third step of the second module!</Instructions>
-      <StartingHtml>
-        <![CDATA[
-          <button>Hello button!</button>
-        ]]>
-      </StartingHtml>
-      <SolutionHtml>
-        <![CDATA[
-          <button id="MyButton">Hello button!</button>
-        ]]>
-      </SolutionHtml>
-      <StartingJavaScript>
-        <![CDATA[
-          // The rest is up to you!
-        ]]>
-      </StartingJavaScript>
-      <SolutionJavaScript>
-        <![CDATA[
-          document.getElementById("MyButton").onclick = function() { alert("hi"); }
-        ]]>
-      </SolutionJavaScript>
+      <StartingHtml><![CDATA[button>Hello button!</button>]]></StartingHtml>
+      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
+      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument>
           <![CDATA[
-            <html>
-            <head>
+<html>
+<head>
           ]]>
         </StartDocument>
         <HeadToContent>
           <![CDATA[
-            </head>
-            <body>
+</head>
+<body>
           ]]>
         </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-            <script>
-          ]]>
-        </ContentToScript>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
         <EndDocument>
           <![CDATA[
-            </script>
-            </body>
-            </html>
+</script>
+</body>
+</html>
           ]]>
         </EndDocument>
       </FrameWriteInstructions>
