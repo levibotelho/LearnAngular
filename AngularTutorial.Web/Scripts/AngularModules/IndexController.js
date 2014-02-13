@@ -1,25 +1,30 @@
-﻿angular.module('AngularTutorial', [])
-  .controller('IndexController', ["$http", function ($http) {
-      var self = this;
-      self.text = "";
-      self.startingHtml = "";
-      self.solutionHtml = "";
-      self.startingJavaScript = "";
-      self.solutionJavaScript = "";
-      self.frameWriteInstructions = [];
+﻿angular.module('AngularTutorial', []).controller('IndexController', ["$http", function ($http) {
+    var self = this;
+    self.title = "";
+    self.instructions = "";
+    self.startingHtml = "";
+    self.solutionHtml = "";
+    self.startingJavaScript = "";
+    self.solutionJavaScript = "";
+    self.frameWriteInstructions = [];
 
-      self.loadStep = function (id) {
-          $http.get("/Home/GetStep", { params: { id: id } })
-          .success(function (data, status, headers, config) {
-              self.text = data.Text;
-              self.startingHtml = data.startingHtml;
-              self.solutionHtml = data.solutionHtml;
-              self.startingJavaScript = data.startingJavaScript;
-              self.solutionJavaScript = data.solutionJavaScript;
-              self.frameWriteInstructions = data.frameWriteInstructions;
-          })
-          .error(function (data, status, headers, config) {
-              alert("Error!");
-          });
-      };
-  }]);
+    self.setStep = function (id) {
+        self.loadStep(id);
+    };
+
+    self.loadStep = function (id) {
+        $http.get("/Home/GetStep", { params: { id: id } })
+        .success(function (data, status, headers, config) {
+            self.title = data.Title;
+            self.instructions = data.Instructions;
+            self.startingHtml = data.StartingHtml;
+            self.solutionHtml = data.SolutionHtml;
+            self.startingJavaScript = data.StartingJavaScript;
+            self.solutionJavaScript = data.SolutionJavaScript;
+            self.frameWriteInstructions = data.FrameWriteInstructions;
+        })
+        .error(function (data, status, headers, config) {
+            alert("Error!");
+        });
+    };
+}]);

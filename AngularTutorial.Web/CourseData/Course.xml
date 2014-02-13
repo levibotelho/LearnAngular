@@ -8,26 +8,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-<html>
-<head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-</head>
-<body>
-          ]]>
-        </HeadToContent>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
         <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument>
-          <![CDATA[
-</script>
-</body>
-</html>
-          ]]>
-        </EndDocument>
+        <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="Getting Started 2">
@@ -37,30 +21,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-            <html>
-            <head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-            </head>
-            <body>
-          ]]>
-        </HeadToContent>
-        <ContentToScript>
-          <![CDATA[
-            <script>
-          ]]>
-        </ContentToScript>
-        <EndDocument>
-          <![CDATA[
-            </script>
-            </body>
-            </html>
-          ]]>
-        </EndDocument>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
+        <ContentToScript><![CDATA[<script>]]></ContentToScript>
+        <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="Getting Started 3">
@@ -70,26 +34,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-<html>
-<head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-</head>
-<body>
-          ]]>
-        </HeadToContent>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
         <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument>
-          <![CDATA[
-</script>
-</body>
-</html>
-          ]]>
-        </EndDocument>
+        <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
   </Module>
@@ -101,26 +49,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-<html>
-<head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-</head>
-<body>
-          ]]>
-        </HeadToContent>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
         <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument>
-          <![CDATA[
-</script>
-</body>
-</html>
-          ]]>
-        </EndDocument>
+        <EndDocument><![CDATA[<script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="The second module 2">
@@ -130,26 +62,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-<html>
-<head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-</head>
-<body>
-          ]]>
-        </HeadToContent>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
         <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument>
-          <![CDATA[
-</script>
-</body>
-</html>
-          ]]>
-        </EndDocument>
+        <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Title="The second module 3">
@@ -159,26 +75,10 @@
       <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument>
-          <![CDATA[
-<html>
-<head>
-          ]]>
-        </StartDocument>
-        <HeadToContent>
-          <![CDATA[
-</head>
-<body>
-          ]]>
-        </HeadToContent>
+        <StartDocument><![CDATA[<html><head>]]></StartDocument>
+        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
         <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument>
-          <![CDATA[
-</script>
-</body>
-</html>
-          ]]>
-        </EndDocument>
+        <EndDocument><![CDATA[<script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
   </Module>
