@@ -123,6 +123,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="_IntelliSense\ace.js" />
+    <Content Include="_IntelliSense\angular.min.js" />
+    <Content Include="_IntelliSense\bootstrap.min.css" />
+    <Content Include="_IntelliSense\bootstrap.min.js" />
+    <Content Include="_IntelliSense\font-awesome.min.css" />
+    <Content Include="_IntelliSense\jquery.min.js" />
     <None Include="CourseData\Course.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -137,7 +143,6 @@
     <None Include="Microsoft.WindowsAzure.Caching\PerformanceCounters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Scripts\IndexController.js" />
     <Content Include="Scripts\ui-ace.js" />
     <Content Include="Views\_ViewStart.cshtml" />

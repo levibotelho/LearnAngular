@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div class="row" ng-controller="IndexController as index">
+<div class="row" ng-controller="IndexController as index" ng-init="init('@Model.Modules.First().Id')">
     <div id="Modules" class="col-sm-4 col-md-2 panel-group">
         @for (var i = 0; i < Model.Modules.Count(); i++)
         {
@@ -39,7 +39,7 @@
         </div>
         <div class="row paddedRow">
             <div class="col-xs-12">
-                <button class="btn btn-sm btn-success" ng-click="index.run()">Upload to frame</button>
+                <button class="btn btn-sm btn-success" ng-click="index.run()"><i class="fa fa-play" style="margin-right: 1em"></i>Run</button>
             </div>
         </div>
         <div class="row paddedRow">

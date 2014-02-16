@@ -1,4 +1,4 @@
-﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$http", function ($http) {
+﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$http", function ($http, initialId) {
     var self = this;
     self.html = "";
     self.javaScript = "";
@@ -40,4 +40,6 @@
             alert("Error!");
         });
     };
+
+    self.setStep(initialId);
 }]);
