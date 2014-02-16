@@ -22,7 +22,7 @@
                         <ul class="nav nav-pills nav-stacked">
                             @foreach (var step in module.Children)
                             {
-                                <li><a ng-click="index.setStep('@step.Id')">@step.Title</a></li>
+                                <li class="stepElement" ng-click="index.setStep('@step.Id')"><a>@step.Title</a></li>
                             }
                         </ul>
                     </div>

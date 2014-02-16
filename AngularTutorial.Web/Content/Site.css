@@ -9,3 +9,7 @@
 .ace_editor {
     height: 200px;
 }
+
+.stepElement {
+    cursor: pointer;
+}
