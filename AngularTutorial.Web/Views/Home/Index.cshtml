@@ -39,12 +39,12 @@
         </div>
         <div class="row paddedRow">
             <div class="col-xs-12">
-                <button id="Upload" class="btn btn-sm btn-success">Upload to frame</button>
+                <button class="btn btn-sm btn-success" ng-click="index.run()">Upload to frame</button>
             </div>
         </div>
         <div class="row paddedRow">
             <div class="col-sm-6">
-                <pre id="htmlEditor" class="editor"></pre>
+                <div ui-ace="{ mode: 'html' }" ng-model="index.html"></div>
             </div>
             <div class="col-sm-6">
                 {{index.instructions}}
@@ -52,7 +52,7 @@
         </div>
         <div class="row paddedRow">
             <div class="col-sm-6">
-                <pre id="javascriptEditor" class="editor"></pre>
+                <div ui-ace="{ mode: 'javascript' }" ng-model="index.javaScript"></div>
             </div>
             <div class="col-sm-6">
                 <iframe class="renderFrame"></iframe>
@@ -63,24 +63,24 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/AngularModules/IndexController.js"></script>
+    <script src="~/Scripts/IndexController.js"></script>
     <script>
-        var htmlEditor = ace.edit("htmlEditor");
-        htmlEditor.setTheme("ace/theme/monokai");
-        htmlEditor.getSession().setMode("ace/mode/html");
-        var jsEditor = ace.edit("javascriptEditor");
-        jsEditor.setTheme("ace/theme/monokai");
-        jsEditor.getSession().setMode("ace/mode/javascript");
+        //var htmlEditor = ace.edit("htmlEditor");
+        //htmlEditor.setTheme("ace/theme/monokai");
+        //htmlEditor.getSession().setMode("ace/mode/html");
+        //var jsEditor = ace.edit("javascriptEditor");
+        //jsEditor.setTheme("ace/theme/monokai");
+        //jsEditor.getSession().setMode("ace/mode/javascript");
 
-        document.getElementById("Upload").onclick = function () {
-            var doc = window.frames[0].document;
-            doc.open();
-            doc.write("<html><body>");
-            doc.write(htmlEditor.getValue());
-            doc.write("<script>");
-            doc.write(jsEditor.getValue());
-            doc.write("<\/script><\/body><\/html>");
-            doc.close();
-        };
+        //document.getElementById("Upload").onclick = function () {
+        //    var doc = window.frames[0].document;
+        //    doc.open();
+        //    doc.write("<html><body>");
+        //    doc.write(htmlEditor.getValue());
+        //    doc.write("<script>");
+        //    doc.write(jsEditor.getValue());
+        //    doc.write("<\/script><\/body><\/html>");
+        //    doc.close();
+        //};
     </script>
 }

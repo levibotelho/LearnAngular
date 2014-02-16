@@ -137,8 +137,9 @@
     <None Include="Microsoft.WindowsAzure.Caching\PerformanceCounters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Scripts\AngularModules\IndexController.js" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Scripts\IndexController.js" />
+    <Content Include="Scripts\ui-ace.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

@@ -1,13 +1,11 @@
-﻿.editor {
-    position: relative;
-    min-height: 200px !important;
-    width: auto;
-}
-
-.paddedRow {
+﻿.paddedRow {
     margin: 1em 0 1em 0;
 }
 
 .renderFrame {
     width: 100%;
+}
+
+.ace_editor {
+    height: 200px;
 }

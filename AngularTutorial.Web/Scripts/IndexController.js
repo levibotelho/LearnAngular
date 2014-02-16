@@ -1,5 +1,7 @@
-﻿angular.module('AngularTutorial', []).controller('IndexController', ["$http", function ($http) {
+﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$http", function ($http) {
     var self = this;
+    self.html = "";
+    self.javaScript = "";
     self.title = "";
     self.instructions = "";
     self.startingHtml = "";
@@ -7,6 +9,10 @@
     self.startingJavaScript = "";
     self.solutionJavaScript = "";
     self.frameWriteInstructions = [];
+
+    self.run = function() {
+        alert(self.html);
+    };
 
     self.setStep = function (id) {
         self.loadStep(id);
