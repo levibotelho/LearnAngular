@@ -10,8 +10,15 @@
     self.solutionJavaScript = "";
     self.frameWriteInstructions = [];
 
-    self.run = function() {
-        alert(self.html);
+    self.run = function () {
+        var doc = window.frames[0].document;
+        doc.open();
+        doc.write("<html><body>");
+        doc.write(self.html);
+        doc.write("<script>");
+        doc.write(self.javaScript);
+        doc.write("<\/script><\/body><\/html>");
+        doc.close();
     };
 
     self.setStep = function (id) {
