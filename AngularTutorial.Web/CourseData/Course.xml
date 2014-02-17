@@ -52,18 +52,18 @@ In Angular, these three concepts are represented by the following components
         <Initial>
           <![CDATA[
 <html>
-  <body>
-    <div>{{message}}</div>
-  </body>
+    <body>
+        <div>{{message}}</div>
+    </body>
 </html>
           ]]>
         </Initial>
         <Solution>
           <![CDATA[
 <html ng-app="Tutorial">
-  <body>
-    <div controller="GettingStartedController">{{message}}</div>
-  </body>
+    <body>
+        <div controller="GettingStartedController">{{message}}</div>
+    </body>
 </html>
           ]]>
         </Solution>
@@ -73,14 +73,14 @@ In Angular, these three concepts are represented by the following components
           <Initial>
             <![CDATA[
 angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
+    $scope.message = "Hello World!";
 }]);
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
 angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
+    $scope.message = "Hello World!";
 }]);
             ]]>
           </Solution>

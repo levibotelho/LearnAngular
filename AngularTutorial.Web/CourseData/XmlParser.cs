@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Xml.Linq;
 using AngularTutorial.Entities;
 
@@ -44,7 +43,7 @@ namespace AngularTutorial.Web.CourseData
             // ReSharper restore PossibleNullReferenceException
         }
 
-        Module GenerateModule(XElement moduleNode)
+        static Module GenerateModule(XElement moduleNode)
         {
             var id = Guid.Parse(moduleNode.Attribute(IdAttributeName).Value);
             var title = moduleNode.Attribute(TitleAttributeName).Value;
@@ -52,7 +51,7 @@ namespace AngularTutorial.Web.CourseData
             return new Module(id, title, steps);
         }
 
-        Step GenerateStep(XElement stepNode)
+        static Step GenerateStep(XElement stepNode)
         {
             // ReSharper disable PossibleNullReferenceException
             var id = Guid.Parse(stepNode.Attribute(IdAttributeName).Value);
@@ -68,7 +67,7 @@ namespace AngularTutorial.Web.CourseData
             // ReSharper restore PossibleNullReferenceException
         }
 
-        HtmlDefinition GenerateHtmlDefinition(XContainer element)
+        static HtmlDefinition GenerateHtmlDefinition(XContainer element)
         {
             if (element == null)
                 return null;
@@ -81,7 +80,7 @@ namespace AngularTutorial.Web.CourseData
             return new HtmlDefinition(header, initial, solution, footer);
         }
 
-        JavaScriptDefinition GenerateJavaScriptDefinition(XContainer element)
+        static JavaScriptDefinition GenerateJavaScriptDefinition(XContainer element)
         {
             if (element == null)
                 return null;

@@ -1,5 +1,8 @@
-﻿namespace AngularTutorial.Entities
+﻿using System;
+
+namespace AngularTutorial.Entities
 {
+    [Serializable]
     public class HtmlDefinition
     {
         public readonly string Header;
