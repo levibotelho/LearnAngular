@@ -29,9 +29,9 @@
         .success(function (data, status, headers, config) {
             $scope.title = data.Title;
             $scope.instructions = data.Instructions;
-            $scope.startingHtml = data.StartingHtml;
+            $scope.html = $scope.startingHtml = data.StartingHtml;
             $scope.solutionHtml = data.SolutionHtml;
-            $scope.startingJavaScript = data.StartingJavaScript;
+            $scope.javaScript = $scope.startingJavaScript = data.StartingJavaScript;
             $scope.solutionJavaScript = data.SolutionJavaScript;
             $scope.frameWriteInstructions = data.FrameWriteInstructions;
         })
