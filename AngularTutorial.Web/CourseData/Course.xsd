@@ -14,23 +14,48 @@
             <xs:choice minOccurs="1" maxOccurs="unbounded">
               <xs:element name="Step">
                 <xs:complexType>
-                  <xs:all minOccurs="1" maxOccurs="1">
-                    <xs:element name="Instructions" type="xs:string" />
-                    <xs:element name="StartingHtml" type="xs:string" />
-                    <xs:element name="SolutionHtml" type="xs:string" />
-                    <xs:element name="StartingJavaScript" type="xs:string" />
-                    <xs:element name="SolutionJavaScript" type="xs:string" />
-                    <xs:element name="FrameWriteInstructions">
+                  <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Instructions" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="Html" maxOccurs="1">
                       <xs:complexType>
-                        <xs:all minOccurs="1" maxOccurs="1">
-                          <xs:element name="StartDocument" type="xs:string" />
-                          <xs:element name="HeadToContent" type="xs:string" />
-                          <xs:element name="ContentToScript" type="xs:string" />
-                          <xs:element name="EndDocument" type="xs:string" />
-                        </xs:all>
+                        <xs:choice minOccurs="2" maxOccurs="4">
+                          <xs:element name="Header" type="xs:string" maxOccurs="1" />
+                          <xs:element name="Initial" type="xs:string" minOccurs="1" maxOccurs="1" />
+                          <xs:element name="Solution" type="xs:string" minOccurs="1" maxOccurs="1" />
+                          <xs:element name="Footer" type="xs:string" maxOccurs="1" />
+                        </xs:choice>
                       </xs:complexType>
                     </xs:element>
-                  </xs:all>
+                    <xs:element name="JavaScript" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:choice minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="Page">
+                            <xs:complexType>
+                              <xs:all minOccurs="1" maxOccurs="1">
+                                <xs:element name="Initial" type="xs:string" />
+                                <xs:element name="Solution" type="xs:string" />
+                              </xs:all>
+                              <xs:attribute name="Name" type="xs:string" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="HeadIncludes" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:choice minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="Include" type="xs:string" />
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ScriptIncludes" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:choice minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="Include" type="xs:string" />
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
                   <xs:attribute name="Id" type="xs:string" />
                   <xs:attribute name="Title" type="xs:string" />
                 </xs:complexType>

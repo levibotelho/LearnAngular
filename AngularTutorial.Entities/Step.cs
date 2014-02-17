@@ -13,10 +13,9 @@ namespace AngularTutorial.Entities
 
         public string Title { get; set; }
         public string Instructions { get; set; }
-        public string StartingHtml { get; set; }
-        public string SolutionHtml { get; set; }
-        public string StartingJavaScript { get; set; }
-        public string SolutionJavaScript { get; set; }
-        public FrameWriteInstructions FrameWriteInstructions { get; set; }
+        public HtmlDefinition Html { get; set; }
+        public JavaScriptDefinition JavaScript { get; set; }
+        public string[] HeadIncludes { get; set; }
+        public string[] ScriptIncludes { get; set; }
     }
 }

@@ -11,12 +11,16 @@ namespace AngularTutorial.Tests.Unit.Web.CourseData.XmlParserTests
     {
         const string XmlPath = @"Web\CourseData\XmlParserTests\Course.xml";
         static Module[] _parsedModules;
+        static Step _sparseStep, _fullStep, _partialStep;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             var parser = new XmlParser(XmlPath);
             _parsedModules = parser.ParseXml();
+            _sparseStep = _parsedModules[0].Steps[0];
+            _fullStep = _parsedModules[0].Steps[1];
+            _partialStep = _parsedModules[1].Steps[0];
         }
 
         [TestMethod]
@@ -26,75 +30,135 @@ namespace AngularTutorial.Tests.Unit.Web.CourseData.XmlParserTests
         }
 
         [TestMethod]
+        public void GeneratesOneStepPerStepInXml()
+        {
+            Assert.AreEqual(2, _parsedModules[0].Steps.Length);
+        }
+
+        [TestMethod]
         public void GeneratedStepIncludesId()
         {
-            Assert.AreNotEqual(Guid.Empty, _parsedModules.First().Steps.First().Id);
+            Assert.AreNotEqual(Guid.Empty, _sparseStep.Id);
         }
 
         [TestMethod]
         public void GeneratedStepIncludesTitle()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().Title));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_sparseStep.Title));
         }
 
         [TestMethod]
         public void GeneratedStepIncludesInstructions()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().Instructions));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_sparseStep.Instructions));
+        }
+        
+        [TestMethod]
+        public void GeneratedStepIncludesHtmlWhenPresent()
+        {
+            Assert.IsNotNull(_fullStep.Html);
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesStartingHtml()
+        public void GeneratedStepDoesNotIncludeHtmlWhenNotPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().StartingHtml));
+            Assert.IsNull(_sparseStep.Html);
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesSolutionHtml()
+        public void GeneratedStepIncludesHtmlHeaderWhenPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().SolutionHtml));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Header));
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesStartingJavaScript()
+        public void GeneratedStepDoesNotIncludeHtmlHeaderWhenNotPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().StartingJavaScript));
+            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.Html.Header));
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesSolutionJavaScript()
+        public void GeneratedStepIncludesHtmlFooterWhenPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().SolutionJavaScript));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Footer));
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesFrameWriteInstructions()
+        public void GeneratedStepDoesNotIncludeHtmlFooterWhenNotPresent()
         {
-            Assert.IsNotNull(_parsedModules.First().Steps.First().FrameWriteInstructions);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.Html.Footer));
         }
 
         [TestMethod]
-        public void GeneratedFrameWriteInstructionsIncludesStartDocument()
+        public void GeneratedHtmlIncludesInitialHtml()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().FrameWriteInstructions.StartDocument));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Initial));
         }
 
         [TestMethod]
-        public void GeneratedFrameWriteInstructionsIncludesHeadToContent()
+        public void GeneratedHtmlIncludesSolutionHtml()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().FrameWriteInstructions.HeadToContent));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Initial));
         }
 
         [TestMethod]
-        public void GeneratedFrameWriteInstructionsIncludesContentToScript()
+        public void GeneratedStepIncludesJavaScriptWhenPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().FrameWriteInstructions.ContentToScript));
+            Assert.IsNotNull(_fullStep.JavaScript);
         }
 
         [TestMethod]
-        public void GeneratedFrameWriteInstructionsIncludesEndDocument()
+        public void GeneratedStepDoesNotIncludeJavaScriptWhenNotPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_parsedModules.First().Steps.First().FrameWriteInstructions.EndDocument));
+            Assert.IsNull(_sparseStep.JavaScript);
+        }
+        
+        [TestMethod]
+        public void GeneratedJavaScriptIncludesOnePagePerPageInXml()
+        {
+            Assert.AreEqual(2, _fullStep.JavaScript.Pages.Count);
+        }
+
+        [TestMethod]
+        public void GeneratedJavaScriptPageIncludesName()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Name));
+        }
+
+        [TestMethod]
+        public void GeneratedJavaScriptPageIncludesIntialJavaScript()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Initial));
+        }
+
+        [TestMethod]
+        public void GeneratedJavaScriptPageIncludesSolutionJavaScript()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Solution));
+        }
+
+        [TestMethod]
+        public void GeneratedStepIncludesOneHeadIncludePerHeadIncludeInXml()
+        {
+            Assert.AreEqual(2, _fullStep.HeadIncludes.Length);
+        }
+
+        [TestMethod]
+        public void GeneratedStepHasNoHeadIncludesWhenNotPresent()
+        {
+            Assert.IsNull(_sparseStep.HeadIncludes);
+        }
+
+        [TestMethod]
+        public void GeneratedStepIncludesOneScriptIncludePerScriptIncludeInXml()
+        {
+            Assert.AreEqual(2, _fullStep.ScriptIncludes.Length);
+        }
+
+        [TestMethod]
+        public void GeneratedStepHasNoScriptIncludesWhenNotPresent()
+        {
+            Assert.IsNull(_sparseStep.ScriptIncludes);
         }
     }
 }

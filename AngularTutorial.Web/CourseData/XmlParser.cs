@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Xml.Linq;
 using AngularTutorial.Entities;
 
@@ -10,19 +11,24 @@ namespace AngularTutorial.Web.CourseData
         static readonly XNamespace Namespace = "http://angulartutorial.azurewebsites.net/Course.xsd";
 
         static readonly XName InstructionsNodeName = Namespace + "Instructions";
-        static readonly XName StartingHtmlNodeName = Namespace + "StartingHtml";
-        static readonly XName SolutionHtmlNodeName = Namespace + "SolutionHtml";
-        static readonly XName StartingJavaScriptNodeName = Namespace + "StartingJavaScript";
-        static readonly XName SolutionJavaScriptNodeName = Namespace + "SolutionJavaScript";
-        static readonly XName FrameWriteInstructionsNodeName = Namespace + "FrameWriteInstructions";
-        
-        static readonly XName StartDocumentNodeName = Namespace + "StartDocument";
-        static readonly XName HeadToContentNodeName = Namespace + "HeadToContent";
-        static readonly XName ContentToScriptName = Namespace + "ContentToScript";
-        static readonly XName EndDocumentNodeName = Namespace + "EndDocument";
+        static readonly XName HtmlNodeName = Namespace + "Html";
+        static readonly XName JavaScriptNodeName = Namespace + "JavaScript";
+
+        static readonly XName HeaderNodeName = Namespace + "Header";
+        static readonly XName InitialNodeName = Namespace + "Initial";
+        static readonly XName SolutionNodeName = Namespace + "Solution";
+        static readonly XName FooterNodeName = Namespace + "Footer";
+
+        static readonly XName PageNodeName = Namespace + "Page";
+
+        static readonly XName HeadIncludesNodeName = Namespace + "HeadIncludes";
+        static readonly XName ScriptIncludesNodeName = Namespace + "ScriptIncludes";
+
+        static readonly XName IncludeNodeName = Namespace + "Include";
 
         static readonly XName IdAttributeName = "Id";
         static readonly XName TitleAttributeName = "Title";
+        static readonly XName NameAttributeName = "Name";
 
         readonly XDocument _document;
 
@@ -34,19 +40,19 @@ namespace AngularTutorial.Web.CourseData
         public Module[] ParseXml()
         {
             // ReSharper disable PossibleNullReferenceException
-            return _document.Root.Elements().Select(GenerateModuleFromXElement).ToArray();
+            return _document.Root.Elements().Select(GenerateModule).ToArray();
             // ReSharper restore PossibleNullReferenceException
         }
 
-        Module GenerateModuleFromXElement(XElement moduleNode)
+        Module GenerateModule(XElement moduleNode)
         {
             var id = Guid.Parse(moduleNode.Attribute(IdAttributeName).Value);
             var title = moduleNode.Attribute(TitleAttributeName).Value;
-            var steps = moduleNode.Elements().Select(GenerateStepFromXElement).ToArray();
+            var steps = moduleNode.Elements().Select(GenerateStep).ToArray();
             return new Module(id, title, steps);
         }
 
-        Step GenerateStepFromXElement(XElement stepNode)
+        Step GenerateStep(XElement stepNode)
         {
             // ReSharper disable PossibleNullReferenceException
             var id = Guid.Parse(stepNode.Attribute(IdAttributeName).Value);
@@ -54,31 +60,52 @@ namespace AngularTutorial.Web.CourseData
             return new Step(id, title)
             {
                 Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
-                StartingHtml = GetValueFromElement(stepNode.Element(StartingHtmlNodeName)),
-                SolutionHtml = GetValueFromElement(stepNode.Element(SolutionHtmlNodeName)),
-                StartingJavaScript = GetValueFromElement(stepNode.Element(StartingJavaScriptNodeName)),
-                SolutionJavaScript = GetValueFromElement(stepNode.Element(SolutionJavaScriptNodeName)),
-                FrameWriteInstructions = GenerateFrameWriteInstructionsFromElement(stepNode.Element(FrameWriteInstructionsNodeName))
+                Html = GenerateHtmlDefinition(stepNode.Element(HtmlNodeName)),
+                JavaScript = GenerateJavaScriptDefinition(stepNode.Element(JavaScriptNodeName)),
+                HeadIncludes = GenerateIncludes(stepNode.Element(HeadIncludesNodeName)),
+                ScriptIncludes = GenerateIncludes(stepNode.Element(ScriptIncludesNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
         }
 
-        FrameWriteInstructions GenerateFrameWriteInstructionsFromElement(XElement frameWriteInstructionsNode)
+        HtmlDefinition GenerateHtmlDefinition(XContainer element)
         {
-            // ReSharper disable PossibleNullReferenceException
-            return new FrameWriteInstructions
-            {
-                StartDocument = GetValueFromElement(frameWriteInstructionsNode.Element(StartDocumentNodeName)),
-                HeadToContent = GetValueFromElement(frameWriteInstructionsNode.Element(HeadToContentNodeName)),
-                ContentToScript = GetValueFromElement(frameWriteInstructionsNode.Element(ContentToScriptName)),
-                EndDocument = GetValueFromElement(frameWriteInstructionsNode.Element(EndDocumentNodeName))
-            };
-            // ReSharper restore PossibleNullReferenceException
+            if (element == null)
+                return null;
+
+            var header = GetValueFromElement(element.Element(HeaderNodeName));
+            var initial = GetValueFromElement(element.Element(InitialNodeName));
+            var solution = GetValueFromElement(element.Element(SolutionNodeName));
+            var footer = GetValueFromElement(element.Element(FooterNodeName));
+
+            return new HtmlDefinition(header, initial, solution, footer);
+        }
+
+        JavaScriptDefinition GenerateJavaScriptDefinition(XContainer element)
+        {
+            if (element == null)
+                return null;
+
+            var pages = element.Elements(PageNodeName).Select(GenerateJavaScriptPage).ToArray();
+            return new JavaScriptDefinition(pages);
+        }
+
+        static JavaScriptPage GenerateJavaScriptPage(XElement element)
+        {
+            var name = element.Attribute(NameAttributeName).Value;
+            var initial = GetValueFromElement(element.Element(InitialNodeName));
+            var solution = GetValueFromElement(element.Element(SolutionNodeName));
+            return new JavaScriptPage(name, initial, solution);
+        }
+
+        static string[] GenerateIncludes(XContainer element)
+        {
+            return element != null ? element.Elements(IncludeNodeName).Select(GetValueFromElement).ToArray() : null;
         }
 
         static string GetValueFromElement(XElement element)
         {
-            return element.Value.Trim();
+            return element != null ? element.Value.Trim() : null;
         }
     }
 }

@@ -43,17 +43,17 @@
             </div>
         </div>
         <div class="row paddedRow">
+            <div class="col-sm-6" ng-bind-html="instructions"></div>
             <div class="col-sm-6">
                 <div ui-ace="{ mode: 'html' }" ng-model="html"></div>
             </div>
-            <div class="col-sm-6" ng-bind-html="instructions"></div>
         </div>
         <div class="row paddedRow">
             <div class="col-sm-6">
-                <div ui-ace="{ mode: 'javascript' }" ng-model="javaScript"></div>
+                <iframe class="renderFrame"></iframe>
             </div>
             <div class="col-sm-6">
-                <iframe class="renderFrame"></iframe>
+                <div ui-ace="{ mode: 'javascript' }" ng-model="javaScript"></div>
             </div>
         </div>
     </div>
