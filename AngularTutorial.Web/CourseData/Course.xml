@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
-  <Module Title="Getting Started">
-    <Step Title="Getting Started 1">
+  <Module Id="d088bf2b-3cc0-4260-96e4-5d9566918118" Title="Getting Started">
+    <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Getting Started 1">
       <Instructions>Hello there, and welcome to the first module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -14,7 +14,7 @@
         <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="Getting Started 2">
+    <Step Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Getting Started 2">
       <Instructions>This is the second step of the first module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -27,7 +27,7 @@
         <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="Getting Started 3">
+    <Step Id="687d72e3-f7f7-4460-9bb5-fc794004eba8" Title="Getting Started 3">
       <Instructions>This is the third step of the first module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -41,8 +41,8 @@
       </FrameWriteInstructions>
     </Step>
   </Module>
-  <Module Title="The second module...">
-    <Step Title="The second module 1">
+  <Module Id="eec8a418-66a3-4b56-bf63-b7c521e21698" Title="The second module...">
+    <Step Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="The second module 1">
       <Instructions>Hello there, and welcome to the second module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -55,7 +55,7 @@
         <EndDocument><![CDATA[<script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="The second module 2">
+    <Step Id="08a14819-3dc8-494a-97d9-106c092ce4b4" Title="The second module 2">
       <Instructions>This is the second step of the second module!</Instructions>
       <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
@@ -68,7 +68,7 @@
         <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
       </FrameWriteInstructions>
     </Step>
-    <Step Title="The second module 3">
+    <Step Id="bc682b85-a178-46b7-91cf-2b3d54e2c711" Title="The second module 3">
       <Instructions>This is the third step of the second module!</Instructions>
       <StartingHtml><![CDATA[button>Hello button!</button>]]></StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>

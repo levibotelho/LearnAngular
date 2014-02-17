@@ -31,10 +31,12 @@
                       </xs:complexType>
                     </xs:element>
                   </xs:all>
+                  <xs:attribute name="Id" type="xs:string" />
                   <xs:attribute name="Title" type="xs:string" />
                 </xs:complexType>
               </xs:element>
             </xs:choice>
+            <xs:attribute name="Id" type="xs:string" />
             <xs:attribute name="Title" type="xs:string" />
           </xs:complexType>
         </xs:element>

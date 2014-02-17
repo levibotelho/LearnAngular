@@ -21,6 +21,7 @@ namespace AngularTutorial.Web.CourseData
         static readonly XName ContentToScriptName = Namespace + "ContentToScript";
         static readonly XName EndDocumentNodeName = Namespace + "EndDocument";
 
+        static readonly XName IdAttributeName = "Id";
         static readonly XName TitleAttributeName = "Title";
 
         readonly XDocument _document;
@@ -39,15 +40,18 @@ namespace AngularTutorial.Web.CourseData
 
         Module GenerateModuleFromXElement(XElement moduleNode)
         {
+            var id = Guid.Parse(moduleNode.Attribute(IdAttributeName).Value);
             var title = moduleNode.Attribute(TitleAttributeName).Value;
             var steps = moduleNode.Elements().Select(GenerateStepFromXElement).ToArray();
-            return new Module(title, steps);
+            return new Module(id, title, steps);
         }
 
         Step GenerateStepFromXElement(XElement stepNode)
         {
             // ReSharper disable PossibleNullReferenceException
-            return new Step(Guid.NewGuid(), stepNode.Attribute(TitleAttributeName).Value)
+            var id = Guid.Parse(stepNode.Attribute(IdAttributeName).Value);
+            var title = stepNode.Attribute(TitleAttributeName).Value;
+            return new Step(id, title)
             {
                 Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
                 StartingHtml = GetValueFromElement(stepNode.Element(StartingHtmlNodeName)),
