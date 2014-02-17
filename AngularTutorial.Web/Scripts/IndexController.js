@@ -1,4 +1,4 @@
-﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", function ($scope, $http) {
+﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
     $scope.html = "";
     $scope.javaScript = "";
     $scope.title = "";
@@ -28,7 +28,7 @@
         $http.get("/Home/GetStep", { params: { id: id } })
         .success(function (data, status, headers, config) {
             $scope.title = data.Title;
-            $scope.instructions = data.Instructions;
+            $scope.instructions = $sce.trustAs("html", data.Instructions);
             $scope.html = $scope.startingHtml = data.StartingHtml;
             $scope.solutionHtml = data.SolutionHtml;
             $scope.javaScript = $scope.startingJavaScript = data.StartingJavaScript;

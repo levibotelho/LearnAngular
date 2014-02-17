@@ -46,9 +46,7 @@
             <div class="col-sm-6">
                 <div ui-ace="{ mode: 'html' }" ng-model="html"></div>
             </div>
-            <div class="col-sm-6">
-                {{instructions}}
-            </div>
+            <div class="col-sm-6" ng-bind-html="instructions"></div>
         </div>
         <div class="row paddedRow">
             <div class="col-sm-6">

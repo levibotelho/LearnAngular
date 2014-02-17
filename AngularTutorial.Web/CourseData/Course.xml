@@ -1,24 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Id="d088bf2b-3cc0-4260-96e4-5d9566918118" Title="Getting Started">
-    <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Getting Started 1">
-      <Instructions>Hello there, and welcome to the first module!</Instructions>
-      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
-      <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
-      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
-      <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
+    <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
+      <Instructions>
+        <![CDATA[
+AngularJS is a JavaScript framework that allows us to write interactive web applications that are both powerful and easy to maintain. Angular makes use of the ubiquitous Model-View-Controller pattern, which means that developers familiar with server-side MVC frameworks will feel right at home with Angular. As is defined in the MVC pattern, Angular developers strive to decorrelate the following three application components:
+
+<ul>
+<li>The data and core business logic underlying the application (the model)</li>
+<li>The presentation logic defining how the user visualises application data (the view)</li>
+<li>The functionality provided to the user, allowing him/her to interact with the model via the view (the controller)</li>
+</ul>
+
+In Angular, these three concepts are represented by the following components
+
+<ul>
+<li>Model - A JavaScript object referred to as $scope acts as the model in an Angular application. We will speak more about $scope very shortly, but for the time being all that you need to know is that $scope is a JavaScript object which contains both data and logic that is presented to and accessed by the user.</li>
+<li>View - In Angular, the view is represented by the HTML we write to present the contents of the model. The HTML in an Angular app is generally written as a template which is filled in by the data from the model.</li>
+<li>Controller - The controller is what binds together the model and the view. Angular controllers are defined in JavaScript usually in the form of a function that takes $scope (the model) as a parameter and prepares it for use by the user.</li>
+</ul>
+      ]]>
+      </Instructions>
+      <StartingHtml></StartingHtml>
+      <SolutionHtml></SolutionHtml>
+      <StartingJavaScript></StartingJavaScript>
+      <SolutionJavaScript></SolutionJavaScript>
       <FrameWriteInstructions>
-        <StartDocument><![CDATA[<html><head>]]></StartDocument>
-        <HeadToContent><![CDATA[</head><body>]]></HeadToContent>
-        <ContentToScript><![CDATA[<script>]]></ContentToScript>
-        <EndDocument><![CDATA[</script></body></html>]]></EndDocument>
+        <StartDocument></StartDocument>
+        <HeadToContent>></HeadToContent>
+        <ContentToScript></ContentToScript>
+        <EndDocument></EndDocument>
       </FrameWriteInstructions>
     </Step>
     <Step Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Getting Started 2">
-      <Instructions>This is the second step of the first module!</Instructions>
-      <StartingHtml><![CDATA[<button>Hello button!</button>]]></StartingHtml>
+      <Instructions>
+        <![CDATA[
+Let's start writing some code! Here we have an HTML page into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:
+
+<ul>
+<li>The controller is defined by calling the "controller" method on an Angular "module". You can think of modules as logical containers in an Angular application. Modules are created by calling <code>angular.module</code> and passing in a name.</li>
+<li>The controller method takes two parameters
+  <li>A string representing the controller name.</li>
+  <li>An array used to instantiate the controller. The array contains the names of all the dependencies which we wish to pass to the controller function, followed by the controller function itself. In this case we are passing the $scope to the controller so that we can add a field to the model.</li>
+</li>
+</ul>
+
+To integrate this controller into our application, you need to make two changes to the HTML page.
+
+<ul>
+<li>Add <code>ng-app="AngularTutorial"</code> to the <code>html</code> element. This tells Angular that our application is defined in the AngularTutorial module.</li>
+<li>Add <code>ng-controller="GettingStartedController"</code> to the <code>div</code> element. This tells Angular that this part of our application is defined by the GettingStartedController controller that is found in the AngularTutorial module.</li>
+</ul>
+
+<code>ng-app</code> and <code>ng-controller</code> are known in Angular-speak as "directives". Directives are used to attach functionality to a view. Directives are a core part of the larger AngularJS framework, and later on we'll learn how to write our own.
+
+There is one more particularity about our HTML page: the <code>{{message}}</code> string in our div element. This is called a binding, and prints the value of the "message" variable onto the screen. Once you have added the <code>ng-app</code> and <code>ng-controller</code> directives to the page, "Hello World!" should be displayed. Try it now.
+      ]]>
+      </Instructions>
+      <StartingHtml>
+        <![CDATA[
+<html>
+<body>
+<div>{{message}}</div>
+</body>
+</html>
+      ]]>
+      </StartingHtml>
       <SolutionHtml><![CDATA[<button id="MyButton">Hello button!</button>]]></SolutionHtml>
-      <StartingJavaScript><![CDATA[// The rest is up to you!]]></StartingJavaScript>
+      <StartingJavaScript>
+        <![CDATA[
+angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
+  $scope.message = "Hello World!";
+}]);
+      ]]>
+      </StartingJavaScript>
       <SolutionJavaScript><![CDATA[document.getElementById("MyButton").onclick = function() { alert("hi"); }]]></SolutionJavaScript>
       <FrameWriteInstructions>
         <StartDocument><![CDATA[<html><head>]]></StartDocument>
