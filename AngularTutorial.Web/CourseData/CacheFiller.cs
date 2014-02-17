@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Hosting;
 using AngularTutorial.Entities;
@@ -10,6 +11,7 @@ namespace AngularTutorial.Web.CourseData
     {
         static readonly string XmlPath = HostingEnvironment.MapPath(@"~/CourseData/Course.xml");
 
+        [Conditional("FILLCACHE")]
         public static void FillCache()
         {
             var parser = new XmlParser(XmlPath);
