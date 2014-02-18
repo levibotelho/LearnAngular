@@ -74,16 +74,18 @@ In Angular, these three concepts are represented by the following components
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-    $scope.message = "Hello World!";
-}]);
+angular.module('AngularTutorial')
+    .controller('GettingStartedController', ["$scope", function ($scope) {
+        $scope.message = "Hello World!";
+    }]);
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-    $scope.message = "Hello World!";
-}]);
+angular.module('AngularTutorial')
+    .controller('GettingStartedController', ["$scope", function ($scope) {
+        $scope.message = "Hello World!";
+    }]);
             ]]>
           </Solution>
         </Document>

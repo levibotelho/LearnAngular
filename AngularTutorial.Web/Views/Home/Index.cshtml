@@ -45,7 +45,14 @@
         <div class="row paddedRow">
             <div class="col-sm-6" ng-bind-html="instructions"></div>
             <div class="col-sm-6">
-                <div ui-ace="{ mode: 'html' }" ng-model="html"></div>
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
+                        <div ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row paddedRow">
@@ -53,8 +60,16 @@
                 <iframe class="renderFrame"></iframe>
             </div>
             <div class="col-sm-6">
-                JavaScript editor out of order
-                @*<div ui-ace="{ mode: 'javascript' }" ng-model="javaScript"></div>*@
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                        <a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                        <div ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

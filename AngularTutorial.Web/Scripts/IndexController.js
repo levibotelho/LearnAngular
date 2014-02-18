@@ -1,27 +1,50 @@
 ﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
     $scope.title = "";
     $scope.instructions = "";
-    $scope.html = "";
-    $scope.initialHtml = "";
-    $scope.solutionHtml = "";
-    $scope.javaScriptPages = [];
+    $scope.htmlDocuments = [];
+    $scope.javaScriptDocuments = [];
     $scope.headIncludes = undefined;
     $scope.scriptIncludes = undefined;
 
-    $scope.parseJavaScriptPages = function (pages) {
-        $scope.javaScriptPages.clear();
-        for (var i = 0; i < pages.length; i++) {
-            var page = pages[i];
-            $scope.javaScriptPages.push({
-                name: page.Name,
-                javaScript: page.Initial,
-                initialJavaScript: page.Initial,
-                solutionJavaScript: page.Solution
+    $scope.generateDocumentId = function(name) {
+        return name != undefined  ? name.replace(".", "") : undefined;
+    };
+
+    $scope.parseHtmlDocuments = function(documents) {
+        $scope.htmlDocuments.length = 0;
+        for (var i = 0; i < documents.length; i++) {
+            var document = documents[i];
+            $scope.htmlDocuments.push({
+                name: document.Name,
+                id: $scope.generateDocumentId(document.Name),
+                header: document.Header,
+                html: document.Initial,
+                initialhtml: document.Initial,
+                solutionHtml: document.Solution,
+                footer: document.Footer
+            });
+        }
+    };
+
+    $scope.parseJavaScriptDocuments = function (documents) {
+        $scope.javaScriptDocuments.length = 0;
+        for (var i = 0; i < documents.length; i++) {
+            var document = documents[i];
+            $scope.javaScriptDocuments.push({
+                name: document.Name,
+                id: $scope.generateDocumentId(document.Name),
+                javaScript: document.Initial,
+                initialJavaScript: document.Initial,
+                solutionJavaScript: document.Solution
             });
         }
     };
 
     $scope.run = function () {
+        if ($scope.htmlDocuments.length > 1) {
+            throw new Error("Multiple HTML documents are not yet supported");
+        }
+
         var doc = window.frames[0].document;
         doc.open();
         doc.write("<html><body>");
@@ -41,9 +64,8 @@
         .success(function (data, status, headers, config) {
             $scope.title = data.Title;
             $scope.instructions = $sce.trustAs("html", data.Instructions);
-            $scope.html = $scope.initialHtml = data.Html.Initial;
-            $scope.solutionHtml = data.Html.Solution;
-            $scope.parseJavaScriptPages(data.JavaScript.Pages);
+            $scope.parseHtmlDocuments(data.HtmlDocuments);
+            $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
             $scope.headIncludes = data.headIncludes;
             $scope.scriptIncludes = data.scriptIncludes;
         })
