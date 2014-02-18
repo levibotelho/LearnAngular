@@ -18,18 +18,25 @@
                     <xs:element name="Instructions" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="Html" maxOccurs="1">
                       <xs:complexType>
-                        <xs:choice minOccurs="2" maxOccurs="4">
-                          <xs:element name="Header" type="xs:string" maxOccurs="1" />
-                          <xs:element name="Initial" type="xs:string" minOccurs="1" maxOccurs="1" />
-                          <xs:element name="Solution" type="xs:string" minOccurs="1" maxOccurs="1" />
-                          <xs:element name="Footer" type="xs:string" maxOccurs="1" />
+                        <xs:choice minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="Document">
+                            <xs:complexType>
+                              <xs:choice minOccurs="2" maxOccurs="4">
+                                <xs:element name="Header" type="xs:string" maxOccurs="1" />
+                                <xs:element name="Initial" type="xs:string" minOccurs="1" maxOccurs="1" />
+                                <xs:element name="Solution" type="xs:string" minOccurs="1" maxOccurs="1" />
+                                <xs:element name="Footer" type="xs:string" maxOccurs="1" />
+                              </xs:choice>
+                              <xs:attribute name="Name" type="xs:string" />
+                            </xs:complexType>
+                          </xs:element>
                         </xs:choice>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="JavaScript" maxOccurs="1">
                       <xs:complexType>
                         <xs:choice minOccurs="1" maxOccurs="unbounded">
-                          <xs:element name="Page">
+                          <xs:element name="Document">
                             <xs:complexType>
                               <xs:all minOccurs="1" maxOccurs="1">
                                 <xs:element name="Initial" type="xs:string" />

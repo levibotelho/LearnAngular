@@ -56,85 +56,96 @@ namespace AngularTutorial.Tests.Unit.Web.CourseData.XmlParserTests
         [TestMethod]
         public void GeneratedStepIncludesHtmlWhenPresent()
         {
-            Assert.IsNotNull(_fullStep.Html);
+            Assert.IsNotNull(_fullStep.HtmlDocuments);
         }
 
         [TestMethod]
         public void GeneratedStepDoesNotIncludeHtmlWhenNotPresent()
         {
-            Assert.IsNull(_sparseStep.Html);
+            Assert.IsNull(_sparseStep.HtmlDocuments);
+        }
+
+        public void GeneratedHtmlIncludesOneDocumentPerDocumentInXml()
+        {
+            Assert.AreEqual(2, _fullStep.HtmlDocuments.Length);
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesHtmlHeaderWhenPresent()
+        public void GeneratedHtmlDocumentIncludesName()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Header));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.HtmlDocuments.First().Name));
         }
 
         [TestMethod]
-        public void GeneratedStepDoesNotIncludeHtmlHeaderWhenNotPresent()
+        public void GeneratedHtmlDocumentIncludesHeaderWhenPresent()
         {
-            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.Html.Header));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.HtmlDocuments.First().Header));
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesHtmlFooterWhenPresent()
+        public void GeneratedHtmlDocumentDoesNotIncludeHeaderWhenNotPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Footer));
+            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.HtmlDocuments.First().Header));
         }
 
         [TestMethod]
-        public void GeneratedStepDoesNotIncludeHtmlFooterWhenNotPresent()
+        public void GeneratedHtmlDocumentIncludesFooterWhenPresent()
         {
-            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.Html.Footer));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.HtmlDocuments.First().Footer));
         }
 
         [TestMethod]
-        public void GeneratedHtmlIncludesInitialHtml()
+        public void GeneratedHtmlDocumentDoesNotIncludeFooterWhenNotPresent()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Initial));
+            Assert.IsTrue(string.IsNullOrWhiteSpace(_partialStep.HtmlDocuments.First().Footer));
         }
 
         [TestMethod]
-        public void GeneratedHtmlIncludesSolutionHtml()
+        public void GeneratedHtmlDocumentIncludesInitialHtml()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.Html.Initial));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.HtmlDocuments.First().Initial));
+        }
+
+        [TestMethod]
+        public void GeneratedHtmlDocumentIncludesSolutionHtml()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.HtmlDocuments.First().Solution));
         }
 
         [TestMethod]
         public void GeneratedStepIncludesJavaScriptWhenPresent()
         {
-            Assert.IsNotNull(_fullStep.JavaScript);
+            Assert.IsNotNull(_fullStep.JavaScriptDocuments);
         }
 
         [TestMethod]
         public void GeneratedStepDoesNotIncludeJavaScriptWhenNotPresent()
         {
-            Assert.IsNull(_sparseStep.JavaScript);
+            Assert.IsNull(_sparseStep.JavaScriptDocuments);
         }
         
         [TestMethod]
-        public void GeneratedJavaScriptIncludesOnePagePerPageInXml()
+        public void GeneratedJavaScriptIncludesOneDocumentPerDocumentInXml()
         {
-            Assert.AreEqual(2, _fullStep.JavaScript.Pages.Count);
+            Assert.AreEqual(2, _fullStep.JavaScriptDocuments.Length);
         }
 
         [TestMethod]
-        public void GeneratedJavaScriptPageIncludesName()
+        public void GeneratedJavaScriptDocumentIncludesName()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Name));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScriptDocuments.First().Name));
         }
 
         [TestMethod]
-        public void GeneratedJavaScriptPageIncludesIntialJavaScript()
+        public void GeneratedJavaScriptDocumentIncludesIntialJavaScript()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Initial));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScriptDocuments.First().Initial));
         }
 
         [TestMethod]
-        public void GeneratedJavaScriptPageIncludesSolutionJavaScript()
+        public void GeneratedJavaScriptDocumentIncludesSolutionJavaScript()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScript.Pages.ElementAt(0).Solution));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(_fullStep.JavaScriptDocuments.First().Solution));
         }
 
         [TestMethod]

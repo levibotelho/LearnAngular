@@ -49,29 +49,53 @@ In Angular, these three concepts are represented by the following components
       ]]>
       </Instructions>
       <Html>
-        <Header><![CDATA[<!DOCTYPE html>]]></Header>
-        <Initial>
-          <![CDATA[
+        <Document Name="index.html">
+          <Header><![CDATA[<!DOCTYPE html>]]></Header>
+          <Initial>
+            <![CDATA[
 <html>
   <body>
     <div>{{message}}</div>
   </body>
 </html>
           ]]>
-        </Initial>
-        <Solution>
-          <![CDATA[
+          </Initial>
+          <Solution>
+            <![CDATA[
 <html ng-app="Tutorial">
   <body>
     <div controller="GettingStartedController">{{message}}</div>
   </body>
 </html>
           ]]>
-        </Solution>
-        <Footer><![CDATA[<!-- End -->]]></Footer>
+          </Solution>
+          <Footer><![CDATA[<!-- End -->]]></Footer>
+        </Document>
+        <Document Name="index.html">
+          <Header><![CDATA[<!DOCTYPE html>]]></Header>
+          <Initial>
+            <![CDATA[
+<html>
+  <body>
+    <div>{{message}}</div>
+  </body>
+</html>
+          ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<html ng-app="Tutorial">
+  <body>
+    <div controller="GettingStartedController">{{message}}</div>
+  </body>
+</html>
+          ]]>
+          </Solution>
+          <Footer><![CDATA[<!-- End -->]]></Footer>
+        </Document>
       </Html>
       <JavaScript>
-        <Page Name="controller.js">
+        <Document Name="controller.js">
           <Initial>
             <![CDATA[
 angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
@@ -86,8 +110,8 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
 }]);
             ]]>
           </Solution>
-        </Page>
-        <Page Name="controller2.js">
+        </Document>
+        <Document Name="controller2.js">
           <Initial>
             <![CDATA[
 angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
@@ -102,7 +126,7 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
 }]);
             ]]>
           </Solution>
-        </Page>
+        </Document>
       </JavaScript>
       <HeadIncludes>
         <Include>Something</Include>
@@ -142,27 +166,29 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
       ]]>
       </Instructions>
       <Html>
-        <Initial>
-          <![CDATA[
+        <Document Name="index.html">
+          <Initial>
+            <![CDATA[
 <html>
   <body>
     <div>{{message}}</div>
   </body>
 </html>
           ]]>
-        </Initial>
-        <Solution>
-          <![CDATA[
+          </Initial>
+          <Solution>
+            <![CDATA[
 <html ng-app="Tutorial">
   <body>
     <div controller="GettingStartedController">{{message}}</div>
   </body>
 </html>
           ]]>
-        </Solution>
+          </Solution>
+        </Document>
       </Html>
       <JavaScript>
-        <Page Name="controller.js">
+        <Document Name="controller.js">
           <Initial>
             <![CDATA[
 angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
@@ -177,7 +203,7 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
 }]);
             ]]>
           </Solution>
-        </Page>
+        </Document>
         <Page Name="controller2.js">
           <Initial>
             <![CDATA[

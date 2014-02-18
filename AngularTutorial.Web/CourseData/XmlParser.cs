@@ -18,7 +18,7 @@ namespace AngularTutorial.Web.CourseData
         static readonly XName SolutionNodeName = Namespace + "Solution";
         static readonly XName FooterNodeName = Namespace + "Footer";
 
-        static readonly XName PageNodeName = Namespace + "Page";
+        static readonly XName DocumentNodeName = Namespace + "Document";
 
         static readonly XName HeadIncludesNodeName = Namespace + "HeadIncludes";
         static readonly XName ScriptIncludesNodeName = Namespace + "ScriptIncludes";
@@ -59,42 +59,47 @@ namespace AngularTutorial.Web.CourseData
             return new Step(id, title)
             {
                 Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
-                Html = GenerateHtmlDefinition(stepNode.Element(HtmlNodeName)),
-                JavaScript = GenerateJavaScriptDefinition(stepNode.Element(JavaScriptNodeName)),
+                HtmlDocuments = GenerateHtmlDocuments(stepNode.Element(HtmlNodeName)),
+                JavaScriptDocuments = GenerateJavaScriptDocuments(stepNode.Element(JavaScriptNodeName)),
                 HeadIncludes = GenerateIncludes(stepNode.Element(HeadIncludesNodeName)),
                 ScriptIncludes = GenerateIncludes(stepNode.Element(ScriptIncludesNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
         }
 
-        static HtmlDefinition GenerateHtmlDefinition(XContainer element)
+        static HtmlDocument[] GenerateHtmlDocuments(XContainer element)
         {
             if (element == null)
                 return null;
 
+            return element.Elements(DocumentNodeName).Select(GenerateHtmlDocument).ToArray();
+        }
+
+        static HtmlDocument GenerateHtmlDocument(XElement element)
+        {
+            var name = element.Attribute(NameAttributeName).Value;
             var header = GetValueFromElement(element.Element(HeaderNodeName));
             var initial = GetValueFromElement(element.Element(InitialNodeName));
             var solution = GetValueFromElement(element.Element(SolutionNodeName));
             var footer = GetValueFromElement(element.Element(FooterNodeName));
 
-            return new HtmlDefinition(header, initial, solution, footer);
+            return new HtmlDocument(name, header, initial, solution, footer);
         }
 
-        static JavaScriptDefinition GenerateJavaScriptDefinition(XContainer element)
+        static JavaScriptDocument[] GenerateJavaScriptDocuments(XContainer element)
         {
             if (element == null)
                 return null;
 
-            var pages = element.Elements(PageNodeName).Select(GenerateJavaScriptPage).ToArray();
-            return new JavaScriptDefinition(pages);
+            return element.Elements(DocumentNodeName).Select(GenerateJavaScriptDocument).ToArray();
         }
-
-        static JavaScriptPage GenerateJavaScriptPage(XElement element)
+        
+        static JavaScriptDocument GenerateJavaScriptDocument(XElement element)
         {
             var name = element.Attribute(NameAttributeName).Value;
             var initial = GetValueFromElement(element.Element(InitialNodeName));
             var solution = GetValueFromElement(element.Element(SolutionNodeName));
-            return new JavaScriptPage(name, initial, solution);
+            return new JavaScriptDocument(name, initial, solution);
         }
 
         static string[] GenerateIncludes(XContainer element)
