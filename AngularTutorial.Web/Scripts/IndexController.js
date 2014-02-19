@@ -6,12 +6,16 @@
     $scope.headIncludes = undefined;
     $scope.scriptIncludes = undefined;
 
-    $scope.generateDocumentId = function(name) {
-        return name != undefined  ? name.replace(".", "") : undefined;
+    $scope.generateDocumentId = function (name) {
+        return name != undefined ? name.replace(".", "") : undefined;
     };
 
-    $scope.parseHtmlDocuments = function(documents) {
+    $scope.parseHtmlDocuments = function (documents) {
         $scope.htmlDocuments.length = 0;
+        if (documents == null) {
+            return;
+        }
+
         for (var i = 0; i < documents.length; i++) {
             var document = documents[i];
             $scope.htmlDocuments.push({
@@ -28,6 +32,10 @@
 
     $scope.parseJavaScriptDocuments = function (documents) {
         $scope.javaScriptDocuments.length = 0;
+        if (documents == null) {
+            return;
+        }
+
         for (var i = 0; i < documents.length; i++) {
             var document = documents[i];
             $scope.javaScriptDocuments.push({
