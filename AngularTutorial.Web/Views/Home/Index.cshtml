@@ -4,6 +4,59 @@
     ViewBag.Title = "Index";
 }
 
+<div class="modal fade" id="runModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Run</h4>
+            </div>
+            <div class="modal-body">
+                <iframe class="renderFrame"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="imStuckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+                <p>All of your modifications will be lost. Do you want us to show you how this step is done?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Actually, no</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Run</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to reset the code to how it was originally?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No, wait!</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Yup!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="row" ng-controller="IndexController">
     <div id="Modules" class="col-sm-4 col-md-2 panel-group">
         @for (var i = 0; i < Model.Modules.Count(); i++)
@@ -39,35 +92,38 @@
         </div>
         <div class="row paddedRow">
             <div class="col-xs-12">
-                <button class="btn btn-sm btn-success" ng-click="run()"><i class="fa fa-play" style="margin-right: 1em"></i>Run</button>
+                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
+                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#imStuckModal" ng-click="run()"><i class="fa fa-ambulance ideIcon"></i>I'm Stuck!</button>
+                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#resetModal" ng-click="run()"><i class="fa fa-repeat ideIcon"></i>Reset</button>
             </div>
         </div>
         <div class="row paddedRow">
             <div class="col-sm-6" ng-bind-html="instructions"></div>
             <div class="col-sm-6">
-                <ul class="nav nav-tabs">
-                    <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
-                        <div ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+                <div class="row paddedRow">
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
+                                <div ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row paddedRow">
-            <div class="col-sm-6">
-                <iframe class="renderFrame"></iframe>
-            </div>
-            <div class="col-sm-6">
-                <ul class="nav nav-tabs">
-                    <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                        <a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                        <div ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                <div class="row paddedRow">
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                                <a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                                <div ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
