@@ -10,6 +10,28 @@
         return name != undefined ? name.replace(".", "") : undefined;
     };
 
+    $scope.showSolution = function() {
+        for (var i = 0; i < $scope.htmlDocuments.length; i++) {
+            var htmlDocument = $scope.htmlDocuments[i];
+            htmlDocument.html = htmlDocument.solutionHtml;
+        }
+        for (var j = 0; j < $scope.javaScriptDocuments.length; j++) {
+            var javaScriptDocument = $scope.javaScriptDocuments[j];
+            javaScriptDocument.javaScript = javaScriptDocument.solutionJavaScript;
+        }
+    };
+
+    $scope.resetCode = function () {
+        for (var i = 0; i < $scope.htmlDocuments.length; i++) {
+            var htmlDocument = $scope.htmlDocuments[i];
+            htmlDocument.html = htmlDocument.initialHtml;
+        }
+        for (var j = 0; j < $scope.javaScriptDocuments.length; j++) {
+            var javaScriptDocument = $scope.javaScriptDocuments[j];
+            javaScriptDocument.javaScript = javaScriptDocument.initialJavaScript;
+        }
+    };
+
     $scope.parseHtmlDocuments = function (documents) {
         $scope.htmlDocuments.length = 0;
         if (documents == null) {
@@ -23,7 +45,7 @@
                 id: $scope.generateDocumentId(document.Name),
                 header: document.Header,
                 html: document.Initial,
-                initialhtml: document.Initial,
+                initialHtml: document.Initial,
                 solutionHtml: document.Solution,
                 footer: document.Footer
             });
