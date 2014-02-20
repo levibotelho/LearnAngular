@@ -21,11 +21,24 @@
 
         var htmlDocument = $scope.htmlDocuments[0];
         var scriptBlock = $scope.generateScriptBlock();
-        var baseDocument = htmlDocument.header + htmlDocument.html + htmlDocument.footer;
+        var baseDocument = $scope.generateBaseHtmlDocument(htmlDocument.header, htmlDocument.html, htmlDocument.footer);
         baseDocument = $scope.insertHeadIncludes(baseDocument);
         baseDocument = $scope.insertScript(baseDocument, scriptBlock);
         return baseDocument;
     };
+
+    $scope.generateBaseHtmlDocument = function(header, body, footer) {
+        var document = "";
+        if (header != null)
+            document += header + "\n";
+        if (body != null)
+            document += body + "\n";
+        if (footer != null) {
+            document += footer + "\n";
+        }
+
+        return document.trim();
+    }
 
     $scope.generateScriptBlock = function() {
         var scriptBlock = "";
@@ -34,7 +47,7 @@
             scriptBlock += "// " + document.name + "\n" + document.javaScript + "\n";
         }
 
-        return scriptBlock;
+        return scriptBlock.trim();
     };
 
     $scope.insertHeadIncludes = function (document) {
@@ -43,16 +56,10 @@
 
         var insertIndex = document.indexOf("</head>");
         if (insertIndex == -1) {
-            insertIndex = document.indexOf("<body>");
-            if (insertIndex == -1) {
-                insertIndex = document.indexOf("<html>" + 6);
-                if (insertIndex == -1) {
-                    insertIndex = 0;
-                }
-            }
+            throw new Error("A </head> element is required to insert head includes.");
         }
 
-        return document.substr(0, insertIndex) + $scope.headIncludes + document.substr(insertIndex);
+        return document.substr(0, insertIndex) + $scope.headIncludes + document.substr(insertIndex) + "\n";
     };
 
     $scope.insertScript = function (document, scriptBlock) {
@@ -71,7 +78,7 @@
             }
         }
 
-        var scripts = $scope.scriptIncludes != null ? $scope.scriptIncludes : "";
+        var scripts = $scope.scriptIncludes != null ? $scope.scriptIncludes + "\n" : "";
         scripts += "<script>\n" + scriptBlock + "\n</script>\n";
         return document.substr(0, insertIndex) + scripts + document.substr(insertIndex);
     };
@@ -160,6 +167,6 @@
     };
 
     $scope.parseIncludes = function (includes) {
-        return includes != null ? includes.join("\n") + "\n" : null;
+        return includes != null ? includes.join("\n") : null;
     };
 }]);

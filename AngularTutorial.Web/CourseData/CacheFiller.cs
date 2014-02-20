@@ -11,7 +11,7 @@ namespace AngularTutorial.Web.CourseData
     {
         static readonly string XmlPath = HostingEnvironment.MapPath(@"~/CourseData/Course.xml");
 
-        [Conditional("FILLCACHE")]
+        [Conditional("RESETCACHE")]
         public static void FillCache()
         {
             var parser = new XmlParser(XmlPath);
