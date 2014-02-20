@@ -161,15 +161,36 @@ namespace AngularTutorial.Tests.Unit.Web.CourseData.XmlParserTests
         }
 
         [TestMethod]
-        public void GeneratedStepIncludesOneScriptIncludePerScriptIncludeInXml()
+        public void GeneratedStepIncludesOneScriptIncludePerScriptIncludeInXmlPlusDefault()
         {
-            Assert.AreEqual(2, _fullStep.ScriptIncludes.Length);
+            Assert.AreEqual(3, _fullStep.ScriptIncludes.Length);
         }
 
         [TestMethod]
-        public void GeneratedStepHasNoScriptIncludesWhenNotPresent()
+        public void GeneratedStepHasOneScriptIncludeWhenNotPresent()
         {
-            Assert.IsNull(_sparseStep.ScriptIncludes);
+            Assert.AreEqual(1, _sparseStep.ScriptIncludes.Length);
+        }
+
+        [TestMethod]
+        public void AllScriptIncludesIncludeAngular()
+        {
+            var includes = new[] { _sparseStep.ScriptIncludes, _fullStep.ScriptIncludes };
+            Assert.IsTrue(includes.All(x => x.Any(y => y.Contains("angularjs"))));
+        }
+
+        [TestMethod]
+        public void DefaultScriptIncludesAreInScriptTag()
+        {
+            var includes = _sparseStep.ScriptIncludes;
+            Assert.IsTrue(includes.All(x => x.StartsWith("<script")));
+        }
+
+        [TestMethod]
+        public void DefaultScriptIncludesEndWithScriptClosingTag()
+        {
+            var includes = _sparseStep.ScriptIncludes;
+            Assert.IsTrue(includes.All(x => x.EndsWith("</script>")));
         }
     }
 }

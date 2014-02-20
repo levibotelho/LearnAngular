@@ -3,11 +3,77 @@
     $scope.instructions = "";
     $scope.htmlDocuments = [];
     $scope.javaScriptDocuments = [];
-    $scope.headIncludes = undefined;
-    $scope.scriptIncludes = undefined;
+    $scope.headIncludes = null;
+    $scope.scriptIncludes = "hello";
 
-    $scope.generateDocumentId = function (name) {
-        return name != undefined ? name.replace(".", "") : undefined;
+    $scope.run = function () {
+        var frame = window.frames[0].document;
+        var document = $scope.generateDocument();
+        frame.open();
+        frame.write(document);
+        frame.close();
+    };
+
+    $scope.generateDocument = function() {
+        if ($scope.htmlDocuments.length > 1) {
+            throw new Error("Multiple HTML documents are not yet supported");
+        }
+
+        var htmlDocument = $scope.htmlDocuments[0];
+        var scriptBlock = $scope.generateScriptBlock();
+        var baseDocument = htmlDocument.header + htmlDocument.html + htmlDocument.footer;
+        baseDocument = $scope.insertHeadIncludes(baseDocument);
+        baseDocument = $scope.insertScript(baseDocument, scriptBlock);
+        return baseDocument;
+    };
+
+    $scope.generateScriptBlock = function() {
+        var scriptBlock = "";
+        for (var i = 0; i < $scope.javaScriptDocuments.length; i++) {
+            var document = $scope.javaScriptDocuments[i];
+            scriptBlock += "// " + document.name + "\n" + document.javaScript + "\n";
+        }
+
+        return scriptBlock;
+    };
+
+    $scope.insertHeadIncludes = function (document) {
+        if ($scope.headIncludes == null)
+            return document;
+
+        var insertIndex = document.indexOf("</head>");
+        if (insertIndex == -1) {
+            insertIndex = document.indexOf("<body>");
+            if (insertIndex == -1) {
+                insertIndex = document.indexOf("<html>" + 6);
+                if (insertIndex == -1) {
+                    insertIndex = 0;
+                }
+            }
+        }
+
+        return document.substr(0, insertIndex) + $scope.headIncludes + document.substr(insertIndex);
+    };
+
+    $scope.insertScript = function (document, scriptBlock) {
+        if (scriptBlock == null) {
+            return document;
+        }
+
+        var insertIndex = document.indexOf("<script>");
+        if (insertIndex == -1) {
+            insertIndex = document.indexOf("</body>");
+            if (insertIndex == -1) {
+                insertIndex = document.indexOf("</html>");
+                if (insertIndex == -1) {
+                    insertIndex = document.length;
+                }
+            }
+        }
+
+        var scripts = $scope.scriptIncludes != null ? $scope.scriptIncludes : "";
+        scripts += "<script>\n" + scriptBlock + "\n</script>\n";
+        return document.substr(0, insertIndex) + scripts + document.substr(insertIndex);
     };
 
     $scope.showSolution = function() {
@@ -32,11 +98,29 @@
         }
     };
 
+    $scope.setStep = function (id) {
+        $scope.loadStep(id);
+    };
+
+    $scope.loadStep = function (id) {
+        $http.get("/Home/GetStep", { params: { id: id } })
+        .success(function (data, status, headers, config) {
+            $scope.title = data.Title;
+            $scope.instructions = $sce.trustAs("html", data.Instructions);
+            $scope.parseHtmlDocuments(data.HtmlDocuments);
+            $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
+            $scope.headIncludes = $scope.parseIncludes(data.HeadIncludes);
+            $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
+        })
+        .error(function (data, status, headers, config) {
+            alert("Error!");
+        });
+    };
+
     $scope.parseHtmlDocuments = function (documents) {
         $scope.htmlDocuments.length = 0;
-        if (documents == null) {
+        if (documents == null)
             return;
-        }
 
         for (var i = 0; i < documents.length; i++) {
             var document = documents[i];
@@ -54,9 +138,8 @@
 
     $scope.parseJavaScriptDocuments = function (documents) {
         $scope.javaScriptDocuments.length = 0;
-        if (documents == null) {
+        if (documents == null)
             return;
-        }
 
         for (var i = 0; i < documents.length; i++) {
             var document = documents[i];
@@ -69,38 +152,14 @@
             });
         }
     };
-
-    $scope.run = function () {
-        if ($scope.htmlDocuments.length > 1) {
-            throw new Error("Multiple HTML documents are not yet supported");
-        }
-
-        var doc = window.frames[0].document;
-        doc.open();
-        doc.write("<html><body>");
-        doc.write($scope.html);
-        doc.write("<script>");
-        doc.write($scope.javaScript);
-        doc.write("<\/script><\/body><\/html>");
-        doc.close();
+    
+    $scope.generateDocumentId = function (name) {
+        if (name == null)
+            throw new Error("name cannot be null");
+        return name.replace(".", "");
     };
 
-    $scope.setStep = function (id) {
-        $scope.loadStep(id);
-    };
-
-    $scope.loadStep = function (id) {
-        $http.get("/Home/GetStep", { params: { id: id } })
-        .success(function (data, status, headers, config) {
-            $scope.title = data.Title;
-            $scope.instructions = $sce.trustAs("html", data.Instructions);
-            $scope.parseHtmlDocuments(data.HtmlDocuments);
-            $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
-            $scope.headIncludes = data.headIncludes;
-            $scope.scriptIncludes = data.scriptIncludes;
-        })
-        .error(function (data, status, headers, config) {
-            alert("Error!");
-        });
+    $scope.parseIncludes = function (includes) {
+        return includes != null ? includes.join("\n") + "\n" : null;
     };
 }]);

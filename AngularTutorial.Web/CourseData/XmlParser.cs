@@ -7,6 +7,11 @@ namespace AngularTutorial.Web.CourseData
 {
     public class XmlParser
     {
+        static readonly string[] DefaultIncludes =
+        {
+            "<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js\"></script>"
+        };
+
         static readonly XNamespace Namespace = "http://angulartutorial.azurewebsites.net/Course.xsd";
 
         static readonly XName InstructionsNodeName = Namespace + "Instructions";
@@ -61,8 +66,8 @@ namespace AngularTutorial.Web.CourseData
                 Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
                 HtmlDocuments = GenerateHtmlDocuments(stepNode.Element(HtmlNodeName)),
                 JavaScriptDocuments = GenerateJavaScriptDocuments(stepNode.Element(JavaScriptNodeName)),
-                HeadIncludes = GenerateIncludes(stepNode.Element(HeadIncludesNodeName)),
-                ScriptIncludes = GenerateIncludes(stepNode.Element(ScriptIncludesNodeName))
+                HeadIncludes = GenerateHeadIncludes(stepNode.Element(HeadIncludesNodeName)),
+                ScriptIncludes = GenerateScriptIncludes(stepNode.Element(ScriptIncludesNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
         }
@@ -102,14 +107,19 @@ namespace AngularTutorial.Web.CourseData
             return new JavaScriptDocument(name, initial, solution);
         }
 
-        static string[] GenerateIncludes(XContainer element)
+        static string[] GenerateHeadIncludes(XContainer element)
         {
             return element != null ? element.Elements(IncludeNodeName).Select(GetValueFromElement).ToArray() : null;
         }
 
+        static string[] GenerateScriptIncludes(XContainer element)
+        {
+            return element != null ? element.Elements(IncludeNodeName).Select(GetValueFromElement).Concat(DefaultIncludes).ToArray() : DefaultIncludes;
+        }
+
         static string GetValueFromElement(XElement element)
         {
-            return element != null ? element.Value.Trim() : null;
+            return element != null ? element.Value.Trim() : string.Empty;
         }
     }
 }
