@@ -1,10 +1,15 @@
 ﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
+    $scope.tableOfContents = null;
     $scope.title = "";
     $scope.instructions = "";
     $scope.htmlDocuments = [];
     $scope.javaScriptDocuments = [];
     $scope.headIncludes = null;
-    $scope.scriptIncludes = "hello";
+    $scope.scriptIncludes = null;
+
+    $scope.areEditableDocuments = function() {
+        return $scope.htmlDocuments.length != 0 || $scope.javaScriptDocuments.length != 0;
+    };
 
     $scope.run = function () {
         var frame = window.frames[0].document;
@@ -14,7 +19,7 @@
         frame.close();
     };
 
-    $scope.generateDocument = function() {
+    $scope.generateDocument = function () {
         if ($scope.htmlDocuments.length > 1) {
             throw new Error("Multiple HTML documents are not yet supported");
         }
@@ -27,7 +32,7 @@
         return baseDocument;
     };
 
-    $scope.generateBaseHtmlDocument = function(header, body, footer) {
+    $scope.generateBaseHtmlDocument = function (header, body, footer) {
         var document = "";
         if (header != null)
             document += header + "\n";
@@ -38,9 +43,9 @@
         }
 
         return document.trim();
-    }
+    };
 
-    $scope.generateScriptBlock = function() {
+    $scope.generateScriptBlock = function () {
         var scriptBlock = "";
         for (var i = 0; i < $scope.javaScriptDocuments.length; i++) {
             var document = $scope.javaScriptDocuments[i];
@@ -83,7 +88,7 @@
         return document.substr(0, insertIndex) + scripts + document.substr(insertIndex);
     };
 
-    $scope.showSolution = function() {
+    $scope.showSolution = function () {
         for (var i = 0; i < $scope.htmlDocuments.length; i++) {
             var htmlDocument = $scope.htmlDocuments[i];
             htmlDocument.html = htmlDocument.solutionHtml;
@@ -104,14 +109,11 @@
             javaScriptDocument.javaScript = javaScriptDocument.initialJavaScript;
         }
     };
-
-    $scope.setStep = function (id) {
-        $scope.loadStep(id);
-    };
-
+    
     $scope.loadStep = function (id) {
         $http.get("/Home/GetStep", { params: { id: id } })
-        .success(function (data, status, headers, config) {
+        // data, status, headers, config
+        .success(function (data) {
             $scope.title = data.Title;
             $scope.instructions = $sce.trustAs("html", data.Instructions);
             $scope.parseHtmlDocuments(data.HtmlDocuments);
@@ -119,8 +121,8 @@
             $scope.headIncludes = $scope.parseIncludes(data.HeadIncludes);
             $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
         })
-        .error(function (data, status, headers, config) {
-            alert("Error!");
+        .error(function () {
+            alert("An unexpected error has occured. Please try again.");
         });
     };
 
@@ -159,7 +161,7 @@
             });
         }
     };
-    
+
     $scope.generateDocumentId = function (name) {
         if (name == null)
             throw new Error("name cannot be null");
@@ -169,4 +171,17 @@
     $scope.parseIncludes = function (includes) {
         return includes != null ? includes.join("\n") : null;
     };
+
+    $scope.loadTableOfContents = function () {
+        $http.get("/Home/GetTableOfContents")
+            .success(function (data) {
+                $scope.tableOfContents = data;
+                $scope.loadStep($scope.tableOfContents[0].Children[0].Id);
+            })
+            .error(function () {
+                alert("An unexpected error has occured. Please try again.");
+            });
+    };
+
+    $scope.loadTableOfContents();
 }]);

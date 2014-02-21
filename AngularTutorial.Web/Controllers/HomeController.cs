@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using AngularTutorial.Services;
-using AngularTutorial.Web.Models.Home;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -17,8 +16,13 @@ namespace AngularTutorial.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new IndexModel(_courseService.GetTableOfContents().Modules);
-            return View(model);
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetTableOfContents()
+        {
+            return Json(_courseService.GetTableOfContents().Modules, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

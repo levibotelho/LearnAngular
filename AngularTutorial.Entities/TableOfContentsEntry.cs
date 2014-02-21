@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AngularTutorial.Entities
 {
@@ -8,16 +6,16 @@ namespace AngularTutorial.Entities
     public class TableOfContentsEntry : CacheableEntityBase
     {
         public readonly string Title;
-        public readonly IEnumerable<TableOfContentsEntry> Children;
+        public readonly TableOfContentsEntry[] Children;
 
         public TableOfContentsEntry(Guid id, string title)
             : base(id)
         {
             Title = title;
-            Children = Enumerable.Empty<TableOfContentsEntry>();
+            Children = new TableOfContentsEntry[0];
         }
 
-        public TableOfContentsEntry(Guid id, string title, IEnumerable<TableOfContentsEntry> children)
+        public TableOfContentsEntry(Guid id, string title, TableOfContentsEntry[] children)
             : base(id)
         {
             Title = title;
