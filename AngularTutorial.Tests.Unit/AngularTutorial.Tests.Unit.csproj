@@ -54,7 +54,9 @@
     <Compile Include="Web\CourseData\XmlParserTests\ConstructorTests.cs" />
     <Compile Include="Web\CourseData\XmlParserTests\ParseXmlTests.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Web\CourseData\XmlParserTests\Course.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

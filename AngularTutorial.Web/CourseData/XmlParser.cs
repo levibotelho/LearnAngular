@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using AngularTutorial.Entities;
+using MarkdownSharp;
 
 namespace AngularTutorial.Web.CourseData
 {
@@ -33,6 +34,8 @@ namespace AngularTutorial.Web.CourseData
         static readonly XName IdAttributeName = "Id";
         static readonly XName TitleAttributeName = "Title";
         static readonly XName NameAttributeName = "Name";
+        
+        static readonly Markdown MarkdownEngine = new Markdown();
 
         readonly XDocument _document;
 
@@ -63,13 +66,19 @@ namespace AngularTutorial.Web.CourseData
             var title = stepNode.Attribute(TitleAttributeName).Value;
             return new Step(id, title)
             {
-                Instructions = GetValueFromElement(stepNode.Element(InstructionsNodeName)),
+                Instructions = GenerateInstructions(stepNode.Element(InstructionsNodeName)),
                 HtmlDocuments = GenerateHtmlDocuments(stepNode.Element(HtmlNodeName)),
                 JavaScriptDocuments = GenerateJavaScriptDocuments(stepNode.Element(JavaScriptNodeName)),
                 HeadIncludes = GenerateHeadIncludes(stepNode.Element(HeadIncludesNodeName)),
                 ScriptIncludes = GenerateScriptIncludes(stepNode.Element(ScriptIncludesNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
+        }
+
+        static string GenerateInstructions(XElement instructionsNode)
+        {
+            var markdown = GetValueFromElement(instructionsNode);
+            return MarkdownEngine.Transform(markdown);
         }
 
         static HtmlDocument[] GenerateHtmlDocuments(XContainer element)

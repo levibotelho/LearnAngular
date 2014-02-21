@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using System.Web.UI;
 using AngularTutorial.Services;
 
 namespace AngularTutorial.Web.Controllers
@@ -23,6 +22,14 @@ namespace AngularTutorial.Web.Controllers
             return View();
         }
 
+#if !DEBUG
+        [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
+#endif
+        public ActionResult About()
+        {
+            return View();
+        }
+
         [HttpGet]
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
@@ -41,5 +48,5 @@ namespace AngularTutorial.Web.Controllers
             var step = _courseService.GetStep(id);
             return Json(step, JsonRequestBehavior.AllowGet);
         }
-	}
+    }
 }
