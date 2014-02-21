@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div id="Modules" class="col-sm-4 col-md-2 panel-group">
+    <div id="Modules" class="col-xs-12 col-sm-3 col-lg-2 panel-group">
         <div class="panel panel-default" ng-repeat="module in tableOfContents">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -74,9 +74,9 @@
         </div>
     </div>
 
-    <div ng-class="areEditableDocuments() ? 'col-sm-8 col-md-10' : 'col-sm-6 col-sm-offset-1 col-md-6 col-md-offset-1';">
+    <div ng-class="areEditableDocuments() ? 'col-xs-12 col-sm-9 col-lg-10' : 'col-sm-9 col-md-6 col-md-offset-1';">
         <div class="row">
-            <div ng-class="areEditableDocuments() ? 'col-sm-6' : 'col-sm-12'">
+            <div ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-6' : 'col-xs-12'">
                 <div class="row paddedRow">
                     <div class="col-xs-12">
                         <h1>{{title}}</h1>
@@ -88,7 +88,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6" ng-show="areEditableDocuments()">
+            <div class="col-xs-12 col-lg-6" ng-show="areEditableDocuments()">
+                <hr class="hidden-lg" />
                 <div class="row paddedRow">
                     <div class="col-xs-12">
                         <div class="h1">
@@ -99,7 +100,7 @@
                     </div>
                 </div>
                 <div class="row paddedRow">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <ul class="nav nav-tabs">
                             <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a></li>
                         </ul>
@@ -111,7 +112,7 @@
                     </div>
                 </div>
                 <div class="row paddedRow">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <ul class="nav nav-tabs">
                             <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
                                 <a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a>
