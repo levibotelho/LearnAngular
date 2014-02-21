@@ -67,7 +67,7 @@
             <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: $first}">
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="stepElement" ng-repeat="step in module.Children" ng-click="loadStep(step.Id)"><a>{{step.Title}}</a></li>
+                        <li class="stepElement" ng-repeat="step in module.Children" ng-class="{active: step.Id == id}" ng-click="loadStep(step.Id)"><a>{{step.Title}}</a></li>
                     </ul>
                 </div>
             </div>

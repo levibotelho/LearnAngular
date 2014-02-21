@@ -1,11 +1,12 @@
 ﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
     $scope.tableOfContents = null;
+    $scope.id = "";
     $scope.title = "";
     $scope.instructions = "";
     $scope.htmlDocuments = [];
     $scope.javaScriptDocuments = [];
-    $scope.headIncludes = null;
-    $scope.scriptIncludes = null;
+    $scope.headIncludes = "";
+    $scope.scriptIncludes = "";
 
     $scope.areEditableDocuments = function() {
         return $scope.htmlDocuments.length != 0 || $scope.javaScriptDocuments.length != 0;
@@ -56,7 +57,7 @@
     };
 
     $scope.insertHeadIncludes = function (document) {
-        if ($scope.headIncludes == null)
+        if ($scope.headIncludes == "")
             return document;
 
         var insertIndex = document.indexOf("</head>");
@@ -83,7 +84,7 @@
             }
         }
 
-        var scripts = $scope.scriptIncludes != null ? $scope.scriptIncludes + "\n" : "";
+        var scripts = $scope.scriptIncludes != "" ? $scope.scriptIncludes + "\n" : "";
         scripts += "<script>\n" + scriptBlock + "\n</script>\n";
         return document.substr(0, insertIndex) + scripts + document.substr(insertIndex);
     };
@@ -114,6 +115,7 @@
         $http.get("/Home/GetStep", { params: { id: id } })
         // data, status, headers, config
         .success(function (data) {
+            $scope.id = data.Id;
             $scope.title = data.Title;
             $scope.instructions = $sce.trustAs("html", data.Instructions);
             $scope.parseHtmlDocuments(data.HtmlDocuments);
@@ -169,7 +171,7 @@
     };
 
     $scope.parseIncludes = function (includes) {
-        return includes != null ? includes.join("\n") : null;
+        return includes != null ? includes.join("\n") : "";
     };
 
     $scope.loadTableOfContents = function () {
