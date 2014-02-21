@@ -75,19 +75,27 @@
     </div>
 
     <div ng-class="areEditableDocuments() ? 'col-sm-8 col-md-10' : 'col-sm-6 col-sm-offset-1 col-md-6 col-md-offset-1';">
-        <div class="row paddedRow">
-            <div class="col-xs-12">
-                <h1>{{title}}</h1>
+        <div class="row">
+            <div ng-class="areEditableDocuments() ? 'col-sm-6' : 'col-sm-12'">
+                <div class="row paddedRow">
+                    <div class="col-xs-12">
+                        <h1>{{title}}</h1>
+                    </div>
+                </div>
+                <div class="row paddedRow">
+                    <div class="col-xs-12">
+                        <div ng-bind-html="instructions"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row paddedRow">
-            <div ng-bind-html="instructions" ng-class="areEditableDocuments() ? 'col-sm-6' : 'col-sm-12'"></div>
             <div class="col-sm-6" ng-show="areEditableDocuments()">
                 <div class="row paddedRow">
                     <div class="col-xs-12">
-                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
-                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#imStuckModal"><i class="fa fa-ambulance ideIcon"></i>I'm Stuck!</button>
-                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#resetModal"><i class="fa fa-repeat ideIcon"></i>Reset</button>
+                        <div class="h1">
+                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
+                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#imStuckModal"><i class="fa fa-ambulance ideIcon"></i>I'm Stuck!</button>
+                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#resetModal"><i class="fa fa-repeat ideIcon"></i>Reset</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row paddedRow">
