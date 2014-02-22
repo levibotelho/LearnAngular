@@ -4,21 +4,30 @@
     <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
-AngularJS is a JavaScript framework that allows us to write interactive web applications that are both powerful and easy to maintain. Angular makes use of the ubiquitous Model-View-Controller pattern, which means that developers familiar with server-side MVC frameworks will feel right at home with Angular. As is defined in the MVC pattern, Angular developers strive to decorrelate the following three application components:
+Introducing AngularJS
 
-<ul>
-<li>The data and core business logic underlying the application (the model)</li>
-<li>The presentation logic defining how the user visualises application data (the view)</li>
-<li>The functionality provided to the user, allowing him/her to interact with the model via the view (the controller)</li>
-</ul>
+AngularJS is a JavaScript framework that is used to enhance web applications by applying the Model-View-Controller (MVC) to client-side code. As you go through these lessons, you'll see that Angular helps make web applications more powerful, more robust, and more testable, all in reducing the amount of code that you, the developer, have to write.
 
-In Angular, these three concepts are represented by the following components
+##MVC
+The MVC pattern separates application architecture into three distinct components:
 
-<ul>
-<li>Model - A JavaScript object referred to as $scope acts as the model in an Angular application. We will speak more about $scope very shortly, but for the time being all that you need to know is that $scope is a JavaScript object which contains both data and logic that is presented to and accessed by the user.</li>
-<li>View - In Angular, the view is represented by the HTML we write to present the contents of the model. The HTML in an Angular app is generally written as a template which is filled in by the data from the model.</li>
-<li>Controller - The controller is what binds together the model and the view. Angular controllers are defined in JavaScript usually in the form of a function that takes $scope (the model) as a parameter and prepares it for use by the user.</li>
-</ul>
++ The model - The model is at the heart of an MVC application. It contains data, business logic, functions and pretty much everything else that makes your application what it is.
++ The view - The view is what presents data from the model to the user of the application. It also is the entry-point for user-interaction with the application, as it contains all of the buttons, text fields and other controls that people will use to manipulate your app.
++ The controller - The controller is what brings an MVC application together. The controller connects the model and the view by retrieving data from the model and passing it to the view for presentation, and by handling user input collected by the view and sending it to the model for processing.
+
+What makes MVC so powerful is that each component has a clearly-defined role which keeps it from encroaching on the roles of the other two. This makes the application both easy to maintain and easy to test.
+
+##Where Angular comes in
+
+Traditionally in the realm of web development, the MVC pattern has been implemented on the server side. This is because applications would do most or all of their data processing on the server. We all know of websites where changing the value of a drop-down list results in a page refresh.
+
+Nowadays, however, we are able to do much better. We still use web servers to do data processing, but we can handle much more of the small stuff directly on the client side with JavaScript. And when we need more complex processing done, we can send an Ajax request to the web server and display the results to the user without requiring a refresh.
+
+But this breakthrough in web development comes with a caveat. More logic on the client-side means much more JavaScript to write. It also means that the "view" of a traditional MVC web application contains more and more functional code that is not necessarily linked purely to the display of model data.
+
+This is where AngularJS comes to the rescue. Angular takes the MVC pattern and applies it to the front end of our web applications, allowing us to once again decouple the different components of our program. In addition to this, it offers a robust data-binding framework which eliminates the need to write repetitive JavaScript functions in order to keep model data up to date with the data that the user interacts with. All of this means that your applications become richer, simpler and more testable.
+
+Over the course of these tutorials we'll get to all of these features, but let's start out simple, by integrating Angular into a simple web page...
       ]]>
       </Instructions>
     </Step>
@@ -55,6 +64,8 @@ In Angular, these three concepts are represented by the following components
 <html>
     <body>
         <div>{{message}}</div>
+        <!-- In a real web application include a reference
+             to angular.js -->
     </body>
 </html>
           ]]>
@@ -64,6 +75,8 @@ In Angular, these three concepts are represented by the following components
 <html ng-app="Tutorial">
     <body>
         <div ng-controller="TutorialController">{{message}}</div>
+            <!-- In a real web application include a reference
+                 to angular.js -->
     </body>
 </html>
           ]]>
