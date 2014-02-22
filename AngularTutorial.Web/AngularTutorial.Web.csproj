@@ -444,7 +444,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CourseData\CacheFiller.cs" />
     <Compile Include="CourseData\XmlParser.cs" />
-    <Compile Include="Dependencies\CourseServiceBootstrapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

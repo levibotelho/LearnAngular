@@ -27,7 +27,6 @@ namespace AngularTutorial.Web
             container.Register<IUnitOfWork, UnitOfWork>();
             container.Register<ICacheRepository, CacheRepository>();
             container.Register<ICourseService, CourseService>();
-            container.Register<ICourseServiceBootstrapper, CourseServiceBootstrapper>();
         }
     }
 }

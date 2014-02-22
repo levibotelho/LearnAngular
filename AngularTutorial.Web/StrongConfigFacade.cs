@@ -27,10 +27,5 @@ namespace AngularTutorial.Web
 		{
 			get { return bool.Parse(ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"]); }
 		}
-
-		public static string TableOfContentsCacheKey
-		{
-			get { return ConfigurationManager.AppSettings["TableOfContentsCacheKey"]; }
-		}
 	}
 }

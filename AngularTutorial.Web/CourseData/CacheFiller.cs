@@ -25,7 +25,9 @@ namespace AngularTutorial.Web.CourseData
             var tableOfContents = new TableOfContents(modules);
 
             cacheRepository.Clear();
-            cacheRepository.Put(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), tableOfContents);
+
+            // By convention, the table of contents is always situated at Guid.Empty.
+            cacheRepository.Put(Guid.Empty, tableOfContents);
             foreach (var step in modules.SelectMany(x => x.Steps))
                 cacheRepository.Put(step.Id, step);
         }

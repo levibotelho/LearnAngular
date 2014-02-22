@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AngularTutorial.Entities;
 using AngularTutorial.Repository;
 
@@ -13,18 +12,17 @@ namespace AngularTutorial.Services
 
     public class CourseService : ICourseService
     {
-        readonly Guid _tableOfContentsCacheKey;
         readonly ICacheRepository _cacheRepository;
 
-        public CourseService(ICacheRepository cacheRepository, ICourseServiceBootstrapper bootstrapper)
+        public CourseService(ICacheRepository cacheRepository)
         {
-            _tableOfContentsCacheKey = bootstrapper.TableOfContentsCacheKey;
             _cacheRepository = cacheRepository;
         }
 
         public TableOfContents GetTableOfContents()
         {
-            return _cacheRepository.Get<TableOfContents>(_tableOfContentsCacheKey);
+            // By convention, the table of contents is always located at Guid.Empty.
+            return _cacheRepository.Get<TableOfContents>(Guid.Empty);
         }
 
         public Step GetStep(Guid id)
