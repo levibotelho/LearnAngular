@@ -14,17 +14,16 @@ namespace AngularTutorial.Web.CourseData
         [Conditional("RESETCACHE")]
         public static void FillCache()
         {
-            FillCache(XmlPath);
+            FillCache(XmlPath, DependencyInjectionConfig.DependencyInjectionContainer.GetInstance<ICacheRepository>());
         }
 
         [Conditional("RESETCACHE")]
-        public static void FillCache(string xmlPath)
+        public static void FillCache(string xmlPath, ICacheRepository cacheRepository)
         {
-            var parser = new XmlParser(XmlPath);
+            var parser = new XmlParser(xmlPath);
             var modules = parser.ParseXml();
             var tableOfContents = new TableOfContents(modules);
 
-            var cacheRepository = DependencyInjectionConfig.DependencyInjectionContainer.GetInstance<ICacheRepository>();
             cacheRepository.Clear();
             cacheRepository.Put(Guid.Parse(ConfigurationFacade.TableOfContentsCacheKey), tableOfContents);
             foreach (var step in modules.SelectMany(x => x.Steps))

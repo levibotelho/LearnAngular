@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AngularTutorial.Repository;
 using AngularTutorial.Web.CourseData;
+using AngularTutorial.Web.Dependencies;
 
 namespace AngularTutorial.ContentPublisher
 {
@@ -11,7 +13,7 @@ namespace AngularTutorial.ContentPublisher
     {
         static void Main(string[] args)
         {
-            CacheFiller.FillCache();
+            CacheFiller.FillCache(ConfigurationFacade.XmlPath, new CacheRepository(new UnitOfWork()));
         }
     }
 }
