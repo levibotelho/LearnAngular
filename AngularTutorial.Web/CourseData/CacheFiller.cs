@@ -14,6 +14,12 @@ namespace AngularTutorial.Web.CourseData
         [Conditional("RESETCACHE")]
         public static void FillCache()
         {
+            FillCache(XmlPath);
+        }
+
+        [Conditional("RESETCACHE")]
+        public static void FillCache(string xmlPath)
+        {
             var parser = new XmlParser(XmlPath);
             var modules = parser.ParseXml();
             var tableOfContents = new TableOfContents(modules);

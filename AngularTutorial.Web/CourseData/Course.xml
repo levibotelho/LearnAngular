@@ -4,16 +4,15 @@
     <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
-Introducing AngularJS
-
 AngularJS is a JavaScript framework that is used to enhance web applications by applying the Model-View-Controller (MVC) to client-side code. As you go through these lessons, you'll see that Angular helps make web applications more powerful, more robust, and more testable, all in reducing the amount of code that you, the developer, have to write.
 
 ##MVC
+
 The MVC pattern separates application architecture into three distinct components:
 
 + The model - The model is at the heart of an MVC application. It contains data, business logic, functions and pretty much everything else that makes your application what it is.
-+ The view - The view is what presents data from the model to the user of the application. It also is the entry-point for user-interaction with the application, as it contains all of the buttons, text fields and other controls that people will use to manipulate your app.
-+ The controller - The controller is what brings an MVC application together. The controller connects the model and the view by retrieving data from the model and passing it to the view for presentation, and by handling user input collected by the view and sending it to the model for processing.
++ The view - The view is what presents data from the model to the user of the application. When the model changes, the view is supposed to update to reflect the changes to the user. In an Angular app the view is your HTML which is enhanced with AngularJS syntax to dynamically display data from the model.
++ The controller - Traditionally, the controller serves to accept data from the user and dispatch it to the model which then updates the view. In Angular, the controller serves primarily to prepare the model for use in the application by adding appropriate data and logic.
 
 What makes MVC so powerful is that each component has a clearly-defined role which keeps it from encroaching on the roles of the other two. This makes the application both easy to maintain and easy to test.
 
@@ -34,27 +33,73 @@ Over the course of these tutorials we'll get to all of these features, but let's
     <Step Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Integrating Angular">
       <Instructions>
         <![CDATA[
-<p>Let's start writing some code! Here we have an HTML Document into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
+*These lessons are intended to be interactive. Follow along in the code pages on the right as we go!*
 
-<ul>
-<li>The controller is defined by calling the "controller" method on an Angular "module". You can think of modules as logical containers in an Angular application. Modules are created by calling <code>angular.module</code> and passing in a name.</li>
-<li>The controller method takes two parameters
-  <ul>
-    <li>A string representing the controller name.</li>
-    <li>An array used to instantiate the controller. The array contains the names of all the dependencies which we wish to pass to the controller function, followed by the controller function itself. In this case we are passing the $scope to the controller so that we can add a field to the model.</li>
-  </ul>
-</li>
-</ul>
+---
 
-<p>To integrate this controller into our application, you need to make two changes to the HTML Document.</p>
+Let's jump right in and take a look at how to start integrating Angular into a web page.
 
-<ul>
-<li>Add <code>ng-app="AngularTutorial"</code> to the <code>html</code> element. This tells Angular that our application is defined in the AngularTutorial module.</li>
-<li>Add <code>ng-controller="GettingStartedController"</code> to the <code>div</code> element. This tells Angular that this part of our application is defined by the GettingStartedController controller that is found in the AngularTutorial module.</li>
-</ul>
+What you see down there in the JavaScript window is the code that is going to run off Angular to enhance our web page. Let's break this down bit by bit.
 
-<p><code>ng-app</code> and <code>ng-controller</code> are known in Angular-speak as "directives". Directives are used to attach functionality to a view. Directives are a core part of the larger AngularJS framework, and later on we'll learn how to write our own.</p>
-<p>There is one more particularity about our HTML Document: the <code>{{message}}</code> string in our div element. This is called a binding, and prints the value of the "message" variable onto the screen. Once you have added the <code>ng-app</code> and <code>ng-controller</code> directives to the Document, "Hello World!" should be displayed. Try it now.</p>
+`angular.module('Tutorial', [])`
+
+This is where it all begins. Here we are declaring a module called "Tutorial". You can think of an Angular module as a logical container of functionality. Angular is built on modules, and in order to build an application we're going to have to start by declaring one.
+
+In case you were wondering, the empty array after the module name is used for dependency injection. If you're not familiar with dependency injection I suggest you take a moment to get acquainted with the basics before continuing on, as Angular depends on it heavily. We'll take a look at how DI works in just a second, but for the moment just know that in *all cases* you *must* include this array in the `module` call, whether it is empty or not. If you don't the module won't be constructed correctly and you'll be left wondering where you went wrong.
+
+`.controller('TutorialController', ...`
+
+This is where we start to declare our controller. To do so, we're calling the `controller` function on the result of the `module` call from just a moment ago. The first argument in our controller call is the name. Here we're creating a controller called `TutorialController`.
+
+`["$scope", function ($scope) {
+        $scope.message = "Hello World!";
+    }]`
+
+This array is the second and final argument to the `controller` function. The final element is the function which defines the controller. All elements in the array leading up to the function are names of dependencies that are injected into the controller as arguments. In this case, we are injecting just a single dependency, the `$scope`
+
+The `$scope` object is very important to our application. It acts as our model. As you can see, we use the controller to add a `message` variable to the `$scope` which we will be able to access from our view.
+
+##Adding Angular to the page
+
+Now that we have our controller and model all figured out, let's turn our attention to our view. For the moment our page is pretty sparse. All we have is a single `div` element in an empty page. Our goal for this step will be to display the `message` variable defined in the model inside that div in our view.
+
+In order to integrate Angular into our page we need three things.
+
++ A reference to the AngularJS script file as well as references to any other related script files such as the one in which we define our controller. In these lessons I reference all these files behind the scenes for you, so you needn't worry about it.
++ An `ng-app` *directive* applied to the root element of our page.
++ An `ng-controller` directive applied somewhere within our page.
+
+Before we go any further, let's take a second to talk about what a directive is. You can think of directives as elements within an HTML page that tell AngularJS to take a certain action at that location in the DOM. Directives are often seen in the form of HTML attributes, but can also take the form of element class names, HTML comments, or even custom HTML tags.
+
+`ng-app` and `ng-controller` are both examples of directives. The `ng-app` directive serves to tell Angular what module to use as the "root module" for our application. In our case, our root module will be the `Tutorial` module that we defined in our JavaScript. To enable AngularJS in our page, we apply `ng-app` as an attribute to a high-level element in our HTML page and set its value to the name of our root module.
+
+`<html ng-app="Tutorial">`
+
+`ng-controller` serves to tell Angular what controller to use in a given part of a view. *Everything inside the element on which `ng-controller` is declared can use Angular directives to access the controller's `$scope` object.*
+
+In our case, let's apply the `ng-controller` directive to the `div` element in our page, setting the controller to be the one we declared in our JavaScript, like so.
+
+`<div ng-controller="TutorialController">`
+
+That's all there is to it, we now have a fully "Angular" web page on our hands! However if you try running the page as-is you're going to be pretty disappointed. While our page is now Angular-capable, we have done nothing to make use of the superheroic* power that Angular provides us with.
+
+##My first data binding
+We're going to get into data-bindings in the next section, but as our goal was to display the `message` variable in our page, we're going to get started right away. To display the message inside the `div`, simply insert the following syntax.
+
+`{{message}}`
+
+That's all we need! The double curly-braces signals to Angular to insert the value of the expression inside the braces into the page. In this case here, Angular looks at the `$scope` object of the controller in context and evaluates the `message` member. It is however important to note that we are by no means restricted to using the `$scope` object. We can also evaluate run-of-the-mill JavaScript expressions as well. For example, `{{1 + 1}}` is also valid syntax. Try it out and see!
+
+##What we learned
+1. Angular apps are divided into modules which house various application components.
+2. Directives are used to add Angular functionality to HTML pages.
+3. `ng-app` tells Angular which module to use as the "root module".
+4. `ng-controller` tells Angular which controller to use in a given area of an HTML page.
+5. `{{expression}}` is used to embed the result of JavaScript expressions into views. It also provides access to the `$scope` of the controller in context.
+
+---
+
+\* *It is the "Superheroic JavaScript MVW Framework" after all!*
       ]]>
       </Instructions>
       <Html>
@@ -63,9 +108,7 @@ Over the course of these tutorials we'll get to all of these features, but let's
             <![CDATA[
 <html>
     <body>
-        <div>{{message}}</div>
-        <!-- In a real web application include a reference
-             to angular.js -->
+        <div></div>
     </body>
 </html>
           ]]>
@@ -75,8 +118,6 @@ Over the course of these tutorials we'll get to all of these features, but let's
 <html ng-app="Tutorial">
     <body>
         <div ng-controller="TutorialController">{{message}}</div>
-            <!-- In a real web application include a reference
-                 to angular.js -->
     </body>
 </html>
           ]]>
@@ -105,73 +146,24 @@ angular.module('Tutorial', [])
       </JavaScript>
     </Step>
   </Module>
-  <Module Id="eec8a418-66a3-4b56-bf63-b7c521e21698" Title="The second module...">
-    <Step Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="The second module 1">
+  <Module Id="eec8a418-66a3-4b56-bf63-b7c521e21698" Title="Test Module">
+    <Step Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="Empty step">
       <Instructions>
         <![CDATA[
-AngularJS is a JavaScript framework that allows us to write interactive web applications that are both powerful and easy to maintain. Angular makes use of the ubiquitous Model-View-Controller pattern, which means that developers familiar with server-side MVC frameworks will feel right at home with Angular. As is defined in the MVC pattern, Angular developers strive to decorrelate the following three application components:
-
-<ul>
-<li>The data and core business logic underlying the application (the model)</li>
-<li>The presentation logic defining how the user visualises application data (the view)</li>
-<li>The functionality provided to the user, allowing him/her to interact with the model via the view (the controller)</li>
-</ul>
-
-In Angular, these three concepts are represented by the following components
-
-<ul>
-<li>Model - A JavaScript object referred to as $scope acts as the model in an Angular application. We will speak more about $scope very shortly, but for the time being all that you need to know is that $scope is a JavaScript object which contains both data and logic that is presented to and accessed by the user.</li>
-<li>View - In Angular, the view is represented by the HTML we write to present the contents of the model. The HTML in an Angular app is generally written as a template which is filled in by the data from the model.</li>
-<li>Controller - The controller is what binds together the model and the view. Angular controllers are defined in JavaScript usually in the form of a function that takes $scope (the model) as a parameter and prepares it for use by the user.</li>
-</ul>
-      ]]>
-      </Instructions>
-    </Step>
-    <Step Id="08a14819-3dc8-494a-97d9-106c092ce4b4" Title="The second module 2">
-      <Instructions>
-        <![CDATA[
-<p>Let's start writing some code! Here we have an HTML Document into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
-
-<ul>
-<li>The controller is defined by calling the "controller" method on an Angular "module". You can think of modules as logical containers in an Angular application. Modules are created by calling <code>angular.module</code> and passing in a name.</li>
-<li>The controller method takes two parameters
-  <ul>
-    <li>A string representing the controller name.</li>
-    <li>An array used to instantiate the controller. The array contains the names of all the dependencies which we wish to pass to the controller function, followed by the controller function itself. In this case we are passing the $scope to the controller so that we can add a field to the model.</li>
-  </ul>
-</li>
-</ul>
-
-<p>To integrate this controller into our application, you need to make two changes to the HTML Document.</p>
-
-<ul>
-<li>Add <code>ng-app="AngularTutorial"</code> to the <code>html</code> element. This tells Angular that our application is defined in the AngularTutorial module.</li>
-<li>Add <code>ng-controller="GettingStartedController"</code> to the <code>div</code> element. This tells Angular that this part of our application is defined by the GettingStartedController controller that is found in the AngularTutorial module.</li>
-</ul>
-
-<p><code>ng-app</code> and <code>ng-controller</code> are known in Angular-speak as "directives". Directives are used to attach functionality to a view. Directives are a core part of the larger AngularJS framework, and later on we'll learn how to write our own.</p>
-<p>There is one more particularity about our HTML Document: the <code>{{message}}</code> string in our div element. This is called a binding, and prints the value of the "message" variable onto the screen. Once you have added the <code>ng-app</code> and <code>ng-controller</code> directives to the Document, "Hello World!" should be displayed. Try it now.</p>
-      ]]>
+        
+        ]]>
       </Instructions>
       <Html>
         <Document Name="index.html">
           <Initial>
             <![CDATA[
-<html>
-  <body>
-    <div>{{message}}</div>
-  </body>
-</html>
-          ]]>
+            
+            ]]>
           </Initial>
           <Solution>
             <![CDATA[
-<html ng-app="Tutorial">
-  <body>
-    <div ng-controller="GettingStartedController">{{message}}</div>
-  </body>
-</html>
-          ]]>
+            
+            ]]>
           </Solution>
         </Document>
       </Html>
@@ -179,150 +171,12 @@ In Angular, these three concepts are represented by the following components
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
+            
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
-            ]]>
-          </Solution>
-        </Document>
-      </JavaScript>
-    </Step>
-    <Step Id="bc682b85-a178-46b7-91cf-2b3d54e2c711" Title="The second module 3">
-      <Instructions>
-        <![CDATA[
-<p>Let's start writing some code! Here we have an HTML Document into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
-
-<ul>
-<li>The controller is defined by calling the "controller" method on an Angular "module". You can think of modules as logical containers in an Angular application. Modules are created by calling <code>angular.module</code> and passing in a name.</li>
-<li>The controller method takes two parameters
-  <ul>
-    <li>A string representing the controller name.</li>
-    <li>An array used to instantiate the controller. The array contains the names of all the dependencies which we wish to pass to the controller function, followed by the controller function itself. In this case we are passing the $scope to the controller so that we can add a field to the model.</li>
-  </ul>
-</li>
-</ul>
-
-<p>To integrate this controller into our application, you need to make two changes to the HTML Document.</p>
-
-<ul>
-<li>Add <code>ng-app="AngularTutorial"</code> to the <code>html</code> element. This tells Angular that our application is defined in the AngularTutorial module.</li>
-<li>Add <code>ng-controller="GettingStartedController"</code> to the <code>div</code> element. This tells Angular that this part of our application is defined by the GettingStartedController controller that is found in the AngularTutorial module.</li>
-</ul>
-
-<p><code>ng-app</code> and <code>ng-controller</code> are known in Angular-speak as "directives". Directives are used to attach functionality to a view. Directives are a core part of the larger AngularJS framework, and later on we'll learn how to write our own.</p>
-<p>There is one more particularity about our HTML Document: the <code>{{message}}</code> string in our div element. This is called a binding, and prints the value of the "message" variable onto the screen. Once you have added the <code>ng-app</code> and <code>ng-controller</code> directives to the Document, "Hello World!" should be displayed. Try it now.</p>
-      ]]>
-      </Instructions>
-      <Html>
-        <Document Name="index.html">
-          <Initial>
-            <![CDATA[
-<html>
-  <body>
-    <div>{{message}}</div>
-  </body>
-</html>
-          ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-<html ng-app="Tutorial">
-  <body>
-    <div ng-controller="GettingStartedController">{{message}}</div>
-  </body>
-</html>
-          ]]>
-          </Solution>
-        </Document>
-      </Html>
-      <JavaScript>
-        <Document Name="controller.js">
-          <Initial>
-            <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
-            ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
-            ]]>
-          </Solution>
-        </Document>
-      </JavaScript>
-    </Step>
-    <Step Id="687d72e3-f7f7-4460-9bb5-fc794004eba8" Title="The Second Module 4">
-      <Instructions>
-        <![CDATA[
-<p>Let's start writing some code! Here we have an HTML Document into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
-
-<ul>
-<li>The controller is defined by calling the "controller" method on an Angular "module". You can think of modules as logical containers in an Angular application. Modules are created by calling <code>angular.module</code> and passing in a name.</li>
-<li>The controller method takes two parameters
-  <ul>
-    <li>A string representing the controller name.</li>
-    <li>An array used to instantiate the controller. The array contains the names of all the dependencies which we wish to pass to the controller function, followed by the controller function itself. In this case we are passing the $scope to the controller so that we can add a field to the model.</li>
-  </ul>
-</li>
-</ul>
-
-<p>To integrate this controller into our application, you need to make two changes to the HTML Document.</p>
-
-<ul>
-<li>Add <code>ng-app="AngularTutorial"</code> to the <code>html</code> element. This tells Angular that our application is defined in the AngularTutorial module.</li>
-<li>Add <code>ng-controller="GettingStartedController"</code> to the <code>div</code> element. This tells Angular that this part of our application is defined by the GettingStartedController controller that is found in the AngularTutorial module.</li>
-</ul>
-
-<p><code>ng-app</code> and <code>ng-controller</code> are known in Angular-speak as "directives". Directives are used to attach functionality to a view. Directives are a core part of the larger AngularJS framework, and later on we'll learn how to write our own.</p>
-<p>There is one more particularity about our HTML Document: the <code>{{message}}</code> string in our div element. This is called a binding, and prints the value of the "message" variable onto the screen. Once you have added the <code>ng-app</code> and <code>ng-controller</code> directives to the Document, "Hello World!" should be displayed. Try it now.</p>
-      ]]>
-      </Instructions>
-      <Html>
-        <Document Name="index.html">
-          <Initial>
-            <![CDATA[
-<html>
-  <body>
-    <div>{{message}}</div>
-  </body>
-</html>
-          ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-<html ng-app="Tutorial">
-  <body>
-    <div ng-controller="GettingStartedController">{{message}}</div>
-  </body>
-</html>
-          ]]>
-          </Solution>
-        </Document>
-      </Html>
-      <JavaScript>
-        <Document Name="controller.js">
-          <Initial>
-            <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
-            ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-angular.module('AngularTutorial').controller('GettingStartedController', ["$scope", function ($scope) {
-  $scope.message = "Hello World!";
-}]);
+            
             ]]>
           </Solution>
         </Document>
