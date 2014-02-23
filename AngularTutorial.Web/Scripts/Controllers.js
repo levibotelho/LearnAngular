@@ -1,4 +1,4 @@
-﻿angular.module('AngularTutorial', ["ui.ace"]).controller('IndexController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
+﻿angular.module('controllers', ["ui.ace"]).controller('index', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
     $scope.tableOfContents = null;
     $scope.id = "";
     $scope.title = "";
