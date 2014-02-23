@@ -51,9 +51,10 @@ In case you were wondering, the empty array after the module name is used for de
 
 This is where we start to declare our controller. To do so, we're calling the `controller` function on the result of the `module` call from just a moment ago. The first argument in our controller call is the name. Here we're creating a controller called `TutorialController`.
 
-`["$scope", function ($scope) {
-        $scope.message = "Hello World!";
-    }]`
+
+    ["$scope", function ($scope) {
+            $scope.message = "Hello World!";
+        }]
 
 This array is the second and final argument to the `controller` function. The final element is the function which defines the controller. All elements in the array leading up to the function are names of dependencies that are injected into the controller as arguments. In this case, we are injecting just a single dependency, the `$scope`
 

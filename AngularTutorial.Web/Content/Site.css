@@ -17,3 +17,13 @@
 .ideIcon {
     margin-right: 1em;
 }
+
+.alphaTag {
+    margin-left: 1em;
+    font-size: 15px;
+}
+
+.instructions {
+    height: 607px;
+    overflow-y: scroll;
+}
