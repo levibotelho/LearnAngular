@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheRepository.cs" />
+    <Compile Include="DebugCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IUnitOfWork.cs" />
   </ItemGroup>

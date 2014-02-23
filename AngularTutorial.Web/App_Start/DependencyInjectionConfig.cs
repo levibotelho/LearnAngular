@@ -25,7 +25,11 @@ namespace AngularTutorial.Web
         static void RegisterTypes(this Container container)
         {
             container.Register<IUnitOfWork, UnitOfWork>();
+#if DEBUG
+            container.Register<ICacheRepository, DebugCacheRepository>();
+#else
             container.Register<ICacheRepository, CacheRepository>();
+#endif
             container.Register<ICourseService, CourseService>();
         }
     }

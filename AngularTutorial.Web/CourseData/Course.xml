@@ -147,8 +147,124 @@ angular.module('Tutorial', [])
       </JavaScript>
     </Step>
   </Module>
-  <Module Id="eec8a418-66a3-4b56-bf63-b7c521e21698" Title="Test Module">
-    <Step Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="Empty step">
+  <Module Id="3a6e3464-c89f-4601-8d3d-75d669332274" Title="Data Binding">
+    <Step Id="2c1de643-4271-4844-8868-0455109d0bbb" Title="Two-way bindings">
+      <Instructions>
+        <![CDATA[
+In the last lesson we saw how we can display a model value in our view using the double curly bracket syntax (`{{name}}`). While this is no doubt useful, the real power of data-binding is being able to modify these values from the view and having the changes reflected in the model.
+
+We're starting out this lesson with a controller containing three variables, and a view containing three different inputs. What we want to accomplish is the following.
+
++ Bind each model variable to the corresponding input.
++ Display each selection beside its input.
+
+To bind model variables to form fields we need to use the `ng-model` directive. We use `ng-model` by applying it in the form of an attribute to an input field. The value of the attribute is the name of the `$scope` variable to which we wish to bind.
+
+So, to bind `$scope.favoriteWord` to our text field, we simply need to modify the `input` tag as follows.
+
+`<input type="text" ng-model="$favoriteWord" />`
+
+This knowledge in hand, you should now be able to bind the rest of the values to the relevant fields. Don't forget that radio button values are retrieved from each individual `input` tag, and that drop-down values are retrieved from the `select` tag. Once you've done that, use the curly bracket syntax to display the chosen value next to each input!
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="Tutorial">
+  <body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="BindingController">
+	<div>
+		Favorite number: <input type="text" />
+		- [Display selection here]
+	</div>
+	<div>
+		Favorite color:
+		<input type="radio" name="fc" value="Red">Red</input>
+		<input type="radio" name="fc" value="Green">Green</input>
+		<input type="radio" name="fc" value="Yellow">Yellow</input>
+		<input type="radio" name="fc" value="Blue">Blue</input>
+		- [Display selection here]
+	</div>
+	<div>
+		Favorite shape:
+		<select>
+			<option value="Circle">Circle</option>
+			<option value="Triangle">Triangle</option>
+			<option value="Square">Square</option>
+		</select>
+		- [Display selection here]
+	</div>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="BindingController">
+	<div>
+		Favorite word: <input type="text" ng-model="favoriteWord" />
+		- {{favoriteWord}}
+	</div>
+	<div>
+		Favorite color:
+		<input type="radio" name="fc" value="Red" ng-model="favoriteColor">Red</input>
+		<input type="radio" name="fc" value="Green" ng-model="favoriteColor">Green</input>
+		<input type="radio" name="fc" value="Yellow" ng-model="favoriteColor">Yellow</input>
+		<input type="radio" name="fc" value="Blue" ng-model="favoriteColor">Blue</input>
+		- {{favoriteColor}}
+	</div>
+	<div>
+		Favorite shape:
+		<select ng-model="favoriteShape">
+			<option value="Circle">Circle</option>
+			<option value="Triangle">Triangle</option>
+			<option value="Square">Square</option>
+		</select>
+		- {{favoriteShape}}
+	</div>
+</div>      
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+  </body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="controller.js">
+          <Initial>
+            <![CDATA[
+angular.module("Tutorial", [])
+    .controller("BindingController", ["$scope", function($scope) {
+        $scope.favoriteWord;
+        $scope.favoriteColour;
+        $scope.favoriteShape;
+    }]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("Tutorial", [])
+    .controller("BindingController", ["$scope", function($scope) {
+        $scope.favoriteWord;
+        $scope.favoriteColour;
+        $scope.favoriteShape;
+    }]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Step>
+  </Module>
+  <!--<Module Id="" Title="Test Module">
+    <Step Id="" Title="Empty step">
       <Instructions>
         <![CDATA[
         
@@ -183,5 +299,5 @@ angular.module('Tutorial', [])
         </Document>
       </JavaScript>
     </Step>
-  </Module>
+  </Module>-->
 </Course>
