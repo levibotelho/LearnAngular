@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.Tests.Unit"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{563097AD-B346-4F3C-910C-4B3F25DE55E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularTutorial.ContentPublisher", "AngularTutorial.ContentPublisher\AngularTutorial.ContentPublisher.csproj", "{17525F69-95AD-4BEF-A194-2A86B5522025}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,10 +41,6 @@ Global
 		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E349495A-6BF5-4A15-B996-D4B5F4F89BFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17525F69-95AD-4BEF-A194-2A86B5522025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17525F69-95AD-4BEF-A194-2A86B5522025}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17525F69-95AD-4BEF-A194-2A86B5522025}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17525F69-95AD-4BEF-A194-2A86B5522025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

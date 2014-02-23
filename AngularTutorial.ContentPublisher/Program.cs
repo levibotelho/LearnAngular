@@ -13,7 +13,7 @@ namespace AngularTutorial.ContentPublisher
     {
         static void Main(string[] args)
         {
-            CacheFiller.FillCache(ConfigurationFacade.XmlPath, new CacheRepository(new UnitOfWork()));
+            CacheFiller.FillCache(ConfigurationFacade.XmlPath, new AzureCacheRepository(new UnitOfWork()));
         }
     }
 }

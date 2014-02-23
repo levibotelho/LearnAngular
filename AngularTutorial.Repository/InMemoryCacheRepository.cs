@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AngularTutorial.Repository
 {
-    public class DebugCacheRepository : ICacheRepository
+    public interface ICacheRepository
+    {
+        T Get<T>(Guid key);
+        void Put(Guid key, object value);
+        void Remove(Guid key);
+        void Clear();
+    }
+
+    public class InMemoryCacheRepository : ICacheRepository
     {
         static readonly Dictionary<Guid, object> Cache = new Dictionary<Guid, object>();
 

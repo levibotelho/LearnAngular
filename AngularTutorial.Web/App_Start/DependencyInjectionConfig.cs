@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using AngularTutorial.Repository;
 using AngularTutorial.Services;
-using AngularTutorial.Web.Dependencies;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 
@@ -24,12 +23,7 @@ namespace AngularTutorial.Web
 
         static void RegisterTypes(this Container container)
         {
-            container.Register<IUnitOfWork, UnitOfWork>();
-#if DEBUG
-            container.Register<ICacheRepository, DebugCacheRepository>();
-#else
-            container.Register<ICacheRepository, CacheRepository>();
-#endif
+            container.Register<ICacheRepository, InMemoryCacheRepository>();
             container.Register<ICourseService, CourseService>();
         }
     }

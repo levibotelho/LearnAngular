@@ -25,5 +25,5 @@
 
 .instructions {
     height: 607px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
