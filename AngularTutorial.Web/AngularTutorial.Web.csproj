@@ -406,6 +406,7 @@
     <Content Include="Scripts\ace\worker-lua.js" />
     <Content Include="Scripts\ace\worker-php.js" />
     <Content Include="Scripts\ace\worker-xquery.js" />
+    <Content Include="Scripts\GoogleAnalytics.js" />
     <Content Include="_IntelliSense\angular.min.js" />
     <Content Include="_IntelliSense\bootstrap.min.css" />
     <Content Include="_IntelliSense\bootstrap.min.js" />
