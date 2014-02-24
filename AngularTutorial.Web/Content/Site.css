@@ -22,3 +22,9 @@
     margin-left: 1em;
     font-size: 15px;
 }
+
+@media (min-width: 1200px) {
+    .affix {
+        position: fixed;
+    }
+}
