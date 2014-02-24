@@ -17,7 +17,7 @@ namespace AngularTutorial.Entities
                 .Select(module => new TableOfContentsEntry(
                     module.Id,
                     module.Title,
-                    module.Steps.Select(step => new TableOfContentsEntry(step.Id, step.Title)).ToArray()))
+                    module.Lessons.Select(lesson => new TableOfContentsEntry(lesson.Id, lesson.Title)).ToArray()))
                 .ToArray();
         }
     }

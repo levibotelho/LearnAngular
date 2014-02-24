@@ -23,14 +23,6 @@ namespace AngularTutorial.Web.Controllers
             return View();
         }
 
-#if !DEBUG
-        [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
-#endif
-        public ActionResult About()
-        {
-            return View();
-        }
-
         [HttpGet]
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
@@ -44,10 +36,10 @@ namespace AngularTutorial.Web.Controllers
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any, VaryByParam = "*")]
 #endif
-        public JsonResult GetStep(Guid id)
+        public JsonResult GetLesson(Guid id)
         {
-            var step = _courseService.GetStep(id);
-            return Json(step, JsonRequestBehavior.AllowGet);
+            var lesson = _courseService.GetLesson(id);
+            return Json(lesson, JsonRequestBehavior.AllowGet);
         }
     }
 }

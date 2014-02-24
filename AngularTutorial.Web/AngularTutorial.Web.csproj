@@ -106,6 +106,8 @@
     <Content Include="Content\Images\LearnAngular-inverse-small.png" />
     <Content Include="Content\Images\LearnAngular-small.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Views\About.html" />
+    <Content Include="Content\Views\Lesson.html" />
     <Content Include="CourseData\Course.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -397,11 +399,8 @@
     </None>
     <Content Include="Scripts\Controllers.js" />
     <Content Include="Scripts\ui-ace.js" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
-    <Content Include="Views\Home\About.cshtml" />
     <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

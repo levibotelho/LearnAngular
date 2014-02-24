@@ -7,13 +7,13 @@ namespace AngularTutorial.Entities
     {
         public readonly Guid Id;
         public readonly string Title;
-        public readonly Step[] Steps;
+        public readonly Lesson[] Lessons;
 
-        public Module(Guid id, string title, Step[] steps)
+        public Module(Guid id, string title, Lesson[] lessons)
         {
             Id = id;
             Title = title;
-            Steps = steps;
+            Lessons = lessons;
         }
     }
 }

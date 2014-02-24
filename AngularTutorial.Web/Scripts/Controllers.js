@@ -1,4 +1,4 @@
-﻿angular.module('controllers', ["ui.ace"]).controller('index', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
+﻿angular.module('controllers', ["ui.ace"]).controller('lesson', ["$scope", "$http", "$routeParams", "$sce", function ($scope, $http, $routeParams, $sce) {
     $scope.tableOfContents = null;
     $scope.id = "";
     $scope.title = "";
@@ -111,8 +111,8 @@
         }
     };
     
-    $scope.loadStep = function (id) {
-        $http.get("/Home/GetStep", { params: { id: id } })
+    $scope.loadLesson = function (id) {
+        $http.get("/Home/GetLesson", { params: { id: id } })
         // data, status, headers, config
         .success(function (data) {
             $scope.id = data.Id;
@@ -178,7 +178,8 @@
         $http.get("/Home/GetTableOfContents")
             .success(function (data) {
                 $scope.tableOfContents = data;
-                $scope.loadStep($scope.tableOfContents[0].Children[0].Id);
+                var id = $routeParams.lessonId || $scope.tableOfContents[0].Children[0].Id;
+                $scope.loadLesson(id);
             })
             .error(function () {
                 alert("An unexpected error has occured. Please try again.");

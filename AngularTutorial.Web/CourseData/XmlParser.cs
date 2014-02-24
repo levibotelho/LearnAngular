@@ -55,22 +55,22 @@ namespace AngularTutorial.Web.CourseData
         {
             var id = Guid.Parse(moduleNode.Attribute(IdAttributeName).Value);
             var title = moduleNode.Attribute(TitleAttributeName).Value;
-            var steps = moduleNode.Elements().Select(GenerateStep).ToArray();
-            return new Module(id, title, steps);
+            var lessons = moduleNode.Elements().Select(GenerateLesson).ToArray();
+            return new Module(id, title, lessons);
         }
 
-        static Step GenerateStep(XElement stepNode)
+        static Lesson GenerateLesson(XElement lessonNode)
         {
             // ReSharper disable PossibleNullReferenceException
-            var id = Guid.Parse(stepNode.Attribute(IdAttributeName).Value);
-            var title = stepNode.Attribute(TitleAttributeName).Value;
-            return new Step(id, title)
+            var id = Guid.Parse(lessonNode.Attribute(IdAttributeName).Value);
+            var title = lessonNode.Attribute(TitleAttributeName).Value;
+            return new Lesson(id, title)
             {
-                Instructions = GenerateInstructions(stepNode.Element(InstructionsNodeName)),
-                HtmlDocuments = GenerateHtmlDocuments(stepNode.Element(HtmlNodeName)),
-                JavaScriptDocuments = GenerateJavaScriptDocuments(stepNode.Element(JavaScriptNodeName)),
-                HeadIncludes = GenerateHeadIncludes(stepNode.Element(HeadIncludesNodeName)),
-                ScriptIncludes = GenerateScriptIncludes(stepNode.Element(ScriptIncludesNodeName))
+                Instructions = GenerateInstructions(lessonNode.Element(InstructionsNodeName)),
+                HtmlDocuments = GenerateHtmlDocuments(lessonNode.Element(HtmlNodeName)),
+                JavaScriptDocuments = GenerateJavaScriptDocuments(lessonNode.Element(JavaScriptNodeName)),
+                HeadIncludes = GenerateHeadIncludes(lessonNode.Element(HeadIncludesNodeName)),
+                ScriptIncludes = GenerateScriptIncludes(lessonNode.Element(ScriptIncludesNodeName))
             };
             // ReSharper restore PossibleNullReferenceException
         }

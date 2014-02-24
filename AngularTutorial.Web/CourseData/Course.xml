@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Id="d088bf2b-3cc0-4260-96e4-5d9566918118" Title="Getting Started">
-    <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
+    <Lesson Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
 AngularJS is a JavaScript framework that is used to enhance web applications by applying the Model-View-Controller (MVC) to client-side code. As you go through these lessons, you'll see that Angular helps make web applications more powerful, more robust, and more testable, all in reducing the amount of code that you, the developer, have to write.
@@ -29,8 +29,8 @@ This is where AngularJS comes to the rescue. Angular takes the MVC pattern and a
 Over the course of these tutorials we'll get to all of these features, but let's start out simple, by integrating Angular into a simple web page...
       ]]>
       </Instructions>
-    </Step>
-    <Step Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Integrating Angular">
+    </Lesson>
+    <Lesson Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Integrating Angular">
       <Instructions>
         <![CDATA[
 *These lessons are intended to be interactive. Follow along in the code pages on the right as we go!*
@@ -62,7 +62,7 @@ The `$scope` object is very important to our application. It acts as our model. 
 
 ##Adding Angular to the page
 
-Now that we have our controller and model all figured out, let's turn our attention to our view. For the moment our page is pretty sparse. All we have is a single `div` element in an empty page. Our goal for this step will be to display the `message` variable defined in the model inside that div in our view.
+Now that we have our controller and model all figured out, let's turn our attention to our view. For the moment our page is pretty sparse. All we have is a single `div` element in an empty page. Our goal for this Lesson will be to display the `message` variable defined in the model inside that div in our view.
 
 In order to integrate Angular into our page we need three things.
 
@@ -145,10 +145,10 @@ angular.module('Tutorial', [])
           </Solution>
         </Document>
       </JavaScript>
-    </Step>
+    </Lesson>
   </Module>
   <Module Id="3a6e3464-c89f-4601-8d3d-75d669332274" Title="Data Binding">
-    <Step Id="2c1de643-4271-4844-8868-0455109d0bbb" Title="Two-way bindings">
+    <Lesson Id="2c1de643-4271-4844-8868-0455109d0bbb" Title="Two-way bindings">
       <Instructions>
         <![CDATA[
 In the last lesson we saw how we can display a model value in our view using the double curly bracket syntax (`{{name}}`). While this is no doubt useful, the real power of data-binding is being able to modify these values from the view and having the changes reflected in the model.
@@ -258,8 +258,8 @@ angular.module("Tutorial", [])
           </Solution>
         </Document>
       </JavaScript>
-    </Step>
-    <Step Id="7718aa8f-040f-4ee5-9553-410e41d4ab06" Title="Binding CSS classes">
+    </Lesson>
+    <Lesson Id="7718aa8f-040f-4ee5-9553-410e41d4ab06" Title="Binding CSS classes">
       <Instructions>
         <![CDATA[
 Angular offers conditional binding of CSS classes via the `ng-class` directive. The directive takes an expression which can be in one of three formats.
@@ -365,8 +365,8 @@ angular.module("app", [])
           </Solution>
         </Document>
       </JavaScript>
-    </Step>
-    <Step Id="77ae323e-1d60-43ba-9dc1-a1ad46c09a74" Title="Repeaters">
+    </Lesson>
+    <Lesson Id="77ae323e-1d60-43ba-9dc1-a1ad46c09a74" Title="Repeaters">
       <Instructions>
         <![CDATA[
 It often happens that you need to display a collection of data to the user. For this task, Angular provides you with the `ng-repeat` directive. `ng-repeat` gives you the power to define a template for a single item in a collection, and then have it be repeated for all the elements in a collection.
@@ -518,10 +518,10 @@ angular.module("app", [])
           </Solution>
         </Document>
       </JavaScript>
-    </Step>
+    </Lesson>
   </Module>
   <!--<Module Id="" Title="Test Module">
-    <Step Id="" Title="Empty step">
+    <Lesson Id="" Title="Empty Lesson">
       <Instructions>
         <![CDATA[
         
@@ -565,6 +565,6 @@ angular.module("app", [])
           </Solution>
         </Document>
       </JavaScript>
-    </Step>
+    </Lesson>
   </Module>-->
 </Course>

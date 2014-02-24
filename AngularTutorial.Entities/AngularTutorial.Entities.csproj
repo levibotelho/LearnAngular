@@ -53,7 +53,7 @@
     <Compile Include="CacheableEntityBase.cs" />
     <Compile Include="HtmlDocument.cs" />
     <Compile Include="JavaScriptDocument.cs" />
-    <Compile Include="Step.cs" />
+    <Compile Include="Lesson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableOfContents.cs" />
     <Compile Include="Module.cs" />

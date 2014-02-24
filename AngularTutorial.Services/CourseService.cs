@@ -7,7 +7,7 @@ namespace AngularTutorial.Services
     public interface ICourseService
     {
         TableOfContents GetTableOfContents();
-        Step GetStep(Guid id);
+        Lesson GetLesson(Guid id);
     }
 
     public class CourseService : ICourseService
@@ -25,9 +25,9 @@ namespace AngularTutorial.Services
             return _cacheRepository.Get<TableOfContents>(Guid.Empty);
         }
 
-        public Step GetStep(Guid id)
+        public Lesson GetLesson(Guid id)
         {
-            return _cacheRepository.Get<Step>(id);
+            return _cacheRepository.Get<Lesson>(id);
         }
     }
 }

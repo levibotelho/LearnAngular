@@ -12,7 +12,7 @@
         <xs:element name="Module">
           <xs:complexType>
             <xs:choice minOccurs="1" maxOccurs="unbounded">
-              <xs:element name="Step">
+              <xs:element name="Lesson">
                 <xs:complexType>
                   <xs:choice minOccurs="0" maxOccurs="unbounded">
                     <xs:element name="Instructions" type="xs:string" minOccurs="1" maxOccurs="1" />

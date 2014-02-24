@@ -28,8 +28,8 @@ namespace AngularTutorial.Web.CourseData
 
             // By convention, the table of contents is always situated at Guid.Empty.
             cacheRepository.Put(Guid.Empty, tableOfContents);
-            foreach (var step in modules.SelectMany(x => x.Steps))
-                cacheRepository.Put(step.Id, step);
+            foreach (var lesson in modules.SelectMany(x => x.Lessons))
+                cacheRepository.Put(lesson.Id, lesson);
         }
     }
 }

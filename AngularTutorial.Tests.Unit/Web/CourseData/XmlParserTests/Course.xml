@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Id="d088bf2b-3cc0-4260-96e4-5d9566918118" Title="Getting Started">
-    <Step Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
+    <Lesson Id="cceefa09-dac9-42b1-b4b1-d74abacda62b" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
 AngularJS is a JavaScript framework that allows us to write interactive web applications that are both powerful and easy to maintain. Angular makes use of the ubiquitous Model-View-Controller pattern, which means that developers familiar with server-side MVC frameworks will feel right at home with Angular. As is defined in the MVC pattern, Angular developers strive to decorrelate the following three application components:
@@ -21,8 +21,8 @@ In Angular, these three concepts are represented by the following components
 </ul>
       ]]>
       </Instructions>
-    </Step>
-    <Step Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Integrating Angular">
+    </Lesson>
+    <Lesson Id="c3975818-4e8a-49b0-b58a-88808a4dcc95" Title="Integrating Angular">
       <Instructions>
         <![CDATA[
 <p>Let's start writing some code! Here we have an HTML page into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
@@ -136,10 +136,10 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
         <Include>Something</Include>
         <Include>Something</Include>
       </ScriptIncludes>
-    </Step>
+    </Lesson>
   </Module>
   <Module Id="eec8a418-66a3-4b56-bf63-b7c521e21698" Title="The second module...">
-    <Step Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="Integrating Angular">
+    <Lesson Id="14c3209c-cd6b-437c-9c1b-e5132fa261d4" Title="Integrating Angular">
       <Instructions>
         <![CDATA[
 <p>Let's start writing some code! Here we have an HTML page into which we're going to integrate AngularJS, as well as a pre-made controller. If you look at the controller you'll notice a few things:</p>
@@ -221,6 +221,6 @@ angular.module('AngularTutorial').controller('GettingStartedController', ["$scop
           </Solution>
         </Page>
       </JavaScript>
-    </Step>
+    </Lesson>
   </Module>
 </Course>
