@@ -23,7 +23,6 @@
     font-size: 15px;
 }
 
-.instructions {
-    height: 607px;
-    overflow-y: auto;
+.ide {
+    position: fixed;
 }
