@@ -153,18 +153,15 @@ angular.module('Tutorial', [])
         <![CDATA[
 In the last lesson we saw how we can display a model value in our view using the double curly bracket syntax (`{{name}}`). While this is no doubt useful, the real power of data-binding is being able to modify these values from the view and having the changes reflected in the model.
 
-We're starting out this lesson with a controller containing three variables, and a view containing three different inputs. What we want to accomplish is the following.
+For this example, we're going to bind each variable in the model to its corresponding input field in the HTML. In order to do this, we need to make use of the `ng-model` directive. We use `ng-model` by applying it in the form of an attribute to an input field. The value of the attribute is the name of the `$scope` variable to which we wish to bind.
 
-+ Bind each model variable to the corresponding input.
-+ Display each selection beside its input.
-
-To bind model variables to form fields we need to use the `ng-model` directive. We use `ng-model` by applying it in the form of an attribute to an input field. The value of the attribute is the name of the `$scope` variable to which we wish to bind.
-
-So, to bind `$scope.favoriteWord` to our text field, we simply need to modify the `input` tag as follows.
+So, to kick off the example, to bind `$scope.favoriteWord` to our text field we simply need to modify the `input` tag as follows.
 
 `<input type="text" ng-model="$favoriteWord" />`
 
-This knowledge in hand, you should now be able to bind the rest of the values to the relevant fields. Don't forget that radio button values are retrieved from each individual `input` tag, and that drop-down values are retrieved from the `select` tag. Once you've done that, use the curly bracket syntax to display the chosen value next to each input!
+That's all there is to it. With this knowledge in hand you can now go ahead and bind the other two values to their relevant fields. Remember that radio button values are retrieved from each individual `input` tag, and that drop-down values are retrieved from the all-encompassing `select` tag.
+
+Once the values are bound, use the double curly bracket syntax to display each value next to its corresponding input!
         ]]>
       </Instructions>
       <Html>
@@ -273,6 +270,8 @@ Angular offers conditional binding of CSS classes via the `ng-class` directive. 
 
 Note that the directive takes an expression. This is standard practice for Angular directives. What this means is that whatever you pass to `ng-class` will be *evaluated* and it is the result of this evaluation which must fall into one of the three categories above. This means that you can include small bits of embedded logic, or better yet, function calls back to your model, to tell Angular what classes to apply and when.
 
+##Example
+
 For this demo, I've defined three CSS classes for you behind the scenes:
 
 + `bold`
@@ -362,6 +361,159 @@ angular.module("app", [])
 		$scope.isItalic = function () { return $scope.value % 3 === 0; };
 		$scope.isUnderlined = function () { return $scope.value % 5 === 0; };
 	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Step>
+    <Step Id="77ae323e-1d60-43ba-9dc1-a1ad46c09a74" Title="Repeaters">
+      <Instructions>
+        <![CDATA[
+It often happens that you need to display a collection of data to the user. For this task, Angular provides you with the `ng-repeat` directive. `ng-repeat` gives you the power to define a template for a single item in a collection, and then have it be repeated for all the elements in a collection.
+
+The syntax for `ng-repeat` is super easy. In attribute form, it looks like this:
+
+`ng-repeat="element in collection"`
+
+Where `collection` is a collection in scope and `element` is a variable used to reference each element throughout the iteration.
+
+In addition to this, Angular exposes several variables that allow you to gain information about the element currently being iterated on.
+
++ `$index` - The index of the current element.
++ `$first` - Boolean indicating if the element is the first in the collection.
++ `$middle` - Boolean indicating if the element is neither first nor last in the collection.
++ `$last` - Boolean indicating if the element is the last in the collection.
++ `$even` - Boolean indicating if the element's index is even.
++ `$odd` - Boolean indicating if the element's index is even.
+
+These variables can be used freely within the scope of the iteration.
+
+##Example
+
+For this example, I've gone ahead and defined the CSS class `oddRow` behind the scenes. `oddRow` will change the background color of the element to which it is applied to a light gray color. What we're going to do in this example is populate the HTML table which is currently empty with the list of products defined in `controller.js`.
+
+The first thing to do is to define what we want one row of the table to look like. Let's do that now, filling in the empty `tbody` tag with a single row.
+
+
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+
+Great. Now let's add the repeat directive. It is important to understand that `ng-repeat` will repeat *itself and its contents* for each element in the collection. We must therefore apply it to the `<tr>` element (not the `tbody` element).
+
+	<tbody>
+		<tr ng-repeat="product in products">
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+
+Let's now go ahead and populate the cells with the values from the collection objects.
+
+	<tr ng-repeat="product in products">
+		<td>{{product.id}}</td>
+		<td>{{product.name}}</td>
+	</tr>
+
+Almost done! Now let's apply the `oddRow` class to every odd-indexed `<tr>`. We'll need to use the `ng-class` directive that we learned about in the last lesson for this.
+
+	<tr ng-repeat="product in products" ng-class="if ($odd) { return "oddRow"; }">
+		<td>{{product.id}}</td>
+		<td>{{product.name}}</td>
+	</tr>
+
+We're done! Run the program and check out the results!
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="app">
+<head>
+<style>
+.oddRow { background-color: #EEE; }
+table { border-spacing: 0; }
+td { border: 1px solid black; padding: 0 1em 0 1em; }
+</style>
+</head>
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="controller">
+  <table>
+	  <thead>
+		  <tr>
+			  <td>Id</td>
+			  <td>Name</td>
+		  </tr>
+	  </thead>
+	  <tbody>
+	  </tbody>
+  </table>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="controller">
+  <table>
+	  <thead>
+		  <tr>
+			  <td>Id</td>
+			  <td>Name</td>
+		  </tr>
+	  </thead>
+	  <tbody>
+		  <tr ng-repeat="product in products"
+			  ng-class="{oddRow: $odd}">
+			  <td>{{product.id}}</td>
+			  <td>{{product.name}}</td>
+		  </tr>
+	  </tbody>
+  </table>
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="controller.js">
+          <Initial>
+            <![CDATA[
+angular.module("app", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.products = [
+			{id: 1, name: "Hockey puck"},
+			{id: 2, name: "Golf club"},
+			{id: 3, name: "Baseball bat"},
+			{id: 4, name: "Lacrosse stick"}
+		];
+}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("app", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.products = [
+			{id: 1, name: "Hockey puck"},
+			{id: 2, name: "Golf club"},
+			{id: 3, name: "Baseball bat"},
+			{id: 4, name: "Lacrosse stick"}
+		];
+}]);
             ]]>
           </Solution>
         </Document>
