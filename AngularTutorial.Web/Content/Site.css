@@ -23,8 +23,6 @@
     font-size: 15px;
 }
 
-@media (min-width: 1200px) {
-    .affix {
-        position: fixed;
-    }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
