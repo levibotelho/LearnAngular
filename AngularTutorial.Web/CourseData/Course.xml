@@ -262,6 +262,111 @@ angular.module("Tutorial", [])
         </Document>
       </JavaScript>
     </Step>
+    <Step Id="7718aa8f-040f-4ee5-9553-410e41d4ab06" Title="Binding CSS classes">
+      <Instructions>
+        <![CDATA[
+Angular offers conditional binding of CSS classes via the `ng-class` directive. The directive takes an expression which can be in one of three formats.
+
++ A string of space-delimited class names.
++ An array of class names.
++ A map (object) where the keys are class names and the values are boolean values indicating whether or not to apply the class.
+
+Note that the directive takes an expression. This is standard practice for Angular directives. What this means is that whatever you pass to `ng-class` will be *evaluated* and it is the result of this evaluation which must fall into one of the three categories above. This means that you can include small bits of embedded logic, or better yet, function calls back to your model, to tell Angular what classes to apply and when.
+
+For this demo, I've defined three CSS classes for you behind the scenes:
+
++ `bold`
++ `italic`
++ `underline`
+
+Let's try applying these three classes to the `span` of sample text in the HTML window according to the following logic:
+
++ If the value in the textbox % 2 == 0, apply `bold`.
++ If the value in the textbox % 3 == 0, apply `italic`.
++ If the value in the textbox % 5 == 0, apply `underline`.
+
+For this example, let's try to do this with a map.
+
+We'll start by defining a function for each of the criteria in the controller.
+
+`$scope.isBold = function () { return $scope.value % 2 === 0; };`
+`$scope.isItalic = function () { return $scope.value % 3 === 0; };`
+`$scope.isUnderlined = function () { return $scope.value % 5 === 0; };`
+
+Now, let's apply the `ng-class` directive to the span of text in the form of an attribute, and pass it a map of class names and boolean values.
+
+`ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}`
+
+Once applied, when you change the number in the text field, the class(es) applied to the sample text should change accordingly. Try it out!
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="app">
+<head>
+<style>
+.bold {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+}
+.underline {
+	text-decoration: underline;
+}
+</style>
+</head>
+<body ng-controller="controller">
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<input type="text" ng-model="value" />
+<span>Example Text</span>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<input type="text" ng-model="value" />
+<span ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}">
+	Example Text
+</span>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="controller.js">
+          <Initial>
+            <![CDATA[
+angular.module("app", [])
+	.controller("controller", ["$scope", function ($scope) {
+		$scope.value = 1;
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("app", [])
+	.controller("controller", ["$scope", function ($scope) {
+		$scope.value = 1;
+		$scope.isBold = function () { return $scope.value % 2 === 0; };
+		$scope.isItalic = function () { return $scope.value % 3 === 0; };
+		$scope.isUnderlined = function () { return $scope.value % 5 === 0; };
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Step>
   </Module>
   <!--<Module Id="" Title="Test Module">
     <Step Id="" Title="Empty step">
@@ -272,6 +377,11 @@ angular.module("Tutorial", [])
       </Instructions>
       <Html>
         <Document Name="index.html">
+          <Header>
+            <![CDATA[
+            
+            ]]>
+          </Header>
           <Initial>
             <![CDATA[
             
@@ -282,6 +392,11 @@ angular.module("Tutorial", [])
             
             ]]>
           </Solution>
+          <Footer>
+            <![CDATA[
+            
+            ]]>
+          </Footer>
         </Document>
       </Html>
       <JavaScript>
