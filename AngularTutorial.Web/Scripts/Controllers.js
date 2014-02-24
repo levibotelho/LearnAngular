@@ -1,6 +1,7 @@
 ﻿angular.module('controllers', ["ui.ace"]).controller('lesson', ["$scope", "$http", "$routeParams", "$sce", function ($scope, $http, $routeParams, $sce) {
     $scope.tableOfContents = null;
     $scope.id = "";
+    $scope.moduleId = "";
     $scope.title = "";
     $scope.instructions = "";
     $scope.htmlDocuments = [];
@@ -116,6 +117,7 @@
         // data, status, headers, config
         .success(function (data) {
             $scope.id = data.Id;
+            $scope.moduleId = data.ModuleId;
             $scope.title = data.Title;
             $scope.instructions = $sce.trustAs("html", data.Instructions);
             $scope.parseHtmlDocuments(data.HtmlDocuments);

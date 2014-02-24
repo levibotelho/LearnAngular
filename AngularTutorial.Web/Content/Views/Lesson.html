@@ -59,7 +59,7 @@
                     </a>
                 </h4>
             </div>
-            <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: $first}">
+            <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: module.Id == moduleId}">
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="lessonElement" ng-repeat="lesson in module.Children" ng-class="{active: lesson.Id == id}"><a href="#/Lessons/{{lesson.Id}}">{{lesson.Title}}</a></li>
