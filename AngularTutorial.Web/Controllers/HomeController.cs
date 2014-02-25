@@ -36,9 +36,9 @@ namespace AngularTutorial.Web.Controllers
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any, VaryByParam = "*")]
 #endif
-        public JsonResult GetLesson(Guid id)
+        public JsonResult GetLesson(Guid? id)
         {
-            var lesson = _courseService.GetLesson(id);
+            var lesson = _courseService.GetLesson(id ?? _courseService.GetTableOfContents().Modules[0].Children[0].Id);
             return Json(lesson, JsonRequestBehavior.AllowGet);
         }
     }
