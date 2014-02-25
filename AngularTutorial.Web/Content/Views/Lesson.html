@@ -26,7 +26,7 @@
             <div class="row paddedRow">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs">
-                        <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a></li>
+                        <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
@@ -39,7 +39,7 @@
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs">
                         <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                            <a href="#{{document.id}}" data-toggle="tab">{{document.name}}</a>
+                            <a href="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a>
                         </li>
                     </ul>
                     <div class="tab-content">
