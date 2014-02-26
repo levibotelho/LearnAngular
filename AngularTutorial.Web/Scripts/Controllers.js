@@ -1,25 +1,32 @@
-﻿angular.module("controllers", ["ui.ace"])
-    .controller("index", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-        $scope.selectedLesson = null;
+﻿angular.module("controllers", ["ui.ace", "services"])
+    .controller("index", ["$scope", "$http", "$location", "navigationFactory",
+        function ($scope, $http, $location, navigation) {
+            $scope.selectedLesson = null;
 
-        $scope.loadLesson = function (id) {
-            for (var i = 0; i < $scope.tableOfContents.length; i++) {
-                var module = $scope.tableOfContents[i];
-                for (var j = 0; j < module.Lessons.length; j++) {
-                    var lesson = module.Lessons[j];
-                    if (lesson.Id == id) {
-                        $scope.selectedLesson = lesson;
-                        $location.path("/lessons/" + id);
-                        return;
+            $scope.loadLesson = function (id) {
+                for (var i = 0; i < $scope.tableOfContents.length; i++) {
+                    var module = $scope.tableOfContents[i];
+                    for (var j = 0; j < module.Lessons.length; j++) {
+                        var lesson = module.Lessons[j];
+                        if (lesson.Id == id) {
+                            navigation.setSelectedLesson(id);
+                            $location.path("/lessons/" + id);
+                            return;
+                        }
                     }
-                }
+                };
+
+                throw new Error("The lesson was not found.");
             };
 
-            throw new Error("The lesson was not found.");
-        };
-
-        $scope.loadTableOfContents();
-    }])
+            navigation.getTableOfContents()
+                .success(function (data) {
+                    $scope.tableOfContents = data;
+                })
+                .error(function () {
+                    alert("An unexpected error has occured. Please try again.");
+                });
+        }])
     .controller("lesson", ["$scope", "$http", "$routeParams", "$sce", function ($scope, $http, $routeParams, $sce) {
         $scope.id = "";
         $scope.title = "";
