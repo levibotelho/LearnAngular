@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - learnAngular</title>
-    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.0/yeti/bootstrap.min.css" rel="stylesheet">
+    @*<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.0/yeti/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="~/Content/Images/favicon.png">
@@ -75,7 +76,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div id="Modules" class="col-xs-12 col-sm-3 col-lg-2 panel-group">
                 <div class="panel panel-default" ng-repeat="module in tableOfContents">
                     <div class="panel-heading">
@@ -85,7 +86,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: selectedLesson == null ? $first : module.Id == selectedLesson.ModuleId}">
+                    <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: module.Id == selectedLesson.ModuleId}">
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="lessonElement" ng-repeat="lesson in module.Lessons" ng-class="{active: lesson.Id == selectedLesson.Id}" ng-click="selectLesson(lesson.Id)"><a ng-cloak>{{lesson.Title}}</a></li>
@@ -102,7 +103,8 @@
             <p>&copy; @DateTime.Now.Year - Levi Botelho</p>
         </footer>
     </div>
-
+    
+    
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

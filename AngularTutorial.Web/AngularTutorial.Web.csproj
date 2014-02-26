@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\LearnAngular-huge.png" />
     <Content Include="Content\Images\LearnAngular-inverse-huge.png" />
