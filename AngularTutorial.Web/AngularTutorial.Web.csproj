@@ -389,6 +389,7 @@
     <Content Include="Scripts\ace\worker-xquery.js" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\GoogleAnalytics.js" />
+    <Content Include="Scripts\Services.js" />
     <Content Include="_IntelliSense\angular.min.js" />
     <Content Include="_IntelliSense\bootstrap.min.css" />
     <Content Include="_IntelliSense\bootstrap.min.js" />
@@ -403,8 +404,6 @@
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

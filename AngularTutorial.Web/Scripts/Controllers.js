@@ -1,17 +1,6 @@
 ﻿angular.module("controllers", ["ui.ace"])
     .controller("index", ["$scope", "$http", "$location", function ($scope, $http, $location) {
-        $scope.tableOfContents = null;
         $scope.selectedLesson = null;
-        
-        $scope.loadTableOfContents = function () {
-            $http.get("/Home/GetTableOfContents")
-                .success(function (data) {
-                    $scope.tableOfContents = data;
-                })
-                .error(function () {
-                    alert("An unexpected error has occured. Please try again.");
-                });
-        };
 
         $scope.loadLesson = function (id) {
             for (var i = 0; i < $scope.tableOfContents.length; i++) {
