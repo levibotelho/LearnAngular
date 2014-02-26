@@ -85,10 +85,10 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: $first || selectedLesson.ModuleId == module.Id}">
+                    <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: $first || module.Id == selectedLesson.ModuleId}">
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="lessonElement" ng-repeat="lesson in module.Lessons" ng-class="{active: lesson.Id == selectedLesson.Id}" ng-click="loadLesson(lesson.Id)"><a ng-cloak>{{lesson.Title}}</a></li>
+                                <li class="lessonElement" ng-repeat="lesson in module.Lessons" ng-class="{active: lesson.Id == selectedLesson.Id}" ng-click="selectLesson(lesson.Id)"><a ng-cloak>{{lesson.Title}}</a></li>
                             </ul>
                         </div>
                     </div>

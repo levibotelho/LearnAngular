@@ -1,25 +1,17 @@
 ﻿angular.module("controllers", ["ui.ace", "services"])
-    .controller("index", ["$scope", "$http", "$location", "navigationFactory",
-        function ($scope, $http, $location, navigation) {
+    .controller("index", ["$scope", "navigationService",
+        function ($scope, navigationService) {
+            $scope.tableOfContents = null;
             $scope.selectedLesson = null;
 
-            $scope.loadLesson = function (id) {
-                for (var i = 0; i < $scope.tableOfContents.length; i++) {
-                    var module = $scope.tableOfContents[i];
-                    for (var j = 0; j < module.Lessons.length; j++) {
-                        var lesson = module.Lessons[j];
-                        if (lesson.Id == id) {
-                            navigation.setSelectedLesson(id);
-                            $location.path("/lessons/" + id);
-                            return;
-                        }
-                    }
-                };
-
-                throw new Error("The lesson was not found.");
+            $scope.selectLesson = function (id) {
+                navigationService.selectLesson(id)
+                    .then(function (lesson) {
+                        $scope.selectedLesson = lesson;
+                    });
             };
 
-            navigation.getTableOfContents()
+            navigationService.getTableOfContents()
                 .success(function (data) {
                     $scope.tableOfContents = data;
                 })
