@@ -5,6 +5,9 @@ using AngularTutorial.Services;
 
 namespace AngularTutorial.Web.Controllers
 {
+    using System.Linq;
+    using AngularTutorial.Entities;
+
     public class HomeController : Controller
     {
         readonly ICourseService _courseService;
@@ -29,7 +32,19 @@ namespace AngularTutorial.Web.Controllers
 #endif
         public JsonResult GetTableOfContents()
         {
-            return Json(_courseService.GetTableOfContents().Modules, JsonRequestBehavior.AllowGet);
+            var modules = _courseService.GetTableOfContents().Modules;
+            var simplifiedTableOfContents = modules.Select(module => new
+            {
+                module.Id,
+                module.Title,
+                Lessons = module.Children.Select(lesson => new
+                {
+                    lesson.Id,
+                    lesson.Title,
+                    ModuleId = module.Id
+                }).ToArray()
+            }).ToArray();
+            return Json(simplifiedTableOfContents, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

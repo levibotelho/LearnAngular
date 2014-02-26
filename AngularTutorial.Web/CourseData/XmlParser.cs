@@ -66,7 +66,6 @@ namespace AngularTutorial.Web.CourseData
             var title = lessonNode.Attribute(TitleAttributeName).Value;
             return new Lesson(id, title)
             {
-                ModuleId = moduleId,
                 Instructions = GenerateInstructions(lessonNode.Element(InstructionsNodeName)),
                 HtmlDocuments = GenerateHtmlDocuments(lessonNode.Element(HtmlNodeName)),
                 JavaScriptDocuments = GenerateJavaScriptDocuments(lessonNode.Element(JavaScriptNodeName)),

@@ -1,7 +1,7 @@
 ﻿angular.module("controllers", ["ui.ace"])
     .controller("index", ["$scope", "$http", "$location", function ($scope, $http, $location) {
         $scope.tableOfContents = null;
-        $scope.id = "";
+        $scope.selectedLesson = null;
         
         $scope.loadTableOfContents = function () {
             $http.get("/Home/GetTableOfContents")
@@ -13,8 +13,20 @@
                 });
         };
 
-        $scope.loadLesson = function(id) {
-            $location.path("/lessons/" + id);
+        $scope.loadLesson = function (id) {
+            for (var i = 0; i < $scope.tableOfContents.length; i++) {
+                var module = $scope.tableOfContents[i];
+                for (var j = 0; j < module.Lessons.length; j++) {
+                    var lesson = module.Lessons[j];
+                    if (lesson.Id == id) {
+                        $scope.selectedLesson = lesson;
+                        $location.path("/lessons/" + id);
+                        return;
+                    }
+                }
+            };
+
+            throw new Error("The lesson was not found.");
         };
 
         $scope.loadTableOfContents();

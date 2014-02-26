@@ -11,7 +11,6 @@ namespace AngularTutorial.Entities
             Title = title;
         }
 
-        public Guid ModuleId { get; set; }
         public string Title { get; set; }
         public string Instructions { get; set; }
         public HtmlDocument[] HtmlDocuments { get; set; }
