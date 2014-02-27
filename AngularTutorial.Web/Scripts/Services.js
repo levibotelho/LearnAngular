@@ -4,9 +4,12 @@
 function NavigationService($http, $location) {
     var self = this;
     self.selectedLesson = null;
+    self.isTableOfContentsAvailable = true;
+
     self.getTableOfContents = function () {
         return $http.get("/Home/GetTableOfContents", { cache: true });
     };
+
     self.selectLesson = function (id) {
         this.getTableOfContents()
             .success(function (tableOfContents) {

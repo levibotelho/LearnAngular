@@ -3,6 +3,7 @@
         function ($scope, $routeParams, navigationService) {
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
+            $scope.isTableOfContentsAvailable = undefined;
 
             $scope.selectLesson = function (id) {
                 navigationService.selectLesson(id);
@@ -23,6 +24,13 @@
                 function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.selectedLesson = newValue;
+                    }
+                });
+
+            $scope.$watch(function() { return navigationService.isTableOfContentsAvailable; },
+                function (newValue, oldValue) {
+                    if (newValue != oldValue) {
+                        $scope.isTableOfContentsAvailable = newValue;
                     }
                 });
         }])
@@ -202,8 +210,12 @@
                 return includes != null ? includes.join("\n") : "";
             };
 
+            navigationService.isTableOfContentsAvailable = true;
             if ($routeParams.lessonId != null) {
                 $scope.loadLesson($routeParams.lessonId);
                 navigationService.selectLesson($routeParams.lessonId);
             }
-        }]);
+        }])
+    .controller("about", ["navigationService", function (navigationService) {
+        navigationService.isTableOfContentsAvailable = false;
+    }])
