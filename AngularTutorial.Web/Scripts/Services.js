@@ -26,4 +26,9 @@ function NavigationService($http, $location) {
                 alert("An unexpected error has occurred. Please try again.");
             });
     };
+
+    self.selectedLesson = self.getTableOfContents()
+        .success(function (tableOfContents) {
+            self.selectLesson(tableOfContents[0].Lessons[0]);
+        });
 }
