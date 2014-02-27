@@ -29,6 +29,6 @@ function NavigationService($http, $location) {
 
     self.selectedLesson = self.getTableOfContents()
         .success(function (tableOfContents) {
-            self.selectLesson(tableOfContents[0].Lessons[0]);
+            self.selectLesson(tableOfContents[0].Lessons[0].Id);
         });
 }
