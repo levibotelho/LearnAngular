@@ -25,58 +25,7 @@
     </nav>
     <div class="clearfix"></div>
     <div class="container-fluid" style="padding: 0 15px">
-        <div class="row" ng-controller="index">
-            <div class="modal fade" id="runModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Run</h4>
-                        </div>
-                        <div class="modal-body">
-                            <iframe class="renderFrame"></iframe>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="imStuckModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>All of your modifications will be lost. Do you want us to show you how this lesson is done?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">No, wait!</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="showSolution()">Yup!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to reset the code to how it was originally?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">No, wait!</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="resetCode()">Yup!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+        <div class="row" ng-controller="index">            
             <div id="Modules" class="col-xs-12 col-sm-3 col-lg-2 panel-group">
                 <div class="panel panel-default" ng-repeat="module in tableOfContents">
                     <div class="panel-heading">
