@@ -4,36 +4,25 @@
     <Lesson Id="introducing-angular" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
-AngularJS is a JavaScript framework that is used to enhance web applications by applying the Model-View-Controller (MVC) to client-side code. As you go through these lessons, you'll see that Angular helps make web applications more powerful, more robust, and more testable, all in reducing the amount of code that you, the developer, have to write.
+So, you want to learn AngularJS. Great! Let's jump right in.
 
-##MVC
+##What is AngularJS?
+AngularJS is a JavaScript framework that is used for making rich, extensible web applications. It runs on plain JavaScript and HTML, so you don't need any other dependencies to make it work, and it is CSS-agnostic so you can use whatever CSS framework/methodology you want when designing your Angular application.
 
-The MVC pattern separates application architecture into three distinct components:
+Now, if you go out ask five different developers why Angular is so great you'll probably get five different answers. For my money though, there are three key features that make it a really great framework to work with.
 
-+ The model - The model is at the heart of an MVC application. It contains data, business logic, functions and pretty much everything else that makes your application what it is.
-+ The view - The view is what presents data from the model to the user of the application. When the model changes, the view is supposed to update to reflect the changes to the user. In an Angular app the view is your HTML which is enhanced with AngularJS syntax to dynamically display data from the model.
-+ The controller - Traditionally, the controller serves to accept data from the user and dispatch it to the model which then updates the view. In Angular, the controller serves primarily to prepare the model for use in the application by adding appropriate data and logic.
+1. **Data binding** - Data binding is the ability to "bind" variables and functions from your code into your user interface and have changes in one side update the other. For example, you can display a JavaScript variable in a form field, and if the user changes the value, the value in JavaScript will automatically update to reflect the change. No more `onchanged` events required to keep things in sync in cases like this! If you've ever used KnockoutJS or a similar framework you'll be ahead of the game learning Angular. And If you haven't, you'll bei thoroughly amazed at how data binding makes your life easier.
+2. **The integrated framework** - Angular provides built-in functions to automate a lot of common tasks, such as making Ajax calls. As such, you can often code Angular apps without having to include additional libraries such as jQuery. Angular actually includes a built-in subset of jQuery, called "jQuery lite". That said, if you want to include jQuery in your apps, no problem! Angular will detect the presence of jQuery and adapt accordingly.
+3. **SPAs** - Angular makes writing single page applications really easy! This site is an example of a single page application. When you change lessons or click on links, you'll notice that the page content updates without requiring a refresh. At the same time however, the url in the browser's navigation bar updates accordingly which allows you to use the browser's forward and back buttons to navigate, as well as to bookmark a page and return to it later.
 
-What makes MVC so powerful is that each component has a clearly-defined role which keeps it from encroaching on the roles of the other two. This makes the application both easy to maintain and easy to test.
-
-##Where Angular comes in
-
-Traditionally in the realm of web development, the MVC pattern has been implemented on the server side. This is because applications would do most or all of their data processing on the server. We all know of websites where changing the value of a drop-down list results in a page refresh.
-
-Nowadays, however, we are able to do much better. We still use web servers to do data processing, but we can handle much more of the small stuff directly on the client side with JavaScript. And when we need more complex processing done, we can send an Ajax request to the web server and display the results to the user without requiring a refresh.
-
-But this breakthrough in web development comes with a caveat. More logic on the client-side means much more JavaScript to write. It also means that the "view" of a traditional MVC web application contains more and more functional code that is not necessarily linked purely to the display of model data.
-
-This is where AngularJS comes to the rescue. Angular takes the MVC pattern and applies it to the front end of our web applications, allowing us to once again decouple the different components of our program. In addition to this, it offers a robust data-binding framework which eliminates the need to write repetitive JavaScript functions in order to keep model data up to date with the data that the user interacts with. All of this means that your applications become richer, simpler and more testable.
-
-Over the course of these tutorials we'll get to all of these features, but let's start out simple, by integrating Angular into a simple web page...
+These three features along with many, many more make Angular a very powerful framework for developing web applications. Now then, enough chatter, let's move forward and take a look at how an Angular application is built.
       ]]>
       </Instructions>
     </Lesson>
     <Lesson Id="core-components" Title="Core Components">
       <Instructions>
         <![CDATA[
-Now that you have an understanding of what AngularJS is all about, let's start looking at what makes up an AngularJS application. Angular applications at their most basic consist of three components.
+Now that you have an idea of what AngularJS is all about, let's start looking at what makes up an AngularJS application. Angular applications at their most basic consist of three components.
 
 + The template (view)
 + The scope
@@ -41,7 +30,7 @@ Now that you have an understanding of what AngularJS is all about, let's start l
 
 ##The template
 
-The template is the HTML portion of the app. Writing a template is exactly like writing a static HTML page, except that templates contain additional syntax which allows data to be injected into them in order to provide a customized user experience. If you have ever written an HTML page using a server-side web framework you'll feel right at home writing templates in Angular. The feature that differentiates Angular templates from server-generated pages, however, is that because Angular is a client-side framework, data can be injected, modified and removed without ever requiring a page refresh. This feature provides a more fluid experience to the end user and enhances the overall feel of Angular web applications. The template is also known, especially to developers familiar with the MVC design pattern, as the view. I will use both terms interchangeably throughout these lessons.
+The template is the HTML portion of the app. Writing a template is exactly like writing a static HTML page, except that templates contain additional syntax which allows data to be injected into them in order to provide a customized user experience. If you have ever written an HTML page using a server-side web framework you'll feel right at home writing templates in Angular. The feature that differentiates Angular templates from server-generated pages, however, is that in Angular data can be injected, modified and removed from templates without ever requiring a page refresh. This feature provides a more fluid experience to the end user and enhances the overall feel of Angular web applications.
 
 ##The scope
 
@@ -50,6 +39,9 @@ The scope is a very important component in Angular applications. The scope is th
 ##The controller
 
 The controller plays somewhat of a supporting role in Angular applications. The controller is a function which generally takes an empty scope object as a parameter and adds to it the fields and functions that will be later exposed to the user via the view.
+
+##Relation to MVC
+Up until now I have intentionally tried to stay away from making any comparisons between Angular and MVC for the benefit of those who have not worked with the MVC pattern before. If you have worked with MVC, then you probably won't need any help in identifying how closely Angular's architecture resembles that of an MVC-based application. As the two are so closely linked, I may from here on in refer to the template as the "view" and the scope as the "model". If you are unfamiliar with MVC, just be aware that these terms are interchangeable and that I am not talking about anything that you haven't seen before.
 
 ##Summary
 The template, the scope, and the controller are the three main building blocks of an Angular web application. While there is much more to Angular than these three components, with an understanding of what they do and how they interact you will already be capable of wiring together a simple Angular application.
@@ -72,7 +64,7 @@ The first thing that we need to do is define our controller. Remember, the contr
 
 To define our controller we first need to define what is known as a *module*. We didn't discuss modules in the last lesson, but no need to worry; they are extremely simple to understand. Modules act as logical containers for components in Angular applications. Whenever we define a component such as a controller, it needs to go in a module. The syntax for defining a module is as follows.
 
-`angular.module("root", [])`
+	angular.module("root", [])
 
 That's all there is to it! The first argument, the string, defines the name of the module, which in this case is `root`. The second argument, the empty array, is used for dependency injection. We aren't going to get into Angular's dependency injection mechanism quite yet, but if you are unfamiliar with the concept of DI I strongly  recommend that you at least get acquainted with the concept before continuing on.*
 
