@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AngularTutorial.Repository
 {
     public interface ICacheRepository
     {
-        T Get<T>(Guid key);
-        void Put(Guid key, object value);
-        void Remove(Guid key);
+        T Get<T>(string key);
+        void Put(string key, object value);
+        void Remove(string key);
         void Clear();
     }
 
     public class InMemoryCacheRepository : ICacheRepository
     {
-        static readonly Dictionary<Guid, object> Cache = new Dictionary<Guid, object>();
+        static readonly Dictionary<string, object> Cache = new Dictionary<string, object>();
 
-        public T Get<T>(Guid key)
+        public T Get<T>(string key)
         {
             return (T)Cache[key];
         }
 
-        public void Put(Guid key, object value)
+        public void Put(string key, object value)
         {
             Cache[key] = value;
         }
 
-        public void Remove(Guid key)
+        public void Remove(string key)
         {
             Cache.Remove(key);
         }

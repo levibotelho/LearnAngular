@@ -53,16 +53,16 @@ namespace AngularTutorial.Web.CourseData
 
         static Module GenerateModule(XElement moduleNode)
         {
-            var id = Guid.Parse(moduleNode.Attribute(IdAttributeName).Value);
+            var id = moduleNode.Attribute(IdAttributeName).Value;
             var title = moduleNode.Attribute(TitleAttributeName).Value;
-            var lessons = moduleNode.Elements().Select(x => GenerateLesson(x, id)).ToArray();
+            var lessons = moduleNode.Elements().Select(GenerateLesson).ToArray();
             return new Module(id, title, lessons);
         }
 
-        static Lesson GenerateLesson(XElement lessonNode, Guid moduleId)
+        static Lesson GenerateLesson(XElement lessonNode)
         {
             // ReSharper disable PossibleNullReferenceException
-            var id = Guid.Parse(lessonNode.Attribute(IdAttributeName).Value);
+            var id = lessonNode.Attribute(IdAttributeName).Value;
             var title = lessonNode.Attribute(TitleAttributeName).Value;
             return new Lesson(id, title)
             {

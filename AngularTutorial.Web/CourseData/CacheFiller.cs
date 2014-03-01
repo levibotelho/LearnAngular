@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Hosting;
 using AngularTutorial.Entities;
 using AngularTutorial.Repository;
+using AngularTutorial.Services;
 
 namespace AngularTutorial.Web.CourseData
 {
@@ -27,7 +28,7 @@ namespace AngularTutorial.Web.CourseData
             cacheRepository.Clear();
 
             // By convention, the table of contents is always situated at Guid.Empty.
-            cacheRepository.Put(Guid.Empty, tableOfContents);
+            cacheRepository.Put(CourseService.TableOfContentsKey, tableOfContents);
             foreach (var lesson in modules.SelectMany(x => x.Lessons))
                 cacheRepository.Put(lesson.Id, lesson);
         }

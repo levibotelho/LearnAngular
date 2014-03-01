@@ -10,7 +10,7 @@
                     templateUrl: "/Content/Views/About.html",
                     controller: "about"
                 })
-                .otherwise({ redirectTo: "/lessons/cceefa09-dac9-42b1-b4b1-d74abacda62b" });
+                .otherwise({ redirectTo: "/lessons/introducing-angular" });
 
             $locationProvider.html5Mode(false).hashPrefix('!');
         }

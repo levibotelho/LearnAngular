@@ -5,7 +5,7 @@ namespace AngularTutorial.Entities
     [Serializable]
     public class Lesson : CacheableEntityBase
     {
-        public Lesson(Guid id, string title)
+        public Lesson(string id, string title)
             : base(id)
         {
             Title = title;

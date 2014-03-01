@@ -3,15 +3,14 @@
 namespace AngularTutorial.Entities
 {
     [Serializable]
-    public class Module
+    public class Module : CacheableEntityBase
     {
-        public readonly Guid Id;
         public readonly string Title;
         public readonly Lesson[] Lessons;
 
-        public Module(Guid id, string title, Lesson[] lessons)
+        public Module(string id, string title, Lesson[] lessons)
+            : base(id)
         {
-            Id = id;
             Title = title;
             Lessons = lessons;
         }

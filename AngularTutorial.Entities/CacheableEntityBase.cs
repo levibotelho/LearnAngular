@@ -5,11 +5,9 @@ namespace AngularTutorial.Entities
     [Serializable]
     public abstract class CacheableEntityBase
     {
-        public readonly Guid Id;
+        public readonly string Id;
 
-        protected CacheableEntityBase() { }
-
-        protected CacheableEntityBase(Guid id)
+        protected CacheableEntityBase(string id)
         {
             Id = id;
         }
