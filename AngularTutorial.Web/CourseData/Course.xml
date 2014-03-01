@@ -99,16 +99,12 @@ Great. Now all we need to do is wire up our template to display this value in th
 Let's turn our attention to our HTML. For now we just have a simple page. We need to do five things to wire in Angular.
 
 1. Include a reference to the Angular script file.
-
 2. Include a reference to our controller script file.
-
 3. Tell Angular which module we are using as our "root module"
-
 4. Tell Angular to what part of the page it should apply our controller and the corresponding scope.
-
 5. Tell Angular to display our message in the `<div>`.
 
-For this lesson and throughout this entire site in fact, I have already taken care of steps 1 and 2 for you behind the scenes. In upcoming lessons unless otherwise stated I will also handle steps 3 and 4, but for the purposes of this lesson, steps 3, 4, and 5 are up to you!
+For this lesson and throughout this entire site in fact, I have already taken care of steps 1 and 2 for you behind the scenes. In upcoming lessons I will often take care of step 3 for you as well. However in this lesson steps 3, 4, and 5 are up to you!
 
 ###The root module
 
@@ -120,9 +116,9 @@ The directive we need to apply is the `ngApp` directive. We apply this directive
 
 There are a couple things to note here.
 
-1. The directive name is `ngApp` but it is applied in the form of an attribute named `ng-app`. We'll discuss the intricacies of this syntax in a later lesson, but for now just understand that directives are given names in camelCase but are written in hyphen-delimited lowercase when applied as attributes.
++ The directive name is `ngApp` but it is applied in the form of an attribute named `ng-app`. We'll discuss the intricacies of this syntax in a later lesson, but for now just understand that directives are given names in camelCase but are written in hyphen-delimited lowercase when applied as attributes.
 
-2. The value of the attribute is the name of our root module.
++ The value of the attribute is the name of our root module.
 
 That's all we need to do. Angular now understands that the module named `root` is the root module for the application.
 
@@ -159,6 +155,7 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
         <Document Name="index.html">
           <Initial>
             <![CDATA[
+<!DOCTYPE html>
 <html>
     <body>
         <div></div>
@@ -215,13 +212,14 @@ Once the values are bound, use the double curly brace syntax to display each val
         <Document Name="index.html">
           <Header>
             <![CDATA[
-<html ng-app="Tutorial">
+<!DOCTYPE html>
+<html ng-app="root">
   <body>
             ]]>
           </Header>
           <Initial>
             <![CDATA[
-<div ng-controller="BindingController">
+<div ng-controller="controller">
 	<div>
 		Favorite number: <input type="text" />
 		- [Display selection here]
@@ -248,7 +246,7 @@ Once the values are bound, use the double curly brace syntax to display each val
           </Initial>
           <Solution>
             <![CDATA[
-<div ng-controller="BindingController">
+<div ng-controller="controller">
 	<div>
 		Favorite word: <input type="text" ng-model="favoriteWord" />
 		- {{favoriteWord}}
@@ -285,8 +283,8 @@ Once the values are bound, use the double curly brace syntax to display each val
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-angular.module("Tutorial", [])
-    .controller("BindingController", ["$scope", function($scope) {
+angular.module("root", [])
+    .controller("controller", ["$scope", function($scope) {
         $scope.favoriteWord;
         $scope.favoriteColour;
         $scope.favoriteShape;
@@ -295,8 +293,8 @@ angular.module("Tutorial", [])
           </Initial>
           <Solution>
             <![CDATA[
-angular.module("Tutorial", [])
-    .controller("BindingController", ["$scope", function($scope) {
+angular.module("root", [])
+    .controller("controller", ["$scope", function($scope) {
         $scope.favoriteWord;
         $scope.favoriteColour;
         $scope.favoriteShape;
@@ -316,9 +314,7 @@ Just as Angular lets us bind scope values to input fields, it also allows us to 
 To bind a CSS class to an HTML element, we use the `ngClass` directive. `ngClass` takes as input an expression which must evaluate to one of the following.
 
 + A string of space-delimited class names.
-
 + An array of class names.
-
 + A map (object) where the keys are class names and the values are boolean values indicating whether or not to apply the class.
 
 ##Example
@@ -326,17 +322,13 @@ To bind a CSS class to an HTML element, we use the `ngClass` directive. `ngClass
 For this demo, I've defined three CSS classes for you behind the scenes:
 
 + `bold`
-
 + `italic`
-
 + `underline`
 
 Let's try applying these three classes to the `span` of sample text in the HTML window according to the following logic:
 
 + If the value in the textbox % 2 == 0, apply `bold`.
-
 + If the value in the textbox % 3 == 0, apply `italic`.
-
 + If the value in the textbox % 5 == 0, apply `underline`.
 
 For this example, let's try to do this with a map.
@@ -358,6 +350,7 @@ Once applied, run the program. When you change the number in the text field, the
         <Document Name="index.html">
           <Header>
             <![CDATA[
+<!DOCTYPE html>
 <html ng-app="root">
 <head>
 <style>
@@ -372,21 +365,25 @@ Once applied, run the program. When you change the number in the text field, the
 }
 </style>
 </head>
-<body ng-controller="controller">
+<body>
             ]]>
           </Header>
           <Initial>
             <![CDATA[
-<input type="text" ng-model="value" />
-<span>Example Text</span>
+<div ng-controller="controller">
+  <input type="text" ng-model="value" />
+  <span>Example Text</span>
+</div>
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
-<input type="text" ng-model="value" />
-<span ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}">
-	Example Text
-</span>
+<div ng-controller="controller">
+  <input type="text" ng-model="value" />
+  <span ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}">
+	  Example Text
+  </span>
+</div>
             ]]>
           </Solution>
           <Footer>
@@ -421,7 +418,7 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
-    <Lesson Id="77ae323e-1d60-43ba-9dc1-a1ad46c09a74" Title="Repeaters">
+    <Lesson Id="repeaters" Title="Repeaters">
       <Instructions>
         <![CDATA[
 It often happens that you need to display a collection of data to the user. For this task, Angular provides you with the `ngRepeat` directive. `ngRepeat` gives you the power to define a template for a single item in a collection, and then have it be repeated for all the elements in a collection.
@@ -435,15 +432,10 @@ Where `collection` is a collection in scope and `element` is a variable used to 
 In addition to this, Angular exposes several variables that allow you to gain information about the element currently being iterated on.
 
 + `$index` - The index of the current element.
-
 + `$first` - Boolean indicating if the element is the first in the collection.
-
 + `$middle` - Boolean indicating if the element is neither first nor last in the collection.
-
 + `$last` - Boolean indicating if the element is the last in the collection.
-
 + `$even` - Boolean indicating if the element's index is even.
-
 + `$odd` - Boolean indicating if the element's index is even.
 
 These variables can be used freely within the scope of the iteration.
@@ -492,6 +484,7 @@ We're done! Run the program and check out the results!
         <Document Name="index.html">
           <Header>
             <![CDATA[
+<!DOCTYPE html>
 <html ng-app="root">
 <head>
 <style>
@@ -574,6 +567,110 @@ angular.module("root", [])
 			{id: 4, name: "Lacrosse stick"}
 		];
 }]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
+    <Lesson Id="visibility" Title="Visibility">
+      <Instructions>
+        <![CDATA[
+##Showing and hiding
+
+We've already seen that Angular lets you bind CSS classes to elements by way of the `ngClass` directive. However if you simply want to show or hide an element, there is a shortcut. The `ngShow` and `ngHide` directives display or hide an element from view by manipulating its `display` CSS property. They both take an expression as an argument which is expected to return a Boolean value.
+
+##Adding and removing
+
+If `ngShow` and `ngHide` control visibility, `ngIf` controls *existence*. That is to say that instead of simply altering how elements are displayed, `ngIf` adds and removes them from the DOM altogether. There are three important things to be aware of when using `ngIf`.
+
++ Code that performs calculations based on the position of elements in the DOM will behave differently with `ngIf` as opposed to `ngShow` or `ngHide`, as the latter two leave hidden elements in the DOM.
+
++ State is not preserved when Angular adds/removes elements from the DOM using `ngIf`. Elements that are removed from and then readded to the DOM are regenerated by Angular and reappear in their initial state, not the state that they were in when they were first removed.
+
++ Elements inserted with `ngIf` live in their own scope which inherits from their parent element's scope. In simple terms, this means that applying `ngIf` to an element is like applying a second `controller` directive. You will have access to the same fields as in the parent, but they will reside on a separate scope object. You therefore cannot rely on variables in one scope to remain synchronized with those in the other scope.*
+
+##Example
+
+For this example we're going to hook in the visibility of two `<div>` elements to two fields in our `$scope`. The fields are already declared for you, and two checkboxes are present to allow you to set each value. Try applying `ng-show="isFirstElementVisible"` to the first `<div>` and its `ngIf` equivalent to the second `<div>`. Then run the example and test it out. If you wish, you can take a look at the corresponding HTML for the document using your browser's development tools to see how `ngIf` and `ngShow` hide the elements to which they are applied.
+
+---
+
+*To see this in action, try pasting the following code into the editors and modifying the textbox values.
+
+HTML:
+
+	<div ng-controller="controller">
+		<input type="text" ng-model="message" />
+		{{message}}
+		<div ng-if="true">
+			<input type="text" ng-model="message" />
+			{{message}}
+		</div>
+	</div>
+
+JavaScript:
+
+	angular.module("root", [])
+		.controller("controller", ["$scope", function($scope) {
+			$scope.message = "Hello World";
+		}]);
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<!DOCTYPE html>
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="controller">
+  <div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
+  <div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
+	<div>First Element</div>
+	<div>Second Element</div>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="controller">
+  <div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
+  <div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
+	<div ng-show="isFirstElementVisible">First Element</div>
+	<div ng-if="isSecondElementVisible">Second Element</div>
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="controller.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.isFirstElementVisible = true;
+    $scope.isSecondElementVisible = true;
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.isFirstElementVisible = true;
+    $scope.isSecondElementVisible = true;
+	}]);
             ]]>
           </Solution>
         </Document>
