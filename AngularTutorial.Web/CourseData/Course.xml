@@ -12,7 +12,9 @@ AngularJS is a JavaScript framework that is used for making rich, extensible web
 Now, if you go out ask five different developers why Angular is so great you'll probably get five different answers. For my money though, there are three key features that make it a really great framework to work with.
 
 1. **Data binding** - Data binding is the ability to "bind" variables and functions from your code into your user interface and have changes in one side update the other. For example, you can display a JavaScript variable in a form field, and if the user changes the value, the value in JavaScript will automatically update to reflect the change. No more `onchanged` events required to keep things in sync in cases like this! If you've ever used KnockoutJS or a similar framework you'll be ahead of the game learning Angular. And If you haven't, you'll bei thoroughly amazed at how data binding makes your life easier.
+
 2. **The integrated framework** - Angular provides built-in functions to automate a lot of common tasks, such as making Ajax calls. As such, you can often code Angular apps without having to include additional libraries such as jQuery. Angular actually includes a built-in subset of jQuery, called "jQuery lite". That said, if you want to include jQuery in your apps, no problem! Angular will detect the presence of jQuery and adapt accordingly.
+
 3. **SPAs** - Angular makes writing single page applications really easy! This site is an example of a single page application. When you change lessons or click on links, you'll notice that the page content updates without requiring a refresh. At the same time however, the url in the browser's navigation bar updates accordingly which allows you to use the browser's forward and back buttons to navigate, as well as to bookmark a page and return to it later.
 
 These three features along with many, many more make Angular a very powerful framework for developing web applications. Now then, enough chatter, let's move forward and take a look at how an Angular application is built.
@@ -58,7 +60,7 @@ The template, the scope, and the controller are the three main building blocks o
 Now that we have a basic understanding of what Angular is all about and how an application fits together, let's jump right in and integrate Angular into a simple web page.
 
 ##Writing the controller
-For this lesson we are starting out with a very basic web page which contains a single, empty `div` element. Let's use Angular to insert the text "Hello World" dynamically into the page.
+For this lesson we are starting out with a very basic web page which contains a single, empty `<div>`. Let's use Angular to insert the text "Hello World" dynamically into the page.
 
 The first thing that we need to do is define our controller. Remember, the controller is a function which augments the scope with data, functions, and whatnot.
 
@@ -97,10 +99,14 @@ Great. Now all we need to do is wire up our template to display this value in th
 Let's turn our attention to our HTML. For now we just have a simple page. We need to do five things to wire in Angular.
 
 1. Include a reference to the Angular script file.
+
 2. Include a reference to our controller script file.
+
 3. Tell Angular which module we are using as our "root module"
+
 4. Tell Angular to what part of the page it should apply our controller and the corresponding scope.
-5. Tell Angular to display our message in the `div`.
+
+5. Tell Angular to display our message in the `<div>`.
 
 For this lesson and throughout this entire site in fact, I have already taken care of steps 1 and 2 for you behind the scenes. In upcoming lessons unless otherwise stated I will also handle steps 3 and 4, but for the purposes of this lesson, steps 3, 4, and 5 are up to you!
 
@@ -114,7 +120,8 @@ The directive we need to apply is the `ngApp` directive. We apply this directive
 
 There are a couple things to note here.
 
-1. The directive name is `ngApp` but it is applied in the form of an attribute named `ng-app`. We'll get deeper into directives in an upcoming lesson, but for now just understand that directives are given names in camelCase,  but when applied as attributes are applied in hyphen-delimited lowercase.
+1. The directive name is `ngApp` but it is applied in the form of an attribute named `ng-app`. We'll discuss the intricacies of this syntax in a later lesson, but for now just understand that directives are given names in camelCase but are written in hyphen-delimited lowercase when applied as attributes.
+
 2. The value of the attribute is the name of our root module.
 
 That's all we need to do. Angular now understands that the module named `root` is the root module for the application.
@@ -133,19 +140,19 @@ All that's left to do is display our message in the page! To print a variable va
 
 	{{message}}
 
-Add this syntax to the `div` element on which we applied our controller and run the code. If all is well, you should see `Hello World` printed loud and clear onto the page for all to see! If something went wrong, don't worry. You can either see the answer by clicking on the "I'm stuck!" button, or reset the example altogether and start over.
+Add this syntax to the `<div>` element on which we applied our controller and run the code. If all is well, you should see `Hello World` printed loud and clear onto the page for all to see! If something went wrong, don't worry. You can either see the answer by clicking on the "I'm stuck!" button, or reset the example altogether and start over.
+
+##Expressions
+Now that you've seen how to bind a scope value to the template, try this. Replace `{{message}}` with a mathematical equation such as `{{1 + 1}}` and run the application. You'll see that Angular will have evaluated the equation and printed the result! This is because the value inside the curly braces is considered by Angular to be an *expression*. Expressions are like simple JavaScript statements, which means that in addition to supporting `$scope` fields, they also support simple functions like this one. Details of exactly what is and is not supported by Angular expressions can be found [here on the Angular site](http://docs.angularjs.org/guide/expression).
 
 ##Summary
 We learned a lot this lesson! We learned about modules, how to declare controllers, and most importantly how to wire everything together to make a full-fledged application. While we haven't seen anything very impressive in terms of results, don't worry because we're getting there. In the next set of lessons we'll take a deeper look at directives and how they can enrich Angular applications.
 
 ---
 
-*[Dependency injection for five year olds][1] is a good place to start if you are completely unfamiliar with the concept, after which there is [this explanation which is simple and to the point][2].
+*[Dependency injection for five year olds](http://stackoverflow.com/a/1638961/1068266) is a good place to start if you are completely unfamiliar with the concept, after which there is [this explanation which is simple and to the point](http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html).
 
 **In case you are wondering why we need this convoluted syntax, it is to enable JavaScript minification. If our argument names are minified, Angular will still be able to understand what dependency we want passed based on the strings in the array preceding the controller function.
-
-[1]: [http://stackoverflow.com/a/1638961/1068266]
-[2]: [http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html]
       ]]>
       </Instructions>
       <Html>
@@ -185,21 +192,23 @@ angular.module('root', [])
       </JavaScript>
     </Lesson>
   </Module>
-  <Module Id="3a6e3464-c89f-4601-8d3d-75d669332274" Title="Basic Data Binding">
-    <Lesson Id="2c1de643-4271-4844-8868-0455109d0bbb" Title="Two-way bindings">
+  <Module Id="module-basic-directives" Title="Basic Directives">
+    <Lesson Id="two-way-bindings" Title="Two-way bindings">
       <Instructions>
         <![CDATA[
-In the last lesson we saw how we can display a model value in our view using the double curly bracket syntax (`{{name}}`). While this is no doubt useful, the real power of data-binding is being able to modify these values from the view and having the changes reflected in the model.
+In this section we are going to take a look at some basic directives that you can use to add interactivity and flexibility to your web applications. There is a lot more to the Angular framework than we have just seen, but looking at a few directives right away will give you an idea of what you can do with Angular and hopefully inspire you to lean more about the framework in the sections that follow.
 
-For this example, we're going to bind each variable in the model to its corresponding input field in the HTML. In order to do this, we need to make use of the `ng-model` directive. We use `ng-model` by applying it in the form of an attribute to an input field. The value of the attribute is the name of the `$scope` variable to which we wish to bind.
+##ngModel
 
-So, to kick off the example, to bind `$scope.favoriteWord` to our text field we simply need to modify the `input` tag as follows.
+We're going to start out by looking at one of the most important directives in Angular, `ngModel`. Unlike values bound using the double curly brace syntax, `ngModel` allows us to bind values to HTML elements such as input fields. When using `ngModel`, not only are changes in the scope reflected in the view, but changes in the view are reflected back into the scope.
 
-`<input type="text" ng-model="$favoriteWord" />`
+To see `ngModel` in action, we are going to use it to bind the `favoriteWord` field in the scope to the input field in the HTML page. To do this, we simply need to apply `ngModel` to the input field in the form of an attribute like so.
 
-That's all there is to it. With this knowledge in hand you can now go ahead and bind the other two values to their relevant fields. Remember that radio button values are retrieved from each individual `input` tag, and that drop-down values are retrieved from the all-encompassing `select` tag.
+`<input type="text" ng-model="favoriteWord" />`
 
-Once the values are bound, use the double curly bracket syntax to display each value next to its corresponding input!
+As you can see, `ngModel` takes an expression which is almost always the name of the `$scope` field to which we want to bind our element. Now, go ahead and try binding the other two scope variables to their respective input fields. As a reminder, remember that radio button values are retrieved from each individual `<input>` tag, and that drop-down values are retrieved from the all-encompassing `<select>` tag.
+
+Once the values are bound, use the double curly brace syntax to display each value next to its corresponding input and run the example to see two-way binding in action!
         ]]>
       </Instructions>
       <Html>
@@ -297,51 +306,59 @@ angular.module("Tutorial", [])
         </Document>
       </JavaScript>
     </Lesson>
-    <Lesson Id="7718aa8f-040f-4ee5-9553-410e41d4ab06" Title="Binding CSS classes">
+    <Lesson Id="binding-css-classes" Title="Binding CSS classes">
       <Instructions>
         <![CDATA[
-Angular offers conditional binding of CSS classes via the `ng-class` directive. The directive takes an expression which can be in one of three formats.
+Just as Angular lets us bind scope values to input fields, it also allows us to bind scope values as class names to HTML elements. As you can imagine, this feature is extremely useful and probably one of the most used features in Angular altogether.
+
+##ngClass
+
+To bind a CSS class to an HTML element, we use the `ngClass` directive. `ngClass` takes as input an expression which must evaluate to one of the following.
 
 + A string of space-delimited class names.
-+ An array of class names.
-+ A map (object) where the keys are class names and the values are boolean values indicating whether or not to apply the class.
 
-Note that the directive takes an expression. This is standard practice for Angular directives. What this means is that whatever you pass to `ng-class` will be *evaluated* and it is the result of this evaluation which must fall into one of the three categories above. This means that you can include small bits of embedded logic, or better yet, function calls back to your model, to tell Angular what classes to apply and when.
++ An array of class names.
+
++ A map (object) where the keys are class names and the values are boolean values indicating whether or not to apply the class.
 
 ##Example
 
 For this demo, I've defined three CSS classes for you behind the scenes:
 
 + `bold`
+
 + `italic`
+
 + `underline`
 
 Let's try applying these three classes to the `span` of sample text in the HTML window according to the following logic:
 
 + If the value in the textbox % 2 == 0, apply `bold`.
+
 + If the value in the textbox % 3 == 0, apply `italic`.
+
 + If the value in the textbox % 5 == 0, apply `underline`.
 
 For this example, let's try to do this with a map.
 
 We'll start by defining a function for each of the criteria in the controller.
 
-`$scope.isBold = function () { return $scope.value % 2 === 0; };`
-`$scope.isItalic = function () { return $scope.value % 3 === 0; };`
-`$scope.isUnderlined = function () { return $scope.value % 5 === 0; };`
+	$scope.isBold = function () { return $scope.value % 2 === 0; };
+	$scope.isItalic = function () { return $scope.value % 3 === 0; };
+	$scope.isUnderlined = function () { return $scope.value % 5 === 0; };
 
-Now, let's apply the `ng-class` directive to the span of text in the form of an attribute, and pass it a map of class names and boolean values.
+Now, let's apply the `ngClass` directive to the span of text in the form of an attribute, and pass it a map of class names and boolean values.
 
-`ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}`
+	ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}
 
-Once applied, when you change the number in the text field, the class(es) applied to the sample text should change accordingly. Try it out!
+Once applied, run the program. When you change the number in the text field, the classes applied to the sample text should change accordingly.
         ]]>
       </Instructions>
       <Html>
         <Document Name="index.html">
           <Header>
             <![CDATA[
-<html ng-app="app">
+<html ng-app="root">
 <head>
 <style>
 .bold {
@@ -384,7 +401,7 @@ Once applied, when you change the number in the text field, the class(es) applie
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-angular.module("app", [])
+angular.module("root", [])
 	.controller("controller", ["$scope", function ($scope) {
 		$scope.value = 1;
 	}]);
@@ -392,7 +409,7 @@ angular.module("app", [])
           </Initial>
           <Solution>
             <![CDATA[
-angular.module("app", [])
+angular.module("root", [])
 	.controller("controller", ["$scope", function ($scope) {
 		$scope.value = 1;
 		$scope.isBold = function () { return $scope.value % 2 === 0; };
@@ -407,9 +424,9 @@ angular.module("app", [])
     <Lesson Id="77ae323e-1d60-43ba-9dc1-a1ad46c09a74" Title="Repeaters">
       <Instructions>
         <![CDATA[
-It often happens that you need to display a collection of data to the user. For this task, Angular provides you with the `ng-repeat` directive. `ng-repeat` gives you the power to define a template for a single item in a collection, and then have it be repeated for all the elements in a collection.
+It often happens that you need to display a collection of data to the user. For this task, Angular provides you with the `ngRepeat` directive. `ngRepeat` gives you the power to define a template for a single item in a collection, and then have it be repeated for all the elements in a collection.
 
-The syntax for `ng-repeat` is super easy. In attribute form, it looks like this:
+The syntax for `ngRepeat` is super easy. In attribute form, it looks like this.
 
 `ng-repeat="element in collection"`
 
@@ -418,10 +435,15 @@ Where `collection` is a collection in scope and `element` is a variable used to 
 In addition to this, Angular exposes several variables that allow you to gain information about the element currently being iterated on.
 
 + `$index` - The index of the current element.
+
 + `$first` - Boolean indicating if the element is the first in the collection.
+
 + `$middle` - Boolean indicating if the element is neither first nor last in the collection.
+
 + `$last` - Boolean indicating if the element is the last in the collection.
+
 + `$even` - Boolean indicating if the element's index is even.
+
 + `$odd` - Boolean indicating if the element's index is even.
 
 These variables can be used freely within the scope of the iteration.
@@ -430,7 +452,7 @@ These variables can be used freely within the scope of the iteration.
 
 For this example, I've gone ahead and defined the CSS class `oddRow` behind the scenes. `oddRow` will change the background color of the element to which it is applied to a light gray color. What we're going to do in this example is populate the HTML table which is currently empty with the list of products defined in `controller.js`.
 
-The first thing to do is to define what we want one row of the table to look like. Let's do that now, filling in the empty `tbody` tag with a single row.
+The first thing to do is to define what we want one row of the table to look like. Let's do that now, filling in the empty `<tbody>` tag with a single row.
 
 
 	<tbody>
@@ -440,7 +462,7 @@ The first thing to do is to define what we want one row of the table to look lik
 		</tr>
 	</tbody>
 
-Great. Now let's add the repeat directive. It is important to understand that `ng-repeat` will repeat *itself and its contents* for each element in the collection. We must therefore apply it to the `<tr>` element (not the `tbody` element).
+Great. Now let's add the repeat directive. It is important to understand that `ngRepeat` will repeat *itself and its contents* for each element in the collection. We must therefore apply it to the `<tr>` and not the `<tbody>`.
 
 	<tbody>
 		<tr ng-repeat="product in products">
@@ -456,7 +478,7 @@ Let's now go ahead and populate the cells with the values from the collection ob
 		<td>{{product.name}}</td>
 	</tr>
 
-Almost done! Now let's apply the `oddRow` class to every odd-indexed `<tr>`. We'll need to use the `ng-class` directive that we learned about in the last lesson for this.
+Almost done! Now let's apply the `oddRow` class to every odd-indexed `<tr>`. We'll need to use the `ngClass` directive that we learned about in the last lesson for this.
 
 	<tr ng-repeat="product in products" ng-class="if ($odd) { return "oddRow"; }">
 		<td>{{product.id}}</td>
@@ -470,7 +492,7 @@ We're done! Run the program and check out the results!
         <Document Name="index.html">
           <Header>
             <![CDATA[
-<html ng-app="app">
+<html ng-app="root">
 <head>
 <style>
 .oddRow { background-color: #EEE; }
@@ -530,7 +552,7 @@ td { border: 1px solid black; padding: 0 1em 0 1em; }
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-angular.module("app", [])
+angular.module("root", [])
 	.controller("controller", ["$scope", function($scope) {
 		$scope.products = [
 			{id: 1, name: "Hockey puck"},
@@ -543,7 +565,7 @@ angular.module("app", [])
           </Initial>
           <Solution>
             <![CDATA[
-angular.module("app", [])
+angular.module("root", [])
 	.controller("controller", ["$scope", function($scope) {
 		$scope.products = [
 			{id: 1, name: "Hockey puck"},
