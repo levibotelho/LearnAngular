@@ -26,12 +26,18 @@ namespace AngularTutorial.Web.Controllers
         {
             if (_escaped_fragment_ != null)
             {
-                if (_escaped_fragment_.Contains("lessons"))
+                string lessonId = null;
+                if (_escaped_fragment_.Trim() == string.Empty)
+                {
+                    lessonId = _courseService.GetTableOfContents().Modules[0].Children[0].Id;
+                }
+                else if (_escaped_fragment_.Contains("lessons"))
                 {
                     var lessonIdStartIndex = _escaped_fragment_.LastIndexOf('/') + 1;
-                    var lessonId = _escaped_fragment_.Substring(lessonIdStartIndex, _escaped_fragment_.Length - lessonIdStartIndex);
-                    ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
+                    lessonId = _escaped_fragment_.Substring(lessonIdStartIndex, _escaped_fragment_.Length - lessonIdStartIndex);
                 }
+
+                ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
             }
 
             return View();
