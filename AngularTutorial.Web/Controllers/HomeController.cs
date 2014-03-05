@@ -6,6 +6,7 @@ using AngularTutorial.Services;
 namespace AngularTutorial.Web.Controllers
 {
     using System.Linq;
+    using System.Web.Mvc.Html;
     using AngularTutorial.Entities;
 
     public class HomeController : Controller
@@ -21,8 +22,18 @@ namespace AngularTutorial.Web.Controllers
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
-        public ActionResult Index()
+        public ActionResult Index(string _escaped_fragment_)
         {
+            if (_escaped_fragment_ != null)
+            {
+                if (_escaped_fragment_.Contains("lessons"))
+                {
+                    var lessonIdStartIndex = _escaped_fragment_.LastIndexOf('/') + 1;
+                    var lessonId = _escaped_fragment_.Substring(lessonIdStartIndex, _escaped_fragment_.Length - lessonIdStartIndex);
+                    ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
+                }
+            }
+
             return View();
         }
 

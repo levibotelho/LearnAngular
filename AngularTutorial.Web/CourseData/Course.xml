@@ -81,7 +81,7 @@ Anyways, now that we have declared our module we can move on to declaring our co
 
 The controller function syntax is much like the module syntax. The first argument specifies the name of the controller we are declaring. The second argument is an array whose last argument is a function. This is the controller function that we will use to augment our scope.
 
-The elements in the array that precede the controller function are the names of the dependencies that we will  pass to the function as arguments. In this case, we are passing the `$scope` dependency into the controller. This is the scope to which we will add our functions and variables in just a moment. It is important to note that the order of dependencies in the array must match the order of the function arguments.**
+The elements in the array that precede the controller function are the names of the dependencies that we will  pass to the function as arguments. In this case, we are passing the `$scope` dependency into the controller. This is the scope to which we will add our functions and variables in just a moment. It is important to note that the order of dependencies in the array must match the order of the function arguments.
 
 ##Augmenting the $scope
 
@@ -147,8 +147,6 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
 ---
 
 *[Dependency injection for five year olds](http://stackoverflow.com/a/1638961/1068266) is a good place to start if you are completely unfamiliar with the concept, after which there is [this explanation which is simple and to the point](http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html).
-
-**In case you are wondering why we need this convoluted syntax, it is to enable JavaScript minification. If our argument names are minified, Angular will still be able to understand what dependency we want passed based on the strings in the array preceding the controller function.
       ]]>
       </Instructions>
       <Html>
