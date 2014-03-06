@@ -1,14 +1,13 @@
-﻿using System;
+﻿using System.IO;
+using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI;
 using AngularTutorial.Services;
+using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace AngularTutorial.Web.Controllers
 {
-    using System.Linq;
-    using AngularTutorial.Entities;
-
-    public class HomeController : Controller
+    public class HomeController : AsyncController
     {
         readonly ICourseService _courseService;
 
@@ -21,8 +20,11 @@ namespace AngularTutorial.Web.Controllers
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string _escaped_fragment_)
         {
+            if (_escaped_fragment_ != null)
+                await HandleEscapedFragmentAsync(_escaped_fragment_);
+
             return View();
         }
 
@@ -56,6 +58,32 @@ namespace AngularTutorial.Web.Controllers
             var lessonId = string.IsNullOrWhiteSpace(id) ? _courseService.GetTableOfContents().Modules[0].Children[0].Id : id;
             var lesson = _courseService.GetLesson(lessonId);
             return Json(lesson, JsonRequestBehavior.AllowGet);
+        }
+
+        async Task HandleEscapedFragmentAsync(string escapedFragment)
+        {
+            if (escapedFragment.Trim() == string.Empty)
+            {
+                var lessonId = _courseService.GetTableOfContents().Modules[0].Children[0].Id;
+                ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
+            }
+            else if (escapedFragment.Contains("lessons"))
+            {
+                var lessonIdStartIndex = escapedFragment.LastIndexOf('/') + 1;
+                var lessonId = escapedFragment.Substring(lessonIdStartIndex, escapedFragment.Length - lessonIdStartIndex);
+                ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
+            }
+            else if (escapedFragment.Contains("about"))
+            {
+                var aboutPath = Server.MapPath("~/Content/Views/About.html");
+                string aboutText;
+                using (var sr = new StreamReader(aboutPath))
+                {
+                    aboutText = await sr.ReadToEndAsync();
+                }
+
+                ViewBag.SeoContent = new MvcHtmlString(aboutText);
+            }
         }
     }
 }
