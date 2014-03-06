@@ -21,7 +21,7 @@ These three features along with many, many more make Angular a very powerful fra
       ]]>
       </Instructions>
     </Lesson>
-    <Lesson Id="core-components" Title="Core Components">
+    <Lesson Id="the-essentials" Title="The Essentials">
       <Instructions>
         <![CDATA[
 Now that you have an idea of what AngularJS is all about, let's start looking at what makes up an AngularJS application. Angular applications at their most basic consist of three components.
@@ -660,7 +660,7 @@ JavaScript:
 angular.module("root", [])
 	.controller("controller", ["$scope", function($scope) {
 		$scope.isFirstElementVisible = true;
-    $scope.isSecondElementVisible = true;
+		$scope.isSecondElementVisible = true;
 	}]);
             ]]>
           </Initial>
@@ -669,7 +669,7 @@ angular.module("root", [])
 angular.module("root", [])
 	.controller("controller", ["$scope", function($scope) {
 		$scope.isFirstElementVisible = true;
-    $scope.isSecondElementVisible = true;
+		$scope.isSecondElementVisible = true;
 	}]);
             ]]>
           </Solution>
@@ -677,33 +677,125 @@ angular.module("root", [])
       </JavaScript>
     </Lesson>
   </Module>
-  <!--<Module Id="" Title="Test Module">
-    <Lesson Id="" Title="Empty Lesson">
+  <Module Id="module-core-facilities" Title="Core Facilities">
+    <Lesson Id="handling-complexity" Title="Handling Complexity">
       <Instructions>
         <![CDATA[
-        
+As Angular applications begin to grow bigger and more complex, the time inevitably comes when we want to externalize some of the logic contained in our controllers into outside objects. Angular provides us with two key features that work hand in hand to help us do just this: dependency injection and services.
+
+###Dependency injection
+Dependency injection is a central part of Angular application development. It is so central, in fact, that we have been using it since the very first example. Every time that we declare a controller with a `$scope` we are using Angular's internal dependency injection mechanism.
+
+	.controller("controller", ["$scope", function ($scope) {
+		// $scope is dependency-injected!
+	}]);
+
+What is so special about this is that we do not invoke the controller function, passing it an argument. Angular does! Angular's injector sees from the `"$scope"` array element that we want the first (and only) function argument to be an instance of `$scope`, and Angular makes it so this is the case.*
+
+###Services
+In an Angular app, services are logical application components that are wired together using dependency injection. They allow us to externalize application logic out of controllers and encapsulate it in easy to use containers. Angular ships with a number of built-in services that allow us to do things like perform Ajax requests or change the URL in the browser's address bar, but the real power of services is the ability to write our own. The following five lessons cover each of these recipes, an
+
+Angular defines five different service types, or "recipes". Each recipe results in a service which has special characteristics that make it useful for solving a certain type of problem. The following five lessons cover each one of these recipes in detail.
+
+Ready to get started? 
+
+---
+
+*You may be wondering why we need this somewhat clumsy array syntax. Shouldn't Angular be able to detect that we want a `$scope` based on the name of the function argument? The reason why we use this syntax is because it allows the Angular injector to work properly when the JavaScript is minified. Minification alters variable names, but not strings.
+        ]]>
+      </Instructions>
+    </Lesson>
+  </Module>
+  <!--<Module Id="module-enriching-applications" Title="Enriching Applications">
+    <Lesson Id="validation-classes" Title="Validation Classes">
+      <Instructions>
+        <![CDATA[
+By now you should have a basic understanding of how to build a simple Angular application and of the components which make up such an appliction. You should also be familiar with some of the core directives that are available in Angular that allow you to bind your template to your scope, making it dynamic and reactive to changes in the scope's underlying data.
+
+We are now going to turn our attention to some of the core features that Angular provides us with that allow us to enrich our applications.
+
+##Validation Attributes and CSS Classes...
+
+AngularJS provides built-in support for data validation through the use of the following HTML attributes.
+
++ `required`
++ `pattern`
++ `minlength`
++ `maxlength`
++ `min`
++ `max`
+
+To enable us to handle data validation correctly, Angular provides us with two pieces of information per form field.
+
++ Whether the field has been modified or not.
++ Whether the field is valid nor not.
+
+It does this by applying a subset of the following CSS classes to each field.
+
++ `ng-valid`
++ `ng-invalid`
++ `ng-pristine`
++ `ng-dirty`
+
+`ng-valid` and `ng-invalid` tell us whether or not a field's data has passed validation. `ng-pristine` and `ng-dirty` allow us to inform the user of field validity only if he/she has actually entered data in the field. We don't want to distract users by telling them that fields are invalid before they have even turned their attention to the fields in question.
+
+##Example
+
+We have three fields with three different validation rules. The first must contain a valid email address, the second must contain a number between 10 and 20, and the third must not be empty. You have two objectives for this example.
+
++ Apply `border: 2px solid red` to fields that have been modified and are invalid.
++ Apply `border: 2px solid green` to fields that have been modified and are valid.
         ]]>
       </Instructions>
       <Html>
         <Document Name="index.html">
           <Header>
             <![CDATA[
-            
+<html ng-app="root">
+<body>
             ]]>
           </Header>
           <Initial>
             <![CDATA[
-            
+<style>
+/* Write your style rules here */
+</style>
+<form ng-controller="controller">
+	<div>
+	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
+	</div>
+	<div>
+	  Age: <input type="text" min="18" ng-model="age" />
+	</div>
+	<div>
+	  Favorite food: <input type="text" required ng-model="food" />
+	</div>
+</div>
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
-            
+<style>
+.ng-valid.ng-dirty { border: 2px solid green; }
+.ng-invalid.ng-dirty { border: 2px solid red; }
+</style>
+<form ng-controller="controller" class="css-controller">
+	<div>
+	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
+	</div>
+	<div>
+	  Age: <input type="text" min="18" ng-model="age" />
+	</div>
+	<div>
+	  Favorite food: <input type="text" required ng-model="food" />
+	</div>
+</div>
             ]]>
           </Solution>
           <Footer>
             <![CDATA[
-            
+</body>
+</html>
             ]]>
           </Footer>
         </Document>
@@ -712,12 +804,69 @@ angular.module("root", [])
         <Document Name="controller.js">
           <Initial>
             <![CDATA[
-            
+angular.module("root", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.email = "";
+		$scope.age = "";
+		$scope.food = "";
+	}]);
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
-            
+angular.module("root", [])
+	.controller("controller", ["$scope", function($scope) {
+		$scope.email = "";
+		$scope.age = "";
+		$scope.food = "";
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
+  </Module>-->
+<!--<Module Id="" Title="Test Module">
+    <Lesson Id="" Title="Empty Lesson">
+      <Instructions>
+        <![CDATA[
+
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="controller.js">
+          <Initial>
+            <![CDATA[
+
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+
             ]]>
           </Solution>
         </Document>
