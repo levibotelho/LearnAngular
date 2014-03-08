@@ -89,8 +89,8 @@
             <div class="row paddedRow">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs">
-                        <li ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                            <a href="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a>
+                        <li class="tabHandle" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                            <a data-target="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a>
                         </li>
                     </ul>
                     <div class="tab-content">

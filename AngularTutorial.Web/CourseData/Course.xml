@@ -173,7 +173,7 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial></Initial>
           <Solution>
             <![CDATA[
@@ -278,7 +278,7 @@ Once the values are bound, use the double curly brace syntax to display each val
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 angular.module("root", [])
@@ -393,7 +393,7 @@ Once applied, run the program. When you change the number in the text field, the
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 angular.module("root", [])
@@ -440,7 +440,7 @@ These variables can be used freely within the scope of the iteration.
 
 ##Example
 
-For this example, I've gone ahead and defined the CSS class `oddRow` behind the scenes. `oddRow` will change the background color of the element to which it is applied to a light gray color. What we're going to do in this example is populate the HTML table which is currently empty with the list of products defined in `controller.js`.
+For this example, I've gone ahead and defined the CSS class `oddRow` behind the scenes. `oddRow` will change the background color of the element to which it is applied to a light gray color. What we're going to do in this example is populate the HTML table which is currently empty with the list of products defined in `root.js`.
 
 The first thing to do is to define what we want one row of the table to look like. Let's do that now, filling in the empty `<tbody>` tag with a single row.
 
@@ -540,7 +540,7 @@ td { border: 1px solid black; padding: 0 1em 0 1em; }
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 angular.module("root", [])
@@ -652,7 +652,7 @@ JavaScript:
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 angular.module("root", [])
@@ -702,6 +702,122 @@ Ready to get started?
 *You may be wondering why we need this somewhat clumsy array syntax. Shouldn't Angular be able to detect that we want a `$scope` based on the name of the function argument? The reason why we use this syntax is because it allows the Angular injector to work properly when the JavaScript is minified. Minification alters variable names, but not strings.
         ]]>
       </Instructions>
+    </Lesson>
+  <Lesson Id="the-value-recipe" Title="The value recipe">
+      <Instructions>
+        <![CDATA[
+The value recipe is the simplest service recipe of all. A value service does exactly what you would expect it to. It provides a value! While this may sound like a trivial task, many applications can benefit from integrating value services into their architecture. Small applications can use value services to decouple "magic number" type values from controller implementations, and larger applications can use value services to marshal data between controllers.
+
+The syntax for defining a value is very simple.
+
+	angular.module("root", [])
+		.value("message", "Hello world!");
+
+Here we have defined a value called `message` which contains the string `"Hello world!"`. We pass the `message` value to a controller in the exact same way as we pass a `$scope`: We add the `"message"` string to the controller array, and finish off by adding a corresponding argument to the controller function.
+
+	angular.module("root", [])
+		.value("message", "Hello world!")
+		.controller("controller", ["$scope", "message", function($scope, message) {
+			// Do something with message and/or $scope.
+		}]);
+		
+
+##Modules
+While the code above is well on its way to becoming a modular, extensible Angular app, we can actually take all this one step further. The AngularJS team actually recommends that applications be split into several modules, defined according to the following logic.
+
++ Create one module for each feature
++ Create one module for each reusable component
++ Create an application level module which depends on the above modules and contains any initialization code.
+
+In our case, we could split our app into one module containing value service, and one module containing the controller.
+
+	// Root.js
+	angular.module("root", [])
+		.controller("controller", ["$scope", "message", function($scope, message) {
+			// Do something with message and/or $scope.
+		}]);
+
+	// Services.js
+	angular.module("services", [])
+		.value("message", "Hello world!");
+
+##More injection
+
+The above code looks great. However, if we go ahead and run it, we will quickly see that we have a problem. The Angular dependency injector won't be able to inject the `message` service into the controller function. This is because by default the injector will not inject components from one module into components in another. More concretely, components defined in the `services` module are not available for use in the `root` module as far as the injector is concerned.
+
+In order to tell the injector that we can reference components from `services`, we need to inject the `services` module into the `root` module like so.
+
+	// Root.js
+	angular.module("root", ["services"])
+		.controller("controller", ["$scope", "message", function($scope, message) {
+		// ...
+
+Now, when the injector sees that we want to inject `message` into our controller function, it will look in the `services` module to see if it can find a match. Having to inject modules in this way is a great feature. Not only does it make it clear what a module depends on from the very first line of code, but it also helps prevent naming collisions.
+
+##Example
+
+For this example, try to replicate the code sample above, displaying the `message` in the HTML page provided by way of the `$scope`. You're pretty much on your own for this one. You have two empty .js files at your disposal, one for each module, and a bare HTML page where you will need to reference your controller *as well as your root module*. The exact steps you will need to take are as follows.
+
++ Declare a services module in `services.js` and create a value service named `message`.
++ Declare a root module in `root.js`, injecting your newly-created `services` module.
++ Create a controller in your root module. The controller should take a `$scope` and an instance of your `message` service.
++ Reference your root module in the HTML page.
++ Reference your controller in the HTML page.
++ Display the message on the page using the double curly brace syntax.
+
+If you can complete this example successfully, you are well on your way to developing fully fledged Angular apps. If you have trouble, don't hesitate to click the "I'm Stuck!" button to see how it's done and try again.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header></Header>
+          <Initial>
+            <![CDATA[
+<html>
+  <body>
+    <div></div>
+  </body>
+</html>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<html ng-app="root">
+    <body>
+        <div ng-controller="controller">{{message}}</div>
+    </body>
+</html>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial></Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["services"])
+	.controller("controller", ["$scope", "message", function($scope, message) {
+		$scope.message = message;
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      <Document Name="services.js">
+          <Initial></Initial>
+          <Solution>
+            <![CDATA[
+angular.module("services", [])
+	.value("message", "Hello world!");
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
     </Lesson>
   </Module>
   <!--<Module Id="module-enriching-applications" Title="Enriching Applications">
@@ -799,7 +915,7 @@ We have three fields with three different validation rules. The first must conta
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 angular.module("root", [])
@@ -856,7 +972,7 @@ angular.module("root", [])
         </Document>
       </Html>
       <JavaScript>
-        <Document Name="controller.js">
+        <Document Name="root.js">
           <Initial>
             <![CDATA[
 
