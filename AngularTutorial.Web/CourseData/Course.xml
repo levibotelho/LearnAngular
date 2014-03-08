@@ -708,31 +708,35 @@ Ready to get started?
     <Lesson Id="the-value-recipe" Title="The Value Recipe">
       <Instructions>
         <![CDATA[
-The value recipe is the simplest service recipe of all. A value service does exactly what you would expect it to. It provides a value! While this may sound like a trivial task, many applications can benefit from integrating value services into their architecture. Small applications can use value services to decouple "magic number" type values from controller implementations, and larger applications can use value services to marshal data between controllers.
+The value recipe is the simplest service recipe of all. A value service does exactly what you would expect it to. It provides a value! While this may sound like a trivial feature, values play a key part in designing flexible, modular Angular applications.
 
 The syntax for defining a value is very simple.
 
 	angular.module("root", [])
 		.value("message", "Hello world!");
 
-Here we have defined a value called `message` which contains the string `"Hello world!"`. We pass the `message` value to a controller in the exact same way as we pass a `$scope`: We add the `"message"` string to the controller array, and finish off by adding a corresponding argument to the controller function.
+Here we have defined a value called `message` which contains the string `"Hello world!"`.
+
+We pass the `message` value to a controller in the exact same way as we pass a `$scope`. We add the `"message"` string to the controller array, and finish off by adding a corresponding argument to the controller function.
 
 	angular.module("root", [])
 		.value("message", "Hello world!")
 		.controller("index", ["$scope", "message", function($scope, message) {
 			// Do something with message and/or $scope.
 		}]);
+    
+##Watch out!
 		
-There is one very important detail here that we need to note before moving on. When Angular creates services, it creates them as singleton objects and stores them in a cache. When a service is injected into a method, it is a reference to the cached object that is passed. You therefore need to be careful when modifying values in services because these modifications will be application-wide.
+There is one very important detail that we need to note before moving on. When Angular creates services, it creates them as singleton objects which are stored in a cache. When a service is injected into a method, the cached object is what is actually passed as an argument. This means that if your service returns a reference type, all methods which take the service as an argument will actually receive a reference to the **same object**. You must therefore be careful if you choose to modify the object, as the changes you make will be application-wide.*
 
 ##Modules
-While the code above is well on its way to becoming a modular, extensible Angular app, we can actually take all this one step further. The AngularJS team actually recommends that applications be split into several modules, defined according to the following logic.
+While the code above is well on its way to becoming a modular, extensible Angular app, we can actually take all this one step further. The AngularJS team recommends that applications be split into several modules, defined according to the following logic.
 
 + Create one module for each feature
 + Create one module for each reusable component
 + Create an application level module which depends on the above modules and contains any initialization code.
 
-In our case, we could split our app into one module containing value service, and one module containing the controller.
+To make our application a bit more flexible, we can split it into two modules: one which will contain the value service, and one which will contain the controller.
 
 	// Root.js
 	angular.module("root", [])
@@ -746,9 +750,9 @@ In our case, we could split our app into one module containing value service, an
 
 ##More injection
 
-The above code looks great. However, if we go ahead and run it, we will quickly see that we have a problem. The Angular dependency injector won't be able to inject the `message` service into the controller function. This is because by default the injector will not inject components from one module into components in another. More concretely, components defined in the `services` module are not available for use in the `root` module as far as the injector is concerned.
+The above code looks great. However, if we go ahead and run it, we will quickly see that we have a problem. The Angular dependency injector won't be able to inject the `message` service into the controller function. This is because by default the injector will not inject components defined in one module into components in another. More concretely, components defined in the `services` module are by default not available for use in the `root` module as far as the injector is concerned.
 
-In order to tell the injector that we can reference components from `services`, we need to inject the `services` module into the `root` module like so.
+In order to tell the injector that we want to reference components from `services`, we need to inject the `services` module into the `root` module like so.
 
 	// Root.js
 	angular.module("root", ["services"])
@@ -769,6 +773,10 @@ For this example, try to replicate the code sample above, displaying the `messag
 + Display the message on the page using the double curly brace syntax.
 
 If you can complete this example successfully, you are well on your way to developing fully fledged Angular apps. If you have trouble, don't hesitate to click the "I'm Stuck!" button to see how it's done and try again.
+
+---
+
+*This isn't necessarily a bad thing. Not only does this behavior improve performance, but it also enables you to share data between controllers if need be.
         ]]>
       </Instructions>
       <Html>
