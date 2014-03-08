@@ -75,7 +75,7 @@ Anyways, in this example we don't need to inject any dependencies into our modul
 Anyways, now that we have declared our module we can move on to declaring our controller. We declare our controller directly on the module that we have just created by using the `controller()` function like so.
 
 	angular.module("root", [])
-		.controller("controller", ["$scope", function($scope) {
+		.controller("index", ["$scope", function($scope) {
 			
 		}]);
 
@@ -88,7 +88,7 @@ The elements in the array that precede the controller function are the names of 
 Now that our controller function is defined, we can start working on the `$scope`. Let's define a variable named `message` which will contain the string `Hello World!`
 
 	angular.module("root", [])
-		.controller("controller", ["$scope", function($scope) {
+		.controller("index", ["$scope", function($scope) {
 			$scope.message = "Hello World";
 		}]);
 
@@ -128,7 +128,7 @@ We now need to apply our controller to the page. We apply the controller using t
 
 For this lesson, we are going to apply the directive to the `div` element like so.
 
-	<div ng-controller="controller"></div>
+	<div ng-controller="index"></div>
 
 ###Accessing the scope
 
@@ -165,7 +165,7 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
             <![CDATA[
 <html ng-app="root">
     <body>
-        <div ng-controller="controller">{{message}}</div>
+        <div ng-controller="index">{{message}}</div>
     </body>
 </html>
           ]]>
@@ -178,7 +178,7 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
           <Solution>
             <![CDATA[
 angular.module('root', [])
-    .controller('controller', ["$scope", function ($scope) {
+    .controller("index", ["$scope", function ($scope) {
         $scope.message = "Hello World!";
     }]);
             ]]>
@@ -196,6 +196,8 @@ In this section we are going to take a look at some basic directives that you ca
 ##ngModel
 
 We're going to start out by looking at one of the most important directives in Angular, `ngModel`. Unlike values bound using the double curly brace syntax, `ngModel` allows us to bind values to HTML elements such as input fields. When using `ngModel`, not only are changes in the scope reflected in the view, but changes in the view are reflected back into the scope.
+
+##Example
 
 To see `ngModel` in action, we are going to use it to bind the `favoriteWord` field in the scope to the input field in the HTML page. To do this, we simply need to apply `ngModel` to the input field in the form of an attribute like so.
 
@@ -217,7 +219,7 @@ Once the values are bound, use the double curly brace syntax to display each val
           </Header>
           <Initial>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
 	<div>
 		Favorite number: <input type="text" />
 		- [Display selection here]
@@ -244,7 +246,7 @@ Once the values are bound, use the double curly brace syntax to display each val
           </Initial>
           <Solution>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
 	<div>
 		Favorite word: <input type="text" ng-model="favoriteWord" />
 		- {{favoriteWord}}
@@ -282,7 +284,7 @@ Once the values are bound, use the double curly brace syntax to display each val
           <Initial>
             <![CDATA[
 angular.module("root", [])
-    .controller("controller", ["$scope", function($scope) {
+    .controller("index", ["$scope", function($scope) {
         $scope.favoriteWord;
         $scope.favoriteColour;
         $scope.favoriteShape;
@@ -292,7 +294,7 @@ angular.module("root", [])
           <Solution>
             <![CDATA[
 angular.module("root", [])
-    .controller("controller", ["$scope", function($scope) {
+    .controller("index", ["$scope", function($scope) {
         $scope.favoriteWord;
         $scope.favoriteColour;
         $scope.favoriteShape;
@@ -368,7 +370,7 @@ Once applied, run the program. When you change the number in the text field, the
           </Header>
           <Initial>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
   <input type="text" ng-model="value" />
   <span>Example Text</span>
 </div>
@@ -376,7 +378,7 @@ Once applied, run the program. When you change the number in the text field, the
           </Initial>
           <Solution>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
   <input type="text" ng-model="value" />
   <span ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}">
 	  Example Text
@@ -397,7 +399,7 @@ Once applied, run the program. When you change the number in the text field, the
           <Initial>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function ($scope) {
+	.controller("index", ["$scope", function ($scope) {
 		$scope.value = 1;
 	}]);
             ]]>
@@ -405,7 +407,7 @@ angular.module("root", [])
           <Solution>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function ($scope) {
+	.controller("index", ["$scope", function ($scope) {
 		$scope.value = 1;
 		$scope.isBold = function () { return $scope.value % 2 === 0; };
 		$scope.isItalic = function () { return $scope.value % 3 === 0; };
@@ -430,9 +432,9 @@ Where `collection` is a collection in scope and `element` is a variable used to 
 In addition to this, Angular exposes several variables that allow you to gain information about the element currently being iterated on.
 
 + `$index` - The index of the current element.
-+ `$first` - Boolean indicating if the element is the first in the collection.
++ `$first` - Boolean indicating if the element is first in the collection.
 + `$middle` - Boolean indicating if the element is neither first nor last in the collection.
-+ `$last` - Boolean indicating if the element is the last in the collection.
++ `$last` - Boolean indicating if the element is last in the collection.
 + `$even` - Boolean indicating if the element's index is even.
 + `$odd` - Boolean indicating if the element's index is even.
 
@@ -496,7 +498,7 @@ td { border: 1px solid black; padding: 0 1em 0 1em; }
           </Header>
           <Initial>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
   <table>
 	  <thead>
 		  <tr>
@@ -512,7 +514,7 @@ td { border: 1px solid black; padding: 0 1em 0 1em; }
           </Initial>
           <Solution>
             <![CDATA[
-<div ng-controller="controller">
+<div ng-controller="index">
   <table>
 	  <thead>
 		  <tr>
@@ -544,7 +546,7 @@ td { border: 1px solid black; padding: 0 1em 0 1em; }
           <Initial>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.products = [
 			{id: 1, name: "Hockey puck"},
 			{id: 2, name: "Golf club"},
@@ -557,7 +559,7 @@ angular.module("root", [])
           <Solution>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.products = [
 			{id: 1, name: "Hockey puck"},
 			{id: 2, name: "Golf club"},
@@ -597,7 +599,7 @@ For this example we're going to hook in the visibility of two `<div>` elements t
 
 HTML:
 
-	<div ng-controller="controller">
+	<div ng-controller="index">
 		<input type="text" ng-model="message" />
 		{{message}}
 		<div ng-if="true">
@@ -609,7 +611,7 @@ HTML:
 JavaScript:
 
 	angular.module("root", [])
-		.controller("controller", ["$scope", function($scope) {
+		.controller("index", ["$scope", function($scope) {
 			$scope.message = "Hello World";
 		}]);
         ]]>
@@ -625,9 +627,9 @@ JavaScript:
           </Header>
           <Initial>
             <![CDATA[
-<div ng-controller="controller">
-  <div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
-  <div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
+<div ng-controller="index">
+	<div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
+	<div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
 	<div>First Element</div>
 	<div>Second Element</div>
 </div>
@@ -635,9 +637,9 @@ JavaScript:
           </Initial>
           <Solution>
             <![CDATA[
-<div ng-controller="controller">
-  <div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
-  <div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
+<div ng-controller="index">
+	<div><input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible</div>
+	<div><input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible</div>
 	<div ng-show="isFirstElementVisible">First Element</div>
 	<div ng-if="isSecondElementVisible">Second Element</div>
 </div>
@@ -656,7 +658,7 @@ JavaScript:
           <Initial>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.isFirstElementVisible = true;
 		$scope.isSecondElementVisible = true;
 	}]);
@@ -665,7 +667,7 @@ angular.module("root", [])
           <Solution>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.isFirstElementVisible = true;
 		$scope.isSecondElementVisible = true;
 	}]);
@@ -684,7 +686,7 @@ As Angular applications begin to grow bigger and more complex, the time inevitab
 ###Dependency injection
 Dependency injection is a central part of Angular application development. It is so central, in fact, that we have been using it since the very first example. Every time that we declare a controller with a `$scope` we are using Angular's internal dependency injection mechanism.
 
-	.controller("controller", ["$scope", function ($scope) {
+	.controller("index", ["$scope", function ($scope) {
 		// $scope is dependency-injected!
 	}]);
 
@@ -703,7 +705,7 @@ Ready to get started?
         ]]>
       </Instructions>
     </Lesson>
-  <Lesson Id="the-value-recipe" Title="The value recipe">
+    <Lesson Id="the-value-recipe" Title="The Value Recipe">
       <Instructions>
         <![CDATA[
 The value recipe is the simplest service recipe of all. A value service does exactly what you would expect it to. It provides a value! While this may sound like a trivial task, many applications can benefit from integrating value services into their architecture. Small applications can use value services to decouple "magic number" type values from controller implementations, and larger applications can use value services to marshal data between controllers.
@@ -717,10 +719,11 @@ Here we have defined a value called `message` which contains the string `"Hello 
 
 	angular.module("root", [])
 		.value("message", "Hello world!")
-		.controller("controller", ["$scope", "message", function($scope, message) {
+		.controller("index", ["$scope", "message", function($scope, message) {
 			// Do something with message and/or $scope.
 		}]);
 		
+There is one very important detail here that we need to note before moving on. When Angular creates services, it creates them as singleton objects and stores them in a cache. When a service is injected into a method, it is a reference to the cached object that is passed. You therefore need to be careful when modifying values in services because these modifications will be application-wide.
 
 ##Modules
 While the code above is well on its way to becoming a modular, extensible Angular app, we can actually take all this one step further. The AngularJS team actually recommends that applications be split into several modules, defined according to the following logic.
@@ -733,7 +736,7 @@ In our case, we could split our app into one module containing value service, an
 
 	// Root.js
 	angular.module("root", [])
-		.controller("controller", ["$scope", "message", function($scope, message) {
+		.controller("index", ["$scope", "message", function($scope, message) {
 			// Do something with message and/or $scope.
 		}]);
 
@@ -749,7 +752,7 @@ In order to tell the injector that we can reference components from `services`, 
 
 	// Root.js
 	angular.module("root", ["services"])
-		.controller("controller", ["$scope", "message", function($scope, message) {
+		.controller("index", ["$scope", "message", function($scope, message) {
 		// ...
 
 Now, when the injector sees that we want to inject `message` into our controller function, it will look in the `services` module to see if it can find a match. Having to inject modules in this way is a great feature. Not only does it make it clear what a module depends on from the very first line of code, but it also helps prevent naming collisions.
@@ -784,7 +787,7 @@ If you can complete this example successfully, you are well on your way to devel
             <![CDATA[
 <html ng-app="root">
     <body>
-        <div ng-controller="controller">{{message}}</div>
+        <div ng-controller="index">{{message}}</div>
     </body>
 </html>
             ]]>
@@ -802,18 +805,127 @@ If you can complete this example successfully, you are well on your way to devel
           <Solution>
             <![CDATA[
 angular.module("root", ["services"])
-	.controller("controller", ["$scope", "message", function($scope, message) {
+	.controller("index", ["$scope", "message", function($scope, message) {
 		$scope.message = message;
 	}]);
             ]]>
           </Solution>
         </Document>
-      <Document Name="services.js">
+        <Document Name="services.js">
           <Initial></Initial>
           <Solution>
             <![CDATA[
 angular.module("services", [])
 	.value("message", "Hello world!");
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
+    <Lesson Id="the-factory-recipe" Title="The Factory Recipe">
+      <Instructions>
+        <![CDATA[
+Values are great, but wouldn't it be nice if we could inject a function instead of a variable? This is the purpose of the factory recipe. Factories are declared using the following syntax.
+
+	angular.module("services", [])
+		.factory("myFactory', [function () {
+			// Logic goes here.
+		}]);
+
+We can also inject dependencies into a factory as we do with controllers.
+
+	.factory("myFactory", ["dependency", function (dependency) {
+		// ...
+
+##Example
+
+To demonstrate the use of the factory recipe, we're going to write an app which takes a number and squares it. To make things a bit more interesting, the number to square will be provided by a value service.
+
+Let's start by defining our value service in a new module in `services.js`
+
+	angular.module("services", [])
+		.value("factor", 6);
+
+Now let's create a "square" service which squares its argument, which will be the number retrieved from the `factor` service.
+
+	angular.module("services", [])
+		.value("factor", 6)
+		.factory("square", ["factor", function (factor) {
+				return factor * factor;
+		}]);
+
+Now let's add this logic to our controller and assign the result to the `product` variable. Don't forget to reference the `services` module!
+
+	angular.module("root", ["services"])
+		.controller("index", ["$scope", "square",
+			function ($scope, square) {
+				$scope.product = square;
+			}
+		]);
+
+Notice how we use `square` as if it were a variable. We do not call it as if it were a function.
+
+Let's finish off by turning our attention to the HTML. Reference the controller, and display `product` in the empty `<div>`.
+
+	<div ng-controller="index">
+		{{product}}
+	</div>
+
+We're all done. Run the program and try it out!
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	{{product}}
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial></Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["services"])
+	.controller("index", ["$scope", "square",
+		function ($scope, square) {
+			$scope.product = square;
+		}
+	]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="services.js">
+          <Initial></Initial>
+          <Solution>
+            <![CDATA[
+angular.module("services", [])
+	.value("factor", 6)
+	.factory("square", ["factor", function (factor) {
+			return factor * factor;
+	}]);
             ]]>
           </Solution>
         </Document>
@@ -874,7 +986,7 @@ We have three fields with three different validation rules. The first must conta
 <style>
 /* Write your style rules here */
 </style>
-<form ng-controller="controller">
+<form ng-controller="index">
 	<div>
 	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
 	</div>
@@ -893,7 +1005,7 @@ We have three fields with three different validation rules. The first must conta
 .ng-valid.ng-dirty { border: 2px solid green; }
 .ng-invalid.ng-dirty { border: 2px solid red; }
 </style>
-<form ng-controller="controller" class="css-controller">
+<form ng-controller="index" class="css-controller">
 	<div>
 	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
 	</div>
@@ -919,7 +1031,7 @@ We have three fields with three different validation rules. The first must conta
           <Initial>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.email = "";
 		$scope.age = "";
 		$scope.food = "";
@@ -929,7 +1041,7 @@ angular.module("root", [])
           <Solution>
             <![CDATA[
 angular.module("root", [])
-	.controller("controller", ["$scope", function($scope) {
+	.controller("index", ["$scope", function($scope) {
 		$scope.email = "";
 		$scope.age = "";
 		$scope.food = "";
@@ -940,7 +1052,7 @@ angular.module("root", [])
       </JavaScript>
     </Lesson>
   </Module>-->
-<!--<Module Id="" Title="Test Module">
+  <!--<Module Id="" Title="Test Module">
     <Lesson Id="" Title="Empty Lesson">
       <Instructions>
         <![CDATA[
