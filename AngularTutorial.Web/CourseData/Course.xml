@@ -939,6 +939,155 @@ angular.module("services", [])
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="the-service-recipe" Title="The Service Recipe">
+      <Instructions>
+        <![CDATA[
+The service recipe is a step up from values and factories, in as much as it is used to expose objects. Its syntax looks like this.
+
+	angular.module("services", [])
+		.service("myService", ["dependency", MyObject]);
+
+	// Declared elsewhere...
+	function MyObject(dependency) {
+		this.value = dependency.value;
+	}
+
+Note that this is equivalent to a factory which returns a `MyObject`.
+
+	angular.module("services", [])
+		.factory("myService", ["dependency", function (dependency) {
+			return new MyObject(dependency);
+		}]);
+
+	// Declared elsewhere...
+	function MyObject(dependency) {
+		this.value = dependency.value;
+	}
+ 
+The real advantage of the service pattern is its cleaner syntax.
+
+##Example
+
+To practice using the service recipe we're going to expand on our example from the last lesson. Instead of writing a factory which squares a number, we're going to write a service which multiplies two numbers together. We'll display the result of the multiplication in our template.
+
+The constructor for the object on which we'll base our service is already written for you in `multiplier.js`. It looks like this.
+
+	function Multiplier(valueFactor) {
+		this.multiply = function (controllerFactor) {
+			return valueFactor * controllerFactor;
+		};
+	}
+
+As you can see, it takes two numbers. One number is passed to the constructor, and the other is passed to the `multiply` function. As in the last example, we're going to inject the constructor argument by way of a value.
+
+Let's go and add our service declaration to our `services` module. I've already declared the `factor` value for you. 
+
+	angular.module("services", [])
+		.value("factor", 6)
+		.service("multiplier", ["factor", Multiplier]);
+
+Time to write the controller. Declare a new controller on the `root` module. Inject the `multiplier` service as well as the `$scope`. Don't forget to inject `services` into the module declaration!
+
+	angular.module("root", ["services"])
+		.controller("index", ["$scope", "multiplier",
+			function ($scope, multiplier) {
+			}]);
+
+Now, add the call to `multiply`, passing in the number of your choice. Assign the result to `$scope.product`.
+
+	angular.module("root", ["services"])
+		.controller("index", ["$scope", "multiplier",
+			function ($scope, multiplier) {
+				$scope.product = multiplier.multiply(2);
+			}]);
+
+To finish off, reference the controller in the template and display `product` in the empty `<div>`.
+
+	<div ng-controller="index">{{product}}</div>
+
+That's all we need to do. Launch the app and test it out!
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div></div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">{{product}}</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", []);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["services"])
+	.controller("index", ["$scope", "multiplier",
+		function ($scope, multiplier) {
+			$scope.product = multiplier.multiply(2);
+		}]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="services.js">
+          <Initial>
+            <![CDATA[
+angular.module("services", [])
+	.value("factor", 6)  
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("services", [])
+	.value("factor", 6)
+	.service("multiplier", ["factor", Multiplier]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="multiplier.js">
+          <Initial>
+            <![CDATA[
+function Multiplier(valueFactor) {
+	this.multiply = function (controllerFactor) {
+		return valueFactor * controllerFactor;
+	};
+}
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+function Multiplier(valueFactor) {
+	this.multiply = function (controllerFactor) {
+		return valueFactor * controllerFactor;
+	};
+}
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
   </Module>
   <!--<Module Id="module-enriching-applications" Title="Enriching Applications">
     <Lesson Id="validation-classes" Title="Validation Classes">
