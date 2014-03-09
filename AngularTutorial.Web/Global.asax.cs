@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using AngularTutorial.Web.CourseData;
-using AngularTutorial.Web.Sitemap;
+using AngularTutorial.Web.Entities;
 
 namespace AngularTutorial.Web
 {

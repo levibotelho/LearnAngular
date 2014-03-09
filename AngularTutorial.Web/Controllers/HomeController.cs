@@ -1,9 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 using AngularTutorial.Services;
 using System.Threading.Tasks;
 using System.Web.UI;
+using AngularTutorial.Web.Entities;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -58,6 +60,12 @@ namespace AngularTutorial.Web.Controllers
             var lessonId = string.IsNullOrWhiteSpace(id) ? _courseService.GetTableOfContents().Modules[0].Children[0].Id : id;
             var lesson = _courseService.GetLesson(lessonId);
             return Json(lesson, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public void SendFeedback(string subject, string message)
+        {
+            Feedback.SendMessage(subject, message);
         }
 
         async Task HandleEscapedFragmentAsync(string escapedFragment)

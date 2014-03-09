@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Hosting;
 using AngularTutorial.Services;
 
-namespace AngularTutorial.Web.Sitemap
+namespace AngularTutorial.Web.Entities
 {
     public static class SiteMapGenerator
     {

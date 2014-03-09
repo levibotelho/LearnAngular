@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AngularTutorial.Entities;
-using AngularTutorial.Web.CourseData;
+using AngularTutorial.Web.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AngularTutorial.Tests.Unit.Web.CourseData.XmlParserTests

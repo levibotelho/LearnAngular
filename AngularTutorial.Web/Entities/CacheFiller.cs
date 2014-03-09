@@ -1,12 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Web.Hosting;
 using AngularTutorial.Entities;
 using AngularTutorial.Repository;
 using AngularTutorial.Services;
 
-namespace AngularTutorial.Web.CourseData
+namespace AngularTutorial.Web.Entities
 {
     public static class CacheFiller
     {

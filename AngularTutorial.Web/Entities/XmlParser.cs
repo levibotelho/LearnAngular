@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml.Linq;
 using AngularTutorial.Entities;
 using MarkdownSharp;
 
-namespace AngularTutorial.Web.CourseData
+namespace AngularTutorial.Web.Entities
 {
     public class XmlParser
     {

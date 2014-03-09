@@ -405,6 +405,10 @@
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
+    <Content Include="StrongConfigFacade.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StrongConfigFacade.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -416,13 +420,19 @@
     <Compile Include="App_Start\DependencyInjectionConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="CourseData\CacheFiller.cs" />
-    <Compile Include="CourseData\XmlParser.cs" />
+    <Compile Include="Entities\CacheFiller.cs" />
+    <Compile Include="Entities\Feedback.cs" />
+    <Compile Include="Entities\XmlParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sitemap\SiteMapGenerator.cs" />
+    <Compile Include="Entities\SiteMapGenerator.cs" />
+    <Compile Include="StrongConfigFacade.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StrongConfigFacade.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
