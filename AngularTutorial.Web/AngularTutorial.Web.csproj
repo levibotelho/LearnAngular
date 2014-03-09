@@ -422,6 +422,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sitemap\SiteMapGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
