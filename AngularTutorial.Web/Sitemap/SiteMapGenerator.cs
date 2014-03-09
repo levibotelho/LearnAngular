@@ -10,6 +10,8 @@ namespace AngularTutorial.Web.Sitemap
     {
         const string Host = "http://www.learn-angular.org/#!/";
         const string LessonFragment = "lessons/";
+
+        static readonly string SitemapDirectory = HostingEnvironment.MapPath(@"~/Sitemap/");
         static readonly string SitemapPath = HostingEnvironment.MapPath(@"~/Sitemap/Sitemap.txt");
 
         static readonly List<string> Urls = new List<string>
@@ -31,6 +33,7 @@ namespace AngularTutorial.Web.Sitemap
 
         static void Write()
         {
+            Directory.CreateDirectory(SitemapDirectory);
             // ReSharper disable once AssignNullToNotNullAttribute
             using (var sr = new StreamWriter(SitemapPath))
             {
