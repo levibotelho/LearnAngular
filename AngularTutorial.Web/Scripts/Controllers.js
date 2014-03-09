@@ -1,37 +1,44 @@
 ﻿angular.module("controllers", ["ui.ace", "services"])
-    .controller("index", ["$scope", "$routeParams", "navigationService",
-        function ($scope, $routeParams, navigationService) {
+    .controller("index", [
+        "$scope", "$routeParams", "navigationService",
+        function($scope, $routeParams, navigationService) {
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
             $scope.isTableOfContentsAvailable = true;
+            $scope.isNavigating = true;
 
-            $scope.selectLesson = function (id) {
+            $scope.selectLesson = function(id) {
                 navigationService.selectLesson(id);
             };
 
             navigationService.getTableOfContents()
-                .success(function (data) {
+                .success(function(data) {
                     $scope.tableOfContents = data;
                     if ($routeParams.lessonId != null) {
                         $scope.selectLesson($routeParams.lessonId);
                     }
                 })
-                .error(function () {
+                .error(function() {
                     alert("An unexpected error has occured. Please try again.");
                 });
 
-            $scope.$watch(function () { return navigationService.selectedLesson; },
-                function (newValue, oldValue) {
+            $scope.$watch(function() { return navigationService.selectedLesson; },
+                function(newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.selectedLesson = newValue;
                     }
                 });
 
             $scope.$watch(function() { return navigationService.isTableOfContentsAvailable; },
-                function (newValue, oldValue) {
+                function(newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.isTableOfContentsAvailable = newValue;
                     }
+                });
+
+            $scope.$watch(function() { return navigationService.isNavigating; },
+                function(newValue) {
+                    $scope.isNavigating = newValue;
                 });
         }])
     .controller("lesson", ["$scope", "$http", "$routeParams", "$sce", "navigationService",
@@ -161,6 +168,9 @@
                 })
                 .error(function () {
                     alert("An unexpected error has occured. Please try again.");
+                })
+                .finally(function() {
+                    navigationService.isNavigating = false;
                 });
             };
 
@@ -212,6 +222,7 @@
 
             navigationService.isTableOfContentsAvailable = true;
             if ($routeParams.lessonId != null) {
+                navigationService.isNavigating = true;
                 $scope.loadLesson($routeParams.lessonId);
                 navigationService.selectLesson($routeParams.lessonId);
             }
