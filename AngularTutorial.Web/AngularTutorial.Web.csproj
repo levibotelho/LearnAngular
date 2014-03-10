@@ -111,6 +111,7 @@
     <Content Include="Content\Views\Lesson.html" />
     <Content Include="CourseData\Course.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Scripts\ace\ace.js" />

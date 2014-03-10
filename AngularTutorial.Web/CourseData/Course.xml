@@ -1088,6 +1088,96 @@ function Multiplier(valueFactor) {
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="watch" Title="$watch">
+      <Instructions>
+        <![CDATA[
+Take a look at the code in the editors. You'll see that the user interface contains a textbox in which is entered the number 6, and that the value of the textbox is bound to the variable `$scope.factor`. Beside the textbox is displayed `$scope.product`, which is calculated in the controller function as `$scope.factor * 2`.
+
+Try running this code. Everything displays normally, with the textbox containing the number 6 by default and the number 12 being displayed beside it. Now try modifying the value in the textbox. You may be surprised to see that `$scope.product` is not updated!
+
+##But why?
+The reason why this happens is because `$scope.product` is initialized to the the value returned by `$scope.factor * 2` when the model is augmented by the controller. It is *not* initialized to the result of the function *throughout the program's execution*. When `$scope.product` is changed, there is no mechanism in place to update `$scope.factor` accordingly.
+
+##An overview of $watch
+This is where the `$watch` function comes in. `$watch` provides us with a way to keep calculated values up to date when the values that they depend on change. The syntax for `$watch` looks like this.
+
+	$scope.$watch([expression returning watched value],
+				  [change handler],
+				  [objectEquality?]);
+
+Let's clarify this a bit. The first argument basically points to the value to watch. This can be a string containing the name of a variable in scope, or a function that returns the variable itself.
+
+The second argument takes a function that looks like this.
+
+	function (newValue, oldValue) {
+		// Take action.
+	}
+
+This is where the actual work gets done. In our example, this is where we would update `$scope.product` based on the value of `newValue`.
+
+The third argument is a boolean value which, when set to true, compares objects for equality rather than reference. This argument can be, and is often, omitted instead of being set to `false`.
+
+##Example
+
+Now it's up to you to pick up where I left off. Use a `$watch` expression to update `$scope.product` when the value in the textbox is changed. Specifically, you will need to watch `$scope.product` and multiply the new value by 2 whenever it is changed.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">
+	<input type="text" ng-model="factor" /> {{product}}
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	<input type="text" ng-model="factor" /> {{product}}
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", [])
+	.controller("index", ["$scope", function($scope) {
+		$scope.factor = 6;
+		$scope.product = $scope.factor * 2;
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", [])
+	.controller("index", ["$scope", function($scope) {
+		$scope.$watch("factor", function (newValue) {
+			$scope.product = newValue * 2;
+		});
+
+		$scope.factor = 6;
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
   </Module>
   <!--<Module Id="module-enriching-applications" Title="Enriching Applications">
     <Lesson Id="validation-classes" Title="Validation Classes">
