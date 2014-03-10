@@ -4,12 +4,11 @@
     <Lesson Id="introducing-angular" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
-So, you want to learn AngularJS. Great! Let's jump right in.
-
 ##What is AngularJS?
 AngularJS is a JavaScript framework that is used for making rich, extensible web applications. It runs on plain JavaScript and HTML, so you don't need any other dependencies to make it work, and it is CSS-agnostic so you can use whatever CSS framework/methodology you want when designing your Angular application.
 
-Now, if you go out ask five different developers why Angular is so great you'll probably get five different answers. For my money though, there are three key features that make it a really great framework to work with.
+##Why is it great?
+This is a very subjective question. For my money though, there are three key features that make it a really great framework to work with.
 
 1. **Data binding** - Data binding is the ability to "bind" variables and functions from your code into your user interface and have changes in one side update the other. For example, you can display a JavaScript variable in a form field, and if the user changes the value, the value in JavaScript will automatically update to reflect the change. No more `onchanged` events required to keep things in sync in cases like this! If you've ever used KnockoutJS or a similar framework you'll be ahead of the game learning Angular. And If you haven't, you'll bei thoroughly amazed at how data binding makes your life easier.
 
@@ -17,7 +16,10 @@ Now, if you go out ask five different developers why Angular is so great you'll 
 
 3. **SPAs** - Angular makes writing single page applications really easy! This site is an example of a single page application. When you change lessons or click on links, you'll notice that the page content updates without requiring a refresh. At the same time however, the url in the browser's navigation bar updates accordingly which allows you to use the browser's forward and back buttons to navigate, as well as to bookmark a page and return to it later.
 
-These three features along with many, many more make Angular a very powerful framework for developing web applications. Now then, enough chatter, let's move forward and take a look at how an Angular application is built.
+These three features along with many, many more make Angular a very powerful framework for developing web applications.
+
+##How does it work?
+You're asking all the right questions! ;) Let's move onto the next lesson and take a look at how an Angular application is built.
       ]]>
       </Instructions>
     </Lesson>
