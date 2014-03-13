@@ -4,12 +4,11 @@
     <Lesson Id="introducing-angular" Title="Introducing AngularJS">
       <Instructions>
         <![CDATA[
-So, you want to learn AngularJS. Great! Let's jump right in.
-
 ##What is AngularJS?
 AngularJS is a JavaScript framework that is used for making rich, extensible web applications. It runs on plain JavaScript and HTML, so you don't need any other dependencies to make it work, and it is CSS-agnostic so you can use whatever CSS framework/methodology you want when designing your Angular application.
 
-Now, if you go out ask five different developers why Angular is so great you'll probably get five different answers. For my money though, there are three key features that make it a really great framework to work with.
+##Why is it great?
+This is a very subjective question. For my money though, there are three key features that make it a really great framework to work with.
 
 1. **Data binding** - Data binding is the ability to "bind" variables and functions from your code into your user interface and have changes in one side update the other. For example, you can display a JavaScript variable in a form field, and if the user changes the value, the value in JavaScript will automatically update to reflect the change. No more `onchanged` events required to keep things in sync in cases like this! If you've ever used KnockoutJS or a similar framework you'll be ahead of the game learning Angular. And If you haven't, you'll bei thoroughly amazed at how data binding makes your life easier.
 
@@ -17,7 +16,10 @@ Now, if you go out ask five different developers why Angular is so great you'll 
 
 3. **SPAs** - Angular makes writing single page applications really easy! This site is an example of a single page application. When you change lessons or click on links, you'll notice that the page content updates without requiring a refresh. At the same time however, the url in the browser's navigation bar updates accordingly which allows you to use the browser's forward and back buttons to navigate, as well as to bookmark a page and return to it later.
 
-These three features along with many, many more make Angular a very powerful framework for developing web applications. Now then, enough chatter, let's move forward and take a look at how an Angular application is built.
+These three features along with many, many more make Angular a very powerful framework for developing web applications.
+
+##How does it work?
+You're asking all the right questions! ;) Let's move onto the next lesson and take a look at how an Angular application is built.
       ]]>
       </Instructions>
     </Lesson>
@@ -1083,6 +1085,96 @@ function Multiplier(valueFactor) {
 		return valueFactor * controllerFactor;
 	};
 }
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
+    <Lesson Id="watch" Title="$watch">
+      <Instructions>
+        <![CDATA[
+Take a look at the code in the editors. You'll see that the user interface contains a textbox in which is entered the number 6, and that the value of the textbox is bound to the variable `$scope.factor`. Beside the textbox is displayed `$scope.product`, which is calculated in the controller function as `$scope.factor * 2`.
+
+Try running this code. Everything displays normally, with the textbox containing the number 6 by default and the number 12 being displayed beside it. Now try modifying the value in the textbox. You may be surprised to see that `$scope.product` is not updated!
+
+##But why?
+The reason why this happens is because `$scope.product` is initialized to the the value returned by `$scope.factor * 2` when the model is augmented by the controller. It is *not* initialized to the result of the function *throughout the program's execution*. When `$scope.product` is changed, there is no mechanism in place to update `$scope.factor` accordingly.
+
+##An overview of $watch
+This is where the `$watch` function comes in. `$watch` provides us with a way to keep calculated values up to date when the values that they depend on change. The syntax for `$watch` looks like this.
+
+	$scope.$watch([expression returning watched value],
+				  [change handler],
+				  [objectEquality?]);
+
+Let's clarify this a bit. The first argument basically points to the value to watch. This can be a string containing the name of a variable in scope, or a function that returns the variable itself.
+
+The second argument takes a function that looks like this.
+
+	function (newValue, oldValue) {
+		// Take action.
+	}
+
+This is where the actual work gets done. In our example, this is where we would update `$scope.product` based on the value of `newValue`.
+
+The third argument is a boolean value which, when set to true, compares objects for equality rather than reference. This argument can be, and is often, omitted instead of being set to `false`.
+
+##Example
+
+Now it's up to you to pick up where I left off. Use a `$watch` expression to update `$scope.product` when the value in the textbox is changed. Specifically, you will need to watch `$scope.product` and multiply the new value by 2 whenever it is changed.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">
+	<input type="text" ng-model="factor" /> {{product}}
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	<input type="text" ng-model="factor" /> {{product}}
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", [])
+	.controller("index", ["$scope", function($scope) {
+		$scope.factor = 6;
+		$scope.product = $scope.factor * 2;
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", [])
+	.controller("index", ["$scope", function($scope) {
+		$scope.$watch("factor", function (newValue) {
+			$scope.product = newValue * 2;
+		});
+
+		$scope.factor = 6;
+	}]);
             ]]>
           </Solution>
         </Document>
