@@ -343,7 +343,7 @@ We'll start by defining a function for each of the criteria in the controller.
 
 Now, let's apply the `ngClass` directive to the span of text in the form of an attribute, and pass it a map of class names and boolean values.
 
-	ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}
+	ng-class="{bold: isBold(), italic: isItalic(), underline: isUnderlined()}"
 
 Once applied, run the program. When you change the number in the text field, the classes applied to the sample text should change accordingly.
         ]]>
@@ -474,7 +474,7 @@ Let's now go ahead and populate the cells with the values from the collection ob
 
 Almost done! Now let's apply the `oddRow` class to every odd-indexed `<tr>`. We'll need to use the `ngClass` directive that we learned about in the last lesson for this.
 
-	<tr ng-repeat="product in products" ng-class="if ($odd) { return "oddRow"; }">
+	<tr ng-repeat="product in products" ng-class="{oddRow: $odd}">
 		<td>{{product.id}}</td>
 		<td>{{product.name}}</td>
 	</tr>
