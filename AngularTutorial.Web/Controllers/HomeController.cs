@@ -92,6 +92,17 @@ namespace AngularTutorial.Web.Controllers
 
                 ViewBag.SeoContent = new MvcHtmlString(aboutText);
             }
+            else if (escapedFragment.Contains("feedback"))
+            {
+                var feedbackPath = Server.MapPath("~/Content/Views/Feedback.html");
+                string feedbackText;
+                using (var sr = new StreamReader(feedbackPath))
+                {
+                    feedbackText = await sr.ReadToEndAsync();
+                }
+
+                ViewBag.SeoContent = new MvcHtmlString(feedbackText);
+            }
         }
     }
 }

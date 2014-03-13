@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Views\Feedback.html" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Images\LearnAngular-huge.png" />
     <Content Include="Content\Images\LearnAngular-inverse-huge.png" />

@@ -8,16 +8,6 @@ namespace AngularTutorial.Web
 	/// </summary>
 	public static class ConfigurationFacade
 	{
-		public static string SmtpHost
-		{
-			get { return ConfigurationManager.AppSettings["SmtpHost"]; }
-		}
-
-		public static string SmtpFromAddress
-		{
-			get { return ConfigurationManager.AppSettings["SmtpFromAddress"]; }
-		}
-
 		public static string FeedbackToAddress
 		{
 			get { return ConfigurationManager.AppSettings["FeedbackToAddress"]; }

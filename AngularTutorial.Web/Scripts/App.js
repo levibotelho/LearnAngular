@@ -10,6 +10,10 @@
                     templateUrl: "/Content/Views/About.html",
                     controller: "about"
                 })
+                .when("/feedback", {
+                    templateUrl: "/Content/Views/Feedback.html",
+                    controller: "feedback"
+                })
                 .otherwise({ redirectTo: "/lessons/introducing-angular" });
 
             $locationProvider.html5Mode(false).hashPrefix('!');
