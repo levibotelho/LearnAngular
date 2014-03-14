@@ -24,7 +24,7 @@
 }
 
 button.close {
-    margin-top: -0.1em;
+    margin-top: -0.1em !important;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
