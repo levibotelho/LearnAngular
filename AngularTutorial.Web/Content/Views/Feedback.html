@@ -8,6 +8,14 @@
         </p>
         <br />
         <br />
+        <div class="alert alert-info" ng-show="feedbackStatus == 0">
+            <button type="button" class="close" aria-hidden="true" ng-click="feedbackStatus = -1">&times;</button>
+            <strong>Thanks!</strong>
+        </div>
+        <div class="alert alert-warning" ng-show="feedbackStatus == 1">
+            <button type="button" class="close" aria-hidden="true" ng-click="feedbackStatus = -1">&times;</button>
+            <strong>Error!</strong> Your feedback was not submitted. Please try again.
+        </div>
         <div class="well">
             <form class="form-horizontal">
                 <fieldset>

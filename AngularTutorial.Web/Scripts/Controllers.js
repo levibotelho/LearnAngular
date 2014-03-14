@@ -237,9 +237,13 @@
     ])
     .controller("feedback", [
         "$scope", "$http", "navigationService", function ($scope, $http, navigationService) {
+            $scope.feedbackStatus = -1;
             navigationService.isTableOfContentsAvailable = false;
             $scope.submit = function () {
-                $http.post("/Home/SendFeedback", { subject: $scope.subject, message: $scope.message });
+                $scope.feedbackStatus = -1;
+                $http.post("/Home/SendFeedback", { subject: $scope.subject, message: $scope.message })
+                    .success(function () { $scope.feedbackStatus = 0; })
+                    .error(function () { $scope.feedbackStatus = 1; });
             };
         }
     ]);
