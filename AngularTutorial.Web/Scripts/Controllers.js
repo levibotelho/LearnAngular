@@ -1,47 +1,49 @@
 ﻿angular.module("controllers", ["ui.ace", "services"])
     .controller("index", [
         "$scope", "$routeParams", "navigationService",
-        function($scope, $routeParams, navigationService) {
+        function ($scope, $routeParams, navigationService) {
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
             $scope.isTableOfContentsAvailable = true;
             $scope.isNavigating = true;
 
-            $scope.selectLesson = function(id) {
+            $scope.selectLesson = function (id) {
                 navigationService.selectLesson(id);
             };
 
             navigationService.getTableOfContents()
-                .success(function(data) {
+                .success(function (data) {
                     $scope.tableOfContents = data;
                     if ($routeParams.lessonId != null) {
                         $scope.selectLesson($routeParams.lessonId);
                     }
                 })
-                .error(function() {
+                .error(function () {
                     alert("An unexpected error has occured. Please try again.");
                 });
 
-            $scope.$watch(function() { return navigationService.selectedLesson; },
-                function(newValue, oldValue) {
+            $scope.$watch(function () { return navigationService.selectedLesson; },
+                function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.selectedLesson = newValue;
                     }
                 });
 
-            $scope.$watch(function() { return navigationService.isTableOfContentsAvailable; },
-                function(newValue, oldValue) {
+            $scope.$watch(function () { return navigationService.isTableOfContentsAvailable; },
+                function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.isTableOfContentsAvailable = newValue;
                     }
                 });
 
-            $scope.$watch(function() { return navigationService.isNavigating; },
-                function(newValue) {
+            $scope.$watch(function () { return navigationService.isNavigating; },
+                function (newValue) {
                     $scope.isNavigating = newValue;
                 });
-        }])
-    .controller("lesson", ["$scope", "$http", "$routeParams", "$sce", "navigationService",
+        }
+    ])
+    .controller("lesson", [
+        "$scope", "$http", "$routeParams", "$sce", "navigationService",
         function ($scope, $http, $routeParams, $sce, navigationService) {
             $scope.id = "";
             $scope.title = "";
@@ -156,22 +158,22 @@
 
             $scope.loadLesson = function (id) {
                 $http.get("/Home/GetLesson", { params: { id: id } })
-                // data, status, headers, config
-                .success(function (data) {
-                    $scope.id = data.Id;
-                    $scope.title = data.Title;
-                    $scope.instructions = $sce.trustAs("html", data.Instructions);
-                    $scope.parseHtmlDocuments(data.HtmlDocuments);
-                    $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
-                    $scope.headIncludes = $scope.parseIncludes(data.HeadIncludes);
-                    $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
-                })
-                .error(function () {
-                    alert("An unexpected error has occured. Please try again.");
-                })
-                .finally(function() {
-                    navigationService.isNavigating = false;
-                });
+                    // data, status, headers, config
+                    .success(function (data) {
+                        $scope.id = data.Id;
+                        $scope.title = data.Title;
+                        $scope.instructions = $sce.trustAs("html", data.Instructions);
+                        $scope.parseHtmlDocuments(data.HtmlDocuments);
+                        $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
+                        $scope.headIncludes = $scope.parseIncludes(data.HeadIncludes);
+                        $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
+                    })
+                    .error(function () {
+                        alert("An unexpected error has occured. Please try again.");
+                    })
+                    .finally(function () {
+                        navigationService.isNavigating = false;
+                    });
             };
 
             $scope.parseHtmlDocuments = function (documents) {
@@ -226,7 +228,18 @@
                 $scope.loadLesson($routeParams.lessonId);
                 navigationService.selectLesson($routeParams.lessonId);
             }
-        }])
-    .controller("about", ["navigationService", function (navigationService) {
-        navigationService.isTableOfContentsAvailable = false;
-    }])
+        }
+    ])
+    .controller("about", [
+        "navigationService", function (navigationService) {
+            navigationService.isTableOfContentsAvailable = false;
+        }
+    ])
+    .controller("feedback", [
+        "$scope", "$http", "navigationService", function ($scope, $http, navigationService) {
+            navigationService.isTableOfContentsAvailable = false;
+            $scope.submit = function () {
+                $http.post("/Home/SendFeedback", { subject: $scope.subject, message: $scope.message });
+            };
+        }
+    ]);
