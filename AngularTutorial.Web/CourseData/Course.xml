@@ -1090,6 +1090,175 @@ function Multiplier(valueFactor) {
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="the-provider-recipe" Title="The Provider Recipe">
+      <Instructions>
+        <![CDATA[
+Imagine that you have written an Angular service that can be used to retrieve weather data from a public API. The object returned by the service is as follows.
+
+	{
+		function Get3DayForecast(city, apiKey) {
+			// Implementation
+		}
+	}
+
+Now while this service may be quite handy, there is a point of redundancy in its design. Wouldn't it be nice to not have to pass the API key every time we want to make a call?
+
+If this service was for our use only, we could simply embed the key directly in the object.
+
+	{
+		var apiKey = "A1B2C3";
+		function Get3DayForecast(city) {
+			// Implementation
+		}
+	}
+
+However, if we wanted to share this service with others, this wouldn't be a very good solution. A better way would be to allow the consumer of the service to set the key once and for all before using it. This is what providers allow us to do.
+
+##Example
+
+###Defining the provider
+
+The best way to see how providers work is through an example. Our example will be extremely simple. We are going to define a provider which will serve a `Message` object that is defined by the following function.
+
+	function Message(text) {
+		this.text = text;
+	}
+
+The catch here is that we will set the message text only once in our app, much as we would have liked to have set the API key in the previous example. Let's look at the code which will let us do this. Add this code to the `services` module definition in `services.js`.
+
+	.provider("message", [function () {
+		var text = null;
+
+		this.setText = function (textString) {
+			text = textString;
+		};
+
+		this.$get = function (text) {
+			return new Message(text);
+		};
+	}]);
+
+Let's look at what's going on here. The first thing that we have is a `text` variable. This will hold the text that will be used to instantiate our `Message`.
+
+The second thing that we have is a function called `setText`. `setText` is the function that we will call to configure our provider. We will pass it a string that will be stored in the `text` variable, only to be finally be used in the call to the `Message()` constructor.
+
+Finally, we have a method called `$get`. As you probably have imagined due to the leading `$`, `$get` is a function that has a special meaning for Angular. When we inject our provider into a function by way of the provider name (`"message"`), Angular will call `$get` to retrieve the object to inject. In this case, it will inject a `Message` that has been instantiated with `text`.
+
+###Using the provider
+
+Now that our provider is defined, let's use it to display a message in our page. Let's start by configuring our provider. We do this like so.
+
+	angular.module("root", ["services"])
+		.config("messageProvider", [function (messageProvider) {
+			messageProvider.setText("Hello world!");
+		}])
+		.controller // ...
+
+This syntax is fairly easy to understand. We call `setText`, in the `config()` function, passing in the message that we want to instantiate our `Message` object with. The only thing that might seem out of place is the `"messageProvider"` string. Where did it come from, and why are we injecting `"messageProvider"` into `config()` and not `"message"` instead?
+
+The reason is because `"message"` does not refer to the object that we defined in the call to `provider()`. `"message"` refers the object defined by the provider's `$get` function. In order to inject the object defined in the provider call, on which we declared the `setText()` function, we inject `"messageProvider"`. 
+
+To be clear, we did not define what `"messageProvider"` meant anywhere in our code. It is simply Angular convention that `"[provider name]Provider"` refers to the provider function result, and that `"[provider name]"` refers to the `$get` result.
+
+Now that our provider is configured to return a `Message` whose `text` is set to `"Hello world!"`, the only thing left to do is inject an instance of it into our controller function and display the result.
+
+	angular.module("root", ["services"])
+		.config("messageProvider", [function (messageProvider) {
+			messageProvider.setText("Hello world!");
+		}])
+		.controller("index", ["$scope", "message", function ($scope, message) {
+			$scope.message = message.text;
+		}]);
+
+When run, the app should display "Hello world!" onscreen.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">{{message}}</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">{{message}}</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", ["services"])
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["services"])
+	.config("messageProvider", [function (messageProvider) {
+		messageProvider.setText("Hello world!");
+	}])
+	.controller("index", ["$scope", "message", function ($scope, message) {
+		$scope.message = message.text;
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="services.js">
+          <Initial>
+            <![CDATA[
+angular.module("services", [])
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("services", [])
+	.provider("message", [function () {
+		var text = null;
+
+		this.setText = function (textString) {
+			text = textString;
+		};
+
+		this.$get = function (text) {
+			return new Message(text);
+		};
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="message.js">
+          <Initial>
+            <![CDATA[
+function Message(text) {
+	this.text = text;
+}
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+function Message(text) {
+	this.text = text;
+}
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
     <Lesson Id="watch" Title="$watch">
       <Instructions>
         <![CDATA[
