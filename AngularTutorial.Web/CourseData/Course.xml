@@ -1118,13 +1118,15 @@ However, if we wanted to share this service with others, this wouldn't be a very
 
 ###Defining the provider
 
-The best way to see how providers work is through an example. Our example will be extremely simple. We are going to define a provider which will serve a `Message` object that is defined by the following function.
+The best way to see how providers work is through an example. Our example will be extremely simple. We are going to define a provider which will serve a `Message` object. The object is defined in `message.js` as follows.
 
 	function Message(text) {
 		this.text = text;
 	}
 
-The catch here is that we will set the message text only once in our app, much as we would have liked to have set the API key in the previous example. Let's look at the code which will let us do this. Add this code to the `services` module definition in `services.js`.
+The catch here is that, like the API key in the previous example, we will set the message text only once in our entire application. Every time we request a message, it will be returned to us with its text already set.
+
+Let's look at the code which will allow us to do this. Add this code to the `services` module definition in `services.js`.
 
 	.provider("message", [function () {
 		var text = null;
@@ -1133,9 +1135,9 @@ The catch here is that we will set the message text only once in our app, much a
 			text = textString;
 		};
 
-		this.$get = function (text) {
+		this.$get = [function () {
 			return new Message(text);
-		};
+		}];
 	}]);
 
 Let's look at what's going on here. The first thing that we have is a `text` variable. This will hold the text that will be used to instantiate our `Message`.
@@ -1149,10 +1151,9 @@ Finally, we have a method called `$get`. As you probably have imagined due to th
 Now that our provider is defined, let's use it to display a message in our page. Let's start by configuring our provider. We do this like so.
 
 	angular.module("root", ["services"])
-		.config("messageProvider", [function (messageProvider) {
+		.config(["messageProvider", function (messageProvider) {
 			messageProvider.setText("Hello world!");
 		}])
-		.controller // ...
 
 This syntax is fairly easy to understand. We call `setText`, in the `config()` function, passing in the message that we want to instantiate our `Message` object with. The only thing that might seem out of place is the `"messageProvider"` string. Where did it come from, and why are we injecting `"messageProvider"` into `config()` and not `"message"` instead?
 
@@ -1163,12 +1164,14 @@ To be clear, we did not define what `"messageProvider"` meant anywhere in our co
 Now that our provider is configured to return a `Message` whose `text` is set to `"Hello world!"`, the only thing left to do is inject an instance of it into our controller function and display the result.
 
 	angular.module("root", ["services"])
-		.config("messageProvider", [function (messageProvider) {
+		.config(["messageProvider", function (messageProvider) {
 			messageProvider.setText("Hello world!");
 		}])
-		.controller("index", ["$scope", "message", function ($scope, message) {
-			$scope.message = message.text;
-		}]);
+		.controller("index", ["$scope", "message",
+			function ($scope, message) {
+				$scope.message = message.text;
+			}
+		]);
 
 When run, the app should display "Hello world!" onscreen.
         ]]>
@@ -1209,12 +1212,13 @@ angular.module("root", ["services"])
           <Solution>
             <![CDATA[
 angular.module("root", ["services"])
-	.config("messageProvider", [function (messageProvider) {
+	.config(["messageProvider", function (messageProvider) {
 		messageProvider.setText("Hello world!");
 	}])
-	.controller("index", ["$scope", "message", function ($scope, message) {
-		$scope.message = message.text;
-	}]);
+	.controller("index", ["$scope", "message",
+		function ($scope, message) {
+			$scope.message = message.text;
+		}]);
             ]]>
           </Solution>
         </Document>
@@ -1234,9 +1238,9 @@ angular.module("services", [])
 			text = textString;
 		};
 
-		this.$get = function (text) {
+		this.$get = [function () {
 			return new Message(text);
-		};
+		}];
 	}]);
             ]]>
           </Solution>
