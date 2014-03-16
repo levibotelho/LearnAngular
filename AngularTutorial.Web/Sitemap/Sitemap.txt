@@ -10,3 +10,4 @@ http://www.learn-angular.org/#!/lessons/handling-complexity
 http://www.learn-angular.org/#!/lessons/the-value-recipe
 http://www.learn-angular.org/#!/lessons/the-factory-recipe
 http://www.learn-angular.org/#!/lessons/the-service-recipe
+http://www.learn-angular.org/#!/lessons/watch

@@ -16,7 +16,7 @@ namespace AngularTutorial.Web.Entities
                 DeliveryMethod = SmtpDeliveryMethod.Network
             };
 
-            var mail = new MailMessage(new MailAddress(smtpSection.From, "learn-angular.org Feedback"), new MailAddress(ConfigurationFacade.FeedbackToAddress))
+            var mail = new MailMessage(new MailAddress(smtpSection.From, "learn-angular.org"), new MailAddress(ConfigurationFacade.FeedbackToAddress))
             {
                 Subject = subject,
                 Body = message
