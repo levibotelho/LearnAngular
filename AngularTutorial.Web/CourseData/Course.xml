@@ -1263,6 +1263,141 @@ function Message(text) {
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="the-constant-recipe" Title="The Constant Recipe">
+      <Instructions>
+        <![CDATA[
+In the last lesson, we saw how providers can be configured using the `config` function. In the example app that we coded, the `config` call looked like this.
+
+	.config(["messageProvider", function (messageProvider) {
+			messageProvider.setText("Hello world!");
+	}])
+
+This worked well for our example. However, we can easily imagine a scenario when we would rather inject `"Hello world!"` instead of hardcoding it into the function.
+
+If you were to try to attempt this, you might try defining a value service and injecting it into the `config` function.
+
+	.value("messageText", "Hello world!");
+
+However you would soon realize that this doesn't work.
+
+The reason why is that `config()` functions are executed before services are instantiated and registered with Angular. This makes sense, because the whole purpose of `config()` functions is to modify the behavior of services. As a result, you cannot inject a value service into a `config()` function because, as far as Angular is concerned, it doesn't exist yet!
+
+This is the problem that constants solve. Constants are defined during the configuration phase of an Angular application. This means that, unlike other services, they *can* be injected into `config()` functions. The syntax for defining constants is just like the syntax for defining values.
+
+	.constant("messageText", "Hello world!");
+
+##Example
+
+The starting code in the editors is the exact same code that we wrote in the lesson on providers. For this example, try creating a constant called `messageText` containing the string `"Hello constant!"` and injecting it into the `config()` function to instantiate the message object. Like in the providers example, `Hello constant!` should be displayed onscreen once you are done.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">{{message}}</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">{{message}}</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", ["services"])
+	.config(["messageProvider", function (messageProvider) {
+		messageProvider.setText("Hello world!");
+	}])
+	.controller("index", ["$scope", "message",
+		function ($scope, message) {
+			$scope.message = message.text;
+		}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["services"])
+	.config(["messageProvider", "messageText",
+		function (messageProvider, messageText) {
+			messageProvider.setText(messageText);
+		}])
+	.controller("index", ["$scope", "message",
+		function ($scope, message) {
+			$scope.message = message.text;
+		}]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="services.js">
+          <Initial>
+            <![CDATA[
+angular.module("services", [])
+	.provider("message", [function () {
+		var text = null;
+
+		this.setText = function (textString) {
+			text = textString;
+		};
+
+		this.$get = [function () {
+			return new Message(text);
+		}];
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("services", [])
+	.constant("messageText", "Hello constant!")
+	.provider("message", [function () {
+		var text = null;
+
+		this.setText = function (textString) {
+			text = textString;
+		};
+
+		this.$get = [function () {
+			return new Message(text);
+		}];
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+        <Document Name="message.js">
+          <Initial>
+            <![CDATA[
+function Message(text) {
+	this.text = text;
+}
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+function Message(text) {
+	this.text = text;
+}
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
     <Lesson Id="watch" Title="$watch">
       <Instructions>
         <![CDATA[
