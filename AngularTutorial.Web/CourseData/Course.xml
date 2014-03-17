@@ -679,7 +679,7 @@ angular.module("root", [])
       </JavaScript>
     </Lesson>
   </Module>
-  <Module Id="module-core-facilities" Title="Core Facilities">
+  <Module Id="module-services" Title="Services">
     <Lesson Id="handling-complexity" Title="Handling Complexity">
       <Instructions>
         <![CDATA[
@@ -1398,6 +1398,8 @@ function Message(text) {
         </Document>
       </JavaScript>
     </Lesson>
+  </Module>
+  <Module Id="module-enriching-applications" Title="Enriching Applications">
     <Lesson Id="watch" Title="$watch">
       <Instructions>
         <![CDATA[
@@ -1488,9 +1490,57 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
-  </Module>
-  <!--<Module Id="module-enriching-applications" Title="Enriching Applications">
-    <Lesson Id="validation-classes" Title="Validation Classes">
+    
+    <!--
+      <Lesson Id="filters" Title="Filters">
+      <Instructions>
+        <![CDATA[
+
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
+    -->
+    
+    <!--
+      <Lesson Id="validation-classes" Title="Validation Classes">
       <Instructions>
         <![CDATA[
 By now you should have a basic understanding of how to build a simple Angular application and of the components which make up such an appliction. You should also be familiar with some of the core directives that are available in Angular that allow you to bind your template to your scope, making it dynamic and reactive to changes in the scope's underlying data.
@@ -1608,7 +1658,8 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
-  </Module>-->
+  -->
+  </Module>
   <!--<Module Id="" Title="Test Module">
     <Lesson Id="" Title="Empty Lesson">
       <Instructions>
