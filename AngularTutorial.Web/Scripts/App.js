@@ -6,6 +6,9 @@
                     templateUrl: '/Content/Views/Lesson.html',
                     controller: 'lesson'
                 })
+                .when("/lessons", {
+                    redirectTo: "/lessons/introducing-angular"
+                })
                 .when("/about", {
                     templateUrl: "/Content/Views/About.html",
                     controller: "about"

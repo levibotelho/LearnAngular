@@ -1,4 +1,6 @@
+http://www.learn-angular.org/#!/
 http://www.learn-angular.org/#!/about
+http://www.learn-angular.org/#!/feedback
 http://www.learn-angular.org/#!/lessons/introducing-angular
 http://www.learn-angular.org/#!/lessons/the-essentials
 http://www.learn-angular.org/#!/lessons/a-simple-app
