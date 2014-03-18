@@ -14,7 +14,10 @@
                     templateUrl: "/Content/Views/Feedback.html",
                     controller: "feedback"
                 })
-                .otherwise({ redirectTo: "/lessons/introducing-angular" });
+                .otherwise({
+                    templateUrl: "/Content/Views/Home.html",
+                    controller: "home"
+                });
 
             $locationProvider.html5Mode(false).hashPrefix('!');
         }

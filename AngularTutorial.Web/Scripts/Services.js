@@ -5,7 +5,6 @@ function NavigationService($http, $location) {
     var self = this;
     self.selectedLesson = null;
     self.isTableOfContentsAvailable = true;
-    self.isNavigating = true;
 
     self.getTableOfContents = function () {
         return $http.get("/Home/GetTableOfContents", { cache: true });

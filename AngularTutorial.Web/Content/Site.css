@@ -1,5 +1,13 @@
-﻿.paddedRow {
+﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.paddedRow {
     margin: 1em 0 1em 0;
+}
+
+.megaPaddedRow {
+    margin: 3em 0 3em 0;
 }
 
 .renderFrame {
@@ -10,7 +18,7 @@
     height: 200px;
 }
 
-.lessonElement, .tabHandle, .panel-title>a {
+.lessonElement, .tabHandle, .panel-title > a {
     cursor: pointer;
 }
 
@@ -27,6 +35,36 @@ button.close {
     margin-top: -0.1em !important;
 }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+.siteTitle {
+    font-size: 5em;
+}
+
+.getStartedButton {
+    font-size: 3em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.getStartedButtonXs {
+    font-size: 2em;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
+.getStartedIcon {
+    margin-left: 1em;
+}
+
+.teaserImage {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.teaserFooter {
+    font-style: italic;
+}
+
+.siteDescriptionText {
+    font-size: 1.5em;
+    font-style: italic;
 }

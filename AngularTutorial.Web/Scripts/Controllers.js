@@ -5,7 +5,6 @@
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
             $scope.isTableOfContentsAvailable = true;
-            $scope.isNavigating = true;
 
             $scope.selectLesson = function (id) {
                 navigationService.selectLesson(id);
@@ -35,13 +34,11 @@
                         $scope.isTableOfContentsAvailable = newValue;
                     }
                 });
-
-            $scope.$watch(function () { return navigationService.isNavigating; },
-                function (newValue) {
-                    $scope.isNavigating = newValue;
-                });
         }
     ])
+    .controller("home", ["$scope", "navigationService", function ($scope, navigationService) {
+        navigationService.isTableOfContentsAvailable = false;
+    }])
     .controller("lesson", [
         "$scope", "$http", "$routeParams", "$sce", "navigationService",
         function ($scope, $http, $routeParams, $sce, navigationService) {
@@ -159,7 +156,7 @@
             $scope.loadLesson = function (id) {
                 $http.get("/Home/GetLesson", { params: { id: id } })
                     // data, status, headers, config
-                    .success(function (data) {
+                    .success(function(data) {
                         $scope.id = data.Id;
                         $scope.title = data.Title;
                         $scope.instructions = $sce.trustAs("html", data.Instructions);
@@ -168,11 +165,8 @@
                         $scope.headIncludes = $scope.parseIncludes(data.HeadIncludes);
                         $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
                     })
-                    .error(function () {
+                    .error(function() {
                         alert("An unexpected error has occured. Please try again.");
-                    })
-                    .finally(function () {
-                        navigationService.isNavigating = false;
                     });
             };
 
@@ -224,7 +218,6 @@
 
             navigationService.isTableOfContentsAvailable = true;
             if ($routeParams.lessonId != null) {
-                navigationService.isNavigating = true;
                 $scope.loadLesson($routeParams.lessonId);
                 navigationService.selectLesson($routeParams.lessonId);
             }
