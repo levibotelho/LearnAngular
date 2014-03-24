@@ -28,7 +28,7 @@
     <div class="clearfix"></div>
     <div class="container-fluid" style="padding: 0 15px" ng-controller="index">
         <div class="row">
-            <div id="Modules" class="col-xs-12 col-sm-3 col-lg-2 panel-group" ng-show="isTableOfContentsAvailable">
+            <div class="col-xs-12 col-sm-3 col-lg-2 panel-group" ng-show="isTableOfContentsAvailable">
                 <div class="panel panel-default" ng-repeat="module in tableOfContents">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -44,6 +44,10 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+                <br/>
+                <div class="alert alert-success newLessonsAlerts">
+                    New lessons added every week!
                 </div>
             </div>
 
