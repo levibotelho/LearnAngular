@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Web.Mvc;
@@ -6,6 +7,7 @@ using AngularTutorial.Services;
 using System.Threading.Tasks;
 using System.Web.UI;
 using AngularTutorial.Web.Entities;
+using Spoon;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -25,7 +27,19 @@ namespace AngularTutorial.Web.Controllers
         public async Task<ActionResult> Index(string _escaped_fragment_)
         {
             if (_escaped_fragment_ != null)
-                await HandleEscapedFragmentAsync(_escaped_fragment_);
+            {
+                string path;
+                try
+                {
+                    path = await SnapshotManager.GetSnapshotPathAsync(_escaped_fragment_);
+                }
+                catch (ArgumentException)
+                {
+                    SendFeedback("Escaped Fragment Failure", "No snapshot was found for the fragment " + _escaped_fragment_ + ".");
+                    return View();
+                }
+                return File(path, "text/html");
+            }
 
             return View();
         }

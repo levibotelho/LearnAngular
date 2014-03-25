@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleInjector.Integration.Web.Mvc</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver">
+             <summary>MVC <see cref="T:System.Web.Mvc.IDependencyResolver"/> for Simple Injector.</summary>
+             <example>
+             The following example shows the usage of the <b>SimpleInjectorDependencyResolver</b> in an
+             MVC application:
+             <code lang="cs"><![CDATA[
+             public class MvcApplication : System.Web.HttpApplication
+             {
+                 protected void Application_Start()
+                 {
+                     var container = new Container();
+             
+                     // Make the container registrations, example:
+                     // container.Register<IUserRepository, SqlUserRepository>();
+             
+                     container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+                     container.RegisterMvcIntegratedFilterProvider();
+            
+                     // Create a new SimpleInjectorDependencyResolver that wraps the,
+                     // container, and register that resolver in MVC.
+                     System.Web.Mvc.DependencyResolver.SetResolver(
+                         new SimpleInjectorDependencyResolver(container));
+             
+                     // Normal MVC stuff here
+                     AreaRegistration.RegisterAllAreas();
+             
+                     RegisterGlobalFilters(GlobalFilters.Filters);
+                     RegisterRoutes(RouteTable.Routes);
+                 }
+             }
+             ]]></code>
+             The previous example show the use of the 
+             <see cref="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcControllers(SimpleInjector.Container,System.Reflection.Assembly[])">RegisterMvcControllers</see> and
+             <see cref="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcIntegratedFilterProvider(SimpleInjector.Container)">RegisterMvcIntegratedFilterProvider</see>
+             extension methods and how the <b>SimpleInjectorDependencyResolver</b> can be used to set the created
+             <see cref="P:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.Container"/> instance as default dependency resolver in MVC.
+             </example>
+        </member>
+        <member name="M:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.#ctor(SimpleInjector.Container)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="container"/> is a null
+            reference.</exception>
+        </member>
+        <member name="M:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.GetService(System.Type)">
+            <summary>Resolves singly registered services that support arbitrary object creation.</summary>
+            <param name="serviceType">The type of the requested service or object.</param>
+            <returns>The requested service or object.</returns>
+        </member>
+        <member name="M:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.GetServices(System.Type)">
+            <summary>Resolves multiply registered services.</summary>
+            <param name="serviceType">The type of the requested services.</param>
+            <returns>The requested services.</returns>
+        </member>
+        <member name="P:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.Container">
+            <summary>Gets the container.</summary>
+            <value>The <see cref="P:SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver.Container"/>.</value>
+        </member>
+        <member name="T:SimpleInjector.SimpleInjectorMvcExtensions">
+            <summary>
+            Extension methods for integrating Simple Injector with ASP.NET MVC applications.
+            </summary>
+        </member>
+        <member name="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcAttributeFilterProvider(SimpleInjector.Container)">
+            <summary>Registers a <see cref="T:System.Web.Mvc.IFilterProvider"/> that allows implicit property injection into
+            the filter attributes that are returned from the provider.</summary>
+            <param name="container">The container that should be used for injecting properties into attributes
+            that the MVC framework uses.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="container"/> is a null reference.</exception>
+        </member>
+        <member name="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcIntegratedFilterProvider(SimpleInjector.Container)">
+            <summary>Registers a <see cref="T:System.Web.Mvc.IFilterProvider"/> that allows filter attributes to go through the
+            Simple Injector pipeline (https://bit.ly/MEau5L). This allows any registered property to be 
+            injected if a custom <see cref="T:SimpleInjector.Advanced.IPropertySelectionBehavior"/> in configured in the container, and 
+            allows any<see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">initializers</see> to be called on those 
+            attributes.
+            </summary>
+            <param name="container">The container that should be used for injecting properties into attributes
+            that the MVC framework uses.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="container"/> is a null reference.</exception>
+        </member>
+        <member name="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcControllers(SimpleInjector.Container,System.Reflection.Assembly[])">
+            <summary>
+            Registers the MVC <see cref="T:System.Web.Mvc.IController"/> instances (which name end with 'Controller') that are 
+            declared as public non-abstract in the supplied set of <paramref name="assemblies"/>.
+            </summary>
+            <param name="container">The container the controllers should be registered in.</param>
+            <param name="assemblies">The assemblies to search.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="container"/> is a null 
+            reference (Nothing in VB).</exception>
+        </member>
+        <member name="M:SimpleInjector.SimpleInjectorMvcExtensions.GetControllerTypesToRegister(SimpleInjector.Container,System.Reflection.Assembly[])">
+            <summary>
+            Returns all public, non abstract, non generic types that implement <see cref="T:System.Web.Mvc.IController"/> and
+            which name end with "Controller" that are located in the supplied <paramref name="assemblies"/>.
+            </summary>
+            <remarks>
+            Use this method to retrieve the list of <see cref="T:System.Web.Mvc.Controller"/> types for manual registration.
+            In most cases, this method doesn't have to be called directly, but the 
+            <see cref="M:SimpleInjector.SimpleInjectorMvcExtensions.RegisterMvcControllers(SimpleInjector.Container,System.Reflection.Assembly[])"/> method can be used instead.
+            </remarks>
+            <param name="container">The container to use.</param>
+            <param name="assemblies">A list of assemblies that will be searched.</param>
+            <returns>A list of types.</returns>
+        </member>
+    </members>
+</doc>

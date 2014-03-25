@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SimpleInjector.Integration.Web.Mvc</id>
+    <version>2.5.0</version>
+    <title>Simple Injector ASP.NET MVC Integration</title>
+    <authors>Simple Injector Contributors</authors>
+    <owners>Simple Injector Contributors</owners>
+    <licenseUrl>https://simpleinjector.codeplex.com/license</licenseUrl>
+    <projectUrl>https://simpleinjector.codeplex.com/wikipage?title=MVC%20Integration</projectUrl>
+    <iconUrl>https://simpleinjector.org/simpleinjector.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Simple Injector ASP.NET MVC Integration.</description>
+    <summary>ASP.NET MVC integration for Simple Injector.</summary>
+    <releaseNotes>Please visit: https://bit.ly/1ogQzp6</releaseNotes>
+    <copyright>Simple Injector Contributors 2011 - 2013</copyright>
+    <language>en-US</language>
+    <tags>simpleinjector MVC MVC3 architecture dependency-injection DI easy easy-to-use Inversion-of-Control IOC DependencyResolver ControllerFactory</tags>
+    <dependencies>
+      <dependency id="SimpleInjector" version="2.5.0" />
+      <dependency id="SimpleInjector.Integration.Web" version="2.5.0" />
+    </dependencies>
+  </metadata>
+</package>

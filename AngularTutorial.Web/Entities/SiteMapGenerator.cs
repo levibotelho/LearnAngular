@@ -11,9 +11,10 @@ namespace AngularTutorial.Web.Entities
         const string Host = "http://www.learn-angular.org/#!/";
         const string LessonFragment = "lessons/";
 
-        static readonly string SitemapDirectory = HostingEnvironment.MapPath(@"~/Sitemap/");
-        static readonly string SitemapPath = HostingEnvironment.MapPath(@"~/Sitemap/Sitemap.txt");
+        public static readonly string SitemapPath = HostingEnvironment.MapPath(@"~/Sitemap/Sitemap.txt");
 
+        static readonly string SitemapDirectory = HostingEnvironment.MapPath(@"~/Sitemap/");
+        
         static readonly List<string> Urls = new List<string>
         {
             Host,
