@@ -26,10 +26,8 @@ namespace AngularTutorial.Web
         void SetupSnapshots()
         {
             var urls = File.ReadAllLines(SiteMapGenerator.SitemapPath);
-            var escapedFragmentUrlPairs = urls
-                .Select(x => new {Url = x, Fragment = x.Substring(x.IndexOf("#!", StringComparison.Ordinal) + 2)})
-                .Where(x => !string.IsNullOrWhiteSpace(x.Fragment))
-                .ToDictionary(x => x.Fragment, x => x.Url);
+            var escapedFragmentUrlPairs = urls.ToDictionary(x => x.Substring(x.IndexOf("#!", StringComparison.Ordinal) + 2), x => x);
+            escapedFragmentUrlPairs[""] = escapedFragmentUrlPairs["/"];
             SnapshotManager.InitializeAsync(escapedFragmentUrlPairs, SnapshotsPath);
         }
     }
