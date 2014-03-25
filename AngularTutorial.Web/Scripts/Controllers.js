@@ -4,7 +4,7 @@
         function ($scope, $routeParams, navigationService) {
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
-            $scope.isTableOfContentsAvailable = true;
+            $scope.isTableOfContentsAvailable = false;
 
             $scope.selectLesson = function (id) {
                 navigationService.selectLesson(id);

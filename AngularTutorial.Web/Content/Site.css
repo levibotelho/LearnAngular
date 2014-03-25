@@ -68,3 +68,8 @@ button.close {
     font-size: 1.5em;
     font-style: italic;
 }
+
+.newLessonsAlerts {
+    font-size: 1em;
+    text-align: center;
+}
