@@ -69,9 +69,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.2.5.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Spoon">
-      <HintPath>..\packages\Spoon.1.0.2\lib\45\Spoon.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Web.DynamicData" />

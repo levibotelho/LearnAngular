@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Linq;
 using System.Web.Mvc;
-using AngularTutorial.Services;
-using System.Threading.Tasks;
 using System.Web.UI;
+using AngularTutorial.Services;
 using AngularTutorial.Web.Entities;
-using Spoon;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -24,24 +19,10 @@ namespace AngularTutorial.Web.Controllers
 #if !DEBUG
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
-        public async Task<ActionResult> Index(string _escaped_fragment_)
+        // ReSharper disable once InconsistentNaming
+        public ActionResult Index(string _escaped_fragment_)
         {
-            if (_escaped_fragment_ != null)
-            {
-                string path;
-                try
-                {
-                    path = await SnapshotManager.GetSnapshotPathAsync(_escaped_fragment_);
-                }
-                catch (ArgumentException)
-                {
-                    SendFeedback("Escaped Fragment Failure", "No snapshot was found for the fragment " + _escaped_fragment_ + ".");
-                    return View();
-                }
-                return File(path, "text/html");
-            }
-
-            return View();
+            return _escaped_fragment_ == null ? (ActionResult)View() : Redirect(GetSnapshotUrl(_escaped_fragment_));
         }
 
         [HttpGet]
@@ -82,41 +63,13 @@ namespace AngularTutorial.Web.Controllers
             Feedback.SendMessage(subject, message);
         }
 
-        async Task HandleEscapedFragmentAsync(string escapedFragment)
+        static string GetSnapshotUrl(string escapedFragment)
         {
-            if (escapedFragment.Trim() == string.Empty)
-            {
-                var lessonId = _courseService.GetTableOfContents().Modules[0].Children[0].Id;
-                ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
-            }
-            else if (escapedFragment.Contains("lessons"))
-            {
-                var lessonIdStartIndex = escapedFragment.LastIndexOf('/') + 1;
-                var lessonId = escapedFragment.Substring(lessonIdStartIndex, escapedFragment.Length - lessonIdStartIndex);
-                ViewBag.SeoContent = new MvcHtmlString(_courseService.GetLesson(lessonId).Instructions);
-            }
-            else if (escapedFragment.Contains("about"))
-            {
-                var aboutPath = Server.MapPath("~/Content/Views/About.html");
-                string aboutText;
-                using (var sr = new StreamReader(aboutPath))
-                {
-                    aboutText = await sr.ReadToEndAsync();
-                }
-
-                ViewBag.SeoContent = new MvcHtmlString(aboutText);
-            }
-            else if (escapedFragment.Contains("feedback"))
-            {
-                var feedbackPath = Server.MapPath("~/Content/Views/Feedback.html");
-                string feedbackText;
-                using (var sr = new StreamReader(feedbackPath))
-                {
-                    feedbackText = await sr.ReadToEndAsync();
-                }
-
-                ViewBag.SeoContent = new MvcHtmlString(feedbackText);
-            }
+            return string.Format(
+                "http://{0}.blob.core.windows.net/{1}/_escaped_fragment={2}.html",
+                ConfigurationFacade.SpoonSnapshotStorageAccount,
+                ConfigurationFacade.SpoonSnapshotStorageContainer,
+                escapedFragment);
         }
     }
 }
