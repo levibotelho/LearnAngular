@@ -1491,6 +1491,150 @@ angular.module("root", [])
       </JavaScript>
     </Lesson>
     
+    
+    
+    
+    <!--<Lesson Id="filters" Title="Filters">
+      <Instructions>
+        <![CDATA[
+Simply put, filters are functions which transform one value into another. They are commonly used in  two different scenarios:
+
++ To transform a value for display purposes. For example, taking the number 6 and transforming it into $6.00 could be accomplished very easily with the help of a filter.
++ To filter collections. A filter could be written to take an array of names and return a smaller array, filtered based on a condition provided by the user.
+
+##Syntax
+
+A filter is declared using the `filter` function, which takes a name and a function returning the filter function as arguments. The filter function must take at least one parameter which will hold the input, however other parameters may be added if desired.
+
+	angular.module("root", [])
+		.filter("myFilter", function () {
+			return function(input) {
+				// Transform the input.
+			}
+		});
+
+Filters can be used in controllers or in views. To use a filter in a controller, simply inject it as you would any other component.
+
+To use a filter in a view, special syntax is necessary. We'll learn how this is done by way of an example.
+
+##Example
+For this example we are going to define a filter which will round a numerical value to a certain number of decimal places.
+
+Let's start by defining the filter in filters.js.
+
+	angular.module("filters", [])
+		.filter("round", function () {
+			return function(input, precision) {
+				return input.toFixed(precision);
+			};
+		});
+
+Now let's integrate this filter into our view. For the moment our view has two text boxes, one for the value and one for the precision. These values are stored in `$scope.value` and `$scope.precision`.
+
+Let's start by outputting the value directly into our view without applying the filter.
+
+	<p>Value: <input type="text" ng-model="value" /></p>
+	<p>{{value}}</p>
+
+Now let's apply the filter, rounding to two decimal places. The syntax for this is as follows.
+
+	{{ expression | filter:arg1:arg2... }}
+
+Therefore, to apply our round filter we need to use the following syntax.
+
+	{{value | round:2}}
+
+Now, when you type a number into the value box the number should always be rounded to two decimal places.
+
+###Chaining filters
+
+Let's define another filter which will prepend `$` to our rounded number.
+
+	.filter("dollars", function () {
+		return function(input) {
+			return "$" + input;
+		};
+	});
+
+Now let's chain this filter to our existing one.
+
+	{{value | round:precision | dollars}}
+
+Now, when we enter a value and a precision into the two inputs, the value outputted onto the page will be rounded to the specified number of decimal places and will have the dollar sign prepended to it.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">
+	<p>Value: <input type="text" ng-model="value" /></p>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	<p>Value: <input type="text" ng-model="value" /></p>
+  <p>{{value | round:2 | dollars}}</p>
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", ["filters"])
+	.controller("index", [function() {}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["filters"])
+	.controller("index", [function() {}]);
+            ]]>
+          </Solution>
+        </Document>
+		<Document Name="filters.js">
+          <Initial>
+            <![CDATA[
+angular.module("filters", [])
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("filters", [])
+	.filter("round", function () {
+		return function(input, precision) {
+			return input.toFixed(precision);
+		};
+	})
+	.filter("dollars", function () {
+		return function(input) {
+			return "$" + input;
+		};
+	});
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>-->
+	
+	
     <!--
       <Lesson Id="filters" Title="Filters">
       <Instructions>

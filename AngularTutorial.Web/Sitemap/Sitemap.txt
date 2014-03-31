@@ -15,3 +15,4 @@ http://www.learn-angular.org/#!/lessons/the-service-recipe
 http://www.learn-angular.org/#!/lessons/the-provider-recipe
 http://www.learn-angular.org/#!/lessons/the-constant-recipe
 http://www.learn-angular.org/#!/lessons/watch
+http://www.learn-angular.org/#!/lessons/filters

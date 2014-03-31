@@ -22,6 +22,7 @@ namespace AngularTutorial.Web.Controllers
         // ReSharper disable once InconsistentNaming
         public ActionResult Index(string _escaped_fragment_)
         {
+            return View();
             return _escaped_fragment_ == null ? (ActionResult)View() : Redirect(GetSnapshotUrl(_escaped_fragment_));
         }
 
