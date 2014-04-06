@@ -1629,12 +1629,14 @@ angular.module("filters", [])
 angular.module("filters", [])
 	.filter("round", function () {
 		return function(input, precision) {
-			return parseFloat(input).toFixed(precision);
+			return input ?
+				parseFloat(input).toFixed(precision) :
+				"";
 		};
 	})
 	.filter("dollars", function () {
 		return function(input) {
-			return "$" + input;
+			return input ? "$" + input : "";
 		};
 	});
             ]]>

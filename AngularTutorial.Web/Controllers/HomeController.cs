@@ -1,8 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI;
 using AngularTutorial.Services;
 using AngularTutorial.Web.Entities;
+
+#if !DEBUG
+using System.Web.UI;
+#endif
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -22,7 +25,6 @@ namespace AngularTutorial.Web.Controllers
         // ReSharper disable once InconsistentNaming
         public ActionResult Index(string _escaped_fragment_)
         {
-            return View();
             return _escaped_fragment_ == null ? (ActionResult)View() : Redirect(GetSnapshotUrl(_escaped_fragment_));
         }
 
@@ -67,7 +69,7 @@ namespace AngularTutorial.Web.Controllers
         static string GetSnapshotUrl(string escapedFragment)
         {
             return string.Format(
-                "http://{0}.blob.core.windows.net/{1}/_escaped_fragment={2}.html",
+                "http://{0}.blob.core.windows.net/{1}/_escaped_fragment_={2}.html",
                 ConfigurationFacade.SpoonSnapshotStorageAccount,
                 ConfigurationFacade.SpoonSnapshotStorageContainer,
                 escapedFragment);
