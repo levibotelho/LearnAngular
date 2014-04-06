@@ -1490,77 +1490,86 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
-    
-    
-    
-    
-    <!--<Lesson Id="filters" Title="Filters">
+    <Lesson Id="filters" Title="Filters">
       <Instructions>
         <![CDATA[
-Simply put, filters are functions which transform one value into another. They are commonly used in  two different scenarios:
+Simply put, filters are functions which transform one value into another. They are commonly used in two different scenarios.
 
 + To transform a value for display purposes. For example, taking the number 6 and transforming it into $6.00 could be accomplished very easily with the help of a filter.
 + To filter collections. A filter could be written to take an array of names and return a smaller array, filtered based on a condition provided by the user.
 
 ##Syntax
 
-A filter is declared using the `filter` function, which takes a name and a function returning the filter function as arguments. The filter function must take at least one parameter which will hold the input, however other parameters may be added if desired.
+A filter is declared using the `filter` method. The method takes two arguments: A name, and a function which returns the function that will actually do the filtering. This is important to remember. It isn't the function passed to the `filter` method which does the filtering, but the function *returned* by the function passed to the method.
+
+This is what a filter definition looks like.
 
 	angular.module("root", [])
-		.filter("myFilter", function () {
+		.filter("doSomething", function () {
 			return function(input) {
-				// Transform the input.
+				// Transform the input and return a value.
 			}
 		});
 
-Filters can be used in controllers or in views. To use a filter in a controller, simply inject it as you would any other component.
+The function which does the filtering can take as many arguments as desired, however the first one is always reserved for the input.
 
-To use a filter in a view, special syntax is necessary. We'll learn how this is done by way of an example.
+Filters can be used in controllers or in views. To use a filter in a controller you simply inject it as you would any other component. There is one small catch, however. You must append "Filter" to the filter name when specifying it for the injector. Therefore, to inject the `doSomething` filter defined above into a controller, the following syntax is required.
+
+	.controller("index", ["doSomethingFilter", function(filter) {
+			// ...
+		});
+
+Using a filter in a view is a little bit different. We'll learn how to do this by way of an example.
 
 ##Example
+
 For this example we are going to define a filter which will round a numerical value to a certain number of decimal places.
 
-Let's start by defining the filter in filters.js.
+Let's start by defining the filter in `filters.js`.
 
 	angular.module("filters", [])
 		.filter("round", function () {
 			return function(input, precision) {
-				return input.toFixed(precision);
+				return input ?
+					parseFloat(input).toFixed(precision) :
+					"";
 			};
 		});
 
-Now let's integrate this filter into our view. For the moment our view has two text boxes, one for the value and one for the precision. These values are stored in `$scope.value` and `$scope.precision`.
+Notice how we are making this filter more flexible by allowing the user to specify a precision.
 
-Let's start by outputting the value directly into our view without applying the filter.
+Now let's integrate this filter into our view. For the moment our view contains a single text box whose value maps to the `$scope.value` variable. Let's modify our template to output `$scope.value` directly onto the page.
 
 	<p>Value: <input type="text" ng-model="value" /></p>
 	<p>{{value}}</p>
 
-Now let's apply the filter, rounding to two decimal places. The syntax for this is as follows.
+Now let's apply the filter. To apply a filter to a value in a template we use the following syntax.
 
 	{{ expression | filter:arg1:arg2... }}
 
-Therefore, to apply our round filter we need to use the following syntax.
+For the sake of this example let's say that we want to round our value to two decimal places. We therefore need to replace `{{value}}` with the following.
 
 	{{value | round:2}}
 
-Now, when you type a number into the value box the number should always be rounded to two decimal places.
+That's all we need to do. Go ahead and try it out.
 
 ###Chaining filters
 
-Let's define another filter which will prepend `$` to our rounded number.
+Let's define another filter which will prepend `$` to our rounded number. Add this definition to `filters.js` right after the `round` filter.
 
 	.filter("dollars", function () {
 		return function(input) {
-			return "$" + input;
+			return input ? "$" + input : "";
 		};
 	});
 
-Now let's chain this filter to our existing one.
+Now let's integrate this into our template. Angular lets us chain filters together by using a `|`. Therefore, to chain our `dollars` filter to our `round` filter, we use the following syntax.
 
-	{{value | round:precision | dollars}}
+	{{value | round:2 | dollars}}
 
-Now, when we enter a value and a precision into the two inputs, the value outputted onto the page will be rounded to the specified number of decimal places and will have the dollar sign prepended to it.
+Note that the order is important in this case. We want to round our number before applying the `$` to it, not after.
+
+That's it! Now when we enter a numerical value into the textbox it is transformed by our filters into its monetary equivalent.
         ]]>
       </Instructions>
       <Html>
@@ -1620,7 +1629,7 @@ angular.module("filters", [])
 angular.module("filters", [])
 	.filter("round", function () {
 		return function(input, precision) {
-			return input.toFixed(precision);
+			return parseFloat(input).toFixed(precision);
 		};
 	})
 	.filter("dollars", function () {
@@ -1632,56 +1641,10 @@ angular.module("filters", [])
           </Solution>
         </Document>
       </JavaScript>
-    </Lesson>-->
-	
-	
-    <!--
-      <Lesson Id="filters" Title="Filters">
-      <Instructions>
-        <![CDATA[
-
-        ]]>
-      </Instructions>
-      <Html>
-        <Document Name="index.html">
-          <Header>
-            <![CDATA[
-
-            ]]>
-          </Header>
-          <Initial>
-            <![CDATA[
-
-            ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-
-            ]]>
-          </Solution>
-          <Footer>
-            <![CDATA[
-
-            ]]>
-          </Footer>
-        </Document>
-      </Html>
-      <JavaScript>
-        <Document Name="root.js">
-          <Initial>
-            <![CDATA[
-
-            ]]>
-          </Initial>
-          <Solution>
-            <![CDATA[
-
-            ]]>
-          </Solution>
-        </Document>
-      </JavaScript>
     </Lesson>
-    -->
+	
+	
+
     
     <!--
       <Lesson Id="validation-classes" Title="Validation Classes">
