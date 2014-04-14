@@ -1,4 +1,5 @@
 http://www.learn-angular.org/#!/
+http://www.learn-angular.org/#!/lessons
 http://www.learn-angular.org/#!/about
 http://www.learn-angular.org/#!/feedback
 http://www.learn-angular.org/#!/lessons/introducing-angular
@@ -16,3 +17,4 @@ http://www.learn-angular.org/#!/lessons/the-provider-recipe
 http://www.learn-angular.org/#!/lessons/the-constant-recipe
 http://www.learn-angular.org/#!/lessons/watch
 http://www.learn-angular.org/#!/lessons/filters
+http://www.learn-angular.org/#!/lessons/data-validation

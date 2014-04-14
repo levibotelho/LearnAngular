@@ -1618,7 +1618,7 @@ angular.module("root", ["filters"])
             ]]>
           </Solution>
         </Document>
-		<Document Name="filters.js">
+        <Document Name="filters.js">
           <Initial>
             <![CDATA[
 angular.module("filters", [])
@@ -1644,49 +1644,64 @@ angular.module("filters", [])
         </Document>
       </JavaScript>
     </Lesson>
-	
-	
-
-    
-    <!--
-      <Lesson Id="validation-classes" Title="Validation Classes">
+    <Lesson Id="data-validation" Title="Data Validation">
       <Instructions>
         <![CDATA[
-By now you should have a basic understanding of how to build a simple Angular application and of the components which make up such an appliction. You should also be familiar with some of the core directives that are available in Angular that allow you to bind your template to your scope, making it dynamic and reactive to changes in the scope's underlying data.
-
-We are now going to turn our attention to some of the core features that Angular provides us with that allow us to enrich our applications.
-
-##Validation Attributes and CSS Classes...
-
-AngularJS provides built-in support for data validation through the use of the following HTML attributes.
-
-+ `required`
-+ `pattern`
-+ `minlength`
-+ `maxlength`
-+ `min`
-+ `max`
-
-To enable us to handle data validation correctly, Angular provides us with two pieces of information per form field.
-
-+ Whether the field has been modified or not.
-+ Whether the field is valid nor not.
-
-It does this by applying a subset of the following CSS classes to each field.
+Form validation is a key component of all but the simplest of web applications. AngularJS once again has us covered by providing a built in framework to tell users whether or not the data they have entered into a form is valid. It does this by applying a subset of the following four CSS classes.
 
 + `ng-valid`
 + `ng-invalid`
 + `ng-pristine`
 + `ng-dirty`
 
-`ng-valid` and `ng-invalid` tell us whether or not a field's data has passed validation. `ng-pristine` and `ng-dirty` allow us to inform the user of field validity only if he/she has actually entered data in the field. We don't want to distract users by telling them that fields are invalid before they have even turned their attention to the fields in question.
+As developers, we can then go ahead and write CSS rules to apply different styles to fields and forms depending on their state.
 
-##Example
+## Defining validity
 
-We have three fields with three different validation rules. The first must contain a valid email address, the second must contain a number between 10 and 20, and the third must not be empty. You have two objectives for this example.
+The CSS classes that Angular exposes are extremely useful, but in order to use them we need to tell Angular how to actually validate our data. For this, Angular relies on HTML5's data validation framework. We won't get into the details of HTML5 data validation here, but if you are interested in what it has to offer [this is a great place to start](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation).
 
-+ Apply `border: 2px solid red` to fields that have been modified and are invalid.
-+ Apply `border: 2px solid green` to fields that have been modified and are valid.
+## Example
+
+For this example we are going to validate the two input fields defined in the form in our template. We are going to do this by applying the following validation logic.
+
++ The name field is required.
++ The email field is optional, but must be a valid email if provided.
+
+In addition to this, we will apply the following design guidelines.
+
++ Fields must only be styled if they have been touched by the user.
++ Fields must be styled with a green border when vaild.
++ Fields must be styled with a red border when invalid.
++ The form itself must not be styled in any way.
+
+Let's get coding. The first thing that we need to do is map a `$scope` value to each form field. The names don't matter much because we're not really going to submit this data, but Angular won't validate fields that aren't mapped to the `$scope` so this is a logical first step to take.
+
+	<input type="text" ng-model="name" />
+	<input type="text" ng-model="email" />
+
+Now let's write our styles. Remember our design guidelines. Fields that are dirty and valid get a green border, and those which are dirty and invalid get a red border. Clean fields don't get styled. We also need to explicitly state that we want to style `input` tags, because we don't want our `form` getting styled as well.
+
+	input.ng-dirty.ng-valid {
+		border-color: green;
+	}
+	
+	input.ng-dirty.ng-invalid {
+		border-color: red;
+	}
+
+Excellent. All we have left to do is apply our validation logic. Let's start by making the name field mandatory by adding the `required` boolean attribute to it.
+
+	<input type="text" ng-model="name" required />
+
+Now let's require that the value of the email field actually be a valid email address. We do this by changing the `type` of the input from `text` to `email`.
+
+	<input type="email" ng-model="email" />
+
+Now run the code and try playing with the values in each of the different fields. The border of each field should change depending on whether data has been entered into it and whether the data it contains is valid according to the rules we have defined.
+
+---
+
+*Note: This probably goes without saying for many visitors to this site, but Angular data validation is a client-side validation solution. It is critical that all data submitted to a web application, including those validated on the client, be validated on the server.*
         ]]>
       </Instructions>
       <Html>
@@ -1702,36 +1717,29 @@ We have three fields with three different validation rules. The first must conta
 <style>
 /* Write your style rules here */
 </style>
+
 <form ng-controller="index">
-	<div>
-	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
-	</div>
-	<div>
-	  Age: <input type="text" min="18" ng-model="age" />
-	</div>
-	<div>
-	  Favorite food: <input type="text" required ng-model="food" />
-	</div>
-</div>
+	<p>Name: <input type="text" /></p>
+	<p>Email: <input type="text" /></p>
+</form>
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
 <style>
-.ng-valid.ng-dirty { border: 2px solid green; }
-.ng-invalid.ng-dirty { border: 2px solid red; }
+	input.ng-dirty.ng-valid {
+		border-color: green;
+	}
+	
+	input.ng-dirty.ng-invalid {
+		border-color: red;
+	}
 </style>
-<form ng-controller="index" class="css-controller">
-	<div>
-	  Email: <input type="text" pattern="\S*@\S*\.\S*" ng-model="email" />
-	</div>
-	<div>
-	  Age: <input type="text" min="18" ng-model="age" />
-	</div>
-	<div>
-	  Favorite food: <input type="text" required ng-model="food" />
-	</div>
-</div>
+
+<form ng-controller="index">
+	<p>Name: <input type="text" ng-model="name" required /></p>
+	<p>Email: <input type="email" ng-model="email" /></p>
+</form>
             ]]>
           </Solution>
           <Footer>
@@ -1747,27 +1755,18 @@ We have three fields with three different validation rules. The first must conta
           <Initial>
             <![CDATA[
 angular.module("root", [])
-	.controller("index", ["$scope", function($scope) {
-		$scope.email = "";
-		$scope.age = "";
-		$scope.food = "";
-	}]);
+	.controller("index", [function() {}]);
             ]]>
           </Initial>
           <Solution>
             <![CDATA[
 angular.module("root", [])
-	.controller("index", ["$scope", function($scope) {
-		$scope.email = "";
-		$scope.age = "";
-		$scope.food = "";
-	}]);
+	.controller("index", [function() {}]);
             ]]>
           </Solution>
         </Document>
       </JavaScript>
     </Lesson>
-  -->
   </Module>
   <!--<Module Id="" Title="Test Module">
     <Lesson Id="" Title="Empty Lesson">

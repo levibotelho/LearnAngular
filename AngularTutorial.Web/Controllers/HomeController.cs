@@ -66,6 +66,8 @@ namespace AngularTutorial.Web.Controllers
         [HttpPost]
         public void SendFeedback(string subject, string message)
         {
+            subject = subject.Substring(0, 200);
+            message = message.Substring(0, 1000);
             Feedback.SendMessage(subject, message);
         }
 
