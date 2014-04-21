@@ -9,6 +9,9 @@ using System.Web.UI;
 
 namespace AngularTutorial.Web.Controllers
 {
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public class HomeController : AsyncController
     {
         readonly ICourseService _courseService;
@@ -23,9 +26,9 @@ namespace AngularTutorial.Web.Controllers
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
         // ReSharper disable once InconsistentNaming
-        public ActionResult Index(string _escaped_fragment_)
+        public async Task<ViewResult> Index(string _escaped_fragment_)
         {
-            return _escaped_fragment_ == null ? (ActionResult)View() : Redirect(GetSnapshotUrl(_escaped_fragment_));
+            return _escaped_fragment_ == null ? View() : await SnapshotContentAsync(_escaped_fragment_);
         }
 
         [HttpGet]
@@ -63,6 +66,8 @@ namespace AngularTutorial.Web.Controllers
         [HttpPost]
         public void SendFeedback(string subject, string message)
         {
+            subject = subject.Substring(0, 200);
+            message = message.Substring(0, 1000);
             Feedback.SendMessage(subject, message);
         }
 
@@ -73,6 +78,16 @@ namespace AngularTutorial.Web.Controllers
                 ConfigurationFacade.SpoonSnapshotStorageAccount,
                 ConfigurationFacade.SpoonSnapshotStorageContainer,
                 escapedFragment);
+        }
+
+        async Task<ViewResult> SnapshotContentAsync(string escapedFragment)
+        {
+            var blobUrl = GetSnapshotUrl(escapedFragment);
+            using (var client = new HttpClient())
+            {
+                ViewBag.Content = await client.GetStringAsync(blobUrl);
+                return View("EscapedFragment");
+            }
         }
     }
 }
