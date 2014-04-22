@@ -1767,6 +1767,99 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="ajax-with-resource" Title="Ajax with $resource">
+      <Instructions>
+        <![CDATA[
+Instructions go here...
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">
+	<button ng-click="getUser()">Get User</button>
+	Name: <input ng-model="user.name" />
+	Email: <input ng-model="user.email" />
+	<button ng-click="postUser()">Post User</button>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	<button ng-click="getUser()">Get User</button>
+	Name: <input ng-model="user.name" />
+	Email: <input ng-model="user.email" />
+	<button ng-click="postUser()">Post User</button>
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <ScriptIncludes>
+        <Include>
+          <![CDATA[
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.min.js"></script>
+          ]]>
+        </Include>
+      </ScriptIncludes>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", ["ngResource"])
+	.controller("index", ["$scope", function($scope) {
+		$scope.user;
+		
+		$scope.getUser = function () {
+			// Make a GET call and store the result in user.
+		};
+
+		$scope.postUser = function () {
+			// Save the user and alert on success or failure.
+		};
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["ngResource"])
+	.controller("index", ["$scope", "$resource", function($scope, $resource) {
+		$scope.user;
+		var users = $resource("http://localhost:59912/ResourceLesson/Users/:id");
+		
+		$scope.getUser = function () {
+			$scope.user = users.get({id: 1});
+
+			// Make a GET call and store the result in user.
+		};
+
+		$scope.postUser = function () {
+			var response = $scope.user.$save();
+			if (response)
+				alert("User saved!");
+			else
+				alert("Error!");
+		};
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
   </Module>
   <!--<Module Id="" Title="Test Module">
     <Lesson Id="" Title="Empty Lesson">
