@@ -73,3 +73,38 @@ button.close {
     font-size: 1em;
     text-align: center;
 }
+
+.container-fluid {
+    padding: 0 15px;
+}
+
+/* TODO: Disable the following three classes for mobile devices */
+.container-fullscreen {
+    padding-top: 70px !important;
+    position: absolute;
+    height: 100%;
+    top: 0;
+}
+
+.full-height, .container-fullscreen-element-scrollable {
+    height: 100%;
+}
+
+.container-fullscreen-element-scrollable {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.editor-button-row {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: 80px;
+}
+
+.editor-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 80px;
+}

@@ -49,9 +49,9 @@
     </div>
 </div>
 
-<div ng-class="areEditableDocuments() ? 'col-xs-12 col-sm-9 col-lg-10' : 'col-sm-9 col-md-6 col-md-offset-1';">
-    <div class="row">
-        <div ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-6 instructions' : 'col-xs-12'">
+<div class="full-height" ng-class="areEditableDocuments() ? 'col-xs-12 col-sm-9 col-lg-10' : 'col-sm-9 col-md-6 col-md-offset-1';">
+    <div class="row full-height">
+        <div class="container-fullscreen-element-scrollable" ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-6 instructions' : 'col-xs-12'">
             <div class="row paddedRow">
                 <div class="col-xs-12">
                     <h1>{{title}}</h1>
@@ -63,9 +63,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-lg-6" ng-show="areEditableDocuments()">
+        <div class="col-xs-12 col-lg-6 full-height" ng-show="areEditableDocuments()">
             <hr class="hidden-lg" />
-            <div class="row paddedRow">
+            <div class="row editor-button-row">
                 <div class="col-xs-12">
                     <div class="h1">
                         <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
@@ -74,28 +74,32 @@
                     </div>
                 </div>
             </div>
-            <div class="row paddedRow">
-                <div class="col-xs-12">
-                    <ul class="nav nav-tabs">
-                        <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
-                            <div ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+            <div class="row editor-container">
+                <div class="col-sm-12">
+                    <div class="row paddedRow">
+                        <div class="col-xs-12">
+                            <ul class="nav nav-tabs">
+                                <li ng-repeat="document in htmlDocuments" ng-class="{active: $first}"><a href="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
+                                    <div ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row paddedRow">
-                <div class="col-xs-12">
-                    <ul class="nav nav-tabs">
-                        <li class="tabHandle" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                            <a data-target="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                            <div ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                    <div class="row paddedRow">
+                        <div class="col-xs-12">
+                            <ul class="nav nav-tabs">
+                                <li class="tabHandle" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                                    <a data-target="#{{document.id}}" data-toggle="tab" ng-cloak>{{document.name}}</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
+                                    <div ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
