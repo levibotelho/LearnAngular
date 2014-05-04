@@ -17,6 +17,8 @@
 }
 
 .navbar {
+    position: fixed;
+    width: 100%;
     z-index: 1;
 }
 
@@ -26,6 +28,7 @@
     padding-bottom: 70px !important;
     position: absolute;
     height: 100%;
+    width: 100%;
     top: 0;
 }
 
@@ -35,7 +38,7 @@
 
 .scrollable {
     overflow-x: hidden !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
 }
 
 .footer-separator {
@@ -50,10 +53,10 @@ footer {
     width: 100%;
 }
 
-/* Layout */
-
-#Modules {
-    margin-bottom: 50px;
+.footer-hidden {
+    visibility: hidden !important;
+    position: static !important;
+    padding-bottom: 14px !important;
 }
 
 /* Home */
@@ -92,6 +95,12 @@ footer {
     font-style: italic;
 }
 
+/* Layout */
+
+#Modules {
+    z-index: 1;
+}
+
 /* Lessons */
 
 .newLessonsAlerts {
@@ -99,14 +108,21 @@ footer {
     text-align: center;
 }
 
+.instructions {
+    padding-right: 2em;
+}
+
+.lesson-content {
+    position: fixed;
+    right: 0;
+    top: 70px;
+    bottom:70px;
+}
+
 /* Editors */
 
 .renderFrame {
     width: 100%;
-}
-
-.ace_editor {
-    height: 200px;
 }
 
 .lessonElement, .tabHandle, .panel-title > a {

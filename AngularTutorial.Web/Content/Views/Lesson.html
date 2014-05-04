@@ -49,9 +49,9 @@
     </div>
 </div>
 
-<div class="full-height" ng-class="areEditableDocuments() ? 'col-xs-12 col-sm-9 col-lg-10' : 'col-sm-9 col-md-6 col-md-offset-1';">
+<div class="col-xs-12 lesson-content">
     <div class="row full-height">
-        <div class="full-height scrollable" ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-6 instructions' : 'col-xs-12'">
+        <div class="full-height scrollable" ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-5 col-sm-offset-3 col-lg-offset-2 instructions' : 'col-xs-12 col-sm-7 col-lg-8 col-sm-offset-4 col-lg-offset-3'">
             <div class="row paddedRow">
                 <div class="col-xs-12">
                     <h1>{{title}}</h1>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-lg-6 full-height" ng-show="areEditableDocuments()">
+        <div class="col-xs-12 col-lg-5 full-height" ng-show="areEditableDocuments()">
             <div class="row editor-button-row text-center">
                 <div class="col-xs-12">
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
