@@ -2,12 +2,24 @@
     display: none !important;
 }
 
+#Modules {
+    margin-bottom: 50px;
+}
+
 .paddedRow {
     margin: 1em 0 1em 0;
 }
 
 .megaPaddedRow {
     margin: 3em 0 3em 0;
+}
+
+footer {
+    background-color: white;
+    bottom: 0;
+    padding-bottom: 15px;
+    position: fixed;
+    width: 100%;
 }
 
 .renderFrame {
