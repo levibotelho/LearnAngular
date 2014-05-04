@@ -1,9 +1,7 @@
-﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
+﻿/* Essentials */
 
-#Modules {
-    margin-bottom: 50px;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
 }
 
 .paddedRow {
@@ -14,6 +12,36 @@
     margin: 3em 0 3em 0;
 }
 
+.container-fluid {
+    padding: 0 15px;
+}
+
+.navbar {
+    z-index: 1;
+}
+
+/* TODO: Disable the following three classes for mobile devices */
+.container-fullscreen {
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+    position: absolute;
+    height: 100%;
+    top: 0;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.scrollable {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.footer-separator {
+    margin-bottom: 13px;
+}
+
 footer {
     background-color: white;
     bottom: 0;
@@ -22,30 +50,13 @@ footer {
     width: 100%;
 }
 
-.renderFrame {
-    width: 100%;
+/* Layout */
+
+#Modules {
+    margin-bottom: 50px;
 }
 
-.ace_editor {
-    height: 200px;
-}
-
-.lessonElement, .tabHandle, .panel-title > a {
-    cursor: pointer;
-}
-
-.ideIcon {
-    margin-right: 1em;
-}
-
-.alphaTag {
-    margin-left: 1em;
-    font-size: 15px;
-}
-
-button.close {
-    margin-top: -0.1em !important;
-}
+/* Home */
 
 .siteTitle {
     font-size: 5em;
@@ -81,39 +92,38 @@ button.close {
     font-style: italic;
 }
 
+/* Lessons */
+
 .newLessonsAlerts {
     font-size: 1em;
     text-align: center;
 }
 
-.container-fluid {
-    padding: 0 15px;
+/* Editors */
+
+.renderFrame {
+    width: 100%;
 }
 
-.navbar {
-    z-index: 1;
+.ace_editor {
+    height: 200px;
 }
 
-.footer-separator {
-    margin-bottom: 13px;
+.lessonElement, .tabHandle, .panel-title > a {
+    cursor: pointer;
 }
 
-/* TODO: Disable the following three classes for mobile devices */
-.container-fullscreen {
-    padding-top: 70px !important;
-    padding-bottom: 70px !important;
-    position: absolute;
-    height: 100%;
-    top: 0;
+.ideIcon {
+    margin-right: 1em;
 }
 
-.full-height {
-    height: 100%;
+.alphaTag {
+    margin-left: 1em;
+    font-size: 15px;
 }
 
-.scrollable {
-    overflow-x: hidden !important;
-    overflow-y: scroll !important;
+button.close {
+    margin-top: -0.1em !important;
 }
 
 .editor-button-row {
