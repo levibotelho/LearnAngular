@@ -105,15 +105,17 @@ button.close {
 }
 
 .editor-button-row {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    height: 80px;
+    height: 40px;
 }
 
 .editor-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    padding-top: 80px;
+    padding-bottom: 40px;
+}
+
+.editor-row {
+    height: 50%;
+}
+
+.editor-tab-content {
+    padding-bottom: 65px;
 }
