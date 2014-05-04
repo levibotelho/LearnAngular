@@ -78,19 +78,28 @@ button.close {
     padding: 0 15px;
 }
 
+.navbar {
+    z-index: 1;
+}
+
+.footer-separator {
+    margin-bottom: 13px;
+}
+
 /* TODO: Disable the following three classes for mobile devices */
 .container-fullscreen {
     padding-top: 70px !important;
+    padding-bottom: 70px !important;
     position: absolute;
     height: 100%;
     top: 0;
 }
 
-.full-height, .container-fullscreen-element-scrollable {
+.full-height {
     height: 100%;
 }
 
-.container-fullscreen-element-scrollable {
+.scrollable {
     overflow-x: hidden !important;
     overflow-y: scroll !important;
 }
