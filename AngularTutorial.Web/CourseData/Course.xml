@@ -1767,6 +1767,201 @@ angular.module("root", [])
         </Document>
       </JavaScript>
     </Lesson>
+    <Lesson Id="ajax-with-resource" Title="Ajax with $resource">
+      <Instructions>
+        <![CDATA[
+Ajax calls are an integral part of virtually all modern web applications. Once again, Angular doesn't disappoint and gives us not one but two different APIs to handle Ajax requests. In this lesson we're going to look at the higher-level of the two, which is known as `$resource`.
+
+## Introduction to $resource
+
+As mentioned a moment ago, `$resource` is a high-level Ajax API. Instead of providing fine-grained control over how requests are made, `$resource` makes a number of assumptions about how a web service endpoint should function, and with minimal information from the developer constructs an object that can be used to make a wide variety of requests to the service.
+
+## The basics
+
+The best way to understand how `$resource` works is by seeing how a resource object is made and what it is capable of. At its simplest, we can instantiate one using the following code.
+
+	var resourceObject = $resource(url);   
+
+This may not look like much, but believe it or not `resourceObject` already contains the following functions.
+
++ `get([params], [success], [error])` - Makes a standard GET call.
++ `save([params], postData, [success], [error])` - Makes a standard POST call.
++ `query([params], [success], [error])` - Makes a standard GET call and returns the response as an array.
++ `remove([params], postData, [success], [error])` - Makes a standard DELETE call.
+
+Let's briefly run through the arguments to these methods. `success` and `error` are both callback functions that will execute in their respective cases. No surprises there. `postData`, where applicable, is simply the data to post to the server. Again, no surprises.
+
+What might be a little less clear is the purpose of the `params` argument. To understand what it is used for, we first must go back to our initial `$resource` call. As we saw a moment ago, the minimum amount of data required to create a `$request` object is a URL. However this url can contain placeholders for parameter values which can then be replaced when when Ajax calls are made. Placeholders are integrated into URLs as follows.
+
+	`http://www.mysite.com/users/:paramName`  
+
+If we were making a `GET` request using a resource object configured for this URL and wanted to set a value for `paramName`, all we would have to do is pass the following object as the first argument to the object's `get` method.
+
+	{ paramName: value }
+
+With these four methods and the features they provide, CRUD requests between client and server become effortless to configure and execute. But there's more! When a resource object receives a response from the server it automatically deserializes the response into a JavaScript object, appending the following two methods to it in the process.
+
++ `$save([params], [success], [error])` - POSTs the object back to the endpoint, saving changes
++ `$remove([params], [success], [error])` - DELETEs the object
+
+Note that these are essentially the same methods that exist on the `$resource` object, except that they do not take a `postData` parameter. These methods are actually customized for the object on which they are configured. That means that if you modify an object and then call `$save`, the object will be serialized and POSTed to the server where it can be updated. The same goes for `$remove`, which makes a DELETE request instead. This really is an amazing feature that saves a lot of time and effort on the part of the developer.
+
+## Example
+
+For this example we're going to use `$resource` to create a service which will perform the following two actions.
+
+1. Retrieve a fictitious "user" from a RESTful endpoint.
+2. POST a modified version of the user back to the endpoint.
+
+As this lesson really is about using the `$resource` API, everything unrelated to `$resource` has already been taken care of. We start out with a basic HTML interface that contains two fields, one for a name and one for an email. It also contains a button to retrieve the user from the RESTful endpoint and a button to save it back. Our goal for this lesson will be to fill in the `getUser` and `postUser` functions attached to these two buttons to make this interface truly functional.
+
+### Configuration
+
+Before we can even get to using `$resource`, a bit of configuration is required. The first thing to take into account is that `$resource` is not a part of the core AngularJS API. The Angular team has instead decided to include `$resource` in a separate module, in a separate code file. For this example the code file has been automatically included, but if you use `$resource` in your own applications you will naturally need to add a reference to it yourself. The name of the file to include is `angular-resource[.min].js`. The file can be downloaded on the AngularJS website, or referenced directly off the Google CDN.
+
+As `$resource` lives in its own module, we need to inject this module into our own. To do this, add `"ngResource"` to the empty array in the module declaration function.
+
+Now, inject `$resource` into the controller by adding it to the `controller` call, both as a dependency and as a controller function argument.
+
+	.controller("index", ["$scope", "$resource", function($scope, $resource) {
+
+That's all we need to do. Now let's start using it! 
+
+### Code
+
+We'll start out by defining our resource object. As we're going to use it in both the `getUser` and `postUser` methods we need to define it directly in the controller function. The URL to the endpoint is as follows.
+
+	http://www.learn-angular.org/ResourceLesson/Users/
+
+In order to retrieve a given user from the server, our RESTful service requires that we append an ID to the end of the URL. Our service will return the user corresponding to the ID that we provide. We'll implement this ID integration into the url using a placeholder, as follows.
+
+	http://www.learn-angular.org/ResourceLesson/Users/:id
+
+Let's now go ahead and use this url to instantiate the resource object. 
+
+	var users = $resource("http://www.learn-angular.org/ResourceLesson/Users/:id");
+
+Now we'll implement our `get` function. The web service listening at the url provided contains a dummy user with the ID of `1`. Therefore to retrieve this user and bind it to our model we need to add the following line of code to the function body.
+	 
+	$scope.user = users.get({id: 1});
+
+When executed, this line of code will insert `1` into our request URL, send off the GET request to the server, deserialize the returned data into a JavaScript object, and assign it to the `$scope.user` variable. The name and email fields in our HTML are preconfigured to bind to the name and email fields on the object returned by the web service.
+
+Now let's implement our save function. Because we will be saving a user that we have already retrieved from the web service, this task is extremely simple. All we need to do is call the `$save()` method that Angular has attached to the user object for us. Add the following code to the `postUser` function.
+
+	var response = $scope.user.$save(function () {
+		alert("User saved!");
+	});
+
+Here we've simply passed a callback which will alert us if the user has been saved successfully.
+
+That's all we need to do. Run the code and try the following.
+
+1. Click the "Get User" button. The two form fields should fill up with dummy user data.
+2. Modify the data and click the "Post User" button. The callback that you passed to the `$save` method should execute and an alert should pop up onscreen indicating that the user has been saved.
+3. Clear the form fields and click the "Get User" button once again. The fields should fill with the data that you saved a moment ago.
+
+## $resource on the server
+
+Because `$resource` makes many assumptions about how a web service endpoint should function, it often proves to be the most useful when you are the one who is in control of the web service. If you are writing a web service to use with `$resource`, keep the following guidelines in mind.
+
++ The service should be RESTful. The action that the server-side code should take should be determined by the HTTP verb used in the request.
++ The same url should be used for all requests. Parameter segments or querystring arguments can be added for GET requests.
++ JSON should be used as the preferred serialization standard. As we saw earlier, Angular will automatically deserialize JSON responses into objects without any additional action on your part.
+
+## More about $resource...
+
+`$resource` is an extremely powerful API. While in this lesson we have been able to walk through the basics, `$resource` contains many more features than could reasonably be covered here. These features include:
+
++ Custom request methods
++ Default parameter values
++ Custom (de)serialization logic
++ Cache support
++ and much more...
+
+[The entire feature set is documented here](https://docs.angularjs.org/api/ngResource/service/$resource) in the AngularJS API reference. I strongly encourage you to take a moment and check it out.
+        ]]>
+      </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Header>
+            <![CDATA[
+<html ng-app="root">
+<body>
+            ]]>
+          </Header>
+          <Initial>
+            <![CDATA[
+<div ng-controller="index">
+	<button ng-click="getUser()">Get User</button>
+	Name: <input ng-model="user.name" />
+	Email: <input ng-model="user.email" />
+	<button ng-click="postUser()">Post User</button>
+</div>
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<div ng-controller="index">
+	<button ng-click="getUser()">Get User</button>
+	Name: <input ng-model="user.name" />
+	Email: <input ng-model="user.email" />
+	<button ng-click="postUser()">Post User</button>
+</div>
+            ]]>
+          </Solution>
+          <Footer>
+            <![CDATA[
+</body>
+</html>
+            ]]>
+          </Footer>
+        </Document>
+      </Html>
+      <ScriptIncludes>
+        <Include>
+          <![CDATA[
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.min.js"></script>
+          ]]>
+        </Include>
+      </ScriptIncludes>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module("root", [])
+	.controller("index", ["$scope", function($scope) {		
+		$scope.getUser = function () {
+			// Make a GET call and store the result in user.
+		};
+
+		$scope.postUser = function () {
+			// Save the user and alert on success or failure.
+		};
+	}]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module("root", ["ngResource"])
+	.controller("index", ["$scope", "$resource", function($scope, $resource) {
+		var users = $resource("http://www.learn-angular.org/ResourceLesson/Users/:id");
+		
+		$scope.getUser = function () {
+			$scope.user = users.get({id: 1});
+		};
+
+		$scope.postUser = function () {
+			var response = $scope.user.$save(function () {
+				alert("User saved!");
+			});
+		};
+	}]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
+    </Lesson>
   </Module>
   <!--<Module Id="" Title="Test Module">
     <Lesson Id="" Title="Empty Lesson">

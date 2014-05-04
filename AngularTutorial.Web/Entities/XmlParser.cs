@@ -122,7 +122,7 @@ namespace AngularTutorial.Web.Entities
 
         static string[] GenerateScriptIncludes(XContainer element)
         {
-            return element != null ? element.Elements(IncludeNodeName).Select(GetValueFromElement).Concat(DefaultIncludes).ToArray() : DefaultIncludes;
+            return element != null ? DefaultIncludes.Concat(element.Elements(IncludeNodeName).Select(GetValueFromElement)).ToArray() : DefaultIncludes;
         }
 
         static string GetValueFromElement(XElement element)
