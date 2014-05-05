@@ -1,0 +1,225 @@
+﻿@screen-xs-max: 767px;
+@screen-sm-min: 768px;
+@screen-sm-max: 991px;
+@screen-md-min: 992px;
+@screen-md-max: 1199px;
+@screen-lg-min: 1200px;
+
+@only-xs: ~"(max-width: @{screen-xs-max})";
+@not-lg: ~"(max-width: @{screen-md-max})";
+@sm: ~"(min-width: @{screen-sm-min})";
+@lg: ~"(min-width: @{screen-lg-min})";
+
+/* Essentials */
+
+.navbar-right {
+    float: right !important;
+}
+
+.navbar-nav > li {
+    float: left;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+}
+
+.navbar-header {
+    float: left;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.paddedRow {
+    margin: 1em 0 1em 0;
+}
+
+.megaPaddedRow {
+    margin: 3em 0 3em 0;
+}
+
+.container-fluid {
+    padding: 0 15px;
+}
+
+.navbar {    
+    z-index: 2;
+
+    @media @lg {
+        position: fixed;
+        width: 100%;
+    }
+}
+
+.container-fullscreen {
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.full-height {
+    @media @lg {
+        height: 100%;
+    }    
+}
+
+.scrollable {
+    @media @lg {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }    
+}
+
+.footer-separator {
+    margin-bottom: 13px;
+}
+
+footer {
+    background-color: white;    
+    padding-bottom: 15px;
+    z-index: 2;
+
+    @media @lg {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+.footer-hidden {
+    visibility: hidden !important;
+    position: static !important;
+    padding-bottom: 14px !important;
+
+    @media @not-lg {
+        display: none;
+    }
+}
+
+/* Home */
+
+.title-text {
+    font-size: 4em;
+
+    @media @lg {
+        font-size: 5em;
+    }    
+}
+
+.getStartedButton {
+    font-size: 3em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.getStartedButtonXs {
+    font-size: 2em;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
+.getStartedIcon {
+    margin-left: 1em;
+}
+
+.teaserImage {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.teaserFooter {
+    font-style: italic;
+}
+
+.siteDescriptionText {
+    font-size: 1.4em;
+    font-style: italic;
+
+    @media @lg {
+        font-size: 1.5em;
+    } 
+}
+
+/* Layout */
+
+#Modules {
+    z-index: 1;
+}
+
+/* Lessons */
+
+.instructions {
+    padding-right: 2em;
+}
+
+.lesson-content {
+    @media @lg {
+        position: fixed;
+        right: 0;
+        top: 70px;
+        bottom:70px;
+    }    
+}
+
+/* Editors */
+
+.editor {
+    @media @lg {
+        .full-height;
+    }
+    
+    @media @not-lg {
+        height: 200px;
+    }
+}
+
+.renderFrame {
+    width: 100%;
+}
+
+.lessonElement, .tabHandle, .panel-title > a {
+    cursor: pointer;
+}
+
+.ideIcon {
+    margin-right: 1em;
+}
+
+.version-tag {
+    margin-left: 1em;
+    font-size: 15px;
+}
+
+button.close {
+    margin-top: -0.1em !important;
+}
+
+.editor-button-row {
+    height: 40px;
+    margin-bottom: 1em;
+}
+
+.editor-container {
+    @media @lg {
+        padding-bottom: 40px;
+    }
+}
+
+.editor-row {
+    height: 50%;
+}
+
+.editor-tab-content {
+    @media @lg {
+        padding-bottom: 65px;
+    }
+
+    @media @not-lg {
+        padding-bottom: 2em;
+    }
+}

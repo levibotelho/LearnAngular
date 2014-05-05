@@ -11,13 +11,11 @@ namespace AngularTutorial.Web.Entities
     {
         static readonly string XmlPath = HostingEnvironment.MapPath(@"~/CourseData/Course.xml");
 
-        [Conditional("RESETCACHE")]
         public static void FillCache()
         {
             FillCache(XmlPath, DependencyInjectionConfig.DependencyInjectionContainer.GetInstance<ICacheRepository>());
         }
 
-        [Conditional("RESETCACHE")]
         public static void FillCache(string xmlPath, ICacheRepository cacheRepository)
         {
             var parser = new XmlParser(xmlPath);

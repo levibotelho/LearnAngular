@@ -5,6 +5,8 @@ using AngularTutorial.Web.Entities;
 
 namespace AngularTutorial.Web
 {
+    using System.Web.Optimization;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

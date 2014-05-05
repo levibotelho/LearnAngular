@@ -36,12 +36,13 @@
                 });
         }
     ])
-    .controller("home", ["$scope", "navigationService", function ($scope, navigationService) {
+    .controller("home", ["$scope", "$window", "navigationService", function ($scope, $window, navigationService) {
+        $window.document.title = "Home";
         navigationService.isTableOfContentsAvailable = false;
     }])
     .controller("lesson", [
-        "$scope", "$http", "$routeParams", "$sce", "navigationService",
-        function ($scope, $http, $routeParams, $sce, navigationService) {
+        "$scope", "$http", "$routeParams", "$sce", "$window", "navigationService",
+        function ($scope, $http, $routeParams, $sce, $window, navigationService) {
             $scope.id = "";
             $scope.title = "";
             $scope.instructions = "";
@@ -158,7 +159,7 @@
                     // data, status, headers, config
                     .success(function(data) {
                         $scope.id = data.Id;
-                        $scope.title = data.Title;
+                        $scope.title = $window.document.title = data.Title;
                         $scope.instructions = $sce.trustAs("html", data.Instructions);
                         $scope.parseHtmlDocuments(data.HtmlDocuments);
                         $scope.parseJavaScriptDocuments(data.JavaScriptDocuments);
@@ -223,13 +224,10 @@
             }
         }
     ])
-    .controller("about", [
-        "navigationService", function (navigationService) {
-            navigationService.isTableOfContentsAvailable = false;
-        }
-    ])
     .controller("feedback", [
-        "$scope", "$http", "navigationService", function ($scope, $http, navigationService) {
+        "$scope", "$http", "$window", "navigationService",
+        function ($scope, $http, $window, navigationService) {
+            $window.document.title = "Feedback";
             $scope.feedbackStatus = -1;
             navigationService.isTableOfContentsAvailable = false;
             $scope.submit = function () {

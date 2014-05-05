@@ -9,17 +9,15 @@
                 .when("/lessons", {
                     redirectTo: "/lessons/introducing-angular"
                 })
-                .when("/about", {
-                    templateUrl: "/Content/Views/About.html",
-                    controller: "about"
-                })
                 .when("/feedback", {
                     templateUrl: "/Content/Views/Feedback.html",
-                    controller: "feedback"
+                    controller: "feedback",
+                    title: "Feedback"
                 })
                 .otherwise({
                     templateUrl: "/Content/Views/Home.html",
-                    controller: "home"
+                    controller: "home",
+                    title: "Home"
                 });
 
             $locationProvider.html5Mode(false).hashPrefix('!');
