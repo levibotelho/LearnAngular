@@ -9,11 +9,6 @@
                 .when("/lessons", {
                     redirectTo: "/lessons/introducing-angular"
                 })
-                .when("/feedback", {
-                    templateUrl: "/Content/Views/Feedback.html",
-                    controller: "feedback",
-                    title: "Feedback"
-                })
                 .otherwise({
                     templateUrl: "/Content/Views/Home.html",
                     controller: "home",

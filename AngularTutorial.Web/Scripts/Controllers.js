@@ -1,48 +1,50 @@
 ﻿angular.module("controllers", ["ui.ace", "services"])
     .controller("index", [
         "$scope", "$routeParams", "navigationService",
-        function ($scope, $routeParams, navigationService) {
+        function($scope, $routeParams, navigationService) {
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
             $scope.isTableOfContentsAvailable = false;
 
-            $scope.selectLesson = function (id) {
+            $scope.selectLesson = function(id) {
                 navigationService.selectLesson(id);
             };
 
             navigationService.getTableOfContents()
-                .success(function (data) {
+                .success(function(data) {
                     $scope.tableOfContents = data;
                     if ($routeParams.lessonId != null) {
                         $scope.selectLesson($routeParams.lessonId);
                     }
                 })
-                .error(function () {
+                .error(function() {
                     alert("An unexpected error has occured. Please try again.");
                 });
 
-            $scope.$watch(function () { return navigationService.selectedLesson; },
-                function (newValue, oldValue) {
+            $scope.$watch(function() { return navigationService.selectedLesson; },
+                function(newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.selectedLesson = newValue;
                     }
                 });
 
-            $scope.$watch(function () { return navigationService.isTableOfContentsAvailable; },
-                function (newValue, oldValue) {
+            $scope.$watch(function() { return navigationService.isTableOfContentsAvailable; },
+                function(newValue, oldValue) {
                     if (newValue != oldValue) {
                         $scope.isTableOfContentsAvailable = newValue;
                     }
                 });
         }
     ])
-    .controller("home", ["$scope", "$window", "navigationService", function ($scope, $window, navigationService) {
-        $window.document.title = "Home";
-        navigationService.isTableOfContentsAvailable = false;
-    }])
+    .controller("home", [
+        "$scope", "$window", "navigationService", function($scope, $window, navigationService) {
+            $window.document.title = "Home";
+            navigationService.isTableOfContentsAvailable = false;
+        }
+    ])
     .controller("lesson", [
         "$scope", "$http", "$routeParams", "$sce", "$window", "navigationService",
-        function ($scope, $http, $routeParams, $sce, $window, navigationService) {
+        function($scope, $http, $routeParams, $sce, $window, navigationService) {
             $scope.id = "";
             $scope.title = "";
             $scope.instructions = "";
@@ -51,11 +53,11 @@
             $scope.headIncludes = "";
             $scope.scriptIncludes = "";
 
-            $scope.areEditableDocuments = function () {
+            $scope.areEditableDocuments = function() {
                 return $scope.htmlDocuments.length != 0 || $scope.javaScriptDocuments.length != 0;
             };
 
-            $scope.run = function () {
+            $scope.run = function() {
                 var frame = window.frames[0].document;
                 var document = $scope.generateDocument();
                 frame.open();
@@ -63,7 +65,7 @@
                 frame.close();
             };
 
-            $scope.generateDocument = function () {
+            $scope.generateDocument = function() {
                 if ($scope.htmlDocuments.length > 1) {
                     throw new Error("Multiple HTML documents are not yet supported");
                 }
@@ -76,7 +78,7 @@
                 return baseDocument;
             };
 
-            $scope.generateBaseHtmlDocument = function (header, body, footer) {
+            $scope.generateBaseHtmlDocument = function(header, body, footer) {
                 var document = "";
                 if (header != null)
                     document += header + "\n";
@@ -89,7 +91,7 @@
                 return document.trim();
             };
 
-            $scope.generateScriptBlock = function () {
+            $scope.generateScriptBlock = function() {
                 var scriptBlock = "";
                 for (var i = 0; i < $scope.javaScriptDocuments.length; i++) {
                     var document = $scope.javaScriptDocuments[i];
@@ -99,7 +101,7 @@
                 return scriptBlock.trim();
             };
 
-            $scope.insertHeadIncludes = function (document) {
+            $scope.insertHeadIncludes = function(document) {
                 if ($scope.headIncludes == "")
                     return document;
 
@@ -111,7 +113,7 @@
                 return document.substr(0, insertIndex) + $scope.headIncludes + document.substr(insertIndex) + "\n";
             };
 
-            $scope.insertScript = function (document, scriptBlock) {
+            $scope.insertScript = function(document, scriptBlock) {
                 if (scriptBlock == null) {
                     return document;
                 }
@@ -132,7 +134,7 @@
                 return document.substr(0, insertIndex) + scripts + document.substr(insertIndex);
             };
 
-            $scope.showSolution = function () {
+            $scope.showSolution = function() {
                 for (var i = 0; i < $scope.htmlDocuments.length; i++) {
                     var htmlDocument = $scope.htmlDocuments[i];
                     htmlDocument.html = htmlDocument.solutionHtml;
@@ -143,7 +145,7 @@
                 }
             };
 
-            $scope.resetCode = function () {
+            $scope.resetCode = function() {
                 for (var i = 0; i < $scope.htmlDocuments.length; i++) {
                     var htmlDocument = $scope.htmlDocuments[i];
                     htmlDocument.html = htmlDocument.initialHtml;
@@ -154,7 +156,7 @@
                 }
             };
 
-            $scope.loadLesson = function (id) {
+            $scope.loadLesson = function(id) {
                 $http.get("/Home/GetLesson", { params: { id: id } })
                     // data, status, headers, config
                     .success(function(data) {
@@ -171,7 +173,7 @@
                     });
             };
 
-            $scope.parseHtmlDocuments = function (documents) {
+            $scope.parseHtmlDocuments = function(documents) {
                 $scope.htmlDocuments.length = 0;
                 if (documents == null)
                     return;
@@ -190,7 +192,7 @@
                 }
             };
 
-            $scope.parseJavaScriptDocuments = function (documents) {
+            $scope.parseJavaScriptDocuments = function(documents) {
                 $scope.javaScriptDocuments.length = 0;
                 if (documents == null)
                     return;
@@ -207,13 +209,13 @@
                 }
             };
 
-            $scope.generateDocumentId = function (name) {
+            $scope.generateDocumentId = function(name) {
                 if (name == null)
                     throw new Error("name cannot be null");
                 return name.replace(".", "");
             };
 
-            $scope.parseIncludes = function (includes) {
+            $scope.parseIncludes = function(includes) {
                 return includes != null ? includes.join("\n") : "";
             };
 
@@ -222,19 +224,5 @@
                 $scope.loadLesson($routeParams.lessonId);
                 navigationService.selectLesson($routeParams.lessonId);
             }
-        }
-    ])
-    .controller("feedback", [
-        "$scope", "$http", "$window", "navigationService",
-        function ($scope, $http, $window, navigationService) {
-            $window.document.title = "Feedback";
-            $scope.feedbackStatus = -1;
-            navigationService.isTableOfContentsAvailable = false;
-            $scope.submit = function () {
-                $scope.feedbackStatus = -1;
-                $http.post("/Home/SendFeedback", { subject: $scope.subject, message: $scope.message })
-                    .success(function () { $scope.feedbackStatus = 0; })
-                    .error(function () { $scope.feedbackStatus = 1; });
-            };
         }
     ]);

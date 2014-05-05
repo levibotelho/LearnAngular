@@ -18,9 +18,7 @@ namespace AngularTutorial.Web.Entities
         static readonly List<string> Urls = new List<string>
         {
             Host,
-            Host + "lessons",
-            Host + "about",
-            Host + "feedback"
+            Host + "lessons"
         };
 
         public static void Generate()

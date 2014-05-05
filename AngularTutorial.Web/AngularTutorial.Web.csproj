@@ -155,7 +155,6 @@
     <Content Include="Content\Images\Editor.png" />
     <Content Include="Content\Images\ImStuck.png" />
     <Content Include="Content\Images\Run.png" />
-    <Content Include="Content\Views\Feedback.html" />
     <Content Include="Content\Views\Home.html" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Images\LearnAngular-huge.png" />
@@ -485,7 +484,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResourceLessonController.cs" />
     <Compile Include="Entities\CacheFiller.cs" />
-    <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\XmlParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

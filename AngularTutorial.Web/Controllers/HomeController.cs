@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using AngularTutorial.Services;
-using AngularTutorial.Web.Entities;
 
 #if !DEBUG
 using System.Web.UI;
@@ -61,14 +60,6 @@ namespace AngularTutorial.Web.Controllers
             var lessonId = string.IsNullOrWhiteSpace(id) ? _courseService.GetTableOfContents().Modules[0].Children[0].Id : id;
             var lesson = _courseService.GetLesson(lessonId);
             return Json(lesson, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public void SendFeedback(string subject, string message)
-        {
-            subject = subject.Substring(0, 200);
-            message = message.Substring(0, 1000);
-            Feedback.SendMessage(subject, message);
         }
 
         static string GetSnapshotUrl(string escapedFragment)
