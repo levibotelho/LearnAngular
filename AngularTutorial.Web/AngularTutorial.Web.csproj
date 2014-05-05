@@ -29,7 +29,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RESETCACHE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -166,7 +166,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Content\Site.less" />
-    <Content Include="Content\Views\About.html" />
     <Content Include="Content\Views\Lesson.html" />
     <Content Include="CourseData\Course.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
