@@ -165,13 +165,14 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\Site.less" />
+    <Content Include="Content\Site.less" />
     <Content Include="Content\Views\Lesson.html" />
     <Content Include="CourseData\Course.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ace.config.js" />
     <Content Include="Scripts\ace\ace.js" />
     <Content Include="Scripts\ace\ext-chromevox.js" />
     <Content Include="Scripts\ace\ext-elastic_tabstops_lite.js" />
@@ -464,13 +465,12 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Properties\PublishProfiles\angulartutorial - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\angulartutorial - Web Deploy.pubxml" />
     <Content Include="StrongConfigFacade.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StrongConfigFacade.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\EscapedFragment.cshtml" />
+    <None Include="Properties\PublishProfiles\angulartutorial.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
