@@ -49,9 +49,9 @@
     </div>
 </div>
 
-<div class="col-xs-12 lesson-content">
+<div class="col-xs-12 col-sm-9 col-lg-12 lesson-content">
     <div class="row full-height">
-        <div class="full-height scrollable" ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-5 col-sm-offset-3 col-lg-offset-2 instructions' : 'col-xs-12 col-sm-7 col-lg-8 col-sm-offset-4 col-lg-offset-3'">
+        <div class="full-height scrollable" ng-class="areEditableDocuments() ? 'col-xs-12 col-lg-5 col-lg-offset-2 instructions' : 'col-xs-12 col-lg-7 col-lg-offset-3'">
             <div class="row paddedRow">
                 <div class="col-xs-12">
                     <h1>{{title}}</h1>
@@ -64,6 +64,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-lg-5 full-height" ng-show="areEditableDocuments()">
+            <hr class="hidden-lg" />
             <div class="row editor-button-row text-center">
                 <div class="col-xs-12">
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#runModal" ng-click="run()"><i class="fa fa-play ideIcon"></i>Run</button>
@@ -80,7 +81,7 @@
                             </ul>
                             <div class="tab-content editor-tab-content full-height">
                                 <div class="tab-pane full-height" id="{{document.id}}" ng-repeat="document in htmlDocuments" ng-class="{active: $first}">
-                                    <div class="full-height" ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
+                                    <div class="editor" ui-ace="{ mode: 'html' }" ng-model="document.html"></div>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                             </ul>
                             <div class="tab-content editor-tab-content full-height">
                                 <div class="tab-pane full-height" id="{{document.id}}" ng-repeat="document in javaScriptDocuments" ng-class="{active: $first}">
-                                    <div class="full-height" ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
+                                    <div class="editor" ui-ace="{ mode: 'javascript' }" ng-model="document.javaScript"></div>
                                 </div>
                             </div>
                         </div>

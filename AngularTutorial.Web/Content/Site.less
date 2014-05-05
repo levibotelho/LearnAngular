@@ -1,12 +1,32 @@
 ﻿@screen-xs-max: 767px;
 @screen-sm-min: 768px;
+@screen-sm-max: 991px;
 @screen-md-min: 992px;
+@screen-md-max: 1199px;
 @screen-lg-min: 1200px;
 
-@not-xs: ~"(min-width: @{screen-sm-min})";
 @only-xs: ~"(max-width: @{screen-xs-max})";
+@not-lg: ~"(max-width: @{screen-md-max})";
+@sm: ~"(min-width: @{screen-sm-min})";
+@lg: ~"(min-width: @{screen-lg-min})";
 
 /* Essentials */
+
+.navbar-right {
+    float: right !important;
+}
+
+.navbar-nav > li {
+    float: left;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+}
+
+.navbar-header {
+    float: left;
+}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
@@ -24,13 +44,15 @@
     padding: 0 15px;
 }
 
-.navbar {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
+.navbar {    
+    z-index: 2;
+
+    @media @lg {
+        position: fixed;
+        width: 100%;
+    }
 }
 
-/* TODO: Disable the following three classes for mobile devices */
 .container-fullscreen {
     padding-top: 70px !important;
     padding-bottom: 70px !important;
@@ -41,12 +63,16 @@
 }
 
 .full-height {
-    height: 100%;
+    @media @lg {
+        height: 100%;
+    }    
 }
 
 .scrollable {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    @media @lg {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }    
 }
 
 .footer-separator {
@@ -54,23 +80,35 @@
 }
 
 footer {
-    background-color: white;
-    bottom: 0;
+    background-color: white;    
     padding-bottom: 15px;
-    position: fixed;
-    width: 100%;
+    z-index: 2;
+
+    @media @lg {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
 }
 
 .footer-hidden {
     visibility: hidden !important;
     position: static !important;
     padding-bottom: 14px !important;
+
+    @media @not-lg {
+        display: none;
+    }
 }
 
 /* Home */
 
-.siteTitle {
-    font-size: 5em;
+.title-text {
+    font-size: 4em;
+
+    @media @lg {
+        font-size: 5em;
+    }    
 }
 
 .getStartedButton {
@@ -99,8 +137,12 @@ footer {
 }
 
 .siteDescriptionText {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-style: italic;
+
+    @media @lg {
+        font-size: 1.5em;
+    } 
 }
 
 /* Layout */
@@ -111,23 +153,30 @@ footer {
 
 /* Lessons */
 
-.newLessonsAlerts {
-    font-size: 1em;
-    text-align: center;
-}
-
 .instructions {
     padding-right: 2em;
 }
 
 .lesson-content {
-    position: fixed;
-    right: 0;
-    top: 70px;
-    bottom:70px;
+    @media @lg {
+        position: fixed;
+        right: 0;
+        top: 70px;
+        bottom:70px;
+    }    
 }
 
 /* Editors */
+
+.editor {
+    @media @lg {
+        .full-height;
+    }
+    
+    @media @not-lg {
+        height: 200px;
+    }
+}
 
 .renderFrame {
     width: 100%;
@@ -141,7 +190,7 @@ footer {
     margin-right: 1em;
 }
 
-.alphaTag {
+.version-tag {
     margin-left: 1em;
     font-size: 15px;
 }
@@ -152,10 +201,13 @@ button.close {
 
 .editor-button-row {
     height: 40px;
+    margin-bottom: 1em;
 }
 
 .editor-container {
-    padding-bottom: 40px;
+    @media @lg {
+        padding-bottom: 40px;
+    }
 }
 
 .editor-row {
@@ -163,5 +215,11 @@ button.close {
 }
 
 .editor-tab-content {
-    padding-bottom: 65px;
+    @media @lg {
+        padding-bottom: 65px;
+    }
+
+    @media @not-lg {
+        padding-bottom: 2em;
+    }
 }
