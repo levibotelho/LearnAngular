@@ -1,4 +1,12 @@
-﻿/* Essentials */
+﻿@screen-xs-max: 767px;
+@screen-sm-min: 768px;
+@screen-md-min: 992px;
+@screen-lg-min: 1200px;
+
+@not-xs: ~"(min-width: @{screen-sm-min})";
+@only-xs: ~"(max-width: @{screen-xs-max})";
+
+/* Essentials */
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;

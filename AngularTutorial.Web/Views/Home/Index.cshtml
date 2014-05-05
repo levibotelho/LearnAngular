@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html ng-app="angularTutorial">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="fragment" content="!">
     <title>learn-angular.org</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/styles")
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="~/favicon.ico">
 </head>
 <body>
