@@ -1,7 +1,6 @@
 ﻿using System.Web.Optimization;
-using BundleTransformer.Core.Builders;
+using BundleTransformer.Core.Bundles;
 using BundleTransformer.Core.Orderers;
-using BundleTransformer.Core.Transformers;
 
 namespace AngularTutorial.Web
 {
@@ -17,12 +16,9 @@ namespace AngularTutorial.Web
                 .Include("~/Scripts/ui-ace.js")
                 .Include("~/Scripts/GoogleAnalytics.js"));
 
-            var lessTransformer = new CssTransformer();
-            var cssBundle = new Bundle("~/bundles/styles")
+            var cssBundle = new CustomStyleBundle("~/bundles/styles")
                 .Include("~/Content/bootstrap.css")
                 .Include("~/Content/Site.less");
-            cssBundle.Builder = new NullBuilder();
-            cssBundle.Transforms.Add(lessTransformer);
             cssBundle.Orderer = new NullOrderer();
             bundles.Add(cssBundle);
         }
