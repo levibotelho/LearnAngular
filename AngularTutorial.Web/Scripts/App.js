@@ -9,7 +9,7 @@
                 .otherwise({
                     templateUrl: "/Content/Views/Home.html",
                     controller: "home",
-                    title: "Home"
+                    title: "Write Code. Learn Angular."
                 });
 
             $locationProvider.html5Mode(false).hashPrefix('!');
