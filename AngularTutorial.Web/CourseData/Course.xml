@@ -1405,7 +1405,7 @@ Take a look at the code in the editors. You'll see that the user interface conta
 Try running this code. Everything displays normally, with the textbox containing the number 6 by default and the number 12 being displayed beside it. Now try modifying the value in the textbox. You may be surprised to see that `$scope.product` is not updated!
 
 ##But why?
-The reason why this happens is because `$scope.product` is initialized to the the value returned by `$scope.factor * 2` when the model is augmented by the controller. It is *not* initialized to the result of the function *throughout the program's execution*. When `$scope.product` is changed, there is no mechanism in place to update `$scope.factor` accordingly.
+The reason why this happens is because `$scope.product` is initialized to the the value returned by `$scope.factor * 2` when the model is augmented by the controller. It is *not* initialized to the result of the function *throughout the program's execution*. When `$scope.factor` is changed, there is no mechanism in place to update `$scope.product` accordingly.
 
 ##An overview of $watch
 This is where the `$watch` function comes in. `$watch` provides us with a way to keep calculated values up to date when the values that they depend on change. The syntax for `$watch` looks like this.
