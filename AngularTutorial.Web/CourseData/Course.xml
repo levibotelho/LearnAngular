@@ -487,7 +487,7 @@ We're done! Run the program and check out the results!
 <html ng-app="root">
 <head>
 <style>
-.oddRow { background-color: #EEE; }
+.oddRow { background-color: lightblue; }
 table { border-spacing: 0; }
 td { border: 1px solid black; padding: 0 1em 0 1em; }
 </style>
@@ -692,7 +692,7 @@ Dependency injection is a central part of Angular application development. It is
 What is so special about this is that we do not invoke the controller function, passing it an argument. Angular does! Angular's injector sees from the `"$scope"` array element that we want the first (and only) function argument to be an instance of `$scope`, and Angular makes it so this is the case.*
 
 ###Services
-In an Angular app, services are logical application components that are wired together using dependency injection. They allow us to externalize application logic out of controllers and encapsulate it in easy to use containers. Angular ships with a number of built-in services that allow us to do things like perform Ajax requests or change the URL in the browser's address bar, but the real power of services is the ability to write our own. The following five lessons cover each of these recipes, an
+In an Angular app, services are logical application components that are wired together using dependency injection. They allow us to externalize application logic out of controllers and encapsulate it in easy to use containers. Angular ships with a number of built-in services that allow us to do things like perform Ajax requests or change the URL in the browser's address bar, but the real power of services is the ability to write our own.
 
 Angular defines five different service types, or "recipes". Each recipe results in a service which has special characteristics that make it useful for solving a certain type of problem. The following five lessons cover each one of these recipes in detail.
 
