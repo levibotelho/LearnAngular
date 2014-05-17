@@ -220,7 +220,7 @@ Once the values are bound, use the double curly brace syntax to display each val
             <![CDATA[
 <div ng-controller="index">
 	<div>
-		Favorite number: <input type="text" />
+		Favorite word: <input type="text" />
 		- [Display selection here]
 	</div>
 	<div>
