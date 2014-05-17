@@ -1428,7 +1428,7 @@ The third argument is a boolean value which, when set to true, compares objects 
 
 ##Example
 
-Now it's up to you to pick up where I left off. Use a `$watch` expression to update `$scope.product` when the value in the textbox is changed. Specifically, you will need to watch `$scope.product` and multiply the new value by 2 whenever it is changed.
+Now it's up to you to pick up where I left off. Use a `$watch` expression to update `$scope.product` when the value in the textbox is changed. Specifically, you will need to watch `$scope.factor` and set `$scope.product` to 2 times `factor` whenever `factor` is changed.
         ]]>
       </Instructions>
       <Html>
