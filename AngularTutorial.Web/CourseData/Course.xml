@@ -435,7 +435,7 @@ In addition to this, Angular exposes several variables that allow you to gain in
 + `$middle` - Boolean indicating if the element is neither first nor last in the collection.
 + `$last` - Boolean indicating if the element is last in the collection.
 + `$even` - Boolean indicating if the element's index is even.
-+ `$odd` - Boolean indicating if the element's index is even.
++ `$odd` - Boolean indicating if the element's index is odd.
 
 These variables can be used freely within the scope of the iteration.
 
