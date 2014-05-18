@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using AngularTutorial.Services;
-
 #if !DEBUG
 using System.Web.UI;
 #endif
+using Spoon.Standalone.Connector;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -25,9 +26,15 @@ namespace AngularTutorial.Web.Controllers
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
         // ReSharper disable once InconsistentNaming
-        public async Task<ViewResult> Index(string _escaped_fragment_)
+        public async Task<ActionResult> Index(string _escaped_fragment_)
         {
-            return _escaped_fragment_ == null ? View() : await SnapshotContentAsync(_escaped_fragment_);
+            if (_escaped_fragment_ == null)
+                return View();
+
+            return await SnapshotManager.GetSnapshotAsync(
+                _escaped_fragment_,
+                ConfigurationFacade.SpoonSnapshotStorageAccount,
+                ConfigurationFacade.SpoonSnapshotStorageContainer);
         }
 
         [HttpGet]
