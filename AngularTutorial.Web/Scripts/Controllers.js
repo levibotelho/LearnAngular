@@ -44,7 +44,9 @@
     ])
     .controller("lesson", [
         "$scope", "$http", "$routeParams", "$sce", "$window", "navigationService",
-        function($scope, $http, $routeParams, $sce, $window, navigationService) {
+        function ($scope, $http, $routeParams, $sce, $window, navigationService) {
+            var fallbackLocationPath = "/#!/lessons/the-essentials";
+
             $scope.id = "";
             $scope.title = "";
             $scope.instructions = "";
@@ -169,7 +171,7 @@
                         $scope.scriptIncludes = $scope.parseIncludes(data.ScriptIncludes);
                     })
                     .error(function() {
-                        alert("An unexpected error has occured. Please try again.");
+                        $window.location.href = fallbackLocationPath;
                     });
             };
 

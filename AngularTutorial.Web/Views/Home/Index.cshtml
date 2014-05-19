@@ -28,9 +28,7 @@
                 <div class="panel panel-default" ng-repeat="module in tableOfContents">
                     <div class="panel-heading" data-toggle="collapse" data-parent="#Modules" data-target="#{{module.Id}}">
                         <h4 class="panel-title">
-                            <a href="#">
-                                {{module.Title}}
-                            </a>
+                            <a>{{module.Title}}</a>
                         </h4>
                     </div>
                     <div id="{{module.Id}}" class="panel-collapse collapse" ng-class="{in: module.Id == selectedLesson.ModuleId}">
