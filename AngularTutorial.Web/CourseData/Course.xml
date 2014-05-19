@@ -835,7 +835,7 @@ angular.module("services", [])
 Values are great, but wouldn't it be nice if we could inject a function instead of a variable? This is the purpose of the factory recipe. Factories are declared using the following syntax.
 
 	angular.module("services", [])
-		.factory("myFactory', [function () {
+		.factory("myFactory", [function () {
 			// Logic goes here.
 		}]);
 
