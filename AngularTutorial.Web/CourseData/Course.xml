@@ -1,43 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Course xmlns="http://angulartutorial.azurewebsites.net/Course.xsd">
   <Module Id="module-getting-started" Title="Getting Started">
-    <Lesson Id="introducing-angular" Title="Introducing AngularJS">
+    <Lesson Id="the-essentials" Title="The Essentials">
       <Instructions>
         <![CDATA[
 ##What is AngularJS?
 AngularJS is a JavaScript framework that is used for making rich, extensible web applications. It runs on plain JavaScript and HTML, so you don't need any other dependencies to make it work, and it is CSS-agnostic so you can use whatever CSS framework/methodology you want when designing your Angular application.
 
-##Why is it great?
-This is a very subjective question. For my money though, there are three key features that make it a really great framework to work with.
+##What does an Angular app look like?
+The code at the right is an example of a "hello world" Angular app. When run, "Hello World!" is printed onscreen using AngularJS. Don't worry too much about understanding the code just yet. We'll work through this example step-by-step in the next lesson.
 
-1. **Data binding** - Data binding is the ability to "bind" variables and functions from your code into your user interface and have changes in one side update the other. For example, you can display a JavaScript variable in a form field, and if the user changes the value, the value in JavaScript will automatically update to reflect the change. No more `onchanged` events required to keep things in sync in cases like this! If you've ever used KnockoutJS or a similar framework you'll be ahead of the game learning Angular. And If you haven't, you'll be thoroughly amazed at how data binding makes your life easier.
+##How is an Angular app architectured?
+Angular applications at their most basic consist of three components.
 
-2. **The integrated framework** - Angular provides built-in functions to automate a lot of common tasks, such as making Ajax calls. As such, you can often code Angular apps without having to include additional libraries such as jQuery. Angular actually includes a built-in subset of jQuery, called "jQuery lite". That said, if you want to include jQuery in your apps, no problem! Angular will detect the presence of jQuery and adapt accordingly.
-
-3. **SPAs** - Angular makes writing single page applications really easy! This site is an example of a single page application. When you change lessons or click on links, you'll notice that the page content updates without requiring a refresh. At the same time however, the url in the browser's navigation bar updates accordingly which allows you to use the browser's forward and back buttons to navigate, as well as to bookmark a page and return to it later.
-
-These three features along with many, many more make Angular a very powerful framework for developing web applications.
-      ]]>
-      </Instructions>
-    </Lesson>
-    <Lesson Id="the-essentials" Title="The Essentials">
-      <Instructions>
-        <![CDATA[
-Now that you have an idea of what AngularJS is all about, let's start looking at what makes up an AngularJS application. Angular applications at their most basic consist of three components.
-
-+ The template (view)
-+ The scope
-+ The controller
-
-##The template
+###The template
 
 The template is the HTML portion of the app. Writing a template is exactly like writing a static HTML page, except that templates contain additional syntax which allows data to be injected into them in order to provide a customized user experience. If you have ever written an HTML page using a server-side web framework you'll feel right at home writing templates in Angular. The feature that differentiates Angular templates from server-generated pages, however, is that in Angular data can be injected, modified and removed from templates without ever requiring a page refresh. This feature provides a more fluid experience to the end user and enhances the overall feel of Angular web applications.
 
-##The scope
+###The scope
 
 The scope is a very important component in Angular applications. The scope is the object that represents the "model" of your application. It contains fields that store data which is presented to the user via the template, as well as functions which can be called when the user performs certain actions such as clicking a button.
 
-##The controller
+###The controller
 
 The controller plays somewhat of a supporting role in Angular applications. The controller is a function which generally takes an empty scope object as a parameter and adds to it the fields and functions that will be later exposed to the user via the view.
 
@@ -48,6 +32,48 @@ Up until now I have intentionally tried to stay away from making any comparisons
 The template, the scope, and the controller are the three main building blocks of an Angular web application. While there is much more to Angular than these three components, with an understanding of what they do and how they interact you will already be capable of wiring together a simple Angular application.
       ]]>
       </Instructions>
+      <Html>
+        <Document Name="index.html">
+          <Initial>
+            <![CDATA[
+<html ng-app="root">
+    <body>
+        <div ng-controller="index">{{message}}</div>
+    </body>
+</html>
+          ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+<html ng-app="root">
+    <body>
+        <div ng-controller="index">{{message}}</div>
+    </body>
+</html>
+          ]]>
+          </Solution>
+        </Document>
+      </Html>
+      <JavaScript>
+        <Document Name="root.js">
+          <Initial>
+            <![CDATA[
+angular.module('root', [])
+    .controller("index", ["$scope", function ($scope) {
+        $scope.message = "Hello World!";
+    }]);
+            ]]>
+          </Initial>
+          <Solution>
+            <![CDATA[
+angular.module('root', [])
+    .controller("index", ["$scope", function ($scope) {
+        $scope.message = "Hello World!";
+    }]);
+            ]]>
+          </Solution>
+        </Document>
+      </JavaScript>
     </Lesson>
     <Lesson Id="a-simple-app" Title="A Simple App">
       <Instructions>
