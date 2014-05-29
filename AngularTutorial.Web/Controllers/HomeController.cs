@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using AngularTutorial.Services;
 #if !DEBUG
@@ -31,10 +32,17 @@ namespace AngularTutorial.Web.Controllers
             if (_escaped_fragment_ == null)
                 return View();
 
-            return await SnapshotManager.GetSnapshotAsync(
-                _escaped_fragment_,
-                ConfigurationFacade.SpoonSnapshotStorageAccount,
-                ConfigurationFacade.SpoonSnapshotStorageContainer);
+            try
+            {
+                return await SnapshotManager.GetSnapshotAsync(
+                    _escaped_fragment_,
+                    ConfigurationFacade.SpoonSnapshotStorageAccount,
+                    ConfigurationFacade.SpoonSnapshotStorageContainer);
+            }
+            catch (HttpRequestException)
+            {
+                throw new HttpException(404, "The requested snapshot could not be found.");
+            }
         }
 
         [HttpGet]

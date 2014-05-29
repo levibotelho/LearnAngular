@@ -1944,7 +1944,7 @@ Because `$resource` makes many assumptions about how a web service endpoint shou
       <ScriptIncludes>
         <Include>
           <![CDATA[
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.min.js"></script>
+<script src="/Scripts/angular/angular-resource.min.js"></script>
           ]]>
         </Include>
       </ScriptIncludes>

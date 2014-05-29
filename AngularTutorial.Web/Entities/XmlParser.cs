@@ -9,7 +9,7 @@ namespace AngularTutorial.Web.Entities
     {
         static readonly string[] DefaultIncludes =
         {
-            "<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js\"></script>"
+            "<script src=\"/Scripts/angular/angular.min.js\"></script>"
         };
 
         static readonly XNamespace Namespace = "http://angulartutorial.azurewebsites.net/Course.xsd";
