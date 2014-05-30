@@ -311,7 +311,7 @@ Once the values are bound, use the double curly brace syntax to display each val
 angular.module("root", [])
     .controller("index", ["$scope", function($scope) {
         $scope.favoriteWord;
-        $scope.favoriteColour;
+        $scope.favoriteColor;
         $scope.favoriteShape;
     }]);
             ]]>
@@ -321,7 +321,7 @@ angular.module("root", [])
 angular.module("root", [])
     .controller("index", ["$scope", function($scope) {
         $scope.favoriteWord;
-        $scope.favoriteColour;
+        $scope.favoriteColor;
         $scope.favoriteShape;
     }]);
             ]]>
