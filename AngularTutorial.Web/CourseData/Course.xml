@@ -216,7 +216,7 @@ angular.module('root', [])
     <Lesson Id="two-way-bindings" Title="Two-way bindings">
       <Instructions>
         <![CDATA[
-In this section we are going to take a look at some basic directives that you can use to add interactivity and flexibility to your web applications. There is a lot more to the Angular framework than we have just seen, but looking at a few directives right away will give you an idea of what you can do with Angular and hopefully inspire you to lean more about the framework in the sections that follow.
+In this section we are going to take a look at some basic directives that you can use to add interactivity and flexibility to your web applications. There is a lot more to the Angular framework than we have just seen, but looking at a few directives right away will give you an idea of what you can do with Angular and hopefully inspire you to learn more about the framework in the sections that follow.
 
 ##ngModel
 
