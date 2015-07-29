@@ -5,6 +5,7 @@
             $scope.tableOfContents = null;
             $scope.selectedLesson = null;
             $scope.isTableOfContentsAvailable = false;
+            $scope.angularVersion = angular.version.full;
 
             $scope.selectLesson = function(id) {
                 navigationService.selectLesson(id);
