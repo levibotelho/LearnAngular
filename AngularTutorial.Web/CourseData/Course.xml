@@ -1814,7 +1814,7 @@ This may not look like much, but believe it or not `resourceObject` already cont
 
 Let's briefly run through the arguments to these methods. `success` and `error` are both callback functions that will execute in their respective cases. No surprises there. `postData`, where applicable, is simply the data to post to the server. Again, no surprises.
 
-What might be a little less clear is the purpose of the `params` argument. To understand what it is used for, we first must go back to our initial `$resource` call. As we saw a moment ago, the minimum amount of data required to create a `$request` object is a URL. However this url can contain placeholders for parameter values which can then be replaced when when Ajax calls are made. Placeholders are integrated into URLs as follows.
+What might be a little less clear is the purpose of the `params` argument. To understand what it is used for, we first must go back to our initial `$resource` call. As we saw a moment ago, the minimum amount of data required to create a `$request` object is a URL. However this url can contain placeholders for parameter values which can then be replaced when Ajax calls are made. Placeholders are integrated into URLs as follows.
 
 	`http://www.mysite.com/users/:paramName`  
 
