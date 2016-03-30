@@ -171,7 +171,7 @@ We learned a lot this lesson! We learned about modules, how to declare controlle
 
 ---
 
-\* [Dependency injection for five year olds](http://stackoverflow.com/a/1638961/1068266) is a good place to start if you are completely unfamiliar with the concept, after which there is [this explanation which is simple and to the point](http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html).
+\* If you're unfamiliar with dependency injection, [this explanation is simple and to the point](http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html).
       ]]>
       </Instructions>
       <Html>
