@@ -19,8 +19,3 @@ The target audience for LearnAngular is developers who are familiar with JavaScr
 ##Contributing
 
 I originally wrote this as a fun side project a few years back. Since its launch it has become quite popular, however at the same time I have undertaken many other projects that require my time and attention. As such, while I welcome all bug reports/feature requests, I probably won't get around to doing them myself. If you want to help make LearnAngular better, the best way to do so is by contributing with a pull request. For small bugs like typos or broken links just fork and fix, and I'll happily accept the PR. For new feature development, please create an issue first so that we can make sure that the feature makes sense before you dive in.
-
-Enjoy the site!
-
-
-Levi
