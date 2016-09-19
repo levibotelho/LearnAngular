@@ -6,7 +6,6 @@ using AngularTutorial.Services;
 #if !DEBUG
 using System.Web.UI;
 #endif
-using Spoon.Standalone.Connector;
 
 namespace AngularTutorial.Web.Controllers
 {
@@ -27,22 +26,9 @@ namespace AngularTutorial.Web.Controllers
         [OutputCache(Duration = 3600, Location = OutputCacheLocation.Any)]
 #endif
         // ReSharper disable once InconsistentNaming
-        public async Task<ActionResult> Index(string _escaped_fragment_)
+        public async Task<ActionResult> Index()
         {
-            if (_escaped_fragment_ == null)
-                return View();
-
-            try
-            {
-                return await SnapshotManager.GetSnapshotAsync(
-                    _escaped_fragment_,
-                    ConfigurationFacade.SpoonSnapshotStorageAccount,
-                    ConfigurationFacade.SpoonSnapshotStorageContainer);
-            }
-            catch (HttpRequestException)
-            {
-                throw new HttpException(404, "The requested snapshot could not be found.");
-            }
+            return View();
         }
 
         [HttpGet]
@@ -75,25 +61,6 @@ namespace AngularTutorial.Web.Controllers
             var lessonId = string.IsNullOrWhiteSpace(id) ? _courseService.GetTableOfContents().Modules[0].Children[0].Id : id;
             var lesson = _courseService.GetLesson(lessonId);
             return Json(lesson, JsonRequestBehavior.AllowGet);
-        }
-
-        static string GetSnapshotUrl(string escapedFragment)
-        {
-            return string.Format(
-                "http://{0}.blob.core.windows.net/{1}/_escaped_fragment_={2}.html",
-                ConfigurationFacade.SpoonSnapshotStorageAccount,
-                ConfigurationFacade.SpoonSnapshotStorageContainer,
-                escapedFragment);
-        }
-
-        async Task<ViewResult> SnapshotContentAsync(string escapedFragment)
-        {
-            var blobUrl = GetSnapshotUrl(escapedFragment);
-            using (var client = new HttpClient())
-            {
-                ViewBag.Content = await client.GetStringAsync(blobUrl);
-                return View("EscapedFragment");
-            }
         }
     }
 }

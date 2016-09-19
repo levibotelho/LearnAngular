@@ -98,10 +98,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.2.5.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Spoon.Standalone.Connector, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spoon.Standalone.Connector.1.0.2\lib\45\Spoon.Standalone.Connector.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.Http" />
@@ -472,7 +468,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StrongConfigFacade.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\EscapedFragment.cshtml" />
     <None Include="Properties\PublishProfiles\angulartutorial.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
