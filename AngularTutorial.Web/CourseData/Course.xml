@@ -89,7 +89,7 @@ For this lesson we are starting out with a very basic web page which contains a 
 
 The first thing that we need to do is define our controller. Remember, the controller is a function which augments the scope with data, functions, and whatnot.
 
-To define our controller we first need to define what is known as a *module*. We didn't discuss modules in the last lesson, but no need to worry; they are extremely simple to understand. Modules act as logical containers for components in Angular applications. Whenever we define a component such as a controller, it needs to go in a module. The syntax for defining a module is as follows.
+To define our controller we first need to define what is known as a *module*. We didn't discuss modules in the last lesson, but no need to worry. Modules act as logical containers for components in Angular applications. Whenever we define a component such as a controller, it needs to go in a module. The syntax for defining a module is as follows.
 
 	angular.module("root", [])
 
@@ -164,7 +164,7 @@ All that's left to do is display our message in the page! To print a variable va
 Add this syntax to the `<div>` element on which we applied our controller and run the code. If all is well, you should see `Hello World` printed loud and clear onto the page for all to see! If something went wrong, don't worry. You can either see the answer by clicking on the "I'm stuck!" button, or reset the example altogether and start over.
 
 ##Expressions
-Now that you've seen how to bind a scope value to the template, try this. Replace `{{message}}` with a mathematical equation such as `{{1 + 1}}` and run the application. You'll see that Angular will have evaluated the equation and printed the result! This is because the value inside the curly braces is considered by Angular to be an *expression*. Expressions are like simple JavaScript statements, which means that in addition to supporting `$scope` fields, they also support simple functions like this one. Details of exactly what is and is not supported by Angular expressions can be found [here on the Angular site](http://docs.angularjs.org/guide/expression).
+Now that you've seen how to bind a scope value to the template, try this. Replace `{{message}}` with a mathematical equation such as `{{1 + 1}}` and run the application. You'll see that Angular will have evaluated the equation and printed the result! This is because the value inside the curly braces is considered by Angular to be an *expression*. Expressions are like regular JavaScript statements, which means that in addition to supporting `$scope` fields, they also support simple functions like this one. Details of exactly what is and is not supported by Angular expressions can be found [here on the Angular site](http://docs.angularjs.org/guide/expression).         
 
 ##Summary
 We learned a lot this lesson! We learned about modules, how to declare controllers, and most importantly how to wire everything together to make a full-fledged application. While we haven't seen anything very impressive in terms of results, don't worry because we're getting there. In the next set of lessons we'll take a deeper look at directives and how they can enrich Angular applications.
@@ -1141,7 +1141,7 @@ However, if we wanted to share this service with others, this wouldn't be a very
 
 ###Defining the provider
 
-The best way to see how providers work is through an example. Our example will be extremely simple. We are going to define a provider which will serve a `Message` object. The object is defined in `message.js` as follows.
+The best way to see how providers work is through an example. We are going to define a provider which will serve a `Message` object. The object is defined in `message.js` as follows.
 
 	function Message(text) {
 		this.text = text;
@@ -1870,7 +1870,7 @@ Now we'll implement our `get` function. The web service listening at the url pro
 
 When executed, this line of code will insert `1` into our request URL, send off the GET request to the server, deserialize the returned data into a JavaScript object, and assign it to the `$scope.user` variable. The name and email fields in our HTML are preconfigured to bind to the name and email fields on the object returned by the web service.
 
-Now let's implement our save function. Because we will be saving a user that we have already retrieved from the web service, this task is extremely simple. All we need to do is call the `$save()` method that Angular has attached to the user object for us. Add the following code to the `postUser` function.
+Now let's implement our save function. Because we will be saving a user that we have already retrieved from the web service, this task is not complicated. All we need to do is call the `$save()` method that Angular has attached to the user object for us. Add the following code to the `postUser` function.
 
 	var response = $scope.user.$save(function () {
 		alert("User saved!");
