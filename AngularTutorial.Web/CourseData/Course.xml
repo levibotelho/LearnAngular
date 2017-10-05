@@ -1693,7 +1693,7 @@ For this example we are going to validate the two input fields defined in the fo
 In addition to this, we will apply the following design guidelines.
 
 + Fields must only be styled if they have been touched by the user.
-+ Fields must be styled with a green border when vaild.
++ Fields must be styled with a green border when valid.
 + Fields must be styled with a red border when invalid.
 + The form itself must not be styled in any way.
 
